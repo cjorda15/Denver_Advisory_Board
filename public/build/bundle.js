@@ -35669,9 +35669,19 @@ var Menu = function (_Component) {
   }
 
   _createClass(Menu, [{
+    key: 'scrollTop',
+    value: function scrollTop() {
+      setTimeout(function () {
+        return _reactScroll2.default.scroller.scrollTo('landing-svg', {
+          duration: 0,
+          delay: 0,
+          smooth: false
+        });
+      }, 0);
+    }
+  }, {
     key: 'scrollAfterSearch',
     value: function scrollAfterSearch(input) {
-      console.log('wiooo');
       setTimeout(function () {
         return _reactScroll2.default.scroller.scrollTo(input, {
           duration: 1000,
@@ -35692,6 +35702,7 @@ var Menu = function (_Component) {
           _reactRouterDom.NavLink,
           {
             onClick: function onClick() {
+              _this2.scrollTop();
               _this2.scrollAfterSearch('landing-svg');
             },
             className: 'nav-link',
@@ -35703,6 +35714,7 @@ var Menu = function (_Component) {
           _reactRouterDom.NavLink,
           {
             onClick: function onClick() {
+              _this2.scrollTop();
               _this2.scrollAfterSearch('projects-container');
             },
             className: 'nav-link',
@@ -35714,6 +35726,7 @@ var Menu = function (_Component) {
           _reactRouterDom.NavLink,
           {
             onClick: function onClick() {
+              _this2.scrollTop();
               _this2.scrollAfterSearch('about-container');
             },
             className: 'nav-link',
@@ -36636,7 +36649,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Projects = function Projects() {
   return _react2.default.createElement(
     'div',
-    { id: 'Projects-container' },
+    { id: 'projects-container' },
     'Projects'
   );
 };
@@ -36683,7 +36696,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#projects-container {\n  height: 100vh; }\n", ""]);
 
 // exports
 
@@ -36757,7 +36770,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#about-container {\n  height: 100vh; }\n", ""]);
 
 // exports
 
