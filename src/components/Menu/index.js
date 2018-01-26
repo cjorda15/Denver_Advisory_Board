@@ -30,36 +30,41 @@ class Menu extends Component {
   render() {
     return (
       <div id="menu">
-        <NavLink
-          onClick={() => {
-            this.scrollTop();
-            this.scrollAfterSearch('landing-svg');
-          }}
-          className="nav-link"
-          to={'/'}
-        >
-          home
-        </NavLink>
-        <NavLink
-          onClick={() => {
-            this.scrollTop();
-            this.scrollAfterSearch('projects-container');
-          }}
-          className="nav-link"
-          to={'/projects'}
-        >
-          projects
-        </NavLink>
-        <NavLink
-          onClick={() => {
-            this.scrollTop();
-            this.scrollAfterSearch('about-container');
-          }}
-          className="nav-link"
-          to={'/about'}
-        >
-          about me
-        </NavLink>
+        <nav>
+          <NavLink
+            id="nav-link-1"
+            onClick={() => {
+              this.scrollTop();
+              this.scrollAfterSearch('landing-svg');
+            }}
+            className="nav-link"
+            to={'/'}
+          >
+            home
+          </NavLink>
+          <NavLink
+            id="nav-link-2"
+            onClick={() => {
+              this.scrollTop();
+              this.scrollAfterSearch('projects-container');
+            }}
+            className="nav-link"
+            to={'/projects'}
+          >
+            projects
+          </NavLink>
+          <NavLink
+            id="nav-link-3"
+            onClick={() => {
+              this.scrollTop();
+              this.scrollAfterSearch('about-container');
+            }}
+            className="nav-link"
+            to={'/about'}
+          >
+            about me
+          </NavLink>
+        </nav>
       </div>
     );
   }

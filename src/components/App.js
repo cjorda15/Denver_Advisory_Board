@@ -5,6 +5,7 @@ import Menu from './Menu';
 import Landing from './Landing';
 import Projects from './Projects';
 import About from './About';
+import '../styles/index.scss';
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/projects" render={({ history }) => <Projects />} />
           <Route path="/about" render={({ history }) => <About />} />
           <Route path="/" render={({ history }) => <div> </div>} />
+          <Route path="/*" render={({ history }) => <div> </div>} />
         </Switch>
       </div>
     );

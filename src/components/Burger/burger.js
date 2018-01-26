@@ -110,7 +110,7 @@ $(function() {
       isChangingState = true;
 
       if (!isOpen) {
-        $('#menu').slideToggle();
+        $('#menu').fadeToggle();
         showCloseBurger();
       } else {
         $('#menu').fadeToggle();

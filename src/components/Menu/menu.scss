@@ -1,6 +1,7 @@
+@import '../../styles/utilities/index.scss';
+
 #menu {
-  background-color: grey;
-  background: linear-gradient(to bottom, #50a7c2 0%, #b7f8db 100%);
+  background-image: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/flowers.png');
   display: none;
   height: 100vh;
   left: 0px;
@@ -8,6 +9,34 @@
   top: 0px;
   z-index: 5;
   width: 100vw;
+  nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 100px;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid #fff;
+    font-size: $lrg-font;
+    font-family: $font-medium;
+    text-transform: uppercase;
+    transition: all 0.7s;
+  }
+}
+
+#nav-link-1:hover {
+  border-bottom: 2px solid red;
+}
+
+#nav-link-2:hover {
+  border-bottom: 2px solid green;
+}
+
+#nav-link-3:hover {
+  border-bottom: 2px solid blue;
 }
 
 .menu-open {
