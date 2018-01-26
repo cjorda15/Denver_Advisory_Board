@@ -1,0 +1,15 @@
+#menu {
+  background-color: grey;
+  background: linear-gradient(to bottom, #50a7c2 0%, #b7f8db 100%);
+  display: none;
+  height: 100vh;
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  z-index: 5;
+  width: 100vw;
+}
+
+.menu-open {
+  display: block !important;
+}
