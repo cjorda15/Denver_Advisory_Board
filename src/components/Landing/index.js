@@ -37,6 +37,9 @@ const Landing = () => {
             <text x="75" y="60">
               JORDAN
             </text>
+            <text x="100" y="78">
+              &darr;
+            </text>
           </mask>
         </defs>
         <rect className="landing-svg" x="0" y="0" width="100%" height="100%" />

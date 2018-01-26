@@ -432,45 +432,85 @@ module.exports = invariant;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
 
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
 
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
 }
 
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
 
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
+	return '/*# ' + data + ' */';
+}
 
-module.exports = emptyFunction;
 
 /***/ }),
 /* 6 */
@@ -846,85 +886,45 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
+"use strict";
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
 };
 
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
+module.exports = emptyFunction;
 
 /***/ }),
 /* 8 */
@@ -1304,7 +1304,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -2717,7 +2717,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -14633,7 +14633,7 @@ _reactDom2.default.render(_react2.default.createElement(
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
@@ -14752,7 +14752,7 @@ module.exports = function (css) {
  * LICENSE file in the root directory of this source tree.
  */
 
-var m=__webpack_require__(8),n=__webpack_require__(13),p=__webpack_require__(5),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
+var m=__webpack_require__(8),n=__webpack_require__(13),p=__webpack_require__(7),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
 function y(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var z={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function A(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}A.prototype.isReactComponent={};A.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?y("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};A.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function B(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}function C(){}C.prototype=A.prototype;var D=B.prototype=new C;D.constructor=B;m(D,A.prototype);D.isPureReactComponent=!0;function E(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}var F=E.prototype=new C;F.constructor=E;m(F,A.prototype);F.unstable_isAsyncReactComponent=!0;F.render=function(){return this.props.children};var G={current:null},H=Object.prototype.hasOwnProperty,I={key:!0,ref:!0,__self:!0,__source:!0};
@@ -14792,7 +14792,7 @@ var _assign = __webpack_require__(8);
 var emptyObject = __webpack_require__(13);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(14);
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(18);
 
 // TODO: this is special because it gets imported during build.
@@ -16148,7 +16148,7 @@ module.exports = react;
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),l=__webpack_require__(32),B=__webpack_require__(8),C=__webpack_require__(5),ba=__webpack_require__(33),da=__webpack_require__(34),ea=__webpack_require__(35),fa=__webpack_require__(36),ia=__webpack_require__(37),D=__webpack_require__(13);
+var aa=__webpack_require__(0),l=__webpack_require__(32),B=__webpack_require__(8),C=__webpack_require__(7),ba=__webpack_require__(33),da=__webpack_require__(34),ea=__webpack_require__(35),fa=__webpack_require__(36),ia=__webpack_require__(37),D=__webpack_require__(13);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -16450,7 +16450,7 @@ var invariant = __webpack_require__(9);
 var warning = __webpack_require__(14);
 var ExecutionEnvironment = __webpack_require__(32);
 var _assign = __webpack_require__(8);
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 var EventListener = __webpack_require__(33);
 var getActiveElement = __webpack_require__(34);
 var shallowEqual = __webpack_require__(35);
@@ -32062,7 +32062,7 @@ BrowserRouter.propTypes = {
 
 
 
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 var invariant = __webpack_require__(9);
 var warning = __webpack_require__(14);
 var assign = __webpack_require__(8);
@@ -32612,7 +32612,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(7);
 var invariant = __webpack_require__(9);
 var ReactPropTypesSecret = __webpack_require__(19);
 
@@ -35353,6 +35353,14 @@ var _About = __webpack_require__(114);
 
 var _About2 = _interopRequireDefault(_About);
 
+var _Contact = __webpack_require__(117);
+
+var _Contact2 = _interopRequireDefault(_Contact);
+
+var _Home = __webpack_require__(120);
+
+var _Home2 = _interopRequireDefault(_Home);
+
 __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35392,21 +35400,17 @@ var App = function (_Component) {
               var history = _ref2.history;
               return _react2.default.createElement(_About2.default, null);
             } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(_ref3) {
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/contact', render: function render(_ref3) {
               var history = _ref3.history;
-              return _react2.default.createElement(
-                'div',
-                null,
-                ' '
-              );
+              return _react2.default.createElement(_Contact2.default, null);
             } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/*', render: function render(_ref4) {
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render(_ref4) {
               var history = _ref4.history;
-              return _react2.default.createElement(
-                'div',
-                null,
-                ' '
-              );
+              return _react2.default.createElement(_Home2.default, null);
+            } }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/*', render: function render(_ref5) {
+              var history = _ref5.history;
+              return _react2.default.createElement(_Home2.default, null);
             } })
         )
       );
@@ -35532,7 +35536,7 @@ if(false) {
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
@@ -35623,9 +35627,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
       if (!isOpen) {
         (0, _jquery2.default)('#menu').fadeToggle();
+
+        (0, _jquery2.default)('menu a').animate({
+          height: 'scale(1.8)'
+        });
         showCloseBurger();
       } else {
         (0, _jquery2.default)('#menu').fadeToggle();
+        (0, _jquery2.default)('menu a').animate({
+          transform: 'scale(1.0)'
+        });
         showOpenBurger();
       }
     }
@@ -35717,7 +35728,7 @@ var Menu = function (_Component) {
               id: 'nav-link-1',
               onClick: function onClick() {
                 _this2.scrollTop();
-                _this2.scrollAfterSearch('landing-svg');
+                _this2.scrollAfterSearch('home-container');
               },
               className: 'nav-link',
               to: '/'
@@ -35749,6 +35760,19 @@ var Menu = function (_Component) {
               to: '/about'
             },
             'about me'
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.NavLink,
+            {
+              id: 'nav-link-4',
+              onClick: function onClick() {
+                _this2.scrollTop();
+                _this2.scrollAfterSearch('contact-container');
+              },
+              className: 'nav-link',
+              to: '/contact'
+            },
+            'Contact'
           )
         )
       );
@@ -35795,12 +35819,12 @@ if(false) {
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "#menu {\n  background-image: url(\"http://cdn.backgroundhost.com/backgrounds/subtlepatterns/flowers.png\");\n  display: none;\n  height: 100vh;\n  left: 0px;\n  position: fixed;\n  top: 0px;\n  z-index: 5;\n  width: 100vw; }\n  #menu nav {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    position: absolute;\n    top: 70px;\n    right: 100px; }\n  #menu a {\n    color: #fff;\n    text-decoration: none;\n    border-bottom: 2px solid #fff;\n    font-size: 2em;\n    font-family: \"Nunito\", sans-serif;\n    text-transform: uppercase;\n    transition: all 0.7s; }\n\n#nav-link-1:hover {\n  border-bottom: 2px solid red; }\n\n#nav-link-2:hover {\n  border-bottom: 2px solid green; }\n\n#nav-link-3:hover {\n  border-bottom: 2px solid blue; }\n\n.menu-open {\n  display: block !important; }\n", ""]);
+exports.push([module.i, "#menu {\n  background-image: url(\"http://cdn.backgroundhost.com/backgrounds/subtlepatterns/flowers.png\");\n  display: none;\n  height: 100vh;\n  left: 0px;\n  position: fixed;\n  top: 0px;\n  z-index: 5;\n  width: 100vw; }\n  #menu nav {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    position: absolute;\n    top: 70px;\n    right: 100px; }\n  #menu a {\n    color: #fff;\n    text-decoration: none;\n    border-bottom: 2px solid #fff;\n    font-size: 2em;\n    font-family: \"Nunito\", sans-serif;\n    text-transform: uppercase;\n    transition: all 0.7s; }\n\n#nav-link-1:hover {\n  border-bottom: 2px solid red; }\n\n#nav-link-2:hover {\n  border-bottom: 2px solid green; }\n\n#nav-link-3:hover {\n  border-bottom: 2px solid blue; }\n\n#nav-link-4:hover {\n  border-bottom: 2px solid yellow; }\n\n.menu-open {\n  display: block !important; }\n", ""]);
 
 // exports
 
@@ -36576,6 +36600,11 @@ var Landing = function Landing() {
             'text',
             { x: '75', y: '60' },
             'JORDAN'
+          ),
+          _react2.default.createElement(
+            'text',
+            { x: '100', y: '78' },
+            '\u2193'
           )
         )
       ),
@@ -36621,12 +36650,12 @@ if(false) {
 /* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: Biko;\n  src: url(\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff\"); }\n\nheader {\n  width: 100%;\n  margin: 0 auto;\n  position: relative;\n  max-width: 1200px; }\n\nheader video {\n  width: 100%; }\n\nsvg {\n  width: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%; }\n\nsvg text {\n  font-family: Biko, sans-serif;\n  font-weight: 700;\n  text-transform: uppercase;\n  font-size: 2em; }\n\n.landing-svg {\n  fill: white;\n  -webkit-mask: url(#mask);\n  mask: url(#mask); }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: Biko;\n  src: url(\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff\"); }\n\nheader {\n  width: 100%;\n  margin: 0 auto;\n  position: relative;\n  margin-top: 60px;\n  max-width: 1200px; }\n\nheader video {\n  width: 100%; }\n\nsvg {\n  width: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%; }\n\nsvg text {\n  font-family: Biko, sans-serif;\n  font-weight: 700;\n  text-transform: uppercase;\n  font-size: 2em; }\n\n.landing-svg {\n  fill: white;\n  -webkit-mask: url(#mask);\n  mask: url(#mask); }\n", ""]);
 
 // exports
 
@@ -36708,12 +36737,12 @@ if(false) {
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, "#projects-container {\n  height: 100vh; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -36741,7 +36770,37 @@ var About = function About() {
   return _react2.default.createElement(
     'div',
     { id: 'about-container' },
-    'ABOUT'
+    _react2.default.createElement(
+      'div',
+      { className: 'initial-summary-container' },
+      _react2.default.createElement(
+        'section',
+        { className: 'intial-section-wrapper' },
+        _react2.default.createElement(
+          'p',
+          { className: 'initial-summary-subtext' },
+          'I am a creative front-end developer who enjoys designing and developing UI/UX web experiences with a focus on usability and prefers to work smart and hard, because hey, this is fun.'
+        ),
+        _react2.default.createElement('span', { className: 'initial-summary-line-1' })
+      ),
+      _react2.default.createElement('div', { className: 'initial-summary-img' }),
+      _react2.default.createElement(
+        'section',
+        { className: 'intial-summary-description-container' },
+        _react2.default.createElement('span', { className: 'initial-summary-line-2' }),
+        _react2.default.createElement(
+          'p',
+          { className: 'inital-summary-description' },
+          ' ',
+          'I have recently graduated from Turing School of Software and Design located in downtown Denver. Turing students invest over 1500 hours across seven months in becoming ready-made web developers. In the Front-End Engineering program, we began by building skills in HTML5, CSS3, JavaScript, jQuery, and Design Fundamentals.'
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'inital-summary-description' },
+          'We continued laying a solid foundation in Javascript from DOM manipulation to writing complex algorithms with a focus on ES2015, then progressed into React/Redux. In the final quarter, we focused on building backend applications with express/node and SQL through knex.js.'
+        )
+      )
+    )
   );
 };
 
@@ -36782,12 +36841,156 @@ if(false) {
 /* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, "#about-container {\n  height: 100vh; }\n", ""]);
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(118);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Contact = function Contact() {
+  return _react2.default.createElement(
+    'div',
+    { id: 'contact-container' },
+    'Contact'
+  );
+};
+
+exports.default = Contact;
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(119);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(6)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contact.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contact.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(121);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Home = function Home() {
+  return _react2.default.createElement('div', { id: 'home-container' });
+};
+
+exports.default = Home;
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(122);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(6)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./home.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./home.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
 
 // exports
 

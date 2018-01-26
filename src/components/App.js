@@ -5,6 +5,8 @@ import Menu from './Menu';
 import Landing from './Landing';
 import Projects from './Projects';
 import About from './About';
+import Contact from './Contact';
+import Home from './Home';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -21,8 +23,9 @@ class App extends Component {
         <Switch>
           <Route path="/projects" render={({ history }) => <Projects />} />
           <Route path="/about" render={({ history }) => <About />} />
-          <Route path="/" render={({ history }) => <div> </div>} />
-          <Route path="/*" render={({ history }) => <div> </div>} />
+          <Route path="/contact" render={({ history }) => <Contact />} />
+          <Route path="/" render={({ history }) => <Home />} />
+          <Route path="/*" render={({ history }) => <Home />} />
         </Switch>
       </div>
     );

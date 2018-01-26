@@ -111,9 +111,16 @@ $(function() {
 
       if (!isOpen) {
         $('#menu').fadeToggle();
+
+        $('menu a').animate({
+          height: 'scale(1.8)'
+        });
         showCloseBurger();
       } else {
         $('#menu').fadeToggle();
+        $('menu a').animate({
+          transform: 'scale(1.0)'
+        });
         showOpenBurger();
       }
     }

@@ -35,7 +35,7 @@ class Menu extends Component {
             id="nav-link-1"
             onClick={() => {
               this.scrollTop();
-              this.scrollAfterSearch('landing-svg');
+              this.scrollAfterSearch('home-container');
             }}
             className="nav-link"
             to={'/'}
@@ -63,6 +63,17 @@ class Menu extends Component {
             to={'/about'}
           >
             about me
+          </NavLink>
+          <NavLink
+            id="nav-link-4"
+            onClick={() => {
+              this.scrollTop();
+              this.scrollAfterSearch('contact-container');
+            }}
+            className="nav-link"
+            to={'/contact'}
+          >
+            Contact
           </NavLink>
         </nav>
       </div>
