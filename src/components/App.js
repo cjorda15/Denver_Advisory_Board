@@ -8,7 +8,7 @@ import About from './About';
 import Contact from './Contact';
 import Home from './Home';
 import '../styles/index.scss';
-
+import './cloud.js';
 class App extends Component {
   constructor(props) {
     super(props);

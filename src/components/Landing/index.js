@@ -32,13 +32,13 @@ const Landing = () => {
               height="100%"
             />
             <text x="90" y="30">
-              CHRIS
+              Denver
             </text>
             <text x="75" y="60">
-              JORDAN
+              Advisory
             </text>
             <text x="100" y="78">
-              &darr;
+              Board
             </text>
           </mask>
         </defs>

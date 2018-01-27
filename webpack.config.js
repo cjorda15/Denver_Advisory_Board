@@ -41,6 +41,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss', '.css']
+  },
+  node: {
+    fs: 'empty'
   }
   // plugins: [new UglifyJSPlugin()]
 };
