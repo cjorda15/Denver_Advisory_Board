@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = process.env.PORT || 3000;
-
+const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary');
+const apiRoutes = require('./routes.js');
+const config = require('./config').app;
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME
-});
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/api/v1', apiRoutes);
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
@@ -19,10 +19,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.post('/cloudinary', (req, res) => {
-  req;
-});
-
-app.listen(port, () => {
+app.listen(config.port, () => {
   console.log('we are live..');
 });
