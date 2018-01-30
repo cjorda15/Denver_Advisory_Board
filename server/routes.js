@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const cloudinary = require('cloudinary');
 const config = require('./config').cloudinary;
-const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart();
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const CronJob = require('cron').CronJob;
+const path = require('path');
+const temp_folder_path = path.join(__dirname, '../uploads');
 
 cloudinary.config({
   cloud_name: config.cloud_name,
@@ -10,34 +13,36 @@ cloudinary.config({
   api_secret: config.api_secret
 });
 
-router.post('/image', multipartMiddleware, (req, res) => {
-  cloudinary.uploader.upload(req.files.image.path, function(result) {
+router.post('/image', upload.single('file'), (req, res) => {
+  cloudinary.uploader.upload(req.file.path, function(result) {
     console.log(result, 'result');
   });
 });
 
-module.exports = router;
+new CronJob(
+  '00 00 00 * * 1-5',
+  function() {
+    deleteFolderRecursive(temp_folder_path);
+  },
+  null,
+  true,
+  'America/Denver'
+);
 
-// const router = require('express').Router();
-// const cloudinary = require('cloudinary');
-// const config = require('./config').cloudinary;
-// const multipart = require('connect-multiparty');
-// const multipartMiddleware = multipart();
-//
-// const multer = require('multer');
-// const upload = multer();
-//
-// cloudinary.config({
-//   cloud_name: config.cloud_name,
-//   api_key: config.api_key,
-//   api_secret: config.api_secret
-// });
-//
-// router.post('/image', upload.any(), (req, res) => {
-//   console.log(req.files, '!@#!@#!@#');
-//   cloudinary.uploader.upload(req.files, function(result) {
-//     console.log(result, 'result');
-//   });
-// });
-//
-// module.exports = router;
+const deleteFolderRecursive = function(path) {
+  if (fs.existsSync(path)) {
+    fs.readdirSync(path).forEach(function(file, index) {
+      var curPath = path + '/' + file;
+      if (fs.lstatSync(curPath).isDirectory()) {
+        // recurse
+        deleteFolderRecursive(curPath);
+        fs.rmdirSync(curPath);
+      } else {
+        // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+  }
+};
+
+module.exports = router;

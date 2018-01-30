@@ -69169,37 +69169,25 @@ var Home = function (_Component) {
     return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
   }
 
-  // cloudinaryTry() {
-  //   fetch('/api/image', {
-  //     method: 'post',
-  //     body: JSON.stringify('booo')
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => console.log(res, 'response'))
-  //     .catch(err => console.log(err, 'error'));
-  // }
-
   _createClass(Home, [{
     key: 'handleClick',
     value: function handleClick(e) {
       e.preventDefault();
-      location.reload();
+      var data = new FormData();
+      var input = document.querySelector('.file-field').files[0];
 
-      // e.preventDefault();
-      // const input = document.querySelector('.file-field').files[0];
-      // // console.log(input);
-      // var data = new FormData();
-      // data.append('file', input);
-      // // data.append('user', 'hubot');
-      // //
-      // fetch('/api/v1/image', {
-      //   method: 'POST',
-      //   body: data
-      // })
-      //   .then(res => res.json())
-      //   .then(res => console.log(res))
-      //   .catch(err => console.log(err));
-      // window.location = '/blah';
+      data.append('file', input);
+
+      fetch('/api/v1/image', {
+        method: 'POST',
+        body: data
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        return console.log(res);
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }, {
     key: 'render',
@@ -69248,11 +69236,11 @@ var Home = function (_Component) {
               null,
               'Image'
             ),
-            _react2.default.createElement('input', { className: 'file-field', name: 'image', type: 'file' })
+            _react2.default.createElement('input', { className: 'file-field', name: 'recfile', type: 'file' })
           ),
           _react2.default.createElement(
             'button',
-            { type: 'post' },
+            { type: 'submit' },
             'post'
           )
         )

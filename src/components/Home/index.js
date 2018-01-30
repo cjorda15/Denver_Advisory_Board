@@ -7,35 +7,20 @@ class Home extends Component {
     super();
   }
 
-  // cloudinaryTry() {
-  //   fetch('/api/image', {
-  //     method: 'post',
-  //     body: JSON.stringify('booo')
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => console.log(res, 'response'))
-  //     .catch(err => console.log(err, 'error'));
-  // }
-
   handleClick(e) {
     e.preventDefault();
-    location.reload();
+    const data = new FormData();
+    const input = document.querySelector('.file-field').files[0];
 
-    // e.preventDefault();
-    // const input = document.querySelector('.file-field').files[0];
-    // // console.log(input);
-    // var data = new FormData();
-    // data.append('file', input);
-    // // data.append('user', 'hubot');
-    // //
-    // fetch('/api/v1/image', {
-    //   method: 'POST',
-    //   body: data
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
-    // window.location = '/blah';
+    data.append('file', input);
+
+    fetch('/api/v1/image', {
+      method: 'POST',
+      body: data
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -60,9 +45,9 @@ class Home extends Component {
           </div>
           <div>
             <label>Image</label>
-            <input className="file-field" name="image" type="file" />
+            <input className="file-field" name="recfile" type="file" />
           </div>
-          <button type="post">post</button>
+          <button type="submit">post</button>
         </form>
       </div>
     );
