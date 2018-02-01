@@ -35,6 +35,8 @@ db.once('open', function() {});
 var Users = mongoose.model('USERS', USERS);
 var Events = mongoose.model('EVENTS', EVENTS);
 
+app.listen(config.port, () => console.log('we are live..'));
+
 // var user = new Users({
 //   name: 'roe',
 //   age: 13

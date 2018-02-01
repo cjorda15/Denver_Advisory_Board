@@ -3,8 +3,14 @@ const Schema = mongoose.Schema;
 
 const USERS = new Schema(
   {
-    name: String,
-    age: Number
+    info: {
+      name: String,
+      bio: String,
+      joined: String,
+      image: String
+    },
+    organizingEvents: [],
+    attendingEvents: []
   },
   {
     collection: 'USERS'
