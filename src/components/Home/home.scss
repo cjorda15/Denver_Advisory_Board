@@ -12,3 +12,13 @@
     width: 90%;
   }
 }
+
+.home-page-section-1 {
+  display: flex;
+  margin: 100px 0px;
+  justify-content: center;
+  article,
+  p {
+    flex: 1;
+  }
+}

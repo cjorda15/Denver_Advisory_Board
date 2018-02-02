@@ -37752,41 +37752,7 @@ __webpack_require__(127);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var About = function About() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'about-container' },
-    _react2.default.createElement(
-      'div',
-      { className: 'initial-summary-container' },
-      _react2.default.createElement(
-        'section',
-        { className: 'intial-section-wrapper' },
-        _react2.default.createElement(
-          'p',
-          { className: 'initial-summary-subtext' },
-          'I am a creative front-end developer who enjoys designing and developing UI/UX web experiences with a focus on usability and prefers to work smart and hard, because hey, this is fun.'
-        ),
-        _react2.default.createElement('span', { className: 'initial-summary-line-1' })
-      ),
-      _react2.default.createElement('div', { className: 'initial-summary-img' }),
-      _react2.default.createElement(
-        'section',
-        { className: 'intial-summary-description-container' },
-        _react2.default.createElement('span', { className: 'initial-summary-line-2' }),
-        _react2.default.createElement(
-          'p',
-          { className: 'inital-summary-description' },
-          ' ',
-          'I have recently graduated from Turing School of Software and Design located in downtown Denver. Turing students invest over 1500 hours across seven months in becoming ready-made web developers. In the Front-End Engineering program, we began by building skills in HTML5, CSS3, JavaScript, jQuery, and Design Fundamentals.'
-        ),
-        _react2.default.createElement(
-          'p',
-          { className: 'inital-summary-description' },
-          'We continued laying a solid foundation in Javascript from DOM manipulation to writing complex algorithms with a focus on ES2015, then progressed into React/Redux. In the final quarter, we focused on building backend applications with express/node and SQL through knex.js.'
-        )
-      )
-    )
-  );
+  return _react2.default.createElement('div', { id: 'about-container' });
 };
 
 exports.default = About;
@@ -37942,7 +37908,16 @@ var Home = function Home() {
       null,
       'We believe in creating and growing professional friendships resulting in personal & business success.'
     ),
-    _react2.default.createElement(_EventSlider2.default, null)
+    _react2.default.createElement(
+      'section',
+      { className: 'home-page-section-1' },
+      _react2.default.createElement(_EventSlider2.default, null),
+      _react2.default.createElement(
+        'p',
+        null,
+        'come check us out at one of our events!'
+      )
+    )
   );
 };
 exports.default = Home;
@@ -37987,7 +37962,7 @@ exports = module.exports = __webpack_require__(5)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Lustria|Montserrat+Alternates);", ""]);
 
 // module
-exports.push([module.i, "#home-container {\n  margin: 60px 0px;\n  padding: 40px 0px; }\n  #home-container h3 {\n    font-family: \"Lustria\", serif;\n    font-size: 1.6em;\n    margin: 0px auto;\n    max-width: 600px;\n    text-align: center;\n    width: 90%; }\n", ""]);
+exports.push([module.i, "#home-container {\n  margin: 60px 0px;\n  padding: 40px 0px; }\n  #home-container h3 {\n    font-family: \"Lustria\", serif;\n    font-size: 1.6em;\n    margin: 0px auto;\n    max-width: 600px;\n    text-align: center;\n    width: 90%; }\n\n.home-page-section-1 {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 100px 0px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n  .home-page-section-1 article,\n  .home-page-section-1 p {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1; }\n", ""]);
 
 // exports
 
@@ -38112,7 +38087,7 @@ var EventSlider = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'section',
+        'article',
         { className: 'events-wrapper' },
         this.renderEvents()
       );
@@ -38243,7 +38218,7 @@ exports = module.exports = __webpack_require__(5)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Lustria|Montserrat+Alternates);", ""]);
 
 // module
-exports.push([module.i, ".events {\n  position: relative;\n  height: 500px;\n  margin: 0px auto;\n  max-width: 1000px;\n  min-width: 320px;\n  overflow: hidden;\n  width: 90%; }\n\n.event {\n  position: absolute;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height: 100%;\n  transition: all 1s;\n  width: 100%; }\n\n.not-active-event {\n  top: -500px; }\n\n.active-event {\n  top: 0px; }\n\n.events-btn {\n  background-color: rgba(0, 0, 0, 0.4);\n  border: 1px solid #fff;\n  bottom: 5%;\n  border-radius: 100%;\n  color: #fff;\n  font-size: 20px;\n  padding: 20px;\n  position: absolute;\n  transition: all 0.5s;\n  z-index: 5; }\n  .events-btn:hover {\n    background-color: #fff;\n    border-color: #000;\n    color: #000; }\n  .events-btn:active {\n    background-color: #fff; }\n\n.event-info {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  background: rgba(0, 0, 0, 0.6);\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n\n.event-title {\n  color: #fff;\n  padding: 5px;\n  font-size: 1.5em;\n  text-align: center; }\n\n.event-links {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .event-links a {\n    transition: all 0.5s ease-in-out; }\n    .event-links a:hover {\n      -webkit-transform: scale(1.1);\n              transform: scale(1.1); }\n  .event-links img {\n    height: 60px;\n    width: 75px; }\n\n.events-btn:nth-of-type(1) {\n  left: 10px; }\n\n.events-btn:nth-of-type(2) {\n  right: 10px; }\n", ""]);
+exports.push([module.i, ".events {\n  position: relative;\n  height: 500px;\n  margin: 0px auto;\n  overflow: hidden;\n  width: 100%; }\n\n.event {\n  position: absolute;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  height: 100%;\n  transition: all 1s;\n  width: 100%; }\n\n.not-active-event {\n  top: -500px; }\n\n.active-event {\n  top: 0px; }\n\n.events-btn {\n  background-color: rgba(0, 0, 0, 0.4);\n  border: 1px solid #fff;\n  bottom: 5%;\n  border-radius: 100%;\n  color: #fff;\n  font-size: 20px;\n  padding: 20px;\n  position: absolute;\n  transition: all 0.5s;\n  z-index: 5; }\n  .events-btn:hover {\n    background-color: #fff;\n    border-color: #000;\n    color: #000; }\n  .events-btn:active {\n    background-color: #fff; }\n\n.event-info {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  background: rgba(0, 0, 0, 0.6);\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n\n.event-title {\n  color: #fff;\n  padding: 5px;\n  font-size: 1.5em;\n  text-align: center; }\n\n.event-links {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .event-links a {\n    transition: all 0.5s ease-in-out; }\n    .event-links a:hover {\n      -webkit-transform: scale(1.1);\n              transform: scale(1.1); }\n  .event-links img {\n    height: 60px;\n    width: 75px; }\n\n.events-btn:nth-of-type(1) {\n  left: 10px; }\n\n.events-btn:nth-of-type(2) {\n  right: 10px; }\n", ""]);
 
 // exports
 

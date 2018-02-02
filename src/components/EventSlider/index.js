@@ -79,7 +79,7 @@ class EventSlider extends Component {
   }
 
   render() {
-    return <section className="events-wrapper">{this.renderEvents()}</section>;
+    return <article className="events-wrapper">{this.renderEvents()}</article>;
   }
 }
 export default EventSlider;

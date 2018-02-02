@@ -9,7 +9,10 @@ const Home = () => {
         We believe in creating and growing professional friendships resulting in
         personal & business success.
       </h3>
-      <EventSlider />
+      <section className="home-page-section-1">
+        <EventSlider />
+        <p>come check us out at one of our events!</p>
+      </section>
     </div>
   );
 };
