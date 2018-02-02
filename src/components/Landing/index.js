@@ -4,17 +4,9 @@ import './landing.js';
 
 const Landing = () => {
   return (
-    <header>
-      <video
-        autoPlay
-        playsInline
-        muted
-        loop
-        preload="true"
-        poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/oceanshot.jpg"
-      >
-        <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ocean-small.webm" />
-        <source src="http://thenewcode.com/assets/videos/ocean-small.mp4" />
+    <div className="video-wrapper">
+      <video autoPlay playsInline muted loop preload="true">
+        <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
       </video>
       <svg
         id="landing-svg"
@@ -31,20 +23,20 @@ const Landing = () => {
               width="100%"
               height="100%"
             />
-            <text x="90" y="30">
+            <text x="75" y="30">
               Denver
             </text>
-            <text x="75" y="60">
+            <text x="74" y="45">
               Advisory
             </text>
-            <text x="100" y="78">
+            <text x="75" y="60">
               Board
             </text>
           </mask>
         </defs>
         <rect className="landing-svg" x="0" y="0" width="100%" height="100%" />
       </svg>
-    </header>
+    </div>
   );
 };
 
