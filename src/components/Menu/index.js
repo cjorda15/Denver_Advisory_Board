@@ -40,7 +40,12 @@ class Menu extends Component {
             className="nav-link"
             to={'/'}
           >
-            home
+            <div className="svg-wrapper">
+              <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect className="shape" height="60" width="320" />
+              </svg>
+              <div className="menu-link-text">HOME</div>
+            </div>
           </NavLink>
           <NavLink
             id="nav-link-2"
@@ -49,9 +54,14 @@ class Menu extends Component {
               this.scrollAfterSearch('projects-container');
             }}
             className="nav-link"
-            to={'/projects'}
+            to={'/about'}
           >
-            projects
+            <div className="svg-wrapper">
+              <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect className="shape" height="60" width="320" />
+              </svg>
+              <div className="menu-link-text">ABOUT</div>
+            </div>
           </NavLink>
           <NavLink
             id="nav-link-3"
@@ -60,9 +70,14 @@ class Menu extends Component {
               this.scrollAfterSearch('about-container');
             }}
             className="nav-link"
-            to={'/about'}
+            to={'/events'}
           >
-            about me
+            <div className="svg-wrapper">
+              <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect className="shape" height="60" width="320" />
+              </svg>
+              <div className="menu-link-text">EVENTS</div>
+            </div>
           </NavLink>
           <NavLink
             id="nav-link-4"
@@ -71,9 +86,14 @@ class Menu extends Component {
               this.scrollAfterSearch('contact-container');
             }}
             className="nav-link"
-            to={'/contact'}
+            to={'/JOIN'}
           >
-            Contact
+            <div className="svg-wrapper">
+              <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+                <rect className="shape" height="60" width="320" />
+              </svg>
+              <div className="menu-link-text">JOIN</div>
+            </div>
           </NavLink>
         </nav>
       </div>
