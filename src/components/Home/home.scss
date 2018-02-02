@@ -1,5 +1,7 @@
+@import '../../styles/utilities/index.scss';
+
 #home-container {
-  background-size: contain;
-  height: 200px;
-  width: 300px;
+  h3 {
+    font-family: $font-regular;
+  }
 }
