@@ -3,10 +3,10 @@ import { Route, Link, Switch } from 'react-router-dom';
 import Burger from './Burger';
 import Menu from './Menu';
 import Landing from './Landing';
-import Projects from './Projects';
 import About from './About';
 import Contact from './Contact';
 import Home from './Home';
+import LrgNav from './LrgNav';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -17,6 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <LrgNav />
         <Burger />
         <Landing />
         <Menu />
