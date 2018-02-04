@@ -1,3 +1,5 @@
+@import '../../../styles/utilities/index.scss';
+
 #landing-page-wrapper h1 {
   font-family: 'Pacifico', cursive;
   font-weight: normal;
@@ -6,12 +8,13 @@
 }
 
 #home-grid {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
-  width: 70%;
+  max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .landing-photo-container {
@@ -20,13 +23,12 @@
   overflow: hidden;
   position: relative;
   margin-top: 20px;
-  max-width: 300px;
-  width: 31%;
+  width: 300px;
   transition: all 400ms ease-in-out;
 }
 
-.landing-photo-container:hover .landing-photo {
-  margin-left: -300px;
+.landing-photo-container:hover .inital-block {
+  margin-left: -700px;
 }
 
 .landing-photo-container:hover div {
@@ -38,39 +40,61 @@
   box-shadow: none;
 }
 
-.intial-block {
+.inital-block {
+  align-items: center;
+  background: #1a1a1a;
+  color: #fff;
+  display: flex;
+  font-family: $font-medium;
   height: 230px;
-  float: left;
+  justify-content: center;
   transition: all 400ms ease-in-out;
   width: 100%;
 }
 
 .landing-photo-hidden-text {
-  text-align: center;
+  align-items: center;
+  font-size: 1em;
+  display: flex;
+  font-family: $font-fancy;
+  justify-content: center;
   padding: 10px;
   transition: all 400ms ease-in-out;
-  font-size: 2em;
 }
 
 .landing-photo-hidden-text-wrapper {
-  position: absolute;
-  left: 300px;
-  display: flex;
-  justify-content: center;
-  height: 100%;
   align-items: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  left: 300px;
+  padding: 10px;
+  position: absolute;
   justify-content: center;
   transition: all 400ms ease-in-out;
   width: 100%;
 }
 
+.grid-link {
+  border-bottom: #19f6e8 2px solid;
+  color: #fff;
+  font-family: $font-medium;
+  text-decoration: none;
+  transition: all 1s;
+  &:hover {
+    border-bottom: #fff 2px solid;
+    color: #19f6e8;
+  }
+}
+
 .photo-container-bg-1 {
-  /*background: #F7ED35;*/
-  box-shadow: 0px 0px 10px #f7ed35, 0px 0px 10px #f7ed35;
+  box-shadow: 0px 0px 10px #ff87b1, 0px 0px 10px #ff87b1;
 }
 
 .photo-container-bg-1:hover {
-  background: #f7ed35;
+  background: #ff87b1;
 }
 
 .photo-container-bg-2 {

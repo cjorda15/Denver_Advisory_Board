@@ -6,7 +6,6 @@ const cloudinary = require('cloudinary');
 const apiRoutes = require('./routes.js');
 const config = require('./config').app;
 const mongoose = require('mongoose');
-const USERS = require('./models/users.js');
 const EVENTS = require('./models/events.js');
 require('./cleanup.js');
 require('dotenv').config();

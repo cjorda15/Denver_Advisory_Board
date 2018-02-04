@@ -7,6 +7,8 @@ import About from './About';
 import Contact from './Contact';
 import Home from './Home';
 import LrgNav from './LrgNav';
+import Footer from './Footer';
+import Login from './Login';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -22,12 +24,13 @@ class App extends Component {
         <Landing />
         <Menu />
         <Switch>
-          <Route path="/projects" render={({ history }) => <Projects />} />
+          <Route path="/login" render={({ history }) => <Login />} />
           <Route path="/about" render={({ history }) => <About />} />
           <Route path="/contact" render={({ history }) => <Contact />} />
           <Route path="/" render={({ history }) => <Home />} />
           <Route path="/*" render={({ history }) => <Home />} />
         </Switch>
+        <Footer />
       </div>
     );
   }

@@ -18,13 +18,14 @@
     margin: 100px auto;
     max-width: 860px;
   }
-  div {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
+}
+
+.call-to-action-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   img {
-    width: 65px;
+    width: 90px;
   }
 }
 
@@ -38,7 +39,9 @@
   text-decoration: none;
   padding: 18px;
   margin-top: 15px;
+  text-align: center;
   transition: all 0.8s;
+  width: 239px;
   &:hover {
     background: #dd7782;
     color: #fff;
@@ -46,11 +49,12 @@
 }
 
 .home-intro-container {
+  align-items: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   span {
     display: inline-flex;
-    border-bottom: 2px solid;
+    border-bottom: 3px solid #000;
     max-width: 300px;
     width: 80%;
   }

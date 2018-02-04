@@ -83,16 +83,16 @@ class Menu extends Component {
             id="nav-link-4"
             onClick={() => {
               this.scrollTop();
-              this.scrollAfterSearch('contact-container');
+              this.scrollAfterSearch('login-signup-container');
             }}
             className="nav-link"
-            to={'/JOIN'}
+            to={'/login'}
           >
             <div className="svg-wrapper">
               <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
                 <rect className="shape" height="60" width="320" />
               </svg>
-              <div className="menu-link-text">JOIN</div>
+              <div className="menu-link-text">login</div>
             </div>
           </NavLink>
         </nav>

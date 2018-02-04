@@ -32,41 +32,74 @@ class HomeGrid extends Component {
       <section id="home-grid">
         <div className="landing-photo-container photo-container-bg-1">
           <div className="landing-photo-hidden-text-wrapper">
-            <p className="landing-photo-hidden-text">puff puff give</p>
+            <p className="landing-photo-hidden-text">
+              One of the most valuable benefits of the Denver Advisory Board is
+              the opportunity to join a Peer Advisory Group.
+            </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Peer Advisory Group</div>
+          <h6 className="inital-block">Peer Advisory Group</h6>
         </div>
         <div className="landing-photo-container photo-container-bg-2">
           <div className="landing-photo-hidden-text-wrapper">
-            <p className="landing-photo-hidden-text">keep a weed journal</p>
+            <p className="landing-photo-hidden-text">
+              One of our primary purposes was to bring value to the community in
+              which its members live and work. Today, that is still an important
+              hallmark of the organization.
+            </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Community Service</div>
+          <h6 className="inital-block">Community Service</h6>
         </div>
         <div className="landing-photo-container photo-container-bg-3">
           <div className="landing-photo-hidden-text-wrapper">
-            <p className="landing-photo-hidden-text">rate strains</p>
+            <p className="landing-photo-hidden-text">
+              We meet at the Downtown Aquarium on the 2nd Tuesday of every month
+              and we welcome guests!
+            </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Monthly Meetings</div>
+          <h6 className="inital-block">Monthly Meetings</h6>
         </div>
         <div className="landing-photo-container photo-container-bg-4">
           <div className="landing-photo-hidden-text-wrapper">
             <p className="landing-photo-hidden-text">
-              recommend your favorites to your friends
+              Come see our list of members
             </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Membership Directory</div>
+          <h6 className="inital-block">Membership Directory</h6>
         </div>
         <div className="landing-photo-container photo-container-bg-5">
           <div className="landing-photo-hidden-text-wrapper">
-            <p className="landing-photo-hidden-text">upload awesome photos</p>
+            <p className="landing-photo-hidden-text">
+              Check out our Commitee Chairs
+            </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Committees</div>
+          <h6 className="inital-block">Committees</h6>
         </div>
         <div className="landing-photo-container photo-container-bg-6">
           <div className="landing-photo-hidden-text-wrapper">
-            <p className="landing-photo-hidden-text">puff puff give</p>
+            <p className="landing-photo-hidden-text">
+              The DAB is always looking to bring in speakers that add value to
+              our members. Interested in being a speaker?
+            </p>
+            <a className="grid-link" href="/">
+              Learn More
+            </a>
           </div>
-          <div className="inital-block">Programs</div>
+          <h6 className="inital-block">Programs</h6>
         </div>
       </section>
     );

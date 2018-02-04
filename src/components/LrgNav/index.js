@@ -64,7 +64,7 @@ class LrgNav extends Component {
         </NavLink>
         <NavLink
           onClick={() => {
-            this.scrollAfterSearch('home-container');
+            this.scrollAfterSearch('login-signup-container');
           }}
           className="lrg-nav-link"
           to={'/login'}
@@ -73,7 +73,7 @@ class LrgNav extends Component {
             <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
               <rect className="lrg-nav-shape" height="60" width="120" />
             </svg>
-            <div className="lrg-menu-link-text">Login</div>
+            <div className="lrg-menu-link-text">LOGIN</div>
           </div>
         </NavLink>
       </nav>
