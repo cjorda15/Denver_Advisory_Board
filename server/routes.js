@@ -38,7 +38,7 @@ router.post('/user', (req, res) => {
       err
         ? res.json('SERVER FAILURE')
         : presentUser
-          ? res.json('Already TAKEN')
+          ? res.json('ALREADY TAKEN')
           : user.save(function(error) {
               res.json('CREATED USER');
               if (error) {
@@ -50,4 +50,19 @@ router.post('/user', (req, res) => {
   );
 });
 
+router.get('/user', (req, res) => {
+  const Users = mongoose.model('USERS', USERS);
+  const { username, password } = req.query;
+  Users.findOne(
+    {
+      name: username,
+      password: password
+    },
+    (err, presentUser) => {
+      err
+        ? res.json('SERVER FAILURE')
+        : presentUser ? res.json('LOGIN SUCCESS') : res.json('LOGIN FAILURE');
+    }
+  );
+});
 module.exports = router;

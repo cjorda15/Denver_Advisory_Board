@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Scroll from 'react-scroll';
 import './login.scss';
 
 class Login extends Component {
@@ -14,6 +15,26 @@ class Login extends Component {
       errorMessage: '',
       loading: false
     };
+  }
+
+  scrollTop() {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo('landing-svg', {
+        duration: 0,
+        delay: 0,
+        smooth: false
+      });
+    }, 0);
+  }
+
+  scrollAfterSearch(input) {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo(input, {
+        duration: 1000,
+        delay: 70,
+        smooth: true
+      });
+    }, 100);
   }
 
   handleRadio(e) {
@@ -61,6 +82,7 @@ class Login extends Component {
 
     if (!emailCheck.test(email)) {
       this.handleError('must be a valid email address');
+      return;
     }
 
     fetch('/api/v1/user', {
@@ -73,7 +95,29 @@ class Login extends Component {
       .catch(err => this.handleSignup(err));
   }
 
-  handleSignup(message) {}
+  handleSignup(message) {
+    if (message == 'ALREADY TAKEN') {
+      this.handleError('username already taken');
+      return;
+    }
+    if (message !== 'CREATED USER') {
+      this.handleError('server error during creation, please try again');
+      return;
+    }
+    this.scrollTop();
+    this.scrollAfterSearch('home-container');
+    this.props.history.replace('/');
+  }
+
+  handleLogin(message) {
+    if (message == 'LOGIN FAILURE') {
+      this.handleError('username or the password not correct');
+      return;
+    }
+    this.scrollTop();
+    this.scrollAfterSearch('home-container');
+    this.props.history.replace('/');
+  }
 
   login() {
     const { username, password } = this.state;
@@ -82,6 +126,10 @@ class Login extends Component {
       this.handleError();
       return;
     }
+    fetch(`/api/v1/user?username=${username}&password=${password}`)
+      .then(res => res.json())
+      .then(res => this.handleLogin(res))
+      .catch(err => this.handleLogin(err));
   }
 
   handleError(message) {

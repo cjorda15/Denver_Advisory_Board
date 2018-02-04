@@ -8,6 +8,16 @@ class LrgNav extends Component {
     super();
   }
 
+  scrollTop() {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo('landing-svg', {
+        duration: 0,
+        delay: 0,
+        smooth: false
+      });
+    }, 0);
+  }
+
   scrollAfterSearch(input) {
     setTimeout(() => {
       return Scroll.scroller.scrollTo(input, {
@@ -64,6 +74,7 @@ class LrgNav extends Component {
         </NavLink>
         <NavLink
           onClick={() => {
+            this.scrollTop();
             this.scrollAfterSearch('login-signup-container');
           }}
           className="lrg-nav-link"

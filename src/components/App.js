@@ -24,11 +24,26 @@ class App extends Component {
         <Landing />
         <Menu />
         <Switch>
-          <Route path="/login" render={({ history }) => <Login />} />
-          <Route path="/about" render={({ history }) => <About />} />
-          <Route path="/contact" render={({ history }) => <Contact />} />
-          <Route path="/" render={({ history }) => <Home />} />
-          <Route path="/*" render={({ history }) => <Home />} />
+          <Route
+            path="/login"
+            render={({ history }) => <Login history={history} />}
+          />
+          <Route
+            path="/about"
+            render={({ history }) => <About history={history} />}
+          />
+          <Route
+            path="/contact"
+            render={({ history }) => <Contact history={history} />}
+          />
+          <Route
+            path="/"
+            render={({ history }) => <Home history={history} />}
+          />
+          <Route
+            path="/*"
+            render={({ history }) => <Home history={history} />}
+          />
         </Switch>
         <Footer />
       </div>
