@@ -31,10 +31,9 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {});
 
-var Users = mongoose.model('USERS', USERS);
-var Events = mongoose.model('EVENTS', EVENTS);
-
 app.listen(config.port, () => console.log('we are live..'));
+
+// var Events = mongoose.model('EVENTS', EVENTS);
 
 // var user = new Users({
 //   name: 'roe',

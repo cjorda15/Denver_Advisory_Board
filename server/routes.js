@@ -7,6 +7,7 @@ const CronJob = require('cron').CronJob;
 const path = require('path');
 const temp_folder_path = path.join(__dirname, '../uploads');
 const USERS = require('./models/users.js');
+const mongoose = require('mongoose');
 
 cloudinary.config({
   cloud_name: config.cloud_name,
@@ -21,9 +22,38 @@ router.post('/image', upload.single('file'), (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-  console.log(req.body);
-  console.log('!@#$!@#$!@#$');
-  res.json('WOOO');
+  const Users = mongoose.model('USERS', USERS);
+  const { username, password, email } = req.body;
+  const user = new Users({
+    name: username,
+    password: password,
+    email: email
+  });
+
+  Users.findOne(
+    {
+      name: username
+    },
+    (err, presentUser) => {
+      if (err) {
+        res.json('SERVER FAILURE');
+        return;
+      } else {
+        if (presentUser) {
+          res.json('Already TAKEN');
+          return;
+        } else {
+          user.save(function(error) {
+            res.json('SUCCESS');
+            if (error) {
+              res.json('SERVER FAILURE');
+              return;
+            }
+          });
+        }
+      }
+    }
+  );
 });
 
 module.exports = router;

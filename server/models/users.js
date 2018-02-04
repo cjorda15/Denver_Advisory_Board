@@ -3,18 +3,15 @@ const Schema = mongoose.Schema;
 
 const USERS = new Schema(
   {
-    info: {
-      name: String,
-      bio: String,
-      joined: String,
-      image: String
-    },
+    name: String,
+    password: String,
+    email: String,
+    bio: String,
+    image: String,
     organizingEvents: [],
     attendingEvents: []
   },
-  {
-    collection: 'USERS'
-  }
+  { collection: 'USERS' }
 );
 
 module.exports = USERS;
