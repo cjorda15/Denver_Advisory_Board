@@ -10,7 +10,7 @@ class Login extends Component {
       password: '',
       retypePassword: '',
       email: '',
-      error: false,
+      showError: false,
       errorMessage: '',
       loading: false
     };
@@ -37,20 +37,43 @@ class Login extends Component {
 
   signup() {
     const { username, password, retypePassword, email } = this.state;
+    const emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if ((!username, !password, !retypePassword, !email)) {
-      this.handleError();
+      this.handleError('complete the form please');
       return;
     }
+
+    if (password !== retypePassword) {
+      this.handleError('passwords not the same');
+      return;
+    }
+
+    if (username.length < 5) {
+      this.handleError('username must be at least 5 characters');
+      return;
+    }
+
+    if (password.length < 5) {
+      this.handleError('username must be at least 5 characters');
+      return;
+    }
+
+    if (!emailCheck.test(email)) {
+      this.handleError('must be a valid email address');
+    }
+
     fetch('/api/v1/user', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password, retypePassword, email })
     })
       .then(res => res.json())
-      .then(res => console.log(res, 'RES'))
-      .catch(err => console.log(err, 'ERROR'));
+      .then(res => this.handleSignup(res))
+      .catch(err => this.handleSignup(err));
   }
+
+  handleSignup(message) {}
 
   login() {
     const { username, password } = this.state;
@@ -61,8 +84,12 @@ class Login extends Component {
     }
   }
 
-  handleError() {
-    console.log('!!!!');
+  handleError(message) {
+    this.setState({ showError: true, errorMessage: message });
+    setTimeout(() => {
+      this.setState({ showError: false });
+    }, 3000);
+    return;
   }
 
   showSignup() {
@@ -161,6 +188,9 @@ class Login extends Component {
           >
             Submit
           </button>
+          {this.state.showError ? (
+            <div id="error-message-login">{this.state.errorMessage}</div>
+          ) : null}
         </form>
       </section>
     );

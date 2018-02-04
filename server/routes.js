@@ -35,23 +35,17 @@ router.post('/user', (req, res) => {
       name: username
     },
     (err, presentUser) => {
-      if (err) {
-        res.json('SERVER FAILURE');
-        return;
-      } else {
-        if (presentUser) {
-          res.json('Already TAKEN');
-          return;
-        } else {
-          user.save(function(error) {
-            res.json('SUCCESS');
-            if (error) {
-              res.json('SERVER FAILURE');
-              return;
-            }
-          });
-        }
-      }
+      err
+        ? res.json('SERVER FAILURE')
+        : presentUser
+          ? res.json('Already TAKEN')
+          : user.save(function(error) {
+              res.json('CREATED USER');
+              if (error) {
+                res.json('SERVER FAILURE');
+                return;
+              }
+            });
     }
   );
 });

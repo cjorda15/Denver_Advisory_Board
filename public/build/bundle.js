@@ -38650,7 +38650,7 @@ var Login = function (_Component) {
       password: '',
       retypePassword: '',
       email: '',
-      error: false,
+      showError: false,
       errorMessage: '',
       loading: false
     };
@@ -38682,17 +38682,40 @@ var Login = function (_Component) {
   }, {
     key: 'signup',
     value: function signup() {
+      var _this2 = this;
+
       var _state = this.state,
           username = _state.username,
           password = _state.password,
           retypePassword = _state.retypePassword,
           email = _state.email;
 
+      var emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       if (!username, !password, !retypePassword, !email) {
-        this.handleError();
+        this.handleError('complete the form please');
         return;
       }
+
+      if (password !== retypePassword) {
+        this.handleError('passwords not the same');
+        return;
+      }
+
+      if (username.length < 5) {
+        this.handleError('username must be at least 5 characters');
+        return;
+      }
+
+      if (password.length < 5) {
+        this.handleError('username must be at least 5 characters');
+        return;
+      }
+
+      if (!emailCheck.test(email)) {
+        this.handleError('must be a valid email address');
+      }
+
       fetch('/api/v1/user', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -38700,11 +38723,14 @@ var Login = function (_Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (res) {
-        return console.log(res, 'RES');
+        return _this2.handleSignup(res);
       }).catch(function (err) {
-        return console.log(err, 'ERROR');
+        return _this2.handleSignup(err);
       });
     }
+  }, {
+    key: 'handleSignup',
+    value: function handleSignup(message) {}
   }, {
     key: 'login',
     value: function login() {
@@ -38720,20 +38746,26 @@ var Login = function (_Component) {
     }
   }, {
     key: 'handleError',
-    value: function handleError() {
-      console.log('!!!!');
+    value: function handleError(message) {
+      var _this3 = this;
+
+      this.setState({ showError: true, errorMessage: message });
+      setTimeout(function () {
+        _this3.setState({ showError: false });
+      }, 3000);
+      return;
     }
   }, {
     key: 'showSignup',
     value: function showSignup() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
         { className: 'signup-container' },
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this2.handleInput(e, 'username');
+            _this4.handleInput(e, 'username');
           },
           type: 'input',
           value: this.state.username,
@@ -38741,7 +38773,7 @@ var Login = function (_Component) {
         }),
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this2.handleInput(e, 'password');
+            _this4.handleInput(e, 'password');
           },
           type: 'input',
           value: this.state.password,
@@ -38749,7 +38781,7 @@ var Login = function (_Component) {
         }),
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this2.handleInput(e, 'retypePassword');
+            _this4.handleInput(e, 'retypePassword');
           },
           type: 'input',
           value: this.state.retypePassword,
@@ -38757,7 +38789,7 @@ var Login = function (_Component) {
         }),
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this2.handleInput(e, 'email');
+            _this4.handleInput(e, 'email');
           },
           type: 'input',
           value: this.state.email,
@@ -38768,14 +38800,14 @@ var Login = function (_Component) {
   }, {
     key: 'showLogin',
     value: function showLogin() {
-      var _this3 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
         { className: 'login-container' },
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this3.handleInput(e, 'username');
+            _this5.handleInput(e, 'username');
           },
           type: 'input',
           value: this.state.username,
@@ -38783,7 +38815,7 @@ var Login = function (_Component) {
         }),
         _react2.default.createElement('input', {
           onChange: function onChange(e) {
-            _this3.handleInput(e, 'password');
+            _this5.handleInput(e, 'password');
           },
           type: 'input',
           value: this.state.password,
@@ -38794,7 +38826,7 @@ var Login = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this6 = this;
 
       return _react2.default.createElement(
         'section',
@@ -38809,7 +38841,7 @@ var Login = function (_Component) {
             checked: this.state.show === 'signup',
             value: 'signup',
             onChange: function onChange(e) {
-              _this4.handleRadio(e);
+              _this6.handleRadio(e);
             }
           }),
           _react2.default.createElement(
@@ -38824,7 +38856,7 @@ var Login = function (_Component) {
             checked: this.state.show === 'login',
             value: 'login',
             onChange: function onChange(e) {
-              _this4.handleRadio(e);
+              _this6.handleRadio(e);
             }
           }),
           _react2.default.createElement(
@@ -38837,11 +38869,16 @@ var Login = function (_Component) {
             'button',
             {
               onClick: function onClick(e) {
-                _this4.handleSubmit(e);
+                _this6.handleSubmit(e);
               }
             },
             'Submit'
-          )
+          ),
+          this.state.showError ? _react2.default.createElement(
+            'div',
+            { id: 'error-message-login' },
+            this.state.errorMessage
+          ) : null
         )
       );
     }
@@ -38892,7 +38929,7 @@ exports = module.exports = __webpack_require__(5)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Fredoka One\", cursive;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button {\n    border: 2px solid #33f5e7;\n    color: #33f5e7;\n    font-size: 1em;\n    font-family: \"Fredoka One\", cursive;\n    padding: 14px;\n    outline: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus {\n      background: #33f5e7;\n      color: #fff; }\n    #login-signup-container button:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Fredoka One\", cursive;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid red; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Fredoka One\", cursive;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button {\n    border: 2px solid #33f5e7;\n    color: #33f5e7;\n    font-size: 1em;\n    font-family: \"Fredoka One\", cursive;\n    padding: 14px;\n    outline: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus {\n      background: #33f5e7;\n      color: #fff; }\n    #login-signup-container button:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Fredoka One\", cursive;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid red; }\n\n#error-message-login {\n  background: red;\n  font-family: \"Fredoka One\", cursive;\n  max-width: 200px;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  padding: 20px;\n  margin-top: 15px; }\n", ""]);
 
 // exports
 

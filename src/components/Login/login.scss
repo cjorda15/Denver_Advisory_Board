@@ -59,3 +59,14 @@
     }
   }
 }
+
+#error-message-login {
+  background: red;
+  font-family: $font-medium;
+  max-width: 200px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  margin-top: 15px;
+}
