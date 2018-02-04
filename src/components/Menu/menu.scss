@@ -12,9 +12,7 @@
   nav {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 70px;
-    right: 100px;
+    margin-top: 80px;
   }
   a {
     text-decoration: none;
@@ -92,7 +90,8 @@
   animation: 0.5s drawout linear forwards;
 }
 
-// .svg-wrapper:hover .shape {
-//   -webkit-animation: 0.5s draw linear forwards;
-//   animation: 0.5s draw linear forwards;
-// }
+@media (min-width: 600px) {
+  #menu {
+    display: none !important;
+  }
+}

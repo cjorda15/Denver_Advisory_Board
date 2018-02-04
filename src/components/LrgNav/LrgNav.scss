@@ -1,17 +1,89 @@
+@import '../../styles/utilities/index.scss';
+
 .lrg-nav-container {
-  padding-top: 20px;
+  align-items: center;
+  background: #fff;
+  display: flex;
+  height: 80px;
+  justify-content: flex-end;
+  position: fixed;
+  top: -20px;
+  width: 100%;
+  z-index: 10;
 }
 
 .lrg-nav-link {
+  height: 47px;
+  margin: 0px 10px;
   text-decoration: none;
 }
 
 .lrg-menu-link-text {
   color: #000;
-  font-size: 22px;
+  font-size: 16px;
+  font-family: $font-regular;
   letter-spacing: 8px;
   line-height: 32px;
   text-align: center;
   position: relative;
   top: -48px;
+}
+
+.lrg-nav-svg-wrapper {
+  height: 60px;
+  margin: 10px auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+}
+
+.lrg-nav-shape {
+  fill: transparent;
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: 30;
+  stroke-width: 8px;
+  stroke: #19f6e8;
+}
+
+@keyframes drawNav {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: 30;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 400 510;
+    stroke-dashoffset: 30;
+    stroke-width: 8px;
+  }
+}
+
+@keyframes drawoutNav {
+  0% {
+    stroke-dasharray: 400 510;
+    stroke-dashoffset: 30;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: 30;
+    stroke-width: 8px;
+  }
+}
+
+.lrg-nav-shape-hover {
+  -webkit-animation: 0.4s draw linear forwards;
+  animation: 0.4s drawNav linear forwards;
+}
+
+.lrg-nav-shape-hover-off {
+  -webkit-animation: 0.4s drawout linear forwards;
+  animation: 0.4s drawoutNav linear forwards;
+}
+
+@media (max-width: 600px) {
+  .lrg-nav-container {
+    display: none;
+  }
 }

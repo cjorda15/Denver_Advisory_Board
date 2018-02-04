@@ -21,3 +21,9 @@
 .isNavOpen {
   overflow: hidden;
 }
+
+@media (min-width: 600px) {
+  .wrapper {
+    display: none;
+  }
+}

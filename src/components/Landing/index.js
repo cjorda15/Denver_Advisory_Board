@@ -15,21 +15,27 @@ const Landing = () => {
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          <mask id="mask" x="0" y="0" width="100vw" height="100vw">
+          <mask id="mask" x="0" y="0">
             <rect
+              style={{
+                width: `100%`,
+                fill: `white`,
+                mask: `url(/add#mask)`,
+                WebkitMask: `url(/add#mask)`
+              }}
               className="landing-svg"
               x="0"
               y="0"
               width="100%"
               height="100%"
             />
-            <text x="75" y="30">
+            <text x="75" y="28">
               Denver
             </text>
-            <text x="74" y="45">
+            <text x="74" y="48">
               Advisory
             </text>
-            <text x="75" y="60">
+            <text x="75" y="68">
               Board
             </text>
           </mask>
