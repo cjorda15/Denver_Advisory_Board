@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Scroll from 'react-scroll';
+import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
 import './login.scss';
 
 class Login extends Component {
@@ -142,63 +144,23 @@ class Login extends Component {
 
   showSignup() {
     return (
-      <div className="signup-container">
-        <input
-          onChange={e => {
-            this.handleInput(e, 'username');
-          }}
-          type="input"
-          value={this.state.username}
-          placeholder="username"
-        />
-        <input
-          onChange={e => {
-            this.handleInput(e, 'password');
-          }}
-          type="input"
-          value={this.state.password}
-          placeholder="password"
-        />
-        <input
-          onChange={e => {
-            this.handleInput(e, 'retypePassword');
-          }}
-          type="input"
-          value={this.state.retypePassword}
-          placeholder="retype-password"
-        />
-        <input
-          onChange={e => {
-            this.handleInput(e, 'email');
-          }}
-          type="input"
-          value={this.state.email}
-          placeholder="email"
-        />
-      </div>
+      <SignupForm
+        username={this.state.username}
+        password={this.state.password}
+        retypePassword={this.state.retypePassword}
+        email={this.state.email}
+        handleInput={this.handleInput.bind(this)}
+      />
     );
   }
 
   showLogin() {
     return (
-      <div className="login-container">
-        <input
-          onChange={e => {
-            this.handleInput(e, 'username');
-          }}
-          type="input"
-          value={this.state.username}
-          placeholder="username"
-        />
-        <input
-          onChange={e => {
-            this.handleInput(e, 'password');
-          }}
-          type="input"
-          value={this.state.password}
-          placeholder="password"
-        />
-      </div>
+      <LoginForm
+        username={this.state.username}
+        password={this.state.password}
+        handleInput={this.handleInput.bind(this)}
+      />
     );
   }
 
