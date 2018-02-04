@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
+import HomeGrid from './HomeGrid.js';
 import './home.scss';
 
 class Home extends Component {
@@ -38,7 +39,6 @@ class Home extends Component {
           </h3>
           <span />
         </div>
-
         <section className="home-page-section-1" data-aos="fade-down">
           <div src="/" data-aos="fade-down">
             <img src="icons/computer.png" />
@@ -82,6 +82,7 @@ class Home extends Component {
             </NavLink>{' '}
           </div>
         </section>
+        <HomeGrid />
       </div>
     );
   }

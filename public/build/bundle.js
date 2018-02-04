@@ -37842,6 +37842,10 @@ var _reactScroll = __webpack_require__(27);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
+var _HomeGrid = __webpack_require__(165);
+
+var _HomeGrid2 = _interopRequireDefault(_HomeGrid);
+
 __webpack_require__(130);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37960,7 +37964,8 @@ var Home = function (_Component) {
             ),
             ' '
           )
-        )
+        ),
+        _react2.default.createElement(_HomeGrid2.default, null)
       );
     }
   }]);
@@ -38170,7 +38175,7 @@ var LrgNav = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'lrg-menu-link-text' },
-              'Log'
+              'Login'
             )
           )
         )
@@ -39603,6 +39608,238 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
   verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
   verify(mergeProps, 'mergeProps', displayName);
 }
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(10);
+
+var _reactScroll = __webpack_require__(27);
+
+var _reactScroll2 = _interopRequireDefault(_reactScroll);
+
+__webpack_require__(166);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var HomeGrid = function (_Component) {
+  _inherits(HomeGrid, _Component);
+
+  function HomeGrid() {
+    _classCallCheck(this, HomeGrid);
+
+    return _possibleConstructorReturn(this, (HomeGrid.__proto__ || Object.getPrototypeOf(HomeGrid)).call(this));
+  }
+
+  _createClass(HomeGrid, [{
+    key: 'scrollTop',
+    value: function scrollTop() {
+      setTimeout(function () {
+        return _reactScroll2.default.scroller.scrollTo('landing-svg', {
+          duration: 0,
+          delay: 0,
+          smooth: false
+        });
+      }, 0);
+    }
+  }, {
+    key: 'scrollAfterSearch',
+    value: function scrollAfterSearch(input) {
+      setTimeout(function () {
+        return _reactScroll2.default.scroller.scrollTo(input, {
+          duration: 1000,
+          delay: 70,
+          smooth: true
+        });
+      }, 100);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { id: 'home-grid' },
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-1' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'puff puff give'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Peer Advisory Group'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-2' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'keep a weed journal'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Community Service'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-3' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'rate strains'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Monthly Meetings'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-4' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'recommend your favorites to your friends'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Membership Directory'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-5' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'upload awesome photos'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Committees'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'landing-photo-container photo-container-bg-6' },
+          _react2.default.createElement(
+            'div',
+            { className: 'landing-photo-hidden-text-wrapper' },
+            _react2.default.createElement(
+              'p',
+              { className: 'landing-photo-hidden-text' },
+              'puff puff give'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'inital-block' },
+            'Programs'
+          )
+        )
+      );
+    }
+  }]);
+
+  return HomeGrid;
+}(_react.Component);
+
+exports.default = HomeGrid;
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(167);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(6)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./home_grid.scss", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./home_grid.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(false);
+// imports
+
+
+// module
+exports.push([module.i, "#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  width: 70%;\n  margin: 0 auto; }\n\n.landing-photo-container {\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  max-width: 300px;\n  width: 31%;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-container:hover .landing-photo {\n  margin-left: -300px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.intial-block {\n  height: 230px;\n  float: left;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  text-align: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out;\n  font-size: 2em; }\n\n.landing-photo-hidden-text-wrapper {\n  position: absolute;\n  left: 300px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.photo-container-bg-1 {\n  /*background: #F7ED35;*/\n  box-shadow: 0px 0px 10px #f7ed35, 0px 0px 10px #f7ed35; }\n\n.photo-container-bg-1:hover {\n  background: #f7ed35; }\n\n.photo-container-bg-2 {\n  box-shadow: 0px 0px 10px #fc575a, 0px 0px 10px #fc575a; }\n\n.photo-container-bg-2:hover {\n  background: #fc575a; }\n\n.photo-container-bg-3 {\n  box-shadow: 0px 0px 10px #800f75, 0px 0px 10px #800f75; }\n\n.photo-container-bg-3:hover {\n  background: #800f75; }\n\n.photo-container-bg-4 {\n  /*background: #91DF2C;*/\n  box-shadow: 0px 0px 10px #91df2c, 0px 0px 10px #91df2c; }\n\n.photo-container-bg-4:hover {\n  background: #91df2c; }\n\n.photo-container-bg-5 {\n  box-shadow: 0px 0px 10px #fb7d2c, 0px 0px 10px #fb7d2c; }\n\n.photo-container-bg-5:hover {\n  background: #fb7d2c; }\n\n.photo-container-bg-6 {\n  box-shadow: 0px 0px 10px #784bd8, 0px 0px 10px #784bd8; }\n\n.photo-container-bg-6:hover {\n  background: #784bd8; }\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

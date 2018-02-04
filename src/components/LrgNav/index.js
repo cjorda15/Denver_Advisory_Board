@@ -73,7 +73,7 @@ class LrgNav extends Component {
             <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
               <rect className="lrg-nav-shape" height="60" width="120" />
             </svg>
-            <div className="lrg-menu-link-text">Log</div>
+            <div className="lrg-menu-link-text">Login</div>
           </div>
         </NavLink>
       </nav>

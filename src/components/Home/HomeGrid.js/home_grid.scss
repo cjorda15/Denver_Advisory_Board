@@ -1,0 +1,115 @@
+#landing-page-wrapper h1 {
+  font-family: 'Pacifico', cursive;
+  font-weight: normal;
+  margin-left: 10%;
+  font-size: 3em;
+}
+
+#home-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.landing-photo-container {
+  display: block;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  max-width: 300px;
+  width: 31%;
+  transition: all 400ms ease-in-out;
+}
+
+.landing-photo-container:hover .landing-photo {
+  margin-left: -300px;
+}
+
+.landing-photo-container:hover div {
+  margin-right: 0px;
+  left: 0px;
+}
+
+.landing-photo-container:hover {
+  box-shadow: none;
+}
+
+.intial-block {
+  height: 230px;
+  float: left;
+  transition: all 400ms ease-in-out;
+  width: 100%;
+}
+
+.landing-photo-hidden-text {
+  text-align: center;
+  padding: 10px;
+  transition: all 400ms ease-in-out;
+  font-size: 2em;
+}
+
+.landing-photo-hidden-text-wrapper {
+  position: absolute;
+  left: 300px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: all 400ms ease-in-out;
+  width: 100%;
+}
+
+.photo-container-bg-1 {
+  /*background: #F7ED35;*/
+  box-shadow: 0px 0px 10px #f7ed35, 0px 0px 10px #f7ed35;
+}
+
+.photo-container-bg-1:hover {
+  background: #f7ed35;
+}
+
+.photo-container-bg-2 {
+  box-shadow: 0px 0px 10px #fc575a, 0px 0px 10px #fc575a;
+}
+
+.photo-container-bg-2:hover {
+  background: #fc575a;
+}
+
+.photo-container-bg-3 {
+  box-shadow: 0px 0px 10px #800f75, 0px 0px 10px #800f75;
+}
+
+.photo-container-bg-3:hover {
+  background: #800f75;
+}
+
+.photo-container-bg-4 {
+  /*background: #91DF2C;*/
+  box-shadow: 0px 0px 10px #91df2c, 0px 0px 10px #91df2c;
+}
+
+.photo-container-bg-4:hover {
+  background: #91df2c;
+}
+
+.photo-container-bg-5 {
+  box-shadow: 0px 0px 10px #fb7d2c, 0px 0px 10px #fb7d2c;
+}
+
+.photo-container-bg-5:hover {
+  background: #fb7d2c;
+}
+
+.photo-container-bg-6 {
+  box-shadow: 0px 0px 10px #784bd8, 0px 0px 10px #784bd8;
+}
+
+.photo-container-bg-6:hover {
+  background: #784bd8;
+}
