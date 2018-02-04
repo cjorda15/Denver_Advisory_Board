@@ -27,6 +27,11 @@
   text-align: center;
   position: relative;
   top: -48px;
+  transition: all 0.7s;
+}
+
+.lrg-menu-link-text-hover {
+  color: #19f6e8;
 }
 
 .lrg-nav-svg-wrapper {
