@@ -17,7 +17,13 @@
   width: 100%;
 }
 
+.landing-photo-wrapper {
+  height: 360px;
+  margin-bottom: 10px;
+}
+
 .landing-photo-container {
+  background: #000;
   display: block;
   height: 230px;
   overflow: hidden;
@@ -25,10 +31,13 @@
   margin-top: 20px;
   width: 300px;
   transition: all 400ms ease-in-out;
+  &:hover {
+    height: 360px;
+  }
 }
 
 .landing-photo-container:hover .inital-block {
-  margin-left: -700px;
+  margin-left: -500px;
 }
 
 .landing-photo-container:hover div {
@@ -82,58 +91,57 @@
   color: #fff;
   font-family: $font-medium;
   text-decoration: none;
-  transition: all 1s;
+  transition: all 0.5s;
   &:hover {
-    border-bottom: #fff 2px solid;
-    color: #19f6e8;
+    border-bottom: red 2px solid;
+    color: #fff;
   }
 }
 
 .photo-container-bg-1 {
-  box-shadow: 0px 0px 10px #ff87b1, 0px 0px 10px #ff87b1;
+  background: linear-gradient(to right, #ffafbd, #ffc3a0);
 }
 
 .photo-container-bg-1:hover {
-  background: #ff87b1;
+  background: linear-gradient(to right, #ffafbd, #ffc3a0);
 }
 
 .photo-container-bg-2 {
-  box-shadow: 0px 0px 10px #fc575a, 0px 0px 10px #fc575a;
+  background: linear-gradient(to right, #d66d75, #ff4f6f);
 }
 
 .photo-container-bg-2:hover {
-  background: #fc575a;
+  background: linear-gradient(to right, #d66d75, #ff4f6f);
 }
 
 .photo-container-bg-3 {
-  box-shadow: 0px 0px 10px #800f75, 0px 0px 10px #800f75;
+  background: linear-gradient(to right, #bc4e9c, #f80759);
 }
 
 .photo-container-bg-3:hover {
-  background: #800f75;
+  background: linear-gradient(to right, #bc4e9c, #f80759);
 }
 
 .photo-container-bg-4 {
-  /*background: #91DF2C;*/
-  box-shadow: 0px 0px 10px #91df2c, 0px 0px 10px #91df2c;
+  background: linear-gradient(to right, #a8c0ff, #3f2b96);
 }
 
 .photo-container-bg-4:hover {
-  background: #91df2c;
+  background: linear-gradient(to right, #a8c0ff, #3f2b96);
 }
 
 .photo-container-bg-5 {
-  box-shadow: 0px 0px 10px #fb7d2c, 0px 0px 10px #fb7d2c;
+  background: linear-gradient(to right, #ffc44f, #b20a2c);
 }
 
 .photo-container-bg-5:hover {
-  background: #fb7d2c;
+  background: linear-gradient(to right, #ffc44f, #b20a2c);
 }
 
 .photo-container-bg-6 {
-  box-shadow: 0px 0px 10px #784bd8, 0px 0px 10px #784bd8;
+  background: linear-gradient(to right, #22c1c3, #a8c0ff);
 }
 
 .photo-container-bg-6:hover {
-  background: #784bd8;
+  background: linear-gradient(to right, #22c1c3, #a8c0ff);
 }

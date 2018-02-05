@@ -12,7 +12,7 @@
     margin: 0px auto;
   }
   label {
-    font-family: $font-medium;
+    font-family: $font-fancy;
     margin-bottom: 25px;
     display: inline-block;
   }
@@ -23,7 +23,7 @@
     border: 2px solid #33f5e7;
     color: #33f5e7;
     font-size: 1em;
-    font-family: $font-medium;
+    font-family: $font-fancy;
     padding: 14px;
     outline: none;
     transition: all 0.8s;
@@ -48,7 +48,7 @@
   width: 100%;
   input {
     border: 2px solid #33f5e7;
-    font-family: $font-medium;
+    font-family: $font-fancy;
     font-size: 1em;
     height: 48px;
     margin-bottom: 9px;
@@ -57,13 +57,14 @@
     transition: all 0.8s;
     &:focus {
       border: 2px solid red;
+      color: red;
     }
   }
 }
 
 #error-message-login {
   background: red;
-  font-family: $font-medium;
+  font-family: $font-fancy;
   max-width: 200px;
   width: 100%;
   text-align: center;

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
 import HomeGrid from './HomeGrid.js';
 import './home.scss';
+import ReactSVG from 'react-svg';
 
 class Home extends Component {
   constructor() {
@@ -45,7 +46,7 @@ class Home extends Component {
             data-aos="fade-down"
             className="call-to-action-container"
           >
-            <img src="icons/computer.png" />
+            <ReactSVG path="computer.svg" style={{ width: 200 }} />{' '}
             <NavLink
               className="call-to-action-links"
               onClick={() => {
@@ -58,7 +59,7 @@ class Home extends Component {
             </NavLink>
           </div>
           <div className="call-to-action-container" data-aos="fade-down">
-            <img src="icons/music.png" />
+            <ReactSVG path="chatting.svg" style={{ width: 200 }} />{' '}
             <NavLink
               className="call-to-action-links"
               onClick={() => {
@@ -72,7 +73,7 @@ class Home extends Component {
             </NavLink>{' '}
           </div>
           <div data-aos="fade-down" className="call-to-action-container">
-            <img src="icons/transport.png" />
+            <ReactSVG path="rocket.svg" style={{ width: 200 }} />{' '}
             <NavLink
               className="call-to-action-links"
               onClick={() => {

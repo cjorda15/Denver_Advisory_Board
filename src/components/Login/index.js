@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Scroll from 'react-scroll';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
+import RadioButtons from './RadioButtons';
 import './login.scss';
 
 class Login extends Component {
@@ -168,28 +169,10 @@ class Login extends Component {
     return (
       <section id="login-signup-container">
         <form>
-          <input
-            type="radio"
-            id="signup"
-            name="sign-login"
-            checked={this.state.show === 'signup'}
-            value="signup"
-            onChange={e => {
-              this.handleRadio(e);
-            }}
+          <RadioButtons
+            handleRadio={this.handleRadio.bind(this)}
+            show={this.state.show}
           />
-          <label htmlFor="signup">SIGN UP</label>
-          <input
-            type="radio"
-            id="login"
-            name="sign-login"
-            checked={this.state.show === 'login'}
-            value="login"
-            onChange={e => {
-              this.handleRadio(e);
-            }}
-          />
-          <label htmlFor="login">LOGIN</label>
           {this.state.show === 'signup' ? this.showSignup() : this.showLogin()}
           <button
             onClick={e => {
