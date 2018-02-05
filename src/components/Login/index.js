@@ -91,10 +91,10 @@ class Login extends Component {
     fetch('/api/v1/user', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, retypePassword, email })
+      body: JSON.stringify({ username, password, email })
     })
       .then(res => res.json())
-      .then(res => this.handleSignup(res))
+      .then(data => this.handleSignup(data))
       .catch(err => this.handleSignup(err));
   }
 
