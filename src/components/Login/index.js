@@ -99,12 +99,8 @@ class Login extends Component {
   }
 
   handleSignup(message) {
-    if (message == 'ALREADY TAKEN') {
+    if (message == 'SERVER FAILURE') {
       this.handleError('username already taken');
-      return;
-    }
-    if (message !== 'CREATED USER') {
-      this.handleError('server error during creation, please try again');
       return;
     }
     this.scrollTop();
