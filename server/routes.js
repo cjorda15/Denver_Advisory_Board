@@ -6,8 +6,9 @@ const upload = multer({ dest: 'uploads/' });
 const CronJob = require('cron').CronJob;
 const path = require('path');
 const temp_folder_path = path.join(__dirname, '../uploads');
-const USERS = require('./models/users.js');
+const User = require('./models/users.js');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 cloudinary.config({
   cloud_name: config.cloud_name,
@@ -22,46 +23,35 @@ router.post('/image', upload.single('file'), (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-  const Users = mongoose.model('USERS', USERS);
-  const { username, password, email } = req.body;
-  const user = new Users({
+  let { username, password, email } = req.body;
+  password = bcrypt.hashSync(password, 10)
+  const user = new User({
     name: username,
     password: password,
     email: email
   });
-
-  Users.findOne(
-    {
-      name: username
-    },
-    (err, presentUser) => {
-      err
-        ? res.json('SERVER FAILURE')
-        : presentUser
-          ? res.json('ALREADY TAKEN')
-          : user.save(function(error) {
-              res.json('CREATED USER');
-              if (error) {
-                res.json('SERVER FAILURE');
-                return;
-              }
-            });
+  user.save((error, user) => {
+    if (error) {
+      res.json('SERVER FAILURE');
+      return;
+    } else {
+      user.password = undefined
+      res.json(user)
     }
-  );
+  });
 });
 
+
 router.get('/user', (req, res) => {
-  const Users = mongoose.model('USERS', USERS);
-  const { username, password } = req.query;
-  Users.findOne(
+  const { email, password } = req.query;
+  User.findOne(
     {
-      name: username,
-      password: password
+      email: email,
     },
     (err, presentUser) => {
       err
         ? res.json('SERVER FAILURE')
-        : presentUser ? res.json('LOGIN SUCCESS') : res.json('LOGIN FAILURE');
+        : presentUser ? user.comparePassword(req.body.password) ? res.json(user) : res.json('WRONG PASSWORD') : res.json('USER NOT FOUND');
     }
   );
 });

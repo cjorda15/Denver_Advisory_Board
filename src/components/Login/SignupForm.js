@@ -18,18 +18,18 @@ const SignupForm = ({
         placeholder="username"
       />
       <input
+        type="password"
         onChange={e => {
           handleInput(e, 'password');
         }}
-        type="input"
         value={password}
         placeholder="password"
       />
       <input
+        type="password"
         onChange={e => {
           handleInput(e, 'retypePassword');
         }}
-        type="input"
         value={retypePassword}
         placeholder="retype-password"
       />

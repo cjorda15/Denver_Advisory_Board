@@ -15,7 +15,7 @@ const LoginForm = ({ username, password, handleInput }) => {
         onChange={e => {
           handleInput(e, 'password');
         }}
-        type="input"
+        type="password"
         value={password}
         placeholder="password"
       />
