@@ -1,0 +1,31 @@
+#events-container {
+}
+
+.stack-grid-wrapper {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 120px 0px;
+  position: relative;
+  width: 80%;
+}
+
+.stack-grid {
+  width: 100%;
+}
+
+.events-card-container {
+  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2px solid;
+  img {
+    display: none;
+  }
+}
+
+.event-hover-open-btn {
+  height: 100px;
+  background: blue;
+}

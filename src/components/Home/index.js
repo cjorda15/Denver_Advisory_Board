@@ -34,6 +34,7 @@ class Home extends Component {
       <div id="home-container">
         <div className="home-intro-container">
           <span />
+
           <h3 data-aos="fade-up">
             We believe in creating and growing professional friendships
             resulting in personal & business success.
@@ -65,9 +66,9 @@ class Home extends Component {
               onClick={() => {
                 this.scrollTop();
 
-                this.scrollAfterSearch('home-container');
+                this.scrollAfterSearch('events-container');
               }}
-              to={'/'}
+              to={'/events'}
             >
               COME TO AN EVENT
             </NavLink>{' '}

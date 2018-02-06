@@ -67,7 +67,7 @@ class Menu extends Component {
             id="nav-link-3"
             onClick={() => {
               this.scrollTop();
-              this.scrollAfterSearch('about-container');
+              this.scrollAfterSearch('events-container');
             }}
             className="nav-link"
             to={'/events'}
