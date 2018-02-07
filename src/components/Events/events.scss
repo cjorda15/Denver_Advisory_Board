@@ -39,13 +39,13 @@
   overflow: none;
   width: 40px;
   span {
-    background: #fff;
     position: absolute;
     width: 3px;
   }
 }
 
 .open-event-click-line-1 {
+  background: #fff;
   height: 21px;
   top: 3px;
   transform: rotate(-50deg);
@@ -53,6 +53,7 @@
   transition: all 0.5s;
 }
 .open-event-click-line-2 {
+  background: #fff;
   height: 21px;
   left: 13px;
   top: 15px;
@@ -61,12 +62,12 @@
 }
 
 .open-event-click-line-3 {
-  background-color: cyan !important;
+  background-color: cyan;
   left: 19px;
   height: 30px;
   top: 5px;
   transform: rotate(-50deg);
-  transition: all 0.2s;
+  transition: all 0.5s;
 }
 
 .open-event-line-1-hover {
@@ -80,9 +81,7 @@
 }
 
 .open-event-line-3-hover {
-  // left: 19px;
-  // top: 5px;
-  // transform: rotate(0deg);
+  background: red;
 }
 
 .close-event-line-1 {
@@ -96,7 +95,7 @@
 .close-event-line-2 {
   height: 25px !important;
   transform: rotate(-140deg) !important;
-  background: red !important;
+  background: blue !important;
   left: 19px !important;
   top: 8px !important;
 }
