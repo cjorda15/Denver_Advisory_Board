@@ -13,19 +13,73 @@
   width: 100%;
 }
 
-.events-card-container {
+.event-card-container {
   background: red;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 2px solid;
+
   img {
     display: none;
   }
 }
 
-.event-hover-open-btn {
-  height: 100px;
-  background: blue;
+.event-card-top {
+  background: purple;
+  height: 70px;
+  width: 100%;
+}
+
+.open-event-click-open-btn {
+  background: #1a1a1a;
+  height: 40px;
+  position: relative;
+  overflow: none;
+  width: 40px;
+  span {
+    background: #fff;
+    position: absolute;
+    transition: all 1s;
+    width: 3px;
+  }
+}
+
+.open-event-click-line-1 {
+  height: 21px;
+  top: 3px;
+  transform: rotate(-50deg);
+  left: 25px;
+}
+.open-event-click-line-2 {
+  height: 21px;
+  left: 13px;
+  top: 15px;
+  transform: rotate(-50deg);
+}
+
+.open-event-click-line-3 {
+  left: 19px;
+  height: 30px;
+  top: 5px;
+  transform: rotate(-50deg);
+}
+
+.open-btn-line-1-hover {
+  left: 25px;
+  transform: rotate(33deg);
+  top: 15px;
+}
+
+.open-btn-line-2-hover {
+  left: 13px;
+  top: 15px;
+  transform: rotate(150deg);
+}
+
+.open-btn-line-3-hover {
+  left: 19px;
+  top: 5px;
+  transform: rotate(0deg);
 }
