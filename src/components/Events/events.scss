@@ -83,3 +83,22 @@
   top: 5px;
   transform: rotate(0deg);
 }
+
+.close-event-line-1 {
+  height: 25px !important;
+  transform: rotate(140deg) !important;
+  background: blue !important;
+  left: 19px !important;
+  top: 8px !important;
+}
+
+.close-event-line-2 {
+  height: 25px !important;
+  transform: rotate(-140deg) !important;
+  background: red !important;
+  left: 19px !important;
+  top: 8px !important;
+}
+.close-event-line-3 {
+  opacity: 0 !important;
+}
