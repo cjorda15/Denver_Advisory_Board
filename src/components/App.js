@@ -9,6 +9,7 @@ import Home from './Home';
 import LrgNav from './LrgNav';
 import Footer from './Footer';
 import Login from './Login';
+import Events from './Events';
 import '../styles/index.scss';
 
 class App extends Component {
@@ -27,6 +28,10 @@ class App extends Component {
           <Route
             path="/login"
             render={({ history }) => <Login history={history} />}
+          />
+          <Route
+            path="/events"
+            render={({ history }) => <Events history={history} />}
           />
           <Route
             path="/about"

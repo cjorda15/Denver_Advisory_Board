@@ -60,7 +60,7 @@ class LrgNav extends Component {
         </NavLink>
         <NavLink
           onClick={() => {
-            this.scrollAfterSearch('home-container');
+            this.scrollAfterSearch('events-container');
           }}
           className="lrg-nav-link"
           to={'/events'}
