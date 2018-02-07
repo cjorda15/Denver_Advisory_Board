@@ -50,235 +50,241 @@ class Events extends Component {
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
             <div className="event-card-container">
               <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
+                <div
+                  className="open-event-click-open-btn "
                   onClick={e => {
                     this.handleOnClick(e.target);
                   }}
                 >
-                  title
-                </span>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  title
-                </span>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <span
-                  className="event-click-open-btn"
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  title
-                </span>
+                  <span className="open-event-click-line-1" />
+                  <span className="open-event-click-line-2" />
+                  <span className="open-event-click-line-3" />
+                </div>
               </div>
               <img className="event-close" src="grr.png" />
             </div>
