@@ -41,7 +41,6 @@
   span {
     background: #fff;
     position: absolute;
-    transition: all 1s;
     width: 3px;
   }
 }
@@ -51,19 +50,23 @@
   top: 3px;
   transform: rotate(-50deg);
   left: 25px;
+  transition: all 0.5s;
 }
 .open-event-click-line-2 {
   height: 21px;
   left: 13px;
   top: 15px;
   transform: rotate(-50deg);
+  transition: all 0.5s;
 }
 
 .open-event-click-line-3 {
+  background-color: cyan !important;
   left: 19px;
   height: 30px;
   top: 5px;
   transform: rotate(-50deg);
+  transition: all 0.2s;
 }
 
 .open-event-line-1-hover {
