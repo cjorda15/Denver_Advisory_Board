@@ -52009,7 +52009,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, ".stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  background: red;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n  .event-card-container img {\n    display: none; }\n\n.event-card-top {\n  background: purple;\n  height: 70px;\n  width: 100%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  height: 40px;\n  position: relative;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    background: #fff;\n    position: absolute;\n    transition: all 1s;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px; }\n\n.open-event-click-line-2 {\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg); }\n\n.open-event-click-line-3 {\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg); }\n\n.open-btn-line-1-hover {\n  left: 25px;\n  -webkit-transform: rotate(33deg);\n          transform: rotate(33deg);\n  top: 15px; }\n\n.open-btn-line-2-hover {\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(150deg);\n          transform: rotate(150deg); }\n\n.open-btn-line-3-hover {\n  left: 19px;\n  top: 5px;\n  -webkit-transform: rotate(0deg);\n          transform: rotate(0deg); }\n", ""]);
+exports.push([module.i, ".stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  background: red;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n  .event-card-container img {\n    display: none; }\n\n.event-card-top {\n  background: purple;\n  height: 70px;\n  width: 100%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  height: 40px;\n  position: relative;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    background: #fff;\n    position: absolute;\n    transition: all 1s;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px; }\n\n.open-event-click-line-2 {\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg); }\n\n.open-event-click-line-3 {\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg); }\n\n.open-event-line-1-hover {\n  left: 25px;\n  -webkit-transform: rotate(33deg);\n          transform: rotate(33deg);\n  top: 15px; }\n\n.open-event-line-2-hover {\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(150deg);\n          transform: rotate(150deg); }\n\n.open-event-line-3-hover {\n  left: 19px;\n  top: 5px;\n  -webkit-transform: rotate(0deg);\n          transform: rotate(0deg); }\n", ""]);
 
 // exports
 
@@ -52024,28 +52024,16 @@ exports.push([module.i, ".stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 
 console.log('!!');
 
 $(document).ready(function () {
-  // function handleHover(that){
-  //   const openLine1 = $('.open-event-click-line-1');
-  //   const openLine2 = $('.open-event-click-line-2');
-  //   const openLine3 = $('.open-event-click-line-3');
-  //   that.find('.open-event-click-line-1').toggleClass('open-event-line-1-hover')
-  //   that.find('.open-event-click-line-2').toggleClass('open-event-line-2-hover')
-  //   that.find('.open-event-click-line-3').toggleClass('open-event-line-3-hover')
-  // }
-
-  // const eventClickBtn = $('.open-event-click-open-btn');
-
   $(document).on('mouseenter', '.open-event-click-open-btn', function () {
-    $(this).find('.open-btn-line-1').toggleClass('open-event-line-1-hover');
-    $(this).find('.open-btn-line-2').toggleClass('open-event-line-2-hover');
-    $(this).find('.open-btn-line-3').toggleClass('open-event-line-3-hover');
+    $(this).find('.open-event-click-line-1').toggleClass('open-event-line-1-hover');
+    $(this).find('.open-event-click-line-2').toggleClass('open-event-line-2-hover');
+    $(this).find('.open-event-click-line-3').toggleClass('open-event-line-3-hover');
   });
 
   $(document).on('mouseleave', '.open-event-click-open-btn', function () {
-    console.log('!!??!');
-    $('.open-btn-line-1').toggleClass('open-event-line-1-hover');
-    $('.open-btn-line-2').toggleClass('open-event-line-2-hover');
-    $('.open-btn-line-3').toggleClass('open-event-line-3-hover');
+    $(this).find('.open-event-click-line-1').toggleClass('open-event-line-1-hover');
+    $(this).find('.open-event-click-line-2').toggleClass('open-event-line-2-hover');
+    $(this).find('.open-event-click-line-3').toggleClass('open-event-line-3-hover');
   });
 });
 
