@@ -24,7 +24,7 @@ router.post('/image', upload.single('file'), (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  let { username, password, email } = req.body;
+  let { password, email } = req.body;
   password = bcrypt.hashSync(password, 10);
   const user = new User({
     password: password,
@@ -38,7 +38,7 @@ router.post('/signup', (req, res) => {
     } else {
       user.password = undefined;
       let token = jwt.sign(
-        { email: user.email, name: user.name, _id: user._id },
+        {  _id: user._id },
         'secret'
       );
       res
@@ -65,7 +65,7 @@ router.post('/login', (req, res) => {
       } else {
         user.password = undefined;
         let token = jwt.sign(
-          { email: user.email, name: user.name, _id: user._id },
+          {  _id: user._id },
           'secret'
         );
         res
