@@ -8,9 +8,8 @@ const path = require('path');
 const temp_folder_path = path.join(__dirname, '../uploads');
 const User = require('./models/users.js');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 cloudinary.config({
   cloud_name: config.cloud_name,
@@ -24,52 +23,56 @@ router.post('/image', upload.single('file'), (req, res) => {
   });
 });
 
-router.post('/user', (req, res) => {
+router.post('/signup', (req, res) => {
   let { username, password, email } = req.body;
-  password = bcrypt.hashSync(password, 10)
+  password = bcrypt.hashSync(password, 10);
   const user = new User({
-    name: username,
     password: password,
     email: email
   });
-  if (user.password.length < 8) {
-    return res.status(400).json({ message: 'Password Length Too Short.' })
-  }
-  if (!user.name.length) return res.json({ message: 'Name Required.' })
-  if (!user.email.length) return res.json({ message: 'Email Required.' })
+
   user.save((error, user) => {
     if (error) {
       res.json({ message: 'Username Taken' });
       return;
     } else {
-      user.password = undefined
-      let token = jwt.sign({ email: user.email, name: user.name, _id: user._id }, 'secret')
-      res.cookie('jwt', token, { expires: new Date(Date.now() + 900000), httpOnly: true }).json({ message: 'Success' })
+      user.password = undefined;
+      let token = jwt.sign(
+        { email: user.email, name: user.name, _id: user._id },
+        'secret'
+      );
+      res
+        .cookie('jwt', token, {
+          expires: new Date(Date.now() + 900000),
+          httpOnly: true
+        })
+        .json({ message: 'Success' });
     }
   });
 });
 
-
-router.get('/user', (req, res) => {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
-  if (!password) {
-    return res.status(400).json({ message: 'Password required.' })
-  }
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
-      return res.status(500).json({ message: 'Something went wrong' })
+      return res.status(500).json({ message: 'Something went wrong' });
     }
     if (!user) {
-      res.status(401).json({ message: 'User not found' })
+      res.status(401).json({ message: 'User not found' });
     } else {
       if (!user.comparePassword(req.body.password)) {
-        res.status(401).json({ message: 'Bad Password.' })
+        res.status(401).json({ message: 'Bad Password.' });
       } else {
-        user.password = undefined
-        let token = jwt.sign({ email: user.email, name: user.name, _id: user._id }, 'secret')
-        res.cookie('jwt', token, { maxage: 900000, httpOnly: true }).json({ message: 'Success' })
+        user.password = undefined;
+        let token = jwt.sign(
+          { email: user.email, name: user.name, _id: user._id },
+          'secret'
+        );
+        res
+          .cookie('jwt', token, { maxage: 900000, httpOnly: true })
+          .json({ message: 'Success' });
       }
     }
-  })
+  });
 });
 module.exports = router;

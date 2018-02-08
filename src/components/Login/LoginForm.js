@@ -1,15 +1,15 @@
 import React from 'react';
 
-const LoginForm = ({ username, password, handleInput }) => {
+const LoginForm = ({ email, password, handleInput }) => {
   return (
     <div className="login-container">
       <input
         onChange={e => {
-          handleInput(e, 'username');
+          handleInput(e, 'email');
         }}
         type="input"
-        value={username}
-        placeholder="username"
+        value={email}
+        placeholder="Email"
       />
       <input
         onChange={e => {
@@ -17,7 +17,7 @@ const LoginForm = ({ username, password, handleInput }) => {
         }}
         type="password"
         value={password}
-        placeholder="password"
+        placeholder="Password"
       />
     </div>
   );

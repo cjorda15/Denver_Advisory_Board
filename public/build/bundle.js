@@ -42987,98 +42987,133 @@ var Login = function (_Component) {
       this.state.show == 'signup' ? this.signup() : this.login();
     }
   }, {
-    key: 'signup',
-    value: function signup() {
+    key: 'login',
+    value: function login() {
       var _this2 = this;
 
       var _state = this.state,
-          username = _state.username,
-          password = _state.password,
-          retypePassword = _state.retypePassword,
-          email = _state.email;
+          email = _state.email,
+          password = _state.password;
+
+
+      if (!email, !password) {
+        this.handleError('Please enter your credentials');
+        return;
+      }
+
+      if (password.length < 8) {
+        this.handleError('Your password needs to be at least 8 characters');
+      }
+
+      fetch('/api/v1/login', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        return _this2.handleLogin(res);
+      }).catch(function (err) {
+        return _this2.handleLogin(err);
+      });
+    }
+  }, {
+    key: 'signup',
+    value: function signup() {
+      var _this3 = this;
+
+      var _state2 = this.state,
+          username = _state2.username,
+          password = _state2.password,
+          retypePassword = _state2.retypePassword,
+          email = _state2.email;
 
       var emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
       if (!username, !password, !retypePassword, !email) {
-        this.handleError('complete the form please');
+        this.handleError('Complete the form please');
         return;
       }
 
       if (password !== retypePassword) {
-        this.handleError('passwords not the same');
+        this.handleError('Passwords not the same');
         return;
       }
 
       if (username.length < 5) {
-        this.handleError('username must be at least 5 characters');
+        this.handleError('Username must be at least 5 characters');
         return;
       }
 
       if (password.length < 5) {
-        this.handleError('username must be at least 5 characters');
+        this.handleError('Username must be at least 5 characters');
         return;
       }
 
       if (!emailCheck.test(email)) {
-        this.handleError('must be a valid email address');
+        this.handleError('Must be a valid email address');
         return;
       }
 
-      fetch('/api/v1/user', {
+      fetch('/api/v1/signup', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username, password: password, email: email })
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
-        return _this2.handleSignup(data);
+        return _this3.handleSignup(data);
       }).catch(function (err) {
-        return _this2.handleSignup(err);
+        return _this3.handleSignup(err);
       });
     }
   }, {
     key: 'handleSignup',
-    value: function handleSignup(message) {
-      if (message == 'SERVER FAILURE') {
-        this.handleError('username already taken');
+    value: function handleSignup(response) {
+      console.log(response.message);
+      if (response.message == 'Success') {
+        this.scrollTop();
+        this.scrollAfterSearch('home-container');
+        // window.location('/home');
+        this.props.history.replace('/');
         return;
       }
-      this.scrollTop();
-      this.scrollAfterSearch('home-container');
-      this.props.history.replace('/');
+
+      if (response.message == 'Username Taken') {
+        this.handleError('User or email already taken');
+        return;
+      }
+
+      if (response.message == 'Something went wrong') {
+        this.handleError('Something went wrong on our end');
+        return;
+      }
+      this.handleError('Unknown error, sorry for the inconvience');
     }
   }, {
     key: 'handleLogin',
-    value: function handleLogin(message) {
-      if (message == 'LOGIN FAILURE') {
-        this.handleError('username or the password not correct');
+    value: function handleLogin(response) {
+      console.log(response);
+
+      if (response.message == 'Success') {
+        this.scrollTop();
+        this.scrollAfterSearch('home-container');
+        // window.location('/home');
+        this.props.history.replace('/');
+      }
+      if (response.message == 'User not found') {
+        this.handleError('User not found');
         return;
       }
-      this.scrollTop();
-      this.scrollAfterSearch('home-container');
-      this.props.history.replace('/');
-    }
-  }, {
-    key: 'login',
-    value: function login() {
-      var _this3 = this;
-
-      var _state2 = this.state,
-          username = _state2.username,
-          password = _state2.password;
-
-
-      if (!username, !password) {
-        this.handleError();
+      if (response.message == 'Bad Password') {
+        this.handleError('Incorrect Password');
         return;
       }
-      fetch('/api/v1/user?username=' + username + '&password=' + password).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        return _this3.handleLogin(res);
-      }).catch(function (err) {
-        return _this3.handleLogin(err);
-      });
+      if (response.message == 'Something went wrong') {
+        this.handleError('Something went wrong on our end');
+        return;
+      }
+      this.handleError('Unknown error, sorry for the inconvience');
     }
   }, {
     key: 'handleError',
@@ -43095,7 +43130,6 @@ var Login = function (_Component) {
     key: 'showSignup',
     value: function showSignup() {
       return _react2.default.createElement(_SignupForm2.default, {
-        username: this.state.username,
         password: this.state.password,
         retypePassword: this.state.retypePassword,
         email: this.state.email,
@@ -43106,7 +43140,7 @@ var Login = function (_Component) {
     key: 'showLogin',
     value: function showLogin() {
       return _react2.default.createElement(_LoginForm2.default, {
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.password,
         handleInput: this.handleInput.bind(this)
       });
@@ -43233,7 +43267,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var LoginForm = function LoginForm(_ref) {
-  var username = _ref.username,
+  var email = _ref.email,
       password = _ref.password,
       handleInput = _ref.handleInput;
 
@@ -43242,11 +43276,11 @@ var LoginForm = function LoginForm(_ref) {
     { className: 'login-container' },
     _react2.default.createElement('input', {
       onChange: function onChange(e) {
-        handleInput(e, 'username');
+        handleInput(e, 'email');
       },
       type: 'input',
-      value: username,
-      placeholder: 'username'
+      value: email,
+      placeholder: 'Email'
     }),
     _react2.default.createElement('input', {
       onChange: function onChange(e) {
@@ -43254,7 +43288,7 @@ var LoginForm = function LoginForm(_ref) {
       },
       type: 'password',
       value: password,
-      placeholder: 'password'
+      placeholder: 'Password'
     })
   );
 };
