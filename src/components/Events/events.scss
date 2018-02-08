@@ -1,0 +1,104 @@
+#events-container {
+}
+
+.stack-grid-wrapper {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 120px 0px;
+  position: relative;
+  width: 80%;
+}
+
+.stack-grid {
+  width: 100%;
+}
+
+.event-card-container {
+  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2px solid;
+
+  img {
+    display: none;
+  }
+}
+
+.event-card-top {
+  background: purple;
+  height: 70px;
+  width: 100%;
+}
+
+.open-event-click-open-btn {
+  background: #1a1a1a;
+  height: 40px;
+  position: relative;
+  overflow: none;
+  width: 40px;
+  span {
+    position: absolute;
+    width: 3px;
+  }
+}
+
+.open-event-click-line-1 {
+  background: #fff;
+  height: 21px;
+  top: 3px;
+  transform: rotate(-50deg);
+  left: 25px;
+  transition: all 0.5s;
+}
+.open-event-click-line-2 {
+  background: #fff;
+  height: 21px;
+  left: 13px;
+  top: 15px;
+  transform: rotate(-50deg);
+  transition: all 0.5s;
+}
+
+.open-event-click-line-3 {
+  background-color: cyan;
+  left: 19px;
+  height: 30px;
+  top: 5px;
+  transform: rotate(-50deg);
+  transition: all 0.5s;
+}
+
+.open-event-line-1-hover {
+  left: 24px;
+  top: 4px;
+}
+
+.open-event-line-2-hover {
+  left: 14px;
+  top: 14px;
+}
+
+.open-event-line-3-hover {
+  background: red;
+}
+
+.close-event-line-1 {
+  height: 25px !important;
+  transform: rotate(140deg) !important;
+  background: blue !important;
+  left: 19px !important;
+  top: 8px !important;
+}
+
+.close-event-line-2 {
+  height: 25px !important;
+  transform: rotate(-140deg) !important;
+  background: blue !important;
+  left: 19px !important;
+  top: 8px !important;
+}
+.close-event-line-3 {
+  opacity: 0 !important;
+}
