@@ -9,11 +9,13 @@ const mongoose = require('mongoose');
 const EVENTS = require('./models/events.js');
 require('./cleanup.js');
 require('dotenv').config();
+let cookieParser = require('cookie-parser')
 
 const mongoURL = process.env.MONGODB_URL || process.env.localMongo;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
 app.use('/api/v1', apiRoutes);
 app.use(express.static(path.join(__dirname, '../public')));
 
