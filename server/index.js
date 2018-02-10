@@ -1,62 +1,47 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
-const cloudinary = require('cloudinary');
-const apiRoutes = require('./routes.js');
-const config = require('./config').app;
-const mongoose = require('mongoose');
-const EVENTS = require('./models/events.js');
-require('./cleanup.js');
-require('dotenv').config();
+let express = require('express')
+let app = express()
+let port = (process.env.PORT || 3000)
+let path = require('path')
+let bodyParser = require('body-parser')
+let compression = require('compression')
+let helmet = require('helmet')
+let logger = require('morgan')
 let cookieParser = require('cookie-parser')
-
+require('dotenv').config()
+let mongoose = require('mongoose')
 const mongoURL = process.env.MONGODB_URL || process.env.localMongo;
+mongoose.connect(mongoURL)
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser())
-app.use('/api/v1', apiRoutes);
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(bodyParser.json())
+app.use(compression())
+app.use(helmet())
+if (!process.env.NODE_ENV) app.use(logger('dev'))
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+app.set('views', './server/views')
+app.set('view engine', 'pug')
+const routes = require('./routes')
+app.use('/', routes)
+app.use(express.static('public'))
 
-mongoose.connect(mongoURL);
 
-let db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {});
+app.use(function (req, res, next) {
+  var err = new Error('File Not Found')
+  err.status = 404
+  next(err)
+})
 
-app.listen(config.port, () => console.log('we are live..'));
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500)
+  res.render('error', { error: err.status, message: err.message })
+})
 
-// var Events = mongoose.model('EVENTS', EVENTS);
 
-// var user = new Users({
-//   name: 'roe',
-//   age: 13
-// });
-//
-// var event = new Events({
-//   name: 'GOOD GOD',
-//   info: 'meooooooow'
-// });
-//
-// user.save(function(error) {
-//   console.log('SAVED');
-//   if (error) {
-//     console.error(error);
-//   }
-// });
-//
-// event.save(function(error) {
-//   console.log('SAVED');
-//   if (error) {
-//     console.error(error);
-//   }
-// });
+
+app.listen(port, () => {
+  console.log(`Worker ${process.pid} listening at port ${port}`)
+})
+
+
