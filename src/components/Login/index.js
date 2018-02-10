@@ -67,10 +67,6 @@ class Login extends Component {
       return;
     }
 
-    if (password.length < 8) {
-      this.handleError('Your password needs to be at least 8 characters');
-    }
-
     fetch(`/api/v1/login`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -82,21 +78,16 @@ class Login extends Component {
   }
 
   signup() {
-    const { username, password, retypePassword, email } = this.state;
+    const { password, retypePassword, email } = this.state;
     const emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if ((!username, !password, !retypePassword, !email)) {
+    if ((!password, !retypePassword, !email)) {
       this.handleError('Complete the form please');
       return;
     }
 
     if (password !== retypePassword) {
       this.handleError('Passwords not the same');
-      return;
-    }
-
-    if (username.length < 5) {
-      this.handleError('Username must be at least 5 characters');
       return;
     }
 
@@ -113,7 +104,7 @@ class Login extends Component {
     fetch('/api/v1/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, email })
+      body: JSON.stringify({ password, email })
     })
       .then(res => res.json())
       .then(data => this.handleSignup(data))
@@ -143,13 +134,14 @@ class Login extends Component {
   }
 
   handleLogin(response) {
-    console.log(response);
+    console.log(response.message);
 
     if (response.message == 'Success') {
       this.scrollTop();
       this.scrollAfterSearch('home-container');
       // window.location('/home');
       this.props.history.replace('/');
+      return;
     }
     if (response.message == 'User not found') {
       this.handleError('User not found');

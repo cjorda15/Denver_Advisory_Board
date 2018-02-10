@@ -1,21 +1,15 @@
 import React from 'react';
 
-const SignupForm = ({
-  username,
-  password,
-  retypePassword,
-  email,
-  handleInput
-}) => {
+const SignupForm = ({ password, retypePassword, email, handleInput }) => {
   return (
     <div className="signup-container">
       <input
         onChange={e => {
-          handleInput(e, 'username');
+          handleInput(e, 'email');
         }}
         type="input"
-        value={username}
-        placeholder="username"
+        value={email}
+        placeholder="email"
       />
       <input
         type="password"
@@ -32,14 +26,6 @@ const SignupForm = ({
         }}
         value={retypePassword}
         placeholder="retype-password"
-      />
-      <input
-        onChange={e => {
-          handleInput(e, 'email');
-        }}
-        type="input"
-        value={email}
-        placeholder="email"
       />
     </div>
   );

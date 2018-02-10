@@ -39415,7 +39415,7 @@ exports = module.exports = __webpack_require__(5)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  max-width: 1000px;\n  margin: 0 auto;\n  width: 100%; }\n\n.landing-photo-wrapper {\n  height: 360px;\n  margin-bottom: 10px; }\n\n.landing-photo-container {\n  background: #000;\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  width: 300px;\n  transition: all 400ms ease-in-out; }\n  .landing-photo-container:hover {\n    height: 360px; }\n\n.landing-photo-container:hover .inital-block {\n  margin-left: -500px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.inital-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #1a1a1a;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Fredoka One\", cursive;\n  height: 230px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 1em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-hidden-text-wrapper {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  height: 100%;\n  left: 300px;\n  padding: 10px;\n  position: absolute;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.grid-link {\n  border-bottom: #19f6e8 2px solid;\n  color: #fff;\n  font-family: \"Fredoka One\", cursive;\n  text-decoration: none;\n  transition: all 0.5s; }\n  .grid-link:hover {\n    border-bottom: red 2px solid;\n    color: #fff; }\n\n.photo-container-bg-1 {\n  background: linear-gradient(to right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-1:hover {\n  background: linear-gradient(to right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-2 {\n  background: linear-gradient(to right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-2:hover {\n  background: linear-gradient(to right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-3 {\n  background: linear-gradient(to right, #bc4e9c, #f80759); }\n\n.photo-container-bg-3:hover {\n  background: linear-gradient(to right, #bc4e9c, #f80759); }\n\n.photo-container-bg-4 {\n  background: linear-gradient(to right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-4:hover {\n  background: linear-gradient(to right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-5 {\n  background: linear-gradient(to right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-5:hover {\n  background: linear-gradient(to right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-6 {\n  background: linear-gradient(to right, #22c1c3, #a8c0ff); }\n\n.photo-container-bg-6:hover {\n  background: linear-gradient(to right, #22c1c3, #a8c0ff); }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  max-width: 1000px;\n  margin: 0 auto;\n  width: 100%; }\n\n.landing-photo-wrapper {\n  height: 360px;\n  margin-bottom: 10px; }\n\n.landing-photo-container {\n  background: #000;\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  width: 300px;\n  transition: all 400ms ease-in-out; }\n  .landing-photo-container:hover {\n    height: 360px; }\n\n.landing-photo-container:hover .inital-block {\n  margin-left: -500px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.inital-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #1a1a1a;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  height: 230px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 1em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-hidden-text-wrapper {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  height: 100%;\n  left: 300px;\n  padding: 10px;\n  position: absolute;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.grid-link {\n  border-bottom: #19f6e8 2px solid;\n  color: #fff;\n  font-family: \"Fredoka One\", cursive;\n  text-decoration: none;\n  transition: all 0.5s; }\n  .grid-link:hover {\n    border-bottom: red 2px solid;\n    color: #fff; }\n\n.photo-container-bg-1 {\n  background: linear-gradient(to right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-1:hover {\n  background: linear-gradient(to right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-2 {\n  background: linear-gradient(to right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-2:hover {\n  background: linear-gradient(to right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-3 {\n  background: linear-gradient(to right, #bc4e9c, #f80759); }\n\n.photo-container-bg-3:hover {\n  background: linear-gradient(to right, #bc4e9c, #f80759); }\n\n.photo-container-bg-4 {\n  background: linear-gradient(to right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-4:hover {\n  background: linear-gradient(to right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-5 {\n  background: linear-gradient(to right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-5:hover {\n  background: linear-gradient(to right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-6 {\n  background: linear-gradient(to right, #22c1c3, #a8c0ff); }\n\n.photo-container-bg-6:hover {\n  background: linear-gradient(to right, #22c1c3, #a8c0ff); }\n", ""]);
 
 // exports
 
@@ -43001,10 +43001,6 @@ var Login = function (_Component) {
         return;
       }
 
-      if (password.length < 8) {
-        this.handleError('Your password needs to be at least 8 characters');
-      }
-
       fetch('/api/v1/login', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -43023,25 +43019,19 @@ var Login = function (_Component) {
       var _this3 = this;
 
       var _state2 = this.state,
-          username = _state2.username,
           password = _state2.password,
           retypePassword = _state2.retypePassword,
           email = _state2.email;
 
       var emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-      if (!username, !password, !retypePassword, !email) {
+      if (!password, !retypePassword, !email) {
         this.handleError('Complete the form please');
         return;
       }
 
       if (password !== retypePassword) {
         this.handleError('Passwords not the same');
-        return;
-      }
-
-      if (username.length < 5) {
-        this.handleError('Username must be at least 5 characters');
         return;
       }
 
@@ -43058,7 +43048,7 @@ var Login = function (_Component) {
       fetch('/api/v1/signup', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username, password: password, email: email })
+        body: JSON.stringify({ password: password, email: email })
       }).then(function (res) {
         return res.json();
       }).then(function (data) {
@@ -43093,13 +43083,14 @@ var Login = function (_Component) {
   }, {
     key: 'handleLogin',
     value: function handleLogin(response) {
-      console.log(response);
+      console.log(response.message);
 
       if (response.message == 'Success') {
         this.scrollTop();
         this.scrollAfterSearch('home-container');
         // window.location('/home');
         this.props.history.replace('/');
+        return;
       }
       if (response.message == 'User not found') {
         this.handleError('User not found');
@@ -43203,8 +43194,7 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SignupForm = function SignupForm(_ref) {
-  var username = _ref.username,
-      password = _ref.password,
+  var password = _ref.password,
       retypePassword = _ref.retypePassword,
       email = _ref.email,
       handleInput = _ref.handleInput;
@@ -43214,11 +43204,11 @@ var SignupForm = function SignupForm(_ref) {
     { className: 'signup-container' },
     _react2.default.createElement('input', {
       onChange: function onChange(e) {
-        handleInput(e, 'username');
+        handleInput(e, 'email');
       },
       type: 'input',
-      value: username,
-      placeholder: 'username'
+      value: email,
+      placeholder: 'email'
     }),
     _react2.default.createElement('input', {
       type: 'password',
@@ -43235,14 +43225,6 @@ var SignupForm = function SignupForm(_ref) {
       },
       value: retypePassword,
       placeholder: 'retype-password'
-    }),
-    _react2.default.createElement('input', {
-      onChange: function onChange(e) {
-        handleInput(e, 'email');
-      },
-      type: 'input',
-      value: email,
-      placeholder: 'email'
     })
   );
 };
@@ -43394,7 +43376,7 @@ exports = module.exports = __webpack_require__(5)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  padding-top: 35px;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button {\n    border: 2px solid #33f5e7;\n    color: #33f5e7;\n    font-size: 1em;\n    font-family: \"Comfortaa\", serif;\n    padding: 14px;\n    outline: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus {\n      background: #33f5e7;\n      color: #fff; }\n    #login-signup-container button:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid red;\n      color: red; }\n\n#error-message-login {\n  background: red;\n  font-family: \"Comfortaa\", serif;\n  max-width: 200px;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  padding: 20px;\n  margin-top: 15px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  padding-top: 35px;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button {\n    border: 2px solid #33f5e7;\n    color: #33f5e7;\n    font-size: 1em;\n    font-family: \"Comfortaa\", serif;\n    padding: 14px;\n    outline: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus {\n      background: #33f5e7;\n      color: #fff; }\n    #login-signup-container button:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid #4286f4;\n      color: #4286f4; }\n\n#error-message-login {\n  background: red;\n  font-family: \"Comfortaa\", serif;\n  max-width: 200px;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  padding: 20px;\n  margin-top: 15px; }\n", ""]);
 
 // exports
 

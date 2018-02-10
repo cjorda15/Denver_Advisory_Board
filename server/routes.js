@@ -61,7 +61,7 @@ router.post('/login', (req, res) => {
       res.status(401).json({ message: 'User not found' });
     } else {
       if (!user.comparePassword(req.body.password)) {
-        res.status(401).json({ message: 'Bad Password.' });
+        res.status(401).json({ message: 'Bad Password' });
       } else {
         user.password = undefined;
         let token = jwt.sign(
