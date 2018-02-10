@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
+import { connect } from 'react-redux';
 import './LrgNav.scss';
 import './LrgNav.js';
+
 class LrgNav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   scrollTop() {
@@ -27,6 +29,11 @@ class LrgNav extends Component {
       });
     }, 100);
   }
+
+  signedIn(){
+    return this.props.user? 
+  }
+
   render() {
     return (
       <nav className="lrg-nav-container">
@@ -92,4 +99,10 @@ class LrgNav extends Component {
   }
 }
 
-export default LrgNav;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps) (LrgNav);
