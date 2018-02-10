@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
+import { connect } from 'react-redux';
 import './LrgNav.scss';
 import './LrgNav.js';
+
 class LrgNav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   scrollTop() {
@@ -27,6 +29,43 @@ class LrgNav extends Component {
       });
     }, 100);
   }
+
+  signedIn() {
+    return this.props.user ? (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('home-container');
+        }}
+        className="lrg-nav-link"
+        to={'/'}
+      >
+        <div className="lrg-nav-svg-wrapper">
+          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="120" />
+          </svg>
+          <div className="lrg-menu-link-text">LOGOUT</div>
+        </div>
+      </NavLink>
+    ) : (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('login-signup-container');
+        }}
+        className="lrg-nav-link"
+        to={'/login'}
+      >
+        <div className="lrg-nav-svg-wrapper">
+          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="120" />
+          </svg>
+          <div className="lrg-menu-link-text">LOGIN</div>
+        </div>
+      </NavLink>
+    );
+  }
+
   render() {
     return (
       <nav className="lrg-nav-container">
@@ -72,24 +111,16 @@ class LrgNav extends Component {
             <div className="lrg-menu-link-text">EVENTS</div>
           </div>
         </NavLink>
-        <NavLink
-          onClick={() => {
-            this.scrollTop();
-            this.scrollAfterSearch('login-signup-container');
-          }}
-          className="lrg-nav-link"
-          to={'/login'}
-        >
-          <div className="lrg-nav-svg-wrapper">
-            <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-              <rect className="lrg-nav-shape" height="60" width="120" />
-            </svg>
-            <div className="lrg-menu-link-text">LOGIN</div>
-          </div>
-        </NavLink>
+        {this.signedIn()}
       </nav>
     );
   }
 }
 
-export default LrgNav;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(LrgNav);

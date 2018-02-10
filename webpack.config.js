@@ -5,9 +5,10 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   entry: ['./src/index.js'],
   output: {
+    filename: '[name].bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'public/build'),
-    filename: 'bundle.js'
+    chunkFilename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'public/')
   },
   module: {
     loaders: [
@@ -46,5 +47,4 @@ module.exports = {
     fs: 'empty'
   }
 };
-
 // plugins: [new UglifyJSPlugin()]

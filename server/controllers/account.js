@@ -2,7 +2,6 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 exports.signup = (req, res) => {
   let { password, email } = req.body;
   password = bcrypt.hashSync(password, 10);
@@ -17,10 +16,7 @@ exports.signup = (req, res) => {
       return;
     } else {
       user.password = undefined;
-      let token = jwt.sign(
-        { _id: user._id },
-        'secret'
-      );
+      let token = jwt.sign({ _id: user._id }, 'secret');
       res
         .cookie('jwt', token, {
           expires: new Date(Date.now() + 900000),
@@ -29,7 +25,7 @@ exports.signup = (req, res) => {
         .json({ message: 'Success' });
     }
   });
-}
+};
 
 exports.login = (req, res) => {
   const { email, password } = req.body;
@@ -44,14 +40,11 @@ exports.login = (req, res) => {
         res.status(401).json({ message: 'Bad Password' });
       } else {
         user.password = undefined;
-        let token = jwt.sign(
-          { _id: user._id },
-          'secret'
-        );
+        let token = jwt.sign({ _id: user._id }, 'secret');
         res
-          .cookie('jwt', token, { maxage: 900000, httpOnly: true })
+          .cookie('jwt', token, { maxage: 900000, httpOnly: false })
           .json({ message: 'Success' });
       }
     }
   });
-}
+};

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Scroll from 'react-scroll';
+import { connect } from 'react-redux';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import RadioButtons from './RadioButtons';
+import { loginUser } from '../../actions';
 import './login.scss';
 
 class Login extends Component {
@@ -135,10 +137,12 @@ class Login extends Component {
 
   handleLogin(response) {
     console.log(response.message);
+    console.log(response);
 
     if (response.message == 'Success') {
       this.scrollTop();
       this.scrollAfterSearch('home-container');
+      this.props.handleLogin('chris');
       // window.location('/home');
       this.props.history.replace('/');
       return;
@@ -212,4 +216,12 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    handleLogin: input => {
+      dispatch(loginUser(input));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);

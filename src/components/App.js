@@ -2,15 +2,45 @@ import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import Burger from './Burger';
 import Menu from './Menu';
-import Landing from './Landing';
-import About from './About';
-import Contact from './Contact';
-import Home from './Home';
 import LrgNav from './LrgNav';
-import Footer from './Footer';
-import Login from './Login';
-import Events from './Events';
+import Loadable from 'react-loadable';
 import '../styles/index.scss';
+
+const Loading = () => <div />;
+
+const LoadLanding = Loadable({
+  loader: () => import('./Landing'),
+  loading: Loading
+});
+
+const LoadFooter = Loadable({
+  loader: () => import('./Footer'),
+  loading: Loading
+});
+
+const LoadLogin = Loadable({
+  loader: () => import('./Login'),
+  loading: Loading
+});
+
+const LoadEvents = Loadable({
+  loader: () => import('./Events'),
+  loading: Loading
+});
+
+const LoadAbout = Loadable({
+  loader: () => import('./About'),
+  loading: Loading
+});
+
+const LoadContact = Loadable({
+  loader: () => import('./Contact'),
+  loading: Loading
+});
+const LoadHome = Loadable({
+  loader: () => import('./Home'),
+  loading: Loading
+});
 
 class App extends Component {
   constructor(props) {
@@ -22,35 +52,35 @@ class App extends Component {
       <div className="app">
         <LrgNav />
         <Burger />
-        <Landing />
+        <LoadLanding />
         <Menu />
         <Switch>
           <Route
             path="/login"
-            render={({ history }) => <Login history={history} />}
+            render={({ history }) => <LoadLogin history={history} />}
           />
           <Route
             path="/events"
-            render={({ history }) => <Events history={history} />}
+            render={({ history }) => <LoadEvents history={history} />}
           />
           <Route
             path="/about"
-            render={({ history }) => <About history={history} />}
+            render={({ history }) => <LoadAbout history={history} />}
           />
           <Route
             path="/contact"
-            render={({ history }) => <Contact history={history} />}
+            render={({ history }) => <LoadContact history={history} />}
           />
           <Route
             path="/"
-            render={({ history }) => <Home history={history} />}
+            render={({ history }) => <LoadHome history={history} />}
           />
           <Route
             path="/*"
-            render={({ history }) => <Home history={history} />}
+            render={({ history }) => <LoadHome history={history} />}
           />
         </Switch>
-        <Footer />
+        <LoadFooter />
       </div>
     );
   }
