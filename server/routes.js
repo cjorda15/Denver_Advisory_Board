@@ -23,4 +23,4 @@ r.post('/api/v1/image', upload.single('file'), (req, res) => {
 const account = require('./controllers/account')
 r.post('/api/v1/signup', account.signup)
 r.post('/api/v1/login', account.login)
-
+r.get('/api/v1/user', account.get)
