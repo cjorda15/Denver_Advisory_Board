@@ -5,6 +5,7 @@ import Menu from './Menu';
 import LrgNav from './LrgNav';
 import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
+import { loginUser } from '../actions';
 import '../styles/index.scss';
 
 const Loading = () => <div />;
@@ -60,8 +61,8 @@ class App extends Component {
       credentials: 'include'
     })
       .then(data => data.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(error));
+      .then(data => this.props.handleUser(data))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -119,4 +120,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    handleUser: input => {
+      dispatch(loginUser(input));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

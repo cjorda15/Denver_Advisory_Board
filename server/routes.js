@@ -16,7 +16,9 @@ cloudinary.config({
 r.post('/api/v1/image', upload.single('file'), (req, res) => {
   cloudinary.uploader.upload(req.file.path, function(result) {
     console.log(result, 'result');
-    res.json(result.secure_url);
+    result.secure_url
+      ? res.json(result.secure_url)
+      : res.json('something went wrong');
   });
 });
 
@@ -24,3 +26,4 @@ const account = require('./controllers/account');
 r.post('/api/v1/signup', account.signup);
 r.post('/api/v1/login', account.login);
 r.get('/api/v1/user', account.get);
+r.get('/api/v1/logout', account.logout);

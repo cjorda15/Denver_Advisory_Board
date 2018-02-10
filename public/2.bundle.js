@@ -18,7 +18,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(17);
 
-var _actions = __webpack_require__(36);
+var _actions = __webpack_require__(21);
 
 var _reactSvg = __webpack_require__(165);
 

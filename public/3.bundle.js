@@ -16,7 +16,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactScroll = __webpack_require__(35);
+var _reactScroll = __webpack_require__(36);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
@@ -34,7 +34,7 @@ var _RadioButtons = __webpack_require__(196);
 
 var _RadioButtons2 = _interopRequireDefault(_RadioButtons);
 
-var _actions = __webpack_require__(36);
+var _actions = __webpack_require__(21);
 
 __webpack_require__(197);
 
@@ -129,6 +129,7 @@ var Login = function (_Component) {
       }
 
       fetch('/api/v1/login', {
+        credentials: 'include',
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: password })
@@ -174,6 +175,7 @@ var Login = function (_Component) {
 
       fetch('/api/v1/signup', {
         method: 'post',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: password, email: email })
       }).then(function (res) {
@@ -187,7 +189,6 @@ var Login = function (_Component) {
   }, {
     key: 'handleSignup',
     value: function handleSignup(response) {
-      console.log(response.message);
       if (response.message == 'Success') {
         this.scrollTop();
         this.scrollAfterSearch('profile-container');
@@ -210,8 +211,6 @@ var Login = function (_Component) {
   }, {
     key: 'handleLogin',
     value: function handleLogin(response) {
-      console.log(response.message);
-
       if (response.message == 'Success') {
         this.scrollTop();
         this.scrollAfterSearch('profile-container');

@@ -2,6 +2,11 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+exports.logout = (req, res) => {
+  console.log('HIT');
+  res.clearCookie('jwt');
+};
+
 exports.signup = (req, res) => {
   let { password, email } = req.body;
   password = bcrypt.hashSync(password, 10);

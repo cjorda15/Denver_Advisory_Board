@@ -18,7 +18,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(16);
 
-var _reactScroll = __webpack_require__(35);
+var _reactScroll = __webpack_require__(36);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
@@ -3445,7 +3445,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(16);
 
-var _reactScroll = __webpack_require__(35);
+var _reactScroll = __webpack_require__(36);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
