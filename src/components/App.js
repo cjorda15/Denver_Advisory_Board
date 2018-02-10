@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import Burger from './Burger';
 import Menu from './Menu';
 import LrgNav from './LrgNav';
 import Loadable from 'react-loadable';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions';
 import '../styles/index.scss';
 
 const Loading = () => <div />;
@@ -53,6 +55,16 @@ class App extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    fetch('/api/v1/user', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(data => data.json())
+      .then(data => this.props.handleUser(data))
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="app">
@@ -79,7 +91,13 @@ class App extends Component {
           />
           <Route
             path="/profile"
-            render={({ history }) => <LoadProfile history={history} />}
+            render={({ history }) => {
+              return this.props.user ? (
+                <LoadProfile history={history} />
+              ) : (
+                <Redirect to="/login" />
+              );
+            }}
           />
           <Route
             path="/"
@@ -96,4 +114,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleUser: input => {
+      dispatch(loginUser(input));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

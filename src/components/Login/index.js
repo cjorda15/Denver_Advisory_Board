@@ -70,6 +70,7 @@ class Login extends Component {
     }
 
     fetch(`/api/v1/login`, {
+      credentials: 'include',
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -105,6 +106,7 @@ class Login extends Component {
 
     fetch('/api/v1/signup', {
       method: 'post',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password, email })
     })
@@ -114,12 +116,11 @@ class Login extends Component {
   }
 
   handleSignup(response) {
-    console.log(response.message);
     if (response.message == 'Success') {
       this.scrollTop();
-      this.scrollAfterSearch('home-container');
+      this.scrollAfterSearch('profile-container');
       // window.location('/home');
-      this.props.history.replace('/');
+      this.props.history.replace('/profile');
       return;
     }
 
@@ -136,14 +137,12 @@ class Login extends Component {
   }
 
   handleLogin(response) {
-    console.log(response.message);
-
     if (response.message == 'Success') {
       this.scrollTop();
-      this.scrollAfterSearch('home-container');
+      this.scrollAfterSearch('profile-container');
       this.props.handleLogin('chris');
       // window.location('/home');
-      this.props.history.replace('/');
+      this.props.history.replace('/profile');
       return;
     }
     if (response.message == 'User not found') {

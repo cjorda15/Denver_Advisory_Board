@@ -3,6 +3,8 @@ import './menu.scss';
 import './menu.js';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions';
 
 class Menu extends Component {
   constructor(props) {
@@ -27,6 +29,63 @@ class Menu extends Component {
       });
     }, 100);
   }
+  signedIn() {
+    return this.props.user ? (
+      <NavLink
+        onClick={() => {
+          this.props.handleLogout();
+          this.scrollTop();
+          this.scrollAfterSearch('home-container');
+        }}
+        className="nav-link"
+        to={'/'}
+      >
+        <div className="svg-wrapper">
+          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect className="shape" height="60" width="320" />
+          </svg>
+          <div className="menu-link-text">LOGOUT</div>
+        </div>
+      </NavLink>
+    ) : (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('login-signup-container');
+        }}
+        className="nav-link"
+        to={'/login'}
+      >
+        <div className="svg-wrapper">
+          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect className="shape" height="60" width="320" />
+          </svg>
+          <div className="menu-link-text">LOGIN</div>
+        </div>
+      </NavLink>
+    );
+  }
+
+  showProfile() {
+    return this.props.user ? (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('profile-container');
+        }}
+        className="nav-link"
+        to={'/profile'}
+      >
+        <div className="svg-wrapper">
+          <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
+            <rect className="shape" height="60" width="320" />
+          </svg>
+          <div className="menu-link-text">PROFILE</div>
+        </div>
+      </NavLink>
+    ) : null;
+  }
+
   render() {
     return (
       <div id="menu">
@@ -79,26 +138,26 @@ class Menu extends Component {
               <div className="menu-link-text">EVENTS</div>
             </div>
           </NavLink>
-          <NavLink
-            id="nav-link-4"
-            onClick={() => {
-              this.scrollTop();
-              this.scrollAfterSearch('login-signup-container');
-            }}
-            className="nav-link"
-            to={'/login'}
-          >
-            <div className="svg-wrapper">
-              <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-                <rect className="shape" height="60" width="320" />
-              </svg>
-              <div className="menu-link-text">login</div>
-            </div>
-          </NavLink>
+          {this.signedIn()}
+          {this.showProfile()}
         </nav>
       </div>
     );
   }
 }
 
-export default Menu;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleLogout: () => {
+      dispatch(logoutUser());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

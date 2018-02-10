@@ -2,6 +2,11 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+exports.logout = (req, res) => {
+  console.log('HIT');
+  res.clearCookie('jwt');
+};
+
 exports.signup = (req, res) => {
   let { password, email } = req.body;
   password = bcrypt.hashSync(password, 10);
@@ -50,14 +55,14 @@ exports.login = (req, res) => {
 };
 
 exports.get = (req, res) => {
-  let token = req.cookies.jwt
+  let token = req.cookies.jwt;
   jwt.verify(token, 'secret', (error, decoded) => {
-    if (error) return res.status(500).send(error)
-    let { _id, name, email } = decoded
+    if (error) return res.status(500).send(error);
+    let { _id, name, email } = decoded;
     User.findOne({ _id: _id }, (err, user) => {
-      if (err) return res.status(err)
-      user.password = undefined
-      res.json(user)
-    })
-  })
-}
+      if (err) return res.status(err);
+      user.password = undefined;
+      res.json(user);
+    });
+  });
+};
