@@ -4,24 +4,23 @@ $(document).ready(function() {
     $('.burger').click();
   });
 
-  $('.svg-wrapper').hover(
-    function() {
-      $(this)
-        .find('.shape')
-        .addClass('shape-hover')
-        .removeClass('shape-hover-off');
-      $(this)
-        .find('.menu-link-text')
-        .toggleClass('menu-link-text-hover');
-    },
-    function() {
-      $(this)
-        .find('.shape')
-        .removeClass('shape-hover')
-        .addClass('shape-hover-off');
-      $(this)
-        .find('.menu-link-text')
-        .toggleClass('menu-link-text-hover');
-    }
-  );
+  $(document).on('mouseenter', '.svg-wrapper', function() {
+    $(this)
+      .find('.shape')
+      .addClass('shape-hover')
+      .removeClass('shape-hover-off');
+    $(this)
+      .find('.menu-link-text')
+      .toggleClass('menu-link-text-hover');
+  });
+
+  $(document).on('mouseleave', '.svg-wrapper', function() {
+    $(this)
+      .find('.shape')
+      .removeClass('shape-hover')
+      .addClass('shape-hover-off');
+    $(this)
+      .find('.menu-link-text')
+      .toggleClass('menu-link-text-hover');
+  });
 });

@@ -137,7 +137,6 @@ class Login extends Component {
 
   handleLogin(response) {
     console.log(response.message);
-    console.log(response);
 
     if (response.message == 'Success') {
       this.scrollTop();

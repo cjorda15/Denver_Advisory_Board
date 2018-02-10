@@ -37,8 +37,14 @@ const LoadContact = Loadable({
   loader: () => import('./Contact'),
   loading: Loading
 });
+
 const LoadHome = Loadable({
   loader: () => import('./Home'),
+  loading: Loading
+});
+
+const LoadProfile = Loadable({
+  loader: () => import('./Profile'),
   loading: Loading
 });
 
@@ -70,6 +76,10 @@ class App extends Component {
           <Route
             path="/contact"
             render={({ history }) => <LoadContact history={history} />}
+          />
+          <Route
+            path="/profile"
+            render={({ history }) => <LoadProfile history={history} />}
           />
           <Route
             path="/"
