@@ -23,6 +23,7 @@
   font-size: 16px;
   font-family: $font-regular;
   letter-spacing: 8px;
+  left: 4px;
   line-height: 32px;
   text-align: center;
   position: relative;
@@ -40,12 +41,12 @@
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  width: 120px;
+  width: 140px;
 }
 
 .lrg-nav-shape {
   fill: transparent;
-  stroke-dasharray: 140 540;
+  stroke-dasharray: 170 540;
   stroke-dashoffset: 30;
   stroke-width: 8px;
   stroke: #19f6e8;
@@ -53,12 +54,12 @@
 
 @keyframes drawNav {
   0% {
-    stroke-dasharray: 140 540;
+    stroke-dasharray: 170 540;
     stroke-dashoffset: 30;
     stroke-width: 8px;
   }
   100% {
-    stroke-dasharray: 400 510;
+    stroke-dasharray: 430 510;
     stroke-dashoffset: 30;
     stroke-width: 8px;
   }
@@ -66,12 +67,12 @@
 
 @keyframes drawoutNav {
   0% {
-    stroke-dasharray: 400 510;
+    stroke-dasharray: 430 510;
     stroke-dashoffset: 30;
     stroke-width: 8px;
   }
   100% {
-    stroke-dasharray: 140 540;
+    stroke-dasharray: 170 540;
     stroke-dashoffset: 30;
     stroke-width: 8px;
   }
@@ -87,7 +88,7 @@
   animation: 0.4s drawoutNav linear forwards;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .lrg-nav-container {
     display: none;
   }

@@ -43,8 +43,8 @@ class LrgNav extends Component {
         to={'/'}
       >
         <div className="lrg-nav-svg-wrapper">
-          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-            <rect className="lrg-nav-shape" height="60" width="120" />
+          <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="140" />
           </svg>
           <div className="lrg-menu-link-text">LOGOUT</div>
         </div>
@@ -59,8 +59,8 @@ class LrgNav extends Component {
         to={'/login'}
       >
         <div className="lrg-nav-svg-wrapper">
-          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-            <rect className="lrg-nav-shape" height="60" width="120" />
+          <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="140" />
           </svg>
           <div className="lrg-menu-link-text">LOGIN</div>
         </div>
@@ -79,8 +79,8 @@ class LrgNav extends Component {
         to={'/profile'}
       >
         <div className="lrg-nav-svg-wrapper">
-          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-            <rect className="lrg-nav-shape" height="60" width="120" />
+          <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="140" />
           </svg>
           <div className="lrg-menu-link-text">PROFILE</div>
         </div>
@@ -99,8 +99,8 @@ class LrgNav extends Component {
           to={'/'}
         >
           <div className="lrg-nav-svg-wrapper">
-            <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-              <rect className="lrg-nav-shape" height="60" width="120" />
+            <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+              <rect className="lrg-nav-shape" height="60" width="140" />
             </svg>
             <div className="lrg-menu-link-text">HOME</div>
           </div>
@@ -113,8 +113,8 @@ class LrgNav extends Component {
           to={'/about'}
         >
           <div className="lrg-nav-svg-wrapper">
-            <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-              <rect className="lrg-nav-shape" height="60" width="120" />
+            <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+              <rect className="lrg-nav-shape" height="60" width="140" />
             </svg>
             <div className="lrg-menu-link-text">ABOUT</div>
           </div>
@@ -127,8 +127,8 @@ class LrgNav extends Component {
           to={'/events'}
         >
           <div className="lrg-nav-svg-wrapper">
-            <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
-              <rect className="lrg-nav-shape" height="60" width="120" />
+            <svg height="60" width="140" xmlns="http://www.w3.org/2000/svg">
+              <rect className="lrg-nav-shape" height="60" width="140" />
             </svg>
             <div className="lrg-menu-link-text">EVENTS</div>
           </div>
