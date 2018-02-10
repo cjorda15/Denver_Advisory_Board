@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
 import { connect } from 'react-redux';
+import { logoutUser } from '../../actions';
 import './LrgNav.scss';
 import './LrgNav.js';
 
@@ -34,6 +35,7 @@ class LrgNav extends Component {
     return this.props.user ? (
       <NavLink
         onClick={() => {
+          this.props.handleLogout();
           this.scrollTop();
           this.scrollAfterSearch('home-container');
         }}
@@ -64,6 +66,26 @@ class LrgNav extends Component {
         </div>
       </NavLink>
     );
+  }
+
+  showProfile() {
+    return this.props.user ? (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('profile-container');
+        }}
+        className="lrg-nav-link"
+        to={'/profile'}
+      >
+        <div className="lrg-nav-svg-wrapper">
+          <svg height="60" width="120" xmlns="http://www.w3.org/2000/svg">
+            <rect className="lrg-nav-shape" height="60" width="120" />
+          </svg>
+          <div className="lrg-menu-link-text">PROFILE</div>
+        </div>
+      </NavLink>
+    ) : null;
   }
 
   render() {
@@ -112,6 +134,7 @@ class LrgNav extends Component {
           </div>
         </NavLink>
         {this.signedIn()}
+        {this.showProfile()}
       </nav>
     );
   }
@@ -123,4 +146,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(LrgNav);
+const mapDispatchToProps = dispatch => {
+  return {
+    handleLogout: () => {
+      dispatch(logoutUser());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LrgNav);
