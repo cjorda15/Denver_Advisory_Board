@@ -1,39 +1,18 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import Burger from './Burger';
-// import Menu from './Menu';
-// import Landing from './Landing';
-// import About from './About';
-// import Contact from './Contact';
-// import Home from './Home';
-// import LrgNav from './LrgNav';
-// import Footer from './Footer';
-// import Login from './Login';
-// import Events from './Events';
+import Menu from './Menu';
+import LrgNav from './LrgNav';
 import Loadable from 'react-loadable';
 import '../styles/index.scss';
 
 const Loading = () => <div />;
-
-const LoadLrgNav = Loadable({
-  loader: () => import('./LrgNav'),
-  loading: Loading
-});
 
 const LoadLanding = Loadable({
   loader: () => import('./Landing'),
   loading: Loading
 });
 
-const LoadBurger = Loadable({
-  loader: () => import('./Burger'),
-  loading: Loading
-});
-
-const LoadMenu = Loadable({
-  loader: () => import('./Menu'),
-  loading: Loading
-});
 const LoadFooter = Loadable({
   loader: () => import('./Footer'),
   loading: Loading
@@ -71,10 +50,10 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <LoadLrgNav />
-        <LoadBurger />
+        <LrgNav />
+        <Burger />
         <LoadLanding />
-        <LoadMenu />
+        <Menu />
         <Switch>
           <Route
             path="/login"
