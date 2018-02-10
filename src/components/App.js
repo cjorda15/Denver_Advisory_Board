@@ -54,6 +54,16 @@ class App extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    fetch('/api/v1/user', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(data => data.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(error));
+  }
+
   render() {
     return (
       <div className="app">
@@ -84,7 +94,7 @@ class App extends Component {
               return this.props.user ? (
                 <LoadProfile history={history} />
               ) : (
-                <Redirect to="/" />
+                <Redirect to="/login" />
               );
             }}
           />

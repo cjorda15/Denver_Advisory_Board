@@ -117,9 +117,9 @@ class Login extends Component {
     console.log(response.message);
     if (response.message == 'Success') {
       this.scrollTop();
-      this.scrollAfterSearch('home-container');
+      this.scrollAfterSearch('profile-container');
       // window.location('/home');
-      this.props.history.replace('/');
+      this.props.history.replace('/profile');
       return;
     }
 
@@ -140,10 +140,10 @@ class Login extends Component {
 
     if (response.message == 'Success') {
       this.scrollTop();
-      this.scrollAfterSearch('home-container');
+      this.scrollAfterSearch('profile-container');
       this.props.handleLogin('chris');
       // window.location('/home');
-      this.props.history.replace('/');
+      this.props.history.replace('/profile');
       return;
     }
     if (response.message == 'User not found') {
