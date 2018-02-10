@@ -20,7 +20,7 @@ var _reactScroll = __webpack_require__(35);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
-var _reactRedux = __webpack_require__(20);
+var _reactRedux = __webpack_require__(19);
 
 var _SignupForm = __webpack_require__(190);
 
@@ -34,7 +34,7 @@ var _RadioButtons = __webpack_require__(192);
 
 var _RadioButtons2 = _interopRequireDefault(_RadioButtons);
 
-var _actions = __webpack_require__(38);
+var _actions = __webpack_require__(36);
 
 __webpack_require__(193);
 

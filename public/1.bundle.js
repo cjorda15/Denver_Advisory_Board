@@ -26,11 +26,11 @@ var _HomeGrid = __webpack_require__(273);
 
 var _HomeGrid2 = _interopRequireDefault(_HomeGrid);
 
-__webpack_require__(280);
-
 var _reactSvg = __webpack_require__(183);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
+
+__webpack_require__(280);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -733,7 +733,7 @@ var emptyObject = __webpack_require__(13);
 var hyphenateStyleName = __webpack_require__(66);
 var memoizeStringOnly = __webpack_require__(184);
 var warning = __webpack_require__(16);
-var checkPropTypes = __webpack_require__(19);
+var checkPropTypes = __webpack_require__(20);
 var camelizeStyleName = __webpack_require__(67);
 
 /**

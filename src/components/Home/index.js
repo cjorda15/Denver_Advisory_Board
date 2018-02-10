@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
 import HomeGrid from './HomeGrid.js';
-import './home.scss';
 import ReactSVG from 'react-svg';
+import './home.scss';
 
 class Home extends Component {
   constructor() {

@@ -23,7 +23,7 @@ var _reactStackGrid = __webpack_require__(217);
 
 var _reactStackGrid2 = _interopRequireDefault(_reactStackGrid);
 
-var _jquery = __webpack_require__(36);
+var _jquery = __webpack_require__(37);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -1907,7 +1907,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 module.exports = freeGlobal;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(38)))
 
 /***/ }),
 /* 199 */

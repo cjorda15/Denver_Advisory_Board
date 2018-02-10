@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import Burger from './Burger';
 import Menu from './Menu';
 import LrgNav from './LrgNav';
 import Loadable from 'react-loadable';
+import { connect } from 'react-redux';
 import '../styles/index.scss';
 
 const Loading = () => <div />;
@@ -79,7 +80,13 @@ class App extends Component {
           />
           <Route
             path="/profile"
-            render={({ history }) => <LoadProfile history={history} />}
+            render={({ history }) => {
+              return this.props.user ? (
+                <LoadProfile history={history} />
+              ) : (
+                <Redirect to="/" />
+              );
+            }}
           />
           <Route
             path="/"
@@ -96,4 +103,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(App);
