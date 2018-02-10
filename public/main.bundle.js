@@ -36581,7 +36581,11 @@ var App = function (_Component) {
       }).then(function (data) {
         return data.json();
       }).then(function (data) {
-        return _this2.props.handleUser(data);
+        console.log(data, '!!!!!');
+        if (data.name === 'JsonWebTokenError') {
+          return;
+        }
+        _this2.props.handleUser(data.userID);
       }).catch(function (err) {
         return console.log(err);
       });
@@ -39086,7 +39090,10 @@ var LrgNav = function (_Component) {
         _reactRouterDom.NavLink,
         {
           onClick: function onClick() {
-            fetch('/api/v1/logout');
+            fetch('/api/v1/logout', {
+              method: 'GET',
+              credentials: 'include'
+            });
             _this2.props.handleLogout();
             _this2.scrollTop();
             _this2.scrollAfterSearch('home-container');

@@ -61,7 +61,13 @@ class App extends Component {
       credentials: 'include'
     })
       .then(data => data.json())
-      .then(data => this.props.handleUser(data))
+      .then(data => {
+        console.log(data, '!!!!!');
+        if (data.name === 'JsonWebTokenError') {
+          return;
+        }
+        this.props.handleUser(data.userID);
+      })
       .catch(err => console.log(err));
   }
 

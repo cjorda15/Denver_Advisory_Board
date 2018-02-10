@@ -35,7 +35,10 @@ class LrgNav extends Component {
     return this.props.user ? (
       <NavLink
         onClick={() => {
-          fetch('/api/v1/logout');
+          fetch('/api/v1/logout', {
+            method: 'GET',
+            credentials: 'include'
+          });
           this.props.handleLogout();
           this.scrollTop();
           this.scrollAfterSearch('home-container');
