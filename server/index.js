@@ -23,6 +23,7 @@ app.set('view engine', 'pug');
 const routes = require('./routes');
 app.use('/', routes);
 app.use(express.static('public'));
+
 // app.use(function(req, res, next) {
 //   var err = new Error('File Not Found');
 //   err.status = 404;
