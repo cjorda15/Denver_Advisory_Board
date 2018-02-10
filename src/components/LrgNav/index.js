@@ -30,9 +30,9 @@ class LrgNav extends Component {
     }, 100);
   }
 
-  signedIn(){
-    return this.props.user? 
-  }
+  // signedIn(){
+  //   return this.props.user?
+  // }
 
   render() {
     return (
@@ -105,4 +105,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps) (LrgNav);
+export default connect(mapStateToProps)(LrgNav);
