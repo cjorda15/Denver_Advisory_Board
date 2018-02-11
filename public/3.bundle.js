@@ -189,7 +189,6 @@ var Login = function (_Component) {
   }, {
     key: 'handleSignup',
     value: function handleSignup(response) {
-      console.log(response, 'SINGUPDATA');
       if (response.message == 'Success') {
         this.props.handleLogin(response.user);
         this.scrollTop();
@@ -212,7 +211,6 @@ var Login = function (_Component) {
   }, {
     key: 'handleLogin',
     value: function handleLogin(response) {
-      console.log('log response', response);
       if (response.message == 'Success') {
         this.props.handleLogin(response.user);
         this.scrollTop();

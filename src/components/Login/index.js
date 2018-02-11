@@ -116,7 +116,6 @@ class Login extends Component {
   }
 
   handleSignup(response) {
-    console.log(response, 'SINGUPDATA');
     if (response.message == 'Success') {
       this.props.handleLogin(response.user);
       this.scrollTop();
@@ -138,7 +137,6 @@ class Login extends Component {
   }
 
   handleLogin(response) {
-    console.log('log response', response);
     if (response.message == 'Success') {
       this.props.handleLogin(response.user);
       this.scrollTop();

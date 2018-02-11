@@ -36581,7 +36581,6 @@ var App = function (_Component) {
       }).then(function (data) {
         return data.json();
       }).then(function (data) {
-        console.log(data, '!!!!!');
         if (data.name === 'JsonWebTokenError') {
           return;
         }
@@ -37153,8 +37152,8 @@ var Menu = function (_Component) {
               )
             )
           ),
-          this.signedIn(),
-          this.showProfile()
+          this.showProfile(),
+          this.signedIn()
         )
       );
     }
@@ -39256,8 +39255,8 @@ var LrgNav = function (_Component) {
             )
           )
         ),
-        this.signedIn(),
-        this.showProfile()
+        this.showProfile(),
+        this.signedIn()
       );
     }
   }]);

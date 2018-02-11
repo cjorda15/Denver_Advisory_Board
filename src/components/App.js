@@ -62,7 +62,6 @@ class App extends Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data, '!!!!!');
         if (data.name === 'JsonWebTokenError') {
           return;
         }

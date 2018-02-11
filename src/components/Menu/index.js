@@ -142,8 +142,8 @@ class Menu extends Component {
               <div className="menu-link-text">EVENTS</div>
             </div>
           </NavLink>
-          {this.signedIn()}
           {this.showProfile()}
+          {this.signedIn()}
         </nav>
       </div>
     );

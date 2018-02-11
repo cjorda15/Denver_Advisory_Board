@@ -137,8 +137,8 @@ class LrgNav extends Component {
             <div className="lrg-menu-link-text">EVENTS</div>
           </div>
         </NavLink>
-        {this.signedIn()}
         {this.showProfile()}
+        {this.signedIn()}
       </nav>
     );
   }
