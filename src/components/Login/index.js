@@ -137,10 +137,11 @@ class Login extends Component {
   }
 
   handleLogin(response) {
+    console.log('log response', response);
     if (response.message == 'Success') {
       this.scrollTop();
       this.scrollAfterSearch('profile-container');
-      this.props.handleLogin('chris');
+      this.props.handleLogin(response.user);
       // window.location('/home');
       this.props.history.replace('/profile');
       return;

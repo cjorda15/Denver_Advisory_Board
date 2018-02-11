@@ -48,7 +48,7 @@ exports.login = (req, res) => {
         let token = jwt.sign({ _id: user._id }, 'secret');
         res
           .cookie('jwt', token, { maxage: 900000, httpOnly: true })
-          .json({ message: 'Success' });
+          .json({ message: 'Success', user: user });
       }
     }
   });
@@ -61,8 +61,24 @@ exports.get = (req, res) => {
     let { _id, name, email } = decoded;
     User.findOne({ _id: _id }, (err, user) => {
       if (err) return res.status(err);
-      user.password = undefined;
       res.json(user);
     });
   });
+};
+
+exports.image = (req, res) => {
+  let { id, image } = req.body;
+  console.log(id, image, 'BADFASFASF');
+  let query = { _id: id };
+  let update = { image: image };
+  User.findOneAndUpdate(query, update, (err, doc) => {
+    console.log('!@#$!@#$');
+    if (err) {
+      console.log('???');
+      res.json('error', err);
+    }
+
+    res.json('Success');
+  });
+  console.log('NNNN');
 };

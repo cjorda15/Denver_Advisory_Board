@@ -66,7 +66,7 @@ class App extends Component {
         if (data.name === 'JsonWebTokenError') {
           return;
         }
-        this.props.handleUser(data.userID);
+        this.props.handleUser(data);
       })
       .catch(err => console.log(err));
   }

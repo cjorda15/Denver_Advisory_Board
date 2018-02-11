@@ -24,18 +24,37 @@ class Profile extends Component {
       body: data
     })
       .then(res => res.json())
-      .then(res => {
-        this.props.handleImage(res);
+      .then(imageUrl => {
         this.setState({ loading: false });
+        this.props.handleImage(imageUrl);
+        fetch('/api/v1/updateImage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: this.props.user.userID._id,
+            image: imageUrl
+          })
+        })
+          .then(data => data.json())
+          .then(mongoResponse => {
+            if (mongoResponse == 'Success') {
+              console.log(mongoResponse);
+              return;
+            }
+            console.log('ERRORWITHMONGO');
+          })
+          .catch(err => {
+            console.log(err, 'ERRROR');
+          });
       })
       .catch(err => console.log(err));
   }
 
   profileImgDisplay() {
-    return this.props.user.image ? (
+    return this.props.user.userID.image ? (
       <div
         className="account-profile-image"
-        style={{ backgroundImage: `url(${this.props.user.image})` }}
+        style={{ backgroundImage: `url(${this.props.user.userID.image})` }}
       />
     ) : (
       <div className="account-profile-image-placeholder">

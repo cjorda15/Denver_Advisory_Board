@@ -36585,7 +36585,7 @@ var App = function (_Component) {
         if (data.name === 'JsonWebTokenError') {
           return;
         }
-        _this2.props.handleUser(data.userID);
+        _this2.props.handleUser(data);
       }).catch(function (err) {
         return console.log(err);
       });

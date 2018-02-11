@@ -64,9 +64,27 @@ var Profile = function (_Component) {
         body: data
       }).then(function (res) {
         return res.json();
-      }).then(function (res) {
-        _this2.props.handleImage(res);
+      }).then(function (imageUrl) {
         _this2.setState({ loading: false });
+        _this2.props.handleImage(imageUrl);
+        fetch('/api/v1/updateImage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: _this2.props.user.userID._id,
+            image: imageUrl
+          })
+        }).then(function (data) {
+          return data.json();
+        }).then(function (mongoResponse) {
+          if (mongoResponse == 'Success') {
+            console.log(mongoResponse);
+            return;
+          }
+          console.log('ERRORWITHMONGO');
+        }).catch(function (err) {
+          console.log(err, 'ERRROR');
+        });
       }).catch(function (err) {
         return console.log(err);
       });
@@ -76,9 +94,9 @@ var Profile = function (_Component) {
     value: function profileImgDisplay() {
       var _this3 = this;
 
-      return this.props.user.image ? _react2.default.createElement('div', {
+      return this.props.user.userID.image ? _react2.default.createElement('div', {
         className: 'account-profile-image',
-        style: { backgroundImage: 'url(' + this.props.user.image + ')' }
+        style: { backgroundImage: 'url(' + this.props.user.userID.image + ')' }
       }) : _react2.default.createElement(
         'div',
         { className: 'account-profile-image-placeholder' },
