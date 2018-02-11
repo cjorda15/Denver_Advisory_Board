@@ -77,10 +77,32 @@ class Profile extends Component {
     );
   }
 
+  profileShowDetails() {
+    let { email } = this.props.user.userID;
+
+    return (
+      <div className="user-details-container">
+        <div>{email}</div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div id="profile-container">
-        <div>{this.profileImgDisplay()}</div>
+        <div className="profile-info-events-container">
+          <div className="profile-info-container">
+            <div className="profile-image-container">
+              {this.profileImgDisplay()}
+            </div>
+            <div className="profile-details-container">
+              {this.profileShowDetails()}
+            </div>
+          </div>
+          <div className="profile-events-container">
+            <p>EVENTS</p>
+          </div>
+        </div>
       </div>
     );
   }

@@ -122,6 +122,22 @@ var Profile = function (_Component) {
       );
     }
   }, {
+    key: 'profileShowDetails',
+    value: function profileShowDetails() {
+      var email = this.props.user.userID.email;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'user-details-container' },
+        _react2.default.createElement(
+          'div',
+          null,
+          email
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -129,8 +145,30 @@ var Profile = function (_Component) {
         { id: 'profile-container' },
         _react2.default.createElement(
           'div',
-          null,
-          this.profileImgDisplay()
+          { className: 'profile-info-events-container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'profile-info-container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'profile-image-container' },
+              this.profileImgDisplay()
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'profile-details-container' },
+              this.profileShowDetails()
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'profile-events-container' },
+            _react2.default.createElement(
+              'p',
+              null,
+              'EVENTS'
+            )
+          )
         )
       );
     }
@@ -3453,10 +3491,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(11)(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, ".account-profile-image {\n  height: 200px;\n  width: 200px;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#profile-container {\n  padding: 30px; }\n\n.profile-info-events-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  max-width: 900px;\n  margin: 0px auto;\n  width: 90%; }\n\n.profile-events-container {\n  font-family: \"Comfortaa\", serif; }\n  .profile-events-container p {\n    border-bottom: 3px solid #1a1a1a;\n    font-size: 1.4em; }\n\n.account-profile-image {\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-radius: 135px;\n  height: 240px;\n  width: 100%; }\n\n.profile-info-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  border-radius: 50px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 300px;\n  padding: 30px;\n  position: relative; }\n\n.profile-image-container {\n  border-radius: 20px;\n  width: 100%; }\n\n.account-profile-image-placeholder {\n  background-repeat: no-repeat;\n  background-image: url(\"https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png\");\n  background-size: cover;\n  min-height: 200px; }\n\n.profile-details-container {\n  width: 100%; }\n\n.user-details-container {\n  padding: 15px;\n  font-family: \"Comfortaa\", serif; }\n  .user-details-container div {\n    background: #fff;\n    margin: 10px 0px; }\n", ""]);
 
 // exports
 

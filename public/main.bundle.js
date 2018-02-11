@@ -37247,6 +37247,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 
   (0, _jquery2.default)(document).on('mouseleave', '.svg-wrapper', function () {
+    console.log('!!!');
     (0, _jquery2.default)(this).find('.shape').removeClass('shape-hover').addClass('shape-hover-off');
     (0, _jquery2.default)(this).find('.menu-link-text').toggleClass('menu-link-text-hover');
   });

@@ -71,13 +71,10 @@ exports.image = (req, res) => {
   let query = { _id: id };
   let update = { image: image };
   User.findOneAndUpdate(query, update, (err, doc) => {
-    console.log('!@#$!@#$');
     if (err) {
-      console.log('???');
       res.json('error', err);
     }
 
     res.json('Success');
   });
-  console.log('NNNN');
 };
