@@ -1,67 +1,97 @@
 @import '../../styles/utilities/index.scss';
 
 #profile-container {
-  padding: 30px;
+  // padding: 30px;
 }
 
-.profile-info-events-container {
+.account-profile-info-events-container {
   display: flex;
   justify-content: space-between;
-  max-width: 900px;
   margin: 0px auto;
   width: 90%;
+  flex-direction: column;
 }
 
-.profile-events-container {
-  // display: flex;
-  font-family: $font-fancy;
-  p {
-    border-bottom: 3px solid #1a1a1a;
-    font-size: 1.4em;
-  }
+.account-profile-info-container {
+  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  padding: 10px;
+  position: relative;
+}
+
+.account-profile-details-image-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .account-profile-image {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 135px;
-  height: 240px;
-  width: 100%;
-}
-
-.profile-info-container {
-  align-items: center;
-  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
-  border-radius: 50px;
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-  padding: 30px;
-  position: relative;
-}
-
-.profile-image-container {
-  border-radius: 20px;
-  width: 100%;
+  border-radius: 10px;
+  height: 220px;
+  width: 220px;
 }
 
 .account-profile-image-placeholder {
   background-repeat: no-repeat;
   background-image: url('https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png');
   background-size: cover;
-  min-height: 200px;
+  border-radius: 10px;
+  height: 220px;
+  width: 220px;
 }
 
-.profile-details-container {
-  width: 100%;
-}
-
-.user-details-container {
-  padding: 15px;
-  font-family: $font-fancy;
+.account-profile-details-basic-container {
+  max-width: 200px;
+  flex: 1;
   div {
     background: #fff;
+    border-radius: 10px;
+    font-family: $font-fancy;
     margin: 10px 0px;
+    padding: 15px;
+  }
+}
+
+.account-profile-details-bio-container {
+  background: #fff;
+  border-radius: 10px;
+  font-family: $font-fancy;
+  margin-top: 25px;
+  padding: 15px;
+}
+
+#edit-profile-details-btn {
+  background: #fff;
+  border-radius: 64px;
+  border: #dd7782 3px solid;
+  color: #dd7782;
+  font-family: $font-fancy;
+  font-size: 1.1em;
+  padding: 18px;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.8s;
+  width: 100%;
+  &:hover {
+    background: #dd7782;
+    color: #fff;
+    border: #fff 3px solid;
+  }
+}
+
+.account-profile-events-container {
+  // display: flex;
+  font-family: $font-fancy;
+  p {
+    border-bottom: 3px solid #1a1a1a;
+    font-size: 1.4em;
   }
 }

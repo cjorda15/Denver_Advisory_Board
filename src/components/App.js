@@ -100,7 +100,7 @@ class App extends Component {
               return this.props.user ? (
                 <LoadProfile history={history} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/" />
               );
             }}
           />

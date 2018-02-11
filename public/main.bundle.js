@@ -36637,7 +36637,7 @@ var App = function (_Component) {
             render: function render(_ref5) {
               var history = _ref5.history;
 
-              return _this3.props.user ? _react2.default.createElement(LoadProfile, { history: history }) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
+              return _this3.props.user ? _react2.default.createElement(LoadProfile, { history: history }) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {

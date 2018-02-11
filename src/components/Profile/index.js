@@ -8,7 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      edit: false
     };
   }
 
@@ -77,29 +78,40 @@ class Profile extends Component {
     );
   }
 
-  profileShowDetails() {
-    let { email } = this.props.user.userID;
-
+  profileDetails() {
+    let { email, name } = this.props.user.userID;
+    name = name || 'Add your name';
     return (
-      <div className="user-details-container">
+      <div className="account-profile-details-basic-container">
+        <div>{name}</div>
         <div>{email}</div>
+        <button id="edit-profile-details-btn">edit profile</button>
       </div>
     );
+  }
+
+  profileBio() {
+    let { bio } = this.props.user.userID;
+    bio = bio || 'Add your bio';
+    return <div className="account-profile-details-bio-container">{bio}</div>;
+  }
+
+  editProfile() {
+    return this.state.edit ? <div className="edit-profile" /> : null;
   }
 
   render() {
     return (
       <div id="profile-container">
-        <div className="profile-info-events-container">
-          <div className="profile-info-container">
-            <div className="profile-image-container">
+        <div className="account-profile-info-events-container">
+          <div className="account-profile-info-container">
+            <div className="account-profile-details-image-container">
               {this.profileImgDisplay()}
+              {this.profileDetails()}
             </div>
-            <div className="profile-details-container">
-              {this.profileShowDetails()}
-            </div>
+            {this.profileBio()}
           </div>
-          <div className="profile-events-container">
+          <div className="account-profile-events-container">
             <p>EVENTS</p>
           </div>
         </div>
