@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.logout = (req, res) => {
-  console.log('HIT');
   res.clearCookie('jwt');
+  res.redirect('/');
 };
 
 exports.signup = (req, res) => {
