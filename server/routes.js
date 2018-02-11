@@ -27,3 +27,4 @@ r.post('/api/v1/signup', account.signup);
 r.post('/api/v1/login', account.login);
 r.get('/api/v1/user', account.get);
 r.get('/api/v1/logout', account.logout);
+r.post('/api/v1/updateImage', account.image);

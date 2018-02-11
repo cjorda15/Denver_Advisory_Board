@@ -43,7 +43,8 @@ var Profile = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 
     _this.state = {
-      loading: false
+      loading: false,
+      edit: false
     };
     return _this;
   }
@@ -64,9 +65,27 @@ var Profile = function (_Component) {
         body: data
       }).then(function (res) {
         return res.json();
-      }).then(function (res) {
-        _this2.props.handleImage(res);
+      }).then(function (imageUrl) {
         _this2.setState({ loading: false });
+        _this2.props.handleImage(imageUrl);
+        fetch('/api/v1/updateImage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: _this2.props.user.userID._id,
+            image: imageUrl
+          })
+        }).then(function (data) {
+          return data.json();
+        }).then(function (mongoResponse) {
+          if (mongoResponse == 'Success') {
+            console.log(mongoResponse);
+            return;
+          }
+          console.log('ERRORWITHMONGO');
+        }).catch(function (err) {
+          console.log(err, 'ERRROR');
+        });
       }).catch(function (err) {
         return console.log(err);
       });
@@ -76,9 +95,9 @@ var Profile = function (_Component) {
     value: function profileImgDisplay() {
       var _this3 = this;
 
-      return this.props.user.image ? _react2.default.createElement('div', {
+      return this.props.user.userID.image ? _react2.default.createElement('div', {
         className: 'account-profile-image',
-        style: { backgroundImage: 'url(' + this.props.user.image + ')' }
+        style: { backgroundImage: 'url(' + this.props.user.userID.image + ')' }
       }) : _react2.default.createElement(
         'div',
         { className: 'account-profile-image-placeholder' },
@@ -104,6 +123,51 @@ var Profile = function (_Component) {
       );
     }
   }, {
+    key: 'profileDetails',
+    value: function profileDetails() {
+      var _props$user$userID = this.props.user.userID,
+          email = _props$user$userID.email,
+          name = _props$user$userID.name;
+
+      name = name || 'Add your name';
+      return _react2.default.createElement(
+        'div',
+        { className: 'account-profile-details-basic-container' },
+        _react2.default.createElement(
+          'div',
+          null,
+          name
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          email
+        ),
+        _react2.default.createElement(
+          'button',
+          { id: 'edit-profile-details-btn' },
+          'edit profile'
+        )
+      );
+    }
+  }, {
+    key: 'profileBio',
+    value: function profileBio() {
+      var bio = this.props.user.userID.bio;
+
+      bio = bio || 'Add your bio';
+      return _react2.default.createElement(
+        'div',
+        { className: 'account-profile-details-bio-container' },
+        bio
+      );
+    }
+  }, {
+    key: 'editProfile',
+    value: function editProfile() {
+      return this.state.edit ? _react2.default.createElement('div', { className: 'edit-profile' }) : null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -111,8 +175,27 @@ var Profile = function (_Component) {
         { id: 'profile-container' },
         _react2.default.createElement(
           'div',
-          null,
-          this.profileImgDisplay()
+          { className: 'account-profile-info-events-container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'account-profile-info-container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'account-profile-details-image-container' },
+              this.profileImgDisplay(),
+              this.profileDetails()
+            ),
+            this.profileBio()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'account-profile-events-container' },
+            _react2.default.createElement(
+              'p',
+              null,
+              'EVENTS'
+            )
+          )
         )
       );
     }
@@ -3435,10 +3518,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(11)(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, ".account-profile-image {\n  height: 200px;\n  width: 200px;\n  background-size: cover;\n  background-repeat: no-repeat; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-info-events-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  margin: 0px auto;\n  width: 90%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n\n.account-profile-info-container {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  border-radius: 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 640px;\n  padding: 10px;\n  position: relative; }\n\n.account-profile-details-image-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  width: 100%; }\n\n.account-profile-image {\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-radius: 10px;\n  height: 220px;\n  width: 220px; }\n\n.account-profile-image-placeholder {\n  background-repeat: no-repeat;\n  background-image: url(\"https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png\");\n  background-size: cover;\n  border-radius: 10px;\n  height: 220px;\n  width: 220px; }\n\n.account-profile-details-basic-container {\n  max-width: 200px;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1; }\n  .account-profile-details-basic-container div {\n    background: #fff;\n    border-radius: 10px;\n    font-family: \"Comfortaa\", serif;\n    margin: 10px 0px;\n    padding: 15px; }\n\n.account-profile-details-bio-container {\n  background: #fff;\n  border-radius: 10px;\n  font-family: \"Comfortaa\", serif;\n  margin-top: 25px;\n  padding: 15px; }\n\n#edit-profile-details-btn {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  padding: 18px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 100%; }\n  #edit-profile-details-btn:hover {\n    background: #dd7782;\n    color: #fff;\n    border: #fff 3px solid; }\n\n.account-profile-events-container {\n  font-family: \"Comfortaa\", serif; }\n  .account-profile-events-container p {\n    border-bottom: 3px solid #1a1a1a;\n    font-size: 1.4em; }\n", ""]);
 
 // exports
 

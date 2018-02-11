@@ -8,7 +8,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      edit: false
     };
   }
 
@@ -24,18 +25,37 @@ class Profile extends Component {
       body: data
     })
       .then(res => res.json())
-      .then(res => {
-        this.props.handleImage(res);
+      .then(imageUrl => {
         this.setState({ loading: false });
+        this.props.handleImage(imageUrl);
+        fetch('/api/v1/updateImage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: this.props.user.userID._id,
+            image: imageUrl
+          })
+        })
+          .then(data => data.json())
+          .then(mongoResponse => {
+            if (mongoResponse == 'Success') {
+              console.log(mongoResponse);
+              return;
+            }
+            console.log('ERRORWITHMONGO');
+          })
+          .catch(err => {
+            console.log(err, 'ERRROR');
+          });
       })
       .catch(err => console.log(err));
   }
 
   profileImgDisplay() {
-    return this.props.user.image ? (
+    return this.props.user.userID.image ? (
       <div
         className="account-profile-image"
-        style={{ backgroundImage: `url(${this.props.user.image})` }}
+        style={{ backgroundImage: `url(${this.props.user.userID.image})` }}
       />
     ) : (
       <div className="account-profile-image-placeholder">
@@ -58,10 +78,43 @@ class Profile extends Component {
     );
   }
 
+  profileDetails() {
+    let { email, name } = this.props.user.userID;
+    name = name || 'Add your name';
+    return (
+      <div className="account-profile-details-basic-container">
+        <div>{name}</div>
+        <div>{email}</div>
+        <button id="edit-profile-details-btn">edit profile</button>
+      </div>
+    );
+  }
+
+  profileBio() {
+    let { bio } = this.props.user.userID;
+    bio = bio || 'Add your bio';
+    return <div className="account-profile-details-bio-container">{bio}</div>;
+  }
+
+  editProfile() {
+    return this.state.edit ? <div className="edit-profile" /> : null;
+  }
+
   render() {
     return (
       <div id="profile-container">
-        <div>{this.profileImgDisplay()}</div>
+        <div className="account-profile-info-events-container">
+          <div className="account-profile-info-container">
+            <div className="account-profile-details-image-container">
+              {this.profileImgDisplay()}
+              {this.profileDetails()}
+            </div>
+            {this.profileBio()}
+          </div>
+          <div className="account-profile-events-container">
+            <p>EVENTS</p>
+          </div>
+        </div>
       </div>
     );
   }

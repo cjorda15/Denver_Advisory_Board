@@ -33,6 +33,10 @@ class Menu extends Component {
     return this.props.user ? (
       <NavLink
         onClick={() => {
+          fetch('/api/v1/logout', {
+            method: 'GET',
+            credentials: 'include'
+          });
           this.props.handleLogout();
           this.scrollTop();
           this.scrollAfterSearch('home-container');
@@ -138,8 +142,8 @@ class Menu extends Component {
               <div className="menu-link-text">EVENTS</div>
             </div>
           </NavLink>
-          {this.signedIn()}
           {this.showProfile()}
+          {this.signedIn()}
         </nav>
       </div>
     );

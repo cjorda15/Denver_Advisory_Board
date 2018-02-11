@@ -62,11 +62,10 @@ class App extends Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data, '!!!!!');
         if (data.name === 'JsonWebTokenError') {
           return;
         }
-        this.props.handleUser(data.userID);
+        this.props.handleUser(data);
       })
       .catch(err => console.log(err));
   }
@@ -101,7 +100,7 @@ class App extends Component {
               return this.props.user ? (
                 <LoadProfile history={history} />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/" />
               );
             }}
           />

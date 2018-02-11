@@ -15,6 +15,7 @@ $(document).ready(function() {
   });
 
   $(document).on('mouseleave', '.svg-wrapper', function() {
+    console.log('!!!');
     $(this)
       .find('.shape')
       .removeClass('shape-hover')

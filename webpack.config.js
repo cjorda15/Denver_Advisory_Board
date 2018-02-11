@@ -45,5 +45,5 @@ module.exports = {
   node: {
     fs: 'empty'
   }
+  // plugins: [new UglifyJSPlugin()]
 };
-// plugins: [new UglifyJSPlugin()]

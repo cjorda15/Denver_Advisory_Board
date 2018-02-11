@@ -36581,11 +36581,10 @@ var App = function (_Component) {
       }).then(function (data) {
         return data.json();
       }).then(function (data) {
-        console.log(data, '!!!!!');
         if (data.name === 'JsonWebTokenError') {
           return;
         }
-        _this2.props.handleUser(data.userID);
+        _this2.props.handleUser(data);
       }).catch(function (err) {
         return console.log(err);
       });
@@ -36638,7 +36637,7 @@ var App = function (_Component) {
             render: function render(_ref5) {
               var history = _ref5.history;
 
-              return _this3.props.user ? _react2.default.createElement(LoadProfile, { history: history }) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/login' });
+              return _this3.props.user ? _react2.default.createElement(LoadProfile, { history: history }) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
             }
           }),
           _react2.default.createElement(_reactRouterDom.Route, {
@@ -36982,6 +36981,10 @@ var Menu = function (_Component) {
         _reactRouterDom.NavLink,
         {
           onClick: function onClick() {
+            fetch('/api/v1/logout', {
+              method: 'GET',
+              credentials: 'include'
+            });
             _this2.props.handleLogout();
             _this2.scrollTop();
             _this2.scrollAfterSearch('home-container');
@@ -37149,8 +37152,8 @@ var Menu = function (_Component) {
               )
             )
           ),
-          this.signedIn(),
-          this.showProfile()
+          this.showProfile(),
+          this.signedIn()
         )
       );
     }
@@ -37244,6 +37247,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 
   (0, _jquery2.default)(document).on('mouseleave', '.svg-wrapper', function () {
+    console.log('!!!');
     (0, _jquery2.default)(this).find('.shape').removeClass('shape-hover').addClass('shape-hover-off');
     (0, _jquery2.default)(this).find('.menu-link-text').toggleClass('menu-link-text-hover');
   });
@@ -39252,8 +39256,8 @@ var LrgNav = function (_Component) {
             )
           )
         ),
-        this.signedIn(),
-        this.showProfile()
+        this.showProfile(),
+        this.signedIn()
       );
     }
   }]);
@@ -39849,10 +39853,10 @@ var user = function user() {
       return null;
     case 'LOAD_IMAGE':
       var newState = _extends({}, state);
-      if (newState.image) {
-        delete newState.image;
+      if (newState.userID.image) {
+        delete newState.userID.image;
       }
-      newState.image = action.payload;
+      newState.userID.image = action.payload;
       return newState;
     default:
       return state;
