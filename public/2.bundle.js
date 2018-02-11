@@ -3456,7 +3456,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, ".account-profile-image {\n  height: 200px;\n  width: 200px;\n  background-size: cover;\n  background-repeat: no-repeat; }\n", ""]);
+exports.push([module.i, ".account-profile-image {\n  height: 200px;\n  width: 200px;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center; }\n", ""]);
 
 // exports
 

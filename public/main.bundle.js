@@ -36982,6 +36982,10 @@ var Menu = function (_Component) {
         _reactRouterDom.NavLink,
         {
           onClick: function onClick() {
+            fetch('/api/v1/logout', {
+              method: 'GET',
+              credentials: 'include'
+            });
             _this2.props.handleLogout();
             _this2.scrollTop();
             _this2.scrollAfterSearch('home-container');
@@ -39849,10 +39853,10 @@ var user = function user() {
       return null;
     case 'LOAD_IMAGE':
       var newState = _extends({}, state);
-      if (newState.image) {
-        delete newState.image;
+      if (newState.userID.image) {
+        delete newState.userID.image;
       }
-      newState.image = action.payload;
+      newState.userID.image = action.payload;
       return newState;
     default:
       return state;

@@ -164,7 +164,7 @@ var Login = function (_Component) {
       }
 
       if (password.length < 5) {
-        this.handleError('Username must be at least 5 characters');
+        this.handleError('Password must be at least 5 characters');
         return;
       }
 
@@ -189,10 +189,11 @@ var Login = function (_Component) {
   }, {
     key: 'handleSignup',
     value: function handleSignup(response) {
+      console.log(response, 'SINGUPDATA');
       if (response.message == 'Success') {
+        this.props.handleLogin(response.user);
         this.scrollTop();
         this.scrollAfterSearch('profile-container');
-        // window.location('/home');
         this.props.history.replace('/profile');
         return;
       }
@@ -213,10 +214,9 @@ var Login = function (_Component) {
     value: function handleLogin(response) {
       console.log('log response', response);
       if (response.message == 'Success') {
+        this.props.handleLogin(response.user);
         this.scrollTop();
         this.scrollAfterSearch('profile-container');
-        this.props.handleLogin(response.user);
-        // window.location('/home');
         this.props.history.replace('/profile');
         return;
       }

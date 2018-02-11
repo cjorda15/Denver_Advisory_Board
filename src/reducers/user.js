@@ -6,10 +6,10 @@ const user = (state = null, action) => {
       return null;
     case 'LOAD_IMAGE':
       let newState = { ...state };
-      if (newState.image) {
-        delete newState.image;
+      if (newState.userID.image) {
+        delete newState.userID.image;
       }
-      newState.image = action.payload;
+      newState.userID.image = action.payload;
       return newState;
     default:
       return state;

@@ -27,7 +27,7 @@ exports.signup = (req, res) => {
           expires: new Date(Date.now() + 900000),
           httpOnly: true
         })
-        .json({ message: 'Success' });
+        .json({ message: 'Success', user: user });
     }
   });
 };
@@ -68,7 +68,6 @@ exports.get = (req, res) => {
 
 exports.image = (req, res) => {
   let { id, image } = req.body;
-  console.log(id, image, 'BADFASFASF');
   let query = { _id: id };
   let update = { image: image };
   User.findOneAndUpdate(query, update, (err, doc) => {
