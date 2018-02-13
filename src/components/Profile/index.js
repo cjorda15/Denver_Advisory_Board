@@ -79,13 +79,14 @@ class Profile extends Component {
   }
 
   profileDetails() {
-    let { email, name } = this.props.user.userID;
+    let { email, name, bio } = this.props.user.userID;
     name = name || 'Add your name';
+    bio = bio || 'Add your bio';
     return (
       <div className="account-profile-details-basic-container">
         <div>{name}</div>
         <div>{email}</div>
-        <button id="edit-profile-details-btn">edit profile</button>
+        <div>{bio}</div>
       </div>
     );
   }
@@ -100,21 +101,72 @@ class Profile extends Component {
     return this.state.edit ? <div className="edit-profile" /> : null;
   }
 
+  //   render() {
+  //     return (
+  //       <div id="profile-container">
+  //         <div className="account-profile-info-events-container">
+  //           <div className="account-profile-info-container">
+  //             <div className="account-profile-details-image-container">
+  //               {this.profileImgDisplay()}
+  //               {this.profileDetails()}
+  //               <button id="edit-profile-details-btn">edit profile</button>
+  //             </div>
+  //           </div>
+  //           <div className="account-profile-events-container">
+  //             <p>EVENTS</p>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
+
+  determineImage() {
+    return (
+      this.props.user.userID.image ||
+      'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png'
+    );
+  }
+
+  profileBasicDetails() {
+    return (
+      <div className="account-profile-basic-details">
+        <p>{this.props.user.userID.name || 'add your name'}</p>
+        <p>{this.props.user.userID.email}</p>
+        <p>{this.props.user.userID.organization || 'add your organization'}</p>
+        <p>{this.props.user.userID.title || 'add your title'}</p>
+      </div>
+    );
+  }
+
+  profileSummaryDetails() {
+    return (
+      <p className="account-profile-summary">
+        {this.props.user.userID.summary || 'add a summary'}
+      </p>
+    );
+  }
+
   render() {
     return (
       <div id="profile-container">
-        <div className="account-profile-info-events-container">
-          <div className="account-profile-info-container">
-            <div className="account-profile-details-image-container">
-              {this.profileImgDisplay()}
-              {this.profileDetails()}
+        <section className="account-profile-card-container">
+          <div className="account-profile-card-top">
+            <button id="edit-profile-details-btn">edit profile</button>
+            <div className="profile-image-wrapper">
+              <div
+                className="profile-image"
+                style={{
+                  backgroundImage: `url(${this.determineImage()})`
+                }}
+              />
             </div>
-            {this.profileBio()}
           </div>
-          <div className="account-profile-events-container">
-            <p>EVENTS</p>
+          <div className="account-profile-bottom-card">
+            {this.profileBasicDetails()}
+            {this.profileSummaryDetails()}
           </div>
-        </div>
+        </section>
       </div>
     );
   }

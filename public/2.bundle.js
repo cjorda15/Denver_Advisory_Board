@@ -127,9 +127,11 @@ var Profile = function (_Component) {
     value: function profileDetails() {
       var _props$user$userID = this.props.user.userID,
           email = _props$user$userID.email,
-          name = _props$user$userID.name;
+          name = _props$user$userID.name,
+          bio = _props$user$userID.bio;
 
       name = name || 'Add your name';
+      bio = bio || 'Add your bio';
       return _react2.default.createElement(
         'div',
         { className: 'account-profile-details-basic-container' },
@@ -144,9 +146,9 @@ var Profile = function (_Component) {
           email
         ),
         _react2.default.createElement(
-          'button',
-          { id: 'edit-profile-details-btn' },
-          'edit profile'
+          'div',
+          null,
+          bio
         )
       );
     }
@@ -167,6 +169,69 @@ var Profile = function (_Component) {
     value: function editProfile() {
       return this.state.edit ? _react2.default.createElement('div', { className: 'edit-profile' }) : null;
     }
+
+    //   render() {
+    //     return (
+    //       <div id="profile-container">
+    //         <div className="account-profile-info-events-container">
+    //           <div className="account-profile-info-container">
+    //             <div className="account-profile-details-image-container">
+    //               {this.profileImgDisplay()}
+    //               {this.profileDetails()}
+    //               <button id="edit-profile-details-btn">edit profile</button>
+    //             </div>
+    //           </div>
+    //           <div className="account-profile-events-container">
+    //             <p>EVENTS</p>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     );
+    //   }
+    // }
+
+  }, {
+    key: 'determineImage',
+    value: function determineImage() {
+      return this.props.user.userID.image || 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
+    }
+  }, {
+    key: 'profileBasicDetails',
+    value: function profileBasicDetails() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'account-profile-basic-details' },
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.name || 'add your name'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.email
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.organization || 'add your organization'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.title || 'add your title'
+        )
+      );
+    }
+  }, {
+    key: 'profileSummaryDetails',
+    value: function profileSummaryDetails() {
+      return _react2.default.createElement(
+        'p',
+        { className: 'account-profile-summary' },
+        this.props.user.userID.summary || 'add a summary'
+      );
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -174,27 +239,32 @@ var Profile = function (_Component) {
         'div',
         { id: 'profile-container' },
         _react2.default.createElement(
-          'div',
-          { className: 'account-profile-info-events-container' },
+          'section',
+          { className: 'account-profile-card-container' },
           _react2.default.createElement(
             'div',
-            { className: 'account-profile-info-container' },
+            { className: 'account-profile-card-top' },
+            _react2.default.createElement(
+              'button',
+              { id: 'edit-profile-details-btn' },
+              'edit profile'
+            ),
             _react2.default.createElement(
               'div',
-              { className: 'account-profile-details-image-container' },
-              this.profileImgDisplay(),
-              this.profileDetails()
-            ),
-            this.profileBio()
+              { className: 'profile-image-wrapper' },
+              _react2.default.createElement('div', {
+                className: 'profile-image',
+                style: {
+                  backgroundImage: 'url(' + this.determineImage() + ')'
+                }
+              })
+            )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'account-profile-events-container' },
-            _react2.default.createElement(
-              'p',
-              null,
-              'EVENTS'
-            )
+            { className: 'account-profile-bottom-card' },
+            this.profileBasicDetails(),
+            this.profileSummaryDetails()
           )
         )
       );
@@ -3521,7 +3591,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-info-events-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  margin: 0px auto;\n  width: 90%;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n\n.account-profile-info-container {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  border-radius: 3px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 640px;\n  padding: 10px;\n  position: relative; }\n\n.account-profile-details-image-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  width: 100%; }\n\n.account-profile-image {\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat;\n  border-radius: 10px;\n  height: 220px;\n  width: 220px; }\n\n.account-profile-image-placeholder {\n  background-repeat: no-repeat;\n  background-image: url(\"https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png\");\n  background-size: cover;\n  border-radius: 10px;\n  height: 220px;\n  width: 220px; }\n\n.account-profile-details-basic-container {\n  max-width: 200px;\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1; }\n  .account-profile-details-basic-container div {\n    background: #fff;\n    border-radius: 10px;\n    font-family: \"Comfortaa\", serif;\n    margin: 10px 0px;\n    padding: 15px; }\n\n.account-profile-details-bio-container {\n  background: #fff;\n  border-radius: 10px;\n  font-family: \"Comfortaa\", serif;\n  margin-top: 25px;\n  padding: 15px; }\n\n#edit-profile-details-btn {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  padding: 18px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 100%; }\n  #edit-profile-details-btn:hover {\n    background: #dd7782;\n    color: #fff;\n    border: #fff 3px solid; }\n\n.account-profile-events-container {\n  font-family: \"Comfortaa\", serif; }\n  .account-profile-events-container p {\n    border-bottom: 3px solid #1a1a1a;\n    font-size: 1.4em; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n#edit-profile-details-btn {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  float: right;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  #edit-profile-details-btn:hover {\n    background: #dd7782;\n    border: 2px solid #fff;\n    color: #fff; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 3px solid cyan;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border-radius: 64px;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n", ""]);
 
 // exports
 
