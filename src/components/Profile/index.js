@@ -13,6 +13,7 @@ class Profile extends Component {
     this.state = {
       loading: false,
       edit: false,
+      imageLoaded: '',
       name: '',
       organization: '',
       title: '',
@@ -118,10 +119,24 @@ class Profile extends Component {
   }
 
   handleUserUpdate(data) {
-    console.log(data.message);
     data.message === 'Success'
       ? this.props.handleUser(data.user)
       : console.log(data.error, 'ERROR');
+  }
+
+  handleImagePath(e) {
+    let imagePath = e.target.value.split('');
+    let cleanImageName = imagePath
+      .splice(imagePath.indexOf('h') + 2, imagePath.length)
+      .join('');
+
+    this.setState({ imageLoaded: cleanImageName });
+  }
+
+  determineImageFile() {
+    return this.state.imageLoaded ? (
+      <span>{this.state.imageLoaded}</span>
+    ) : null;
   }
 
   showEditProfile() {
@@ -148,20 +163,28 @@ class Profile extends Component {
             <div>Load Image</div>
             <label htmlFor="upload-photo">Choose Image</label>
             <input
+              onChange={e => {
+                this.handleImagePath(e);
+              }}
               className="file-field"
               name="recfile"
               type="file"
               id="upload-photo"
             />
             <button type="submit">Submit</button>
-            <div className="image-loading-svg-container">
-              {this.state.loading ? (
-                <ReactSVG
-                  className="image-loading-svg"
-                  path="loading.svg"
-                  style={{ width: 200 }}
-                />
-              ) : null}
+            <div className="edit-image-bottom-container">
+              <div className="image-file-name-container">
+                {this.determineImageFile()}
+              </div>
+              <div className="image-loading-svg-container">
+                {this.state.loading ? (
+                  <ReactSVG
+                    className="image-loading-svg"
+                    path="loading.svg"
+                    style={{ width: 200 }}
+                  />
+                ) : null}
+              </div>
             </div>
           </form>
         </div>

@@ -51,6 +51,7 @@ var Profile = function (_Component) {
     _this.state = {
       loading: false,
       edit: false,
+      imageLoaded: '',
       name: '',
       organization: '',
       title: '',
@@ -191,8 +192,24 @@ var Profile = function (_Component) {
   }, {
     key: 'handleUserUpdate',
     value: function handleUserUpdate(data) {
-      console.log(data.message);
       data.message === 'Success' ? this.props.handleUser(data.user) : console.log(data.error, 'ERROR');
+    }
+  }, {
+    key: 'handleImagePath',
+    value: function handleImagePath(e) {
+      var imagePath = e.target.value.split('');
+      var cleanImageName = imagePath.splice(imagePath.indexOf('h') + 2, imagePath.length).join('');
+
+      this.setState({ imageLoaded: cleanImageName });
+    }
+  }, {
+    key: 'determineImageFile',
+    value: function determineImageFile() {
+      return this.state.imageLoaded ? _react2.default.createElement(
+        'span',
+        null,
+        this.state.imageLoaded
+      ) : null;
     }
   }, {
     key: 'showEditProfile',
@@ -237,6 +254,9 @@ var Profile = function (_Component) {
               'Choose Image'
             ),
             _react2.default.createElement('input', {
+              onChange: function onChange(e) {
+                _this4.handleImagePath(e);
+              },
               className: 'file-field',
               name: 'recfile',
               type: 'file',
@@ -249,12 +269,21 @@ var Profile = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'image-loading-svg-container' },
-              this.state.loading ? _react2.default.createElement(_reactSvg2.default, {
-                className: 'image-loading-svg',
-                path: 'loading.svg',
-                style: { width: 200 }
-              }) : null
+              { className: 'edit-image-bottom-container' },
+              _react2.default.createElement(
+                'div',
+                { className: 'image-file-name-container' },
+                this.determineImageFile()
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'image-loading-svg-container' },
+                this.state.loading ? _react2.default.createElement(_reactSvg2.default, {
+                  className: 'image-loading-svg',
+                  path: 'loading.svg',
+                  style: { width: 200 }
+                }) : null
+              )
             )
           )
         ),
@@ -3695,7 +3724,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  border-bottom: 3px solid cyan;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.image-loading-svg-container {\n  height: 100px;\n  padding-top: 0px;\n  padding-bottom: 15px;\n  position: relative;\n  margin: 0px auto;\n  width: 50px; }\n\n.image-loading-svg {\n  position: absolute;\n  top: 0px; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  border-bottom: 3px solid cyan;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-image-bottom-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 165px; }\n\n.image-loading-svg-container {\n  height: 100px;\n  padding-top: 0px;\n  padding-bottom: 15px;\n  margin: 0px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 50px; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
 
 // exports
 

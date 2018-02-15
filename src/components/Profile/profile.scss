@@ -147,8 +147,25 @@
     }
   }
 }
+.edit-image-bottom-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 165px;
+}
 
-.image-file-field {
+.image-loading-svg-container {
+  height: 100px;
+  padding-top: 0px;
+  padding-bottom: 15px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+}
+
+.edit-image-bottom-container {
 }
 
 .edit-basic-form-container {
@@ -201,20 +218,6 @@
       color: #fff;
     }
   }
-}
-
-.image-loading-svg-container {
-  height: 100px;
-  padding-top: 0px;
-  padding-bottom: 15px;
-  position: relative;
-  margin: 0px auto;
-  width: 50px;
-}
-
-.image-loading-svg {
-  position: absolute;
-  top: 0px;
 }
 
 .no-scroll {
