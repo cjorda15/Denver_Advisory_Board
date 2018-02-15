@@ -48,6 +48,7 @@ class Profile extends Component {
     })
       .then(res => res.json())
       .then(imageUrl => {
+        this.closeEdit();
         this.setState({ loading: false });
         this.props.handleImage(imageUrl);
         fetch('/api/v1/updateImage', {
@@ -119,9 +120,11 @@ class Profile extends Component {
   }
 
   handleUserUpdate(data) {
-    data.message === 'Success'
-      ? this.props.handleUser(data.user)
-      : console.log(data.error, 'ERROR');
+    if (data.message === 'Success') {
+      this.props.handleUser(data.user);
+      this.closeEdit();
+      return;
+    }
   }
 
   handleImagePath(e) {
@@ -144,8 +147,8 @@ class Profile extends Component {
       <div className="edit-profile-container">
         <button
           className="edit-profile-details-btn"
-          onClick={e => {
-            this.closeEdit(e);
+          onClick={() => {
+            this.closeEdit();
           }}
         >
           cancel
@@ -236,8 +239,8 @@ class Profile extends Component {
     this.setState({ edit: true });
   }
 
-  closeEdit(e) {
-    e.preventDefault();
+  closeEdit() {
+    this.setState({ imageLoaded: '' });
     $('body').removeClass('no-scroll');
     this.setState({ edit: false });
   }
