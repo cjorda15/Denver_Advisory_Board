@@ -1,6 +1,6 @@
 const user = (state = null, action) => {
   switch (action.type) {
-    case 'LOGIN_USER':
+    case 'UPDATE_USER':
       return { userID: action.payload };
     case 'LOGOUT_USER':
       return null;

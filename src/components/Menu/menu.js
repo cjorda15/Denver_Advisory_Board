@@ -2,6 +2,7 @@ import $ from 'jquery';
 $(document).ready(function() {
   $(document).on('click', '#menu a', function(e) {
     $('.burger').click();
+    $('body').removeClass('no-scroll');
   });
 
   $(document).on('mouseenter', '.svg-wrapper', function() {
@@ -15,7 +16,6 @@ $(document).ready(function() {
   });
 
   $(document).on('mouseleave', '.svg-wrapper', function() {
-    console.log('!!!');
     $(this)
       .find('.shape')
       .removeClass('shape-hover')
