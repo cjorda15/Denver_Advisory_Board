@@ -94,6 +94,10 @@
   animation: 0.5s drawout linear forwards;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 @media (min-width: 800px) {
   #menu {
     display: none !important;

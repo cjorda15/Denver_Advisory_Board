@@ -1829,9 +1829,9 @@ module.exports = checkPropTypes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var loginUser = exports.loginUser = function loginUser(input) {
+var updateUser = exports.updateUser = function updateUser(input) {
   return {
-    type: 'LOGIN_USER',
+    type: 'UPDATE_USER',
     payload: input
   };
 };
@@ -15933,7 +15933,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol,\nul {\n  list-style: none; }\n\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\nhtml,\nbody {\n  height: 100%;\n  width: 100%; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol,\nul {\n  list-style: none; }\n\nhtml {\n  box-sizing: border-box; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\nhtml,\nbody {\n  height: 100%;\n  width: 100%; }\n\n.app {\n  position: relative;\n  height: 100%;\n  width: 100%; }\n", ""]);
 
 // exports
 
@@ -36672,7 +36672,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     handleUser: function handleUser(input) {
-      dispatch((0, _actions.loginUser)(input));
+      dispatch((0, _actions.updateUser)(input));
     }
   };
 };
@@ -37218,7 +37218,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#menu {\n  background-image: url(\"http://cdn.backgroundhost.com/backgrounds/subtlepatterns/flowers.png\");\n  display: none;\n  height: 100vh;\n  left: 0px;\n  position: fixed;\n  top: 0px;\n  z-index: 5;\n  width: 100vw; }\n  #menu nav {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin-top: 80px; }\n  #menu a {\n    text-decoration: none;\n    font-size: 2em;\n    font-family: \"Fredoka One\", cursive;\n    text-transform: uppercase;\n    transition: all 0.7s; }\n\n.menu-open {\n  display: block !important; }\n\n.svg-wrapper {\n  height: 60px;\n  margin: 10px auto;\n  position: relative;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n  width: 320px; }\n\n.shape {\n  fill: transparent;\n  stroke-dasharray: 140 540;\n  stroke-dashoffset: -474;\n  stroke-width: 8px;\n  stroke: #19f6e8; }\n\n.menu-link-text {\n  color: #fff;\n  font-size: 22px;\n  letter-spacing: 8px;\n  line-height: 32px;\n  text-align: center;\n  position: relative;\n  top: -48px;\n  transition: all 1s; }\n\n.menu-link-text-hover {\n  color: #19f6e8; }\n\n@-webkit-keyframes draw {\n  0% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; } }\n\n@keyframes draw {\n  0% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; } }\n\n@-webkit-keyframes drawout {\n  0% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; } }\n\n@keyframes drawout {\n  0% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; } }\n\n.shape-hover {\n  -webkit-animation: 0.5s draw linear forwards;\n  animation: 0.5s draw linear forwards; }\n\n.shape-hover-off {\n  -webkit-animation: 0.5s drawout linear forwards;\n  animation: 0.5s drawout linear forwards; }\n\n@media (min-width: 800px) {\n  #menu {\n    display: none !important; } }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#menu {\n  background-image: url(\"http://cdn.backgroundhost.com/backgrounds/subtlepatterns/flowers.png\");\n  display: none;\n  height: 100vh;\n  left: 0px;\n  position: fixed;\n  top: 0px;\n  z-index: 5;\n  width: 100vw; }\n  #menu nav {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin-top: 80px; }\n  #menu a {\n    text-decoration: none;\n    font-size: 2em;\n    font-family: \"Fredoka One\", cursive;\n    text-transform: uppercase;\n    transition: all 0.7s; }\n\n.menu-open {\n  display: block !important; }\n\n.svg-wrapper {\n  height: 60px;\n  margin: 10px auto;\n  position: relative;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n  width: 320px; }\n\n.shape {\n  fill: transparent;\n  stroke-dasharray: 140 540;\n  stroke-dashoffset: -474;\n  stroke-width: 8px;\n  stroke: #19f6e8; }\n\n.menu-link-text {\n  color: #fff;\n  font-size: 22px;\n  letter-spacing: 8px;\n  line-height: 32px;\n  text-align: center;\n  position: relative;\n  top: -48px;\n  transition: all 1s; }\n\n.menu-link-text-hover {\n  color: #19f6e8; }\n\n@-webkit-keyframes draw {\n  0% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; } }\n\n@keyframes draw {\n  0% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; } }\n\n@-webkit-keyframes drawout {\n  0% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; } }\n\n@keyframes drawout {\n  0% {\n    stroke-dasharray: 760;\n    stroke-dashoffset: 0;\n    stroke-width: 8px; }\n  100% {\n    stroke-dasharray: 140 540;\n    stroke-dashoffset: -474;\n    stroke-width: 8px; } }\n\n.shape-hover {\n  -webkit-animation: 0.5s draw linear forwards;\n  animation: 0.5s draw linear forwards; }\n\n.shape-hover-off {\n  -webkit-animation: 0.5s drawout linear forwards;\n  animation: 0.5s drawout linear forwards; }\n\n.no-scroll {\n  overflow: hidden; }\n\n@media (min-width: 800px) {\n  #menu {\n    display: none !important; } }\n", ""]);
 
 // exports
 
@@ -37239,6 +37239,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _jquery2.default)(document).ready(function () {
   (0, _jquery2.default)(document).on('click', '#menu a', function (e) {
     (0, _jquery2.default)('.burger').click();
+    (0, _jquery2.default)('body').removeClass('no-scroll');
   });
 
   (0, _jquery2.default)(document).on('mouseenter', '.svg-wrapper', function () {
@@ -37247,7 +37248,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 
   (0, _jquery2.default)(document).on('mouseleave', '.svg-wrapper', function () {
-    console.log('!!!');
     (0, _jquery2.default)(this).find('.shape').removeClass('shape-hover').addClass('shape-hover-off');
     (0, _jquery2.default)(this).find('.menu-link-text').toggleClass('menu-link-text-hover');
   });
@@ -39847,7 +39847,7 @@ var user = function user() {
   var action = arguments[1];
 
   switch (action.type) {
-    case 'LOGIN_USER':
+    case 'UPDATE_USER':
       return { userID: action.payload };
     case 'LOGOUT_USER':
       return null;

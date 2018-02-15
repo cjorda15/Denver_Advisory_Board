@@ -5,7 +5,7 @@ import Menu from './Menu';
 import LrgNav from './LrgNav';
 import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions';
+import { updateUser } from '../actions';
 import '../styles/index.scss';
 
 const Loading = () => <div />;
@@ -128,7 +128,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleUser: input => {
-      dispatch(loginUser(input));
+      dispatch(updateUser(input));
     }
   };
 };

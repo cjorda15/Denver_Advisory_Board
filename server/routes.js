@@ -28,3 +28,4 @@ r.post('/api/v1/login', account.login);
 r.get('/api/v1/user', account.get);
 r.get('/api/v1/logout', account.logout);
 r.post('/api/v1/updateImage', account.image);
+r.post('/api/v1/user/update', account.update);

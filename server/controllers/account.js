@@ -78,3 +78,22 @@ exports.image = (req, res) => {
     res.json('Success');
   });
 };
+
+exports.update = (req, res) => {
+  console.log(req.body, 'REQUEST');
+  let { name, title, organization, summary, id } = req.body;
+  let query = { _id: id };
+  let update = {
+    name: name,
+    title: title,
+    organization: organization,
+    summary: summary
+  };
+  User.findOneAndUpdate(query, update, { new: true }, function(err, doc) {
+    if (err) {
+      res.json({ message: 'error', error: err });
+    }
+    console.log(doc, 'UPDATED');
+    res.json({ message: 'Success', user: doc });
+  });
+};

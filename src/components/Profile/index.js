@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
+import $ from 'jquery';
+import { updateUser } from '../../actions';
+
 import './profile.scss';
 
 class Profile extends Component {
@@ -9,11 +12,29 @@ class Profile extends Component {
     super(props);
     this.state = {
       loading: false,
-      edit: false
+      edit: false,
+      name: '',
+      organization: '',
+      title: '',
+      summary: ''
     };
   }
 
-  handleClick(e) {
+  componentDidMount() {
+    let { name, title, organization, summary } = this.props.user.userID;
+    name = name || '';
+    title = title || '';
+    organization = organization || '';
+    summary = summary || '';
+    this.setState({
+      name: name,
+      organization: organization,
+      title: title,
+      summary: summary
+    });
+  }
+
+  handleImageLoad(e) {
     e.preventDefault();
     const data = new FormData();
     const input = document.querySelector('.file-field').files[0];
@@ -51,70 +72,185 @@ class Profile extends Component {
       .catch(err => console.log(err));
   }
 
-  profileImgDisplay() {
-    return this.props.user.userID.image ? (
-      <div
-        className="account-profile-image"
-        style={{ backgroundImage: `url(${this.props.user.userID.image})` }}
-      />
-    ) : (
-      <div className="account-profile-image-placeholder">
-        <form
-          onSubmit={e => {
-            this.handleClick(e);
-          }}
-          action="/api/v1/image"
-          method="post"
-          encType="multipart/form-data"
-          className="ui form"
-        >
-          <input className="file-field" name="recfile" type="file" />
-          <button type="submit">post</button>
-          {this.state.loading ? (
-            <ReactSVG path="loading.svg" style={{ width: 200 }} />
-          ) : null}
-        </form>
-      </div>
-    );
-  }
-
-  profileDetails() {
-    let { email, name } = this.props.user.userID;
-    name = name || 'Add your name';
+  determineImage() {
     return (
-      <div className="account-profile-details-basic-container">
-        <div>{name}</div>
-        <div>{email}</div>
-        <button id="edit-profile-details-btn">edit profile</button>
+      this.props.user.userID.image ||
+      'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png'
+    );
+  }
+
+  profileBasicDetails() {
+    return (
+      <div className="account-profile-basic-details">
+        <p>{this.props.user.userID.name || 'add your name'}</p>
+        <p>{this.props.user.userID.organization || 'add your organization'}</p>
+        <p>{this.props.user.userID.title || 'add your title'}</p>
       </div>
     );
   }
 
-  profileBio() {
-    let { bio } = this.props.user.userID;
-    bio = bio || 'Add your bio';
-    return <div className="account-profile-details-bio-container">{bio}</div>;
+  profileSummaryDetails() {
+    return (
+      <p className="account-profile-summary">
+        {this.props.user.userID.summary || 'add a summary'}
+      </p>
+    );
   }
 
-  editProfile() {
-    return this.state.edit ? <div className="edit-profile" /> : null;
+  handleEditBasicInfo(e) {
+    e.preventDefault();
+    const { name, organization, title, summary } = this.state;
+    const id = this.props.user.userID._id;
+    fetch('/api/v1/user/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        organization: organization,
+        title: title,
+        summary: summary,
+        id: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => this.handleUserUpdate(data))
+      .catch(err => console.log(err, 'ERROR'));
+  }
+
+  handleUserUpdate(data) {
+    console.log(data.message);
+    data.message === 'Success'
+      ? this.props.handleUser(data.user)
+      : console.log(data.error, 'ERROR');
+  }
+
+  showEditProfile() {
+    return this.state.edit ? (
+      <div className="edit-profile-container">
+        <button
+          className="edit-profile-details-btn"
+          onClick={e => {
+            this.closeEdit(e);
+          }}
+        >
+          cancel
+        </button>
+        <div className="edit-image-form-container">
+          <form
+            className="edit-image-form"
+            onSubmit={e => {
+              this.handleImageLoad(e);
+            }}
+            action="/api/v1/image"
+            method="post"
+            encType="multipart/form-data"
+          >
+            <div>Load Image</div>
+            <label htmlFor="upload-photo">Choose Image</label>
+            <input
+              className="file-field"
+              name="recfile"
+              type="file"
+              id="upload-photo"
+            />
+            <button type="submit">Submit</button>
+            <div className="image-loading-svg-container">
+              {this.state.loading ? (
+                <ReactSVG
+                  className="image-loading-svg"
+                  path="loading.svg"
+                  style={{ width: 200 }}
+                />
+              ) : null}
+            </div>
+          </form>
+        </div>
+        <div className="edit-basic-form-container">
+          <div>Basic Info</div>
+          <input
+            placeholder="name"
+            value={this.state.name}
+            onChange={e => {
+              this.editBasicInfo(e, 'name');
+            }}
+          />
+          <input
+            placeholder="organization"
+            value={this.state.organization}
+            onChange={e => {
+              this.editBasicInfo(e, 'organization');
+            }}
+          />
+          <input
+            placeholder="title"
+            value={this.state.title}
+            onChange={e => {
+              this.editBasicInfo(e, 'title');
+            }}
+          />
+          <textarea
+            placeholder="summary"
+            value={this.state.summary}
+            onChange={e => {
+              this.editBasicInfo(e, 'summary');
+            }}
+          />
+          <button
+            onClick={e => {
+              this.handleEditBasicInfo(e);
+            }}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    ) : null;
+  }
+
+  editProfile(e) {
+    e.preventDefault();
+    $('body').addClass('no-scroll');
+    this.setState({ edit: true });
+  }
+
+  closeEdit(e) {
+    e.preventDefault();
+    $('body').removeClass('no-scroll');
+    this.setState({ edit: false });
+  }
+
+  editBasicInfo(e, type) {
+    this.setState({ [type]: e.target.value });
   }
 
   render() {
     return (
       <div id="profile-container">
-        <div className="account-profile-info-events-container">
-          <div className="account-profile-info-container">
-            <div className="account-profile-details-image-container">
-              {this.profileImgDisplay()}
-              {this.profileDetails()}
+        <section className="account-profile-card-container">
+          <div className="account-profile-card-top">
+            <button
+              onClick={e => {
+                this.editProfile(e);
+              }}
+              className="edit-profile-details-btn"
+            >
+              edit profile
+            </button>
+            <div className="profile-image-wrapper">
+              <div
+                className="profile-image"
+                style={{
+                  backgroundImage: `url(${this.determineImage()})`
+                }}
+              />
             </div>
-            {this.profileBio()}
           </div>
-          <div className="account-profile-events-container">
-            <p>EVENTS</p>
+          <div className="account-profile-bottom-card">
+            {this.profileBasicDetails()}
+            {this.profileSummaryDetails()}
           </div>
-        </div>
+          {this.showEditProfile()}
+        </section>
       </div>
     );
   }
@@ -130,6 +266,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handleImage: input => {
       dispatch(loadImage(input));
+    },
+    handleUser: input => {
+      dispatch(updateUser(input));
     }
   };
 };
