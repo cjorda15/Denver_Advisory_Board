@@ -1829,9 +1829,9 @@ module.exports = checkPropTypes;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var loginUser = exports.loginUser = function loginUser(input) {
+var updateUser = exports.updateUser = function updateUser(input) {
   return {
-    type: 'LOGIN_USER',
+    type: 'UPDATE_USER',
     payload: input
   };
 };
@@ -36672,7 +36672,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     handleUser: function handleUser(input) {
-      dispatch((0, _actions.loginUser)(input));
+      dispatch((0, _actions.updateUser)(input));
     }
   };
 };
@@ -39847,7 +39847,7 @@ var user = function user() {
   var action = arguments[1];
 
   switch (action.type) {
-    case 'LOGIN_USER':
+    case 'UPDATE_USER':
       return { userID: action.payload };
     case 'LOGOUT_USER':
       return null;

@@ -6,7 +6,9 @@ const userSchema = new Schema({
   name: String,
   password: { type: String, required: true },
   email: { type: String, unique: true },
-  bio: String,
+  title: String,
+  organization: String,
+  summary: String,
   image: String,
   organizingEvents: [],
   attendingEvents: []

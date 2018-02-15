@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
 import $ from 'jquery';
+import { updateUser } from '../../actions';
+
 import './profile.scss';
 
 class Profile extends Component {
@@ -95,8 +97,31 @@ class Profile extends Component {
     );
   }
 
-  editBasicInfo(e) {
+  handleEditBasicInfo(e) {
     e.preventDefault();
+    const { name, organization, title, summary } = this.state;
+    const id = this.props.user.userID._id;
+    fetch('/api/v1/user/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        organization: organization,
+        title: title,
+        summary: summary,
+        id: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => this.handleUserUpdate(data))
+      .catch(err => console.log(err, 'ERROR'));
+  }
+
+  handleUserUpdate(data) {
+    console.log(data.message);
+    data.message === 'Success'
+      ? this.props.handleUser(data.user)
+      : console.log(data.error, 'ERROR');
   }
 
   showEditProfile() {
@@ -235,6 +260,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handleImage: input => {
       dispatch(loadImage(input));
+    },
+    handleUser: input => {
+      dispatch(updateUser(input));
     }
   };
 };
