@@ -24,9 +24,15 @@ var _reactSvg = __webpack_require__(165);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
+var _jquery = __webpack_require__(37);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 __webpack_require__(282);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44,14 +50,38 @@ var Profile = function (_Component) {
 
     _this.state = {
       loading: false,
-      edit: false
+      edit: false,
+      name: '',
+      organization: '',
+      title: '',
+      summary: ''
     };
     return _this;
   }
 
   _createClass(Profile, [{
-    key: 'handleClick',
-    value: function handleClick(e) {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props$user$userID = this.props.user.userID,
+          name = _props$user$userID.name,
+          title = _props$user$userID.title,
+          organization = _props$user$userID.organization,
+          summary = _props$user$userID.summary;
+
+      name = name || '';
+      title = title || '';
+      organization = organization || '';
+      summary = summary || '';
+      this.setState({
+        name: name,
+        organization: organization,
+        title: title,
+        summary: summary
+      });
+    }
+  }, {
+    key: 'handleImageLoad',
+    value: function handleImageLoad(e) {
       var _this2 = this;
 
       e.preventDefault();
@@ -91,106 +121,6 @@ var Profile = function (_Component) {
       });
     }
   }, {
-    key: 'profileImgDisplay',
-    value: function profileImgDisplay() {
-      var _this3 = this;
-
-      return this.props.user.userID.image ? _react2.default.createElement('div', {
-        className: 'account-profile-image',
-        style: { backgroundImage: 'url(' + this.props.user.userID.image + ')' }
-      }) : _react2.default.createElement(
-        'div',
-        { className: 'account-profile-image-placeholder' },
-        _react2.default.createElement(
-          'form',
-          {
-            onSubmit: function onSubmit(e) {
-              _this3.handleClick(e);
-            },
-            action: '/api/v1/image',
-            method: 'post',
-            encType: 'multipart/form-data',
-            className: 'ui form'
-          },
-          _react2.default.createElement('input', { className: 'file-field', name: 'recfile', type: 'file' }),
-          _react2.default.createElement(
-            'button',
-            { type: 'submit' },
-            'post'
-          ),
-          this.state.loading ? _react2.default.createElement(_reactSvg2.default, { path: 'loading.svg', style: { width: 200 } }) : null
-        )
-      );
-    }
-  }, {
-    key: 'profileDetails',
-    value: function profileDetails() {
-      var _props$user$userID = this.props.user.userID,
-          email = _props$user$userID.email,
-          name = _props$user$userID.name,
-          bio = _props$user$userID.bio;
-
-      name = name || 'Add your name';
-      bio = bio || 'Add your bio';
-      return _react2.default.createElement(
-        'div',
-        { className: 'account-profile-details-basic-container' },
-        _react2.default.createElement(
-          'div',
-          null,
-          name
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          email
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          bio
-        )
-      );
-    }
-  }, {
-    key: 'profileBio',
-    value: function profileBio() {
-      var bio = this.props.user.userID.bio;
-
-      bio = bio || 'Add your bio';
-      return _react2.default.createElement(
-        'div',
-        { className: 'account-profile-details-bio-container' },
-        bio
-      );
-    }
-  }, {
-    key: 'editProfile',
-    value: function editProfile() {
-      return this.state.edit ? _react2.default.createElement('div', { className: 'edit-profile' }) : null;
-    }
-
-    //   render() {
-    //     return (
-    //       <div id="profile-container">
-    //         <div className="account-profile-info-events-container">
-    //           <div className="account-profile-info-container">
-    //             <div className="account-profile-details-image-container">
-    //               {this.profileImgDisplay()}
-    //               {this.profileDetails()}
-    //               <button id="edit-profile-details-btn">edit profile</button>
-    //             </div>
-    //           </div>
-    //           <div className="account-profile-events-container">
-    //             <p>EVENTS</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     );
-    //   }
-    // }
-
-  }, {
     key: 'determineImage',
     value: function determineImage() {
       return this.props.user.userID.image || 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
@@ -205,11 +135,6 @@ var Profile = function (_Component) {
           'p',
           null,
           this.props.user.userID.name || 'add your name'
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          this.props.user.userID.email
         ),
         _react2.default.createElement(
           'p',
@@ -233,8 +158,138 @@ var Profile = function (_Component) {
       );
     }
   }, {
+    key: 'editBasicInfo',
+    value: function editBasicInfo(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: 'showEditProfile',
+    value: function showEditProfile() {
+      var _this3 = this;
+
+      return this.state.edit ? _react2.default.createElement(
+        'div',
+        { className: 'edit-profile-container' },
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'edit-profile-details-btn',
+            onClick: function onClick(e) {
+              _this3.closeEdit(e);
+            }
+          },
+          'cancel'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'edit-image-form-container' },
+          _react2.default.createElement(
+            'form',
+            {
+              className: 'edit-image-form',
+              onSubmit: function onSubmit(e) {
+                _this3.handleImageLoad(e);
+              },
+              action: '/api/v1/image',
+              method: 'post',
+              encType: 'multipart/form-data'
+            },
+            _react2.default.createElement(
+              'div',
+              null,
+              'Load Image'
+            ),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'upload-photo' },
+              'Choose Image'
+            ),
+            _react2.default.createElement('input', {
+              className: 'file-field',
+              name: 'recfile',
+              type: 'file',
+              id: 'upload-photo'
+            }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit' },
+              'Submit'
+            ),
+            this.state.loading ? _react2.default.createElement(_reactSvg2.default, { path: 'loading.svg', style: { width: 200 } }) : null
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'edit-basic-form-container' },
+          _react2.default.createElement(
+            'div',
+            null,
+            'Basic Info'
+          ),
+          _react2.default.createElement('input', {
+            placeholder: 'name',
+            value: this.state.name,
+            onChange: function onChange(e) {
+              _this3.editBasicInfo(e, 'name');
+            }
+          }),
+          _react2.default.createElement('input', {
+            placeholder: 'organization',
+            value: this.state.organization,
+            onChange: function onChange(e) {
+              _this3.editBasicInfo(e, 'organization');
+            }
+          }),
+          _react2.default.createElement('input', {
+            placeholder: 'title',
+            value: this.state.title,
+            onChange: function onChange(e) {
+              _this3.editBasicInfo(e, 'title');
+            }
+          }),
+          _react2.default.createElement('textarea', {
+            placeholder: 'summary',
+            value: this.state.summary,
+            onChange: function onChange(e) {
+              _this3.editBasicInfo(e, 'summary');
+            }
+          }),
+          _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick(e) {
+                _this3.handleEditBasicInfo(e);
+              }
+            },
+            'Submit'
+          )
+        )
+      ) : null;
+    }
+  }, {
+    key: 'editProfile',
+    value: function editProfile(e) {
+      e.preventDefault();
+      (0, _jquery2.default)('body').addClass('no-scroll');
+      this.setState({ edit: true });
+    }
+  }, {
+    key: 'closeEdit',
+    value: function closeEdit(e) {
+      e.preventDefault();
+      (0, _jquery2.default)('body').removeClass('no-scroll');
+      this.setState({ edit: false });
+    }
+  }, {
+    key: 'editBasicInfo',
+    value: function editBasicInfo(e, type) {
+      this.setState(_defineProperty({}, type, e.target.value));
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       return _react2.default.createElement(
         'div',
         { id: 'profile-container' },
@@ -246,7 +301,12 @@ var Profile = function (_Component) {
             { className: 'account-profile-card-top' },
             _react2.default.createElement(
               'button',
-              { id: 'edit-profile-details-btn' },
+              {
+                onClick: function onClick(e) {
+                  _this4.editProfile(e);
+                },
+                className: 'edit-profile-details-btn'
+              },
               'edit profile'
             ),
             _react2.default.createElement(
@@ -265,7 +325,8 @@ var Profile = function (_Component) {
             { className: 'account-profile-bottom-card' },
             this.profileBasicDetails(),
             this.profileSummaryDetails()
-          )
+          ),
+          this.showEditProfile()
         )
       );
     }
@@ -3591,7 +3652,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n#edit-profile-details-btn {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  float: right;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  #edit-profile-details-btn:hover {\n    background: #dd7782;\n    border: 2px solid #fff;\n    color: #fff; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 3px solid cyan;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border-radius: 64px;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  border-bottom: 3px solid cyan;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  height: 140px;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
 
 // exports
 
