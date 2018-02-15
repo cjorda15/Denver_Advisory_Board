@@ -154,9 +154,15 @@ class Profile extends Component {
               id="upload-photo"
             />
             <button type="submit">Submit</button>
-            {this.state.loading ? (
-              <ReactSVG path="loading.svg" style={{ width: 200 }} />
-            ) : null}
+            <div className="image-loading-svg-container">
+              {this.state.loading ? (
+                <ReactSVG
+                  className="image-loading-svg"
+                  path="loading.svg"
+                  style={{ width: 200 }}
+                />
+              ) : null}
+            </div>
           </form>
         </div>
         <div className="edit-basic-form-container">
