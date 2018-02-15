@@ -104,7 +104,7 @@ class Profile extends Component {
     const { name, organization, title, summary } = this.state;
     const id = this.props.user.userID._id;
     fetch('/api/v1/user/update', {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: name,

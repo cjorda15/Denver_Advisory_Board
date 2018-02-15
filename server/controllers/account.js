@@ -89,11 +89,11 @@ exports.update = (req, res) => {
     organization: organization,
     summary: summary
   };
-  User.findOneAndUpdate(query, update, { new: true }, function(err, doc) {
+  User.findOneAndUpdate(query, update, { new: true }, (err, doc) => {
     if (err) {
       res.json({ message: 'error', error: err });
     }
-    console.log(doc, 'UPDATED');
+    doc.password = undefined 
     res.json({ message: 'Success', user: doc });
   });
 };
