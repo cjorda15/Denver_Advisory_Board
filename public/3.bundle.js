@@ -303,7 +303,7 @@ var Login = function (_Component) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     handleLogin: function handleLogin(input) {
-      dispatch((0, _actions.loginUser)(input));
+      dispatch((0, _actions.updateUser)(input));
     }
   };
 };
