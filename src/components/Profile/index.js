@@ -93,9 +93,9 @@ class Profile extends Component {
 
   profileSummaryDetails() {
     return (
-      <p className="account-profile-summary">
+      <pre className="account-profile-summary">
         {this.props.user.userID.summary || 'add a summary'}
-      </p>
+      </pre>
     );
   }
 

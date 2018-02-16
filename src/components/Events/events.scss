@@ -1,4 +1,35 @@
+@import '../../styles/utilities/index.scss';
+
 #events-container {
+  position: relative;
+  padding-top: 40px;
+}
+
+#add-event-link {
+  background: #fff;
+  border: #dd7782 3px solid;
+  border-radius: 64px;
+  color: #dd7782;
+  font-family: $font-fancy;
+  font-size: 1.1em;
+  margin-top: 30px;
+  margin-left: 20px;
+  position: absolute;
+  padding: 14px;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.8s;
+  width: 270px;
+  z-index: 1;
+  &:hover {
+    background: #dd7782;
+    color: #fff;
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .stack-grid-wrapper {

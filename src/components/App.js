@@ -45,6 +45,11 @@ const LoadHome = Loadable({
   loading: Loading
 });
 
+const LoadAddEvent = Loadable({
+  loader: () => import('./AddEvent'),
+  loading: Loading
+});
+
 const LoadProfile = Loadable({
   loader: () => import('./Profile'),
   loading: Loading
@@ -93,6 +98,10 @@ class App extends Component {
           <Route
             path="/contact"
             render={({ history }) => <LoadContact history={history} />}
+          />
+          <Route
+            path="/addevent"
+            render={({ history }) => <LoadAddEvent history={history} />}
           />
           <Route
             path="/profile"

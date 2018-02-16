@@ -8,8 +8,8 @@ import { loginUser } from '../../actions';
 import './login.scss';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show: 'signup',
       username: '',

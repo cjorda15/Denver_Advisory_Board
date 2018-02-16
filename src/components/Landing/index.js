@@ -2,12 +2,17 @@ import React from 'react';
 import './landing.scss';
 import './landing.js';
 
+// <video autoPlay playsInline muted loop preload="true">
+// <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
+// </video>
+// >
 const Landing = () => {
   return (
     <div className="video-wrapper">
-      <video autoPlay playsInline muted loop preload="true">
-        <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
-      </video>
+      <img
+        width="100%"
+        src="https://res.cloudinary.com/hdfmst19a/image/upload/v1518751751/pexels-photo-221502_1_ppqftz.jpg"
+      />
       <svg
         id="landing-svg"
         xmlns="http://www.w3.org/2000/svg"
