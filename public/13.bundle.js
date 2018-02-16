@@ -1,4 +1,4 @@
-webpackJsonp([4],{
+webpackJsonp([13],{
 
 /***/ 154:
 /***/ (function(module, exports, __webpack_require__) {
@@ -14,24 +14,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(190);
+__webpack_require__(189);
 
-__webpack_require__(192);
+__webpack_require__(191);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// <video autoPlay playsInline muted loop preload="true">
-// <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
-// </video>
-// >
 var Landing = function Landing() {
   return _react2.default.createElement(
     'div',
     { className: 'video-wrapper' },
-    _react2.default.createElement('img', {
-      width: '100%',
-      src: 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518751751/pexels-photo-221502_1_ppqftz.jpg'
-    }),
+    _react2.default.createElement(
+      'video',
+      { autoPlay: true, playsInline: true, muted: true, loop: true, preload: 'true' },
+      _react2.default.createElement('source', { src: 'https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4' })
+    ),
     _react2.default.createElement(
       'svg',
       {
@@ -85,13 +82,13 @@ exports.default = Landing;
 
 /***/ }),
 
-/***/ 190:
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(191);
+var content = __webpack_require__(190);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -117,7 +114,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 191:
+/***/ 190:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -132,7 +129,7 @@ exports.push([module.i, "@font-face {\n  font-family: Biko;\n  src: url(\"https:
 
 /***/ }),
 
-/***/ 192:
+/***/ 191:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

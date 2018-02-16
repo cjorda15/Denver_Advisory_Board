@@ -1,12 +1,35 @@
 import React, { Component } from 'react';
 import sizeMe from 'react-sizeme';
 import StackGrid from 'react-stack-grid';
+import { NavLink } from 'react-router-dom';
+import Scroll from 'react-scroll';
 import $ from 'jquery';
 import './events.scss';
 import './events.js';
+
 class Events extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+  }
+
+  scrollTop() {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo('landing-svg', {
+        duration: 0,
+        delay: 0,
+        smooth: false
+      });
+    }, 0);
+  }
+
+  scrollAfterSearch(input) {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo(input, {
+        duration: 1000,
+        delay: 70,
+        smooth: true
+      });
+    }, 100);
   }
 
   handleOnClick(e) {
@@ -18,11 +41,28 @@ class Events extends Component {
     $(e).toggleClass('open-event-card-container-open');
   }
 
+  handleAddEventLink() {
+    ///eventually only return if user has admin status
+    return (
+      <NavLink
+        onClick={() => {
+          this.scrollTop();
+          this.scrollAfterSearch('add-event-container');
+        }}
+        to={'/addevent'}
+        id="add-event-link"
+      >
+        Add Event
+      </NavLink>
+    );
+  }
+
   render() {
     const { size: { width } } = this.props;
 
     return (
       <div id="events-container">
+        {this.handleAddEventLink()}
         <div className="stack-grid-wrapper">
           <StackGrid
             gridRef={grid => (this.grid = grid)}

@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([10],{
 
 /***/ 160:
 /***/ (function(module, exports, __webpack_require__) {
@@ -16,7 +16,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(14);
+var _reactRouterDom = __webpack_require__(16);
 
 var _reactScroll = __webpack_require__(36);
 
@@ -26,7 +26,7 @@ var _HomeGrid = __webpack_require__(278);
 
 var _HomeGrid2 = _interopRequireDefault(_HomeGrid);
 
-var _reactSvg = __webpack_require__(166);
+var _reactSvg = __webpack_require__(165);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
@@ -168,7 +168,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 165:
+/***/ 164:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -202,7 +202,7 @@ module.exports = memoizeStringOnly;
 
 /***/ }),
 
-/***/ 166:
+/***/ 165:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -222,7 +222,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(169);
+var _server = __webpack_require__(168);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -236,7 +236,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // See: https://github.com/webpack/react-starter/issues/37
 var isBrowser = typeof window !== 'undefined';
-var SVGInjector = isBrowser ? __webpack_require__(172) : undefined;
+var SVGInjector = isBrowser ? __webpack_require__(171) : undefined;
 
 var ReactSVG = function (_React$Component) {
   _inherits(ReactSVG, _React$Component);
@@ -336,23 +336,23 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 169:
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(170);
+  module.exports = __webpack_require__(169);
 } else {
-  module.exports = __webpack_require__(171);
+  module.exports = __webpack_require__(170);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 170:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -365,7 +365,7 @@ if (process.env.NODE_ENV === 'production') {
  * LICENSE file in the root directory of this source tree.
  */
 
-var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(165);
+var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(164);
 function w(a){for(var b=arguments.length-1,g="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)g+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(g+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var x={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function z(a,b){return(a&b)===b}
 var B={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=B,g=a.Properties||{},c=a.DOMAttributeNamespaces||{},k=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in g){C.hasOwnProperty(f)?w("48",f):void 0;var e=f.toLowerCase(),d=g[f];e={attributeName:e,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:z(d,b.MUST_USE_PROPERTY),
@@ -402,7 +402,7 @@ d){if(null!=d.__html){d=d.__html;break a}}else if(d=f.children,"string"===typeof
 
 /***/ }),
 
-/***/ 171:
+/***/ 170:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -429,8 +429,8 @@ var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(5);
 var emptyObject = __webpack_require__(13);
 var hyphenateStyleName = __webpack_require__(66);
-var memoizeStringOnly = __webpack_require__(165);
-var warning = __webpack_require__(15);
+var memoizeStringOnly = __webpack_require__(164);
+var warning = __webpack_require__(14);
 var checkPropTypes = __webpack_require__(20);
 var camelizeStyleName = __webpack_require__(67);
 
@@ -2955,7 +2955,7 @@ module.exports = server_browser;
 
 /***/ }),
 
-/***/ 172:
+/***/ 171:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3443,7 +3443,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(14);
+var _reactRouterDom = __webpack_require__(16);
 
 var _reactScroll = __webpack_require__(36);
 
@@ -3451,7 +3451,7 @@ var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
 __webpack_require__(279);
 
-var _reactSvg = __webpack_require__(166);
+var _reactSvg = __webpack_require__(165);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
@@ -3722,7 +3722,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  max-width: 1000px;\n  margin: 0 auto;\n  width: 100%; }\n\n.landing-photo-wrapper {\n  height: 360px;\n  margin-bottom: 10px; }\n\n.landing-photo-container {\n  background: #000;\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  width: 300px;\n  transition: all 400ms ease-in-out; }\n  .landing-photo-container:hover {\n    height: 360px; }\n\n.landing-photo-container:hover .inital-block {\n  margin-left: -500px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.inital-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  height: 230px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 1em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-hidden-text-wrapper {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  height: 100%;\n  left: 300px;\n  padding: 10px;\n  position: absolute;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.grid-link {\n  border-bottom: #19f6e8 2px solid;\n  color: #fff;\n  font-family: \"Fredoka One\", cursive;\n  text-decoration: none;\n  transition: all 0.5s; }\n  .grid-link:hover {\n    border-bottom: red 2px solid;\n    color: #fff; }\n\n.photo-container-bg-1 {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-1:hover {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-2 {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-2:hover {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-3 {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-3:hover {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-4 {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-4:hover {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-5 {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-5:hover {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-6 {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n\n.photo-container-bg-6:hover {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  max-width: 1000px;\n  margin: 0 auto;\n  width: 100%; }\n\n.landing-photo-wrapper {\n  height: 360px;\n  margin-bottom: 10px; }\n\n.landing-photo-container {\n  background: #000;\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  width: 300px;\n  transition: all 400ms ease-in-out; }\n  .landing-photo-container:hover {\n    height: 360px; }\n\n.landing-photo-container:hover .inital-block {\n  margin-left: -500px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.inital-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #1a1a1a;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  height: 230px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 1em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-hidden-text-wrapper {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  height: 100%;\n  left: 300px;\n  padding: 10px;\n  position: absolute;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.grid-link {\n  border-bottom: #19f6e8 2px solid;\n  color: #fff;\n  font-family: \"Fredoka One\", cursive;\n  text-decoration: none;\n  transition: all 0.5s; }\n  .grid-link:hover {\n    border-bottom: red 2px solid;\n    color: #fff; }\n\n.photo-container-bg-1 {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-1:hover {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-2 {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-2:hover {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-3 {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-3:hover {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-4 {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-4:hover {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-5 {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-5:hover {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-6 {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n\n.photo-container-bg-6:hover {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n", ""]);
 
 // exports
 

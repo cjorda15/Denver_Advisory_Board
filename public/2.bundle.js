@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 161:
+/***/ 162:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20,7 +20,7 @@ var _reactRedux = __webpack_require__(17);
 
 var _actions = __webpack_require__(21);
 
-var _reactSvg = __webpack_require__(165);
+var _reactSvg = __webpack_require__(166);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
@@ -28,7 +28,7 @@ var _jquery = __webpack_require__(37);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-__webpack_require__(282);
+__webpack_require__(285);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -154,7 +154,7 @@ var Profile = function (_Component) {
     key: 'profileSummaryDetails',
     value: function profileSummaryDetails() {
       return _react2.default.createElement(
-        'p',
+        'pre',
         { className: 'account-profile-summary' },
         this.props.user.userID.summary || 'add a summary'
       );
@@ -430,7 +430,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
-/***/ 164:
+/***/ 165:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -464,7 +464,7 @@ module.exports = memoizeStringOnly;
 
 /***/ }),
 
-/***/ 165:
+/***/ 166:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -484,7 +484,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(168);
+var _server = __webpack_require__(169);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -498,7 +498,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // See: https://github.com/webpack/react-starter/issues/37
 var isBrowser = typeof window !== 'undefined';
-var SVGInjector = isBrowser ? __webpack_require__(171) : undefined;
+var SVGInjector = isBrowser ? __webpack_require__(172) : undefined;
 
 var ReactSVG = function (_React$Component) {
   _inherits(ReactSVG, _React$Component);
@@ -598,23 +598,23 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 168:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(169);
-} else {
   module.exports = __webpack_require__(170);
+} else {
+  module.exports = __webpack_require__(171);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 169:
+/***/ 170:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -627,7 +627,7 @@ if (process.env.NODE_ENV === 'production') {
  * LICENSE file in the root directory of this source tree.
  */
 
-var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(164);
+var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(165);
 function w(a){for(var b=arguments.length-1,g="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)g+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(g+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var x={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function z(a,b){return(a&b)===b}
 var B={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=B,g=a.Properties||{},c=a.DOMAttributeNamespaces||{},k=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in g){C.hasOwnProperty(f)?w("48",f):void 0;var e=f.toLowerCase(),d=g[f];e={attributeName:e,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:z(d,b.MUST_USE_PROPERTY),
@@ -664,7 +664,7 @@ d){if(null!=d.__html){d=d.__html;break a}}else if(d=f.children,"string"===typeof
 
 /***/ }),
 
-/***/ 170:
+/***/ 171:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -691,8 +691,8 @@ var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(5);
 var emptyObject = __webpack_require__(13);
 var hyphenateStyleName = __webpack_require__(66);
-var memoizeStringOnly = __webpack_require__(164);
-var warning = __webpack_require__(14);
+var memoizeStringOnly = __webpack_require__(165);
+var warning = __webpack_require__(15);
 var checkPropTypes = __webpack_require__(20);
 var camelizeStyleName = __webpack_require__(67);
 
@@ -3217,7 +3217,7 @@ module.exports = server_browser;
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3689,13 +3689,13 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ 282:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(283);
+var content = __webpack_require__(286);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3721,7 +3721,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 283:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -3729,7 +3729,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#profile-container {\n  padding-top: 210px; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  border-bottom: 3px solid cyan;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-image-bottom-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 165px; }\n\n.image-loading-svg-container {\n  height: 100px;\n  padding-top: 0px;\n  padding-bottom: 15px;\n  margin: 0px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 50px; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#profile-container {\n  padding-top: 100px; }\n\n.account-profile-card-container {\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  border-bottom: 3px solid cyan;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-image-bottom-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 165px; }\n\n.image-loading-svg-container {\n  height: 100px;\n  padding-top: 0px;\n  padding-bottom: 15px;\n  margin: 0px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 50px; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
 
 // exports
 
