@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import RadioButtons from './RadioButtons';
-import { loginUser } from '../../actions';
+import { updateUser } from '../../actions';
 import './login.scss';
 
 class Login extends Component {
@@ -216,7 +216,7 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     handleLogin: input => {
-      dispatch(loginUser(input));
+      dispatch(updateUser(input));
     }
   };
 };
