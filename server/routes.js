@@ -5,6 +5,8 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const path = require('path');
 const temp_folder_path = path.join(__dirname, '../uploads');
+const checkAuth = require('./controllers/helpers/checkAuth')
+const checkAdmin = require('./controllers/helpers/checkAdmin')
 module.exports = r;
 
 cloudinary.config({
@@ -27,5 +29,12 @@ r.post('/api/v1/signup', account.signup);
 r.post('/api/v1/login', account.login);
 r.get('/api/v1/user', account.get);
 r.get('/api/v1/logout', account.logout);
-r.post('/api/v1/updateImage', account.image);
-r.put('/api/v1/user/update', account.update);
+r.post('/api/v1/updateImage', checkAuth, account.image);
+r.put('/api/v1/user/update', checkAuth, account.update);
+
+
+const events = require('./controllers/events')
+r.get('/api/v1/events', events.get)
+r.put('/api/v1/events/:id', checkAdmin, events.put)
+r.delete('/api/v1/events/:id', checkAdmin, events.deleteevents)
+r.post('/api/v1/events', checkAdmin, events.post)

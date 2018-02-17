@@ -7,7 +7,8 @@
     "start": "node server/cluster.js",
     "dev": "nodemon server/cluster.js",
     "build": "webpack --watch",
-    "prod": "webpack --config webpack.prod.js"
+    "prod": "webpack --config webpack.prod.js",
+    "api": "node enzo/api.js"
   },
   "keywords": [],
   "author": "",

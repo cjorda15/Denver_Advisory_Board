@@ -70,9 +70,9 @@ class Login extends Component {
     }
 
     fetch(`/api/v1/login`, {
-      credentials: 'include',
-      method: 'post',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ email, password })
     })
       .then(res => res.json())
