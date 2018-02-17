@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import moment from 'moment-timezone';
 import { connect } from 'react-redux';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../../../node_modules/react-dropzone-component/styles/filepicker.css';
 import '../../../node_modules/dropzone/dist/min/dropzone.min.css';
 import './add_event.scss';
@@ -12,17 +14,25 @@ class AddEvent extends Component {
     this.state = {
       title: '',
       location: '',
-      date: '',
       summary: '',
       filesToBeSent: [],
       filesUrl: [],
-      loading: false
+      loading: false,
+      startDate: moment().tz('America/Denver'),
+      currentDay: moment().tz('America/Denver'),
+      submitDate: ''
     };
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   handleInputChange(e, type) {
     e.preventDefault();
     this.setState({ [type]: e.target.value });
+  }
+
+  handleDateChange(date) {
+    let newDate = moment.tz(date, 'America/Denver').format('LLLL');
+    this.setState({ startDate: date, submitDate: newDate });
   }
 
   handleSubmit(e) {
@@ -52,8 +62,7 @@ class AddEvent extends Component {
   }
 
   handleMongoSubmit() {
-    const { title, location, date, summary, filesUrl } = this.state;
-    const time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    const { title, location, submitDate, summary, filesUrl } = this.state;
     const id = this.props.user.userID._id;
     fetch('/api/v1/events', {
       method: 'post',
@@ -62,11 +71,11 @@ class AddEvent extends Component {
       body: JSON.stringify({
         title: title,
         location: location,
-        date: date,
-        time: time,
+        date: submitDate,
         summary: summary,
         images: filesUrl,
-        organizer: id
+        organizer: id,
+        today: moment()
       })
     })
       .then(res => res.json())
@@ -113,10 +122,11 @@ class AddEvent extends Component {
           onSubmit={e => {
             this.handleSubmit(e);
           }}
-          id="testForm"
+          id="add-event-form"
           encType="multipart/form-data"
         >
           <input
+            placeholder="title"
             type="input"
             value={this.state.title}
             className="add-event-input"
@@ -125,6 +135,7 @@ class AddEvent extends Component {
             }}
           />
           <input
+            placeholder="location"
             type="input"
             value={this.state.location}
             className="add-event-input"
@@ -132,15 +143,18 @@ class AddEvent extends Component {
               this.handleInputChange(e, 'location');
             }}
           />
-          <input
-            type="date"
-            value={this.state.date}
-            className="add-event-input"
-            onChange={e => {
-              this.handleInputChange(e, 'date');
-            }}
+          <DatePicker
+            disabledDays={{ before: this.state.currentDay }}
+            showTimeSelect={true}
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="LLL"
+            timeCaption="time"
+            selected={this.state.startDate}
+            onChange={this.handleDateChange}
           />
           <input
+            placeholder="summary"
             type="input"
             value={this.state.summary}
             className="add-event-input"
@@ -148,13 +162,13 @@ class AddEvent extends Component {
               this.handleInputChange(e, 'summary');
             }}
           />
-          <button>submit</button>
           <Dropzone onDrop={files => this.handleDrop(files)}>
             <div>
               Try dropping some files here, or click to select files to upload.
             </div>
           </Dropzone>
           <div className="file-preview-container">{this.showPreview()}</div>
+          <button>submit</button>
         </form>
       </div>
     );

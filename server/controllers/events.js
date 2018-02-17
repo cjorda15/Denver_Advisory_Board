@@ -24,8 +24,7 @@ exports.put = (req, res) => {
         title: title,
         summary: summary,
         location: location,
-        date: date,
-        time: time
+        date: date
       }
     },
     { new: true },

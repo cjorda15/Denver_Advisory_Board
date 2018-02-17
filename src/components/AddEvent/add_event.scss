@@ -1,1 +1,6 @@
 @import '../../styles/utilities/index.scss';
+
+#add-event-form {
+  display: flex;
+  flex-direction: column;
+}
