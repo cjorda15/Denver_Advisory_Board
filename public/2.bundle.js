@@ -50,6 +50,7 @@ var AddEvent = function (_Component) {
       date: '',
       summary: '',
       filesToBeSent: [],
+      filesUrl: [],
       preview: [],
       loading: false
     };
@@ -65,8 +66,39 @@ var AddEvent = function (_Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
+      this.setState({ loading: true });
+      this.state.filesToBeSent.map(function (file, index) {
+        var data = new FormData();
+        data.append('file', file);
+        fetch('api/v1/cloudload', {
+          method: 'POST',
+          body: data
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          return _this2.handleCloudResponse(res, index);
+        }).catch(function (err) {
+          return console.log(err);
+        });
+      });
     }
+  }, {
+    key: 'handleCloudResponse',
+    value: function handleCloudResponse(res, index) {
+      var filesUrl = this.state.filesUrl;
+      filesUrl.push(res);
+      this.setState({ filesUrl: filesUrl });
+      if (index == this.state.filesToBeSent.length - 1) {
+        this.handleMongoSubmit();
+        return;
+      }
+    }
+  }, {
+    key: 'handleMongoSubmit',
+    value: function handleMongoSubmit() {}
   }, {
     key: 'handleDrop',
     value: function handleDrop(file) {
@@ -86,7 +118,7 @@ var AddEvent = function (_Component) {
   }, {
     key: 'showPreview',
     value: function showPreview() {
-      var _this2 = this;
+      var _this3 = this;
 
       return this.state.filesToBeSent.map(function (file, index) {
         return _react2.default.createElement(
@@ -102,7 +134,7 @@ var AddEvent = function (_Component) {
             'button',
             {
               onClick: function onClick(e) {
-                _this2.removeFile(e, index);
+                _this3.removeFile(e, index);
               }
             },
             'remove'
@@ -113,7 +145,7 @@ var AddEvent = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -122,7 +154,7 @@ var AddEvent = function (_Component) {
           'form',
           {
             onSubmit: function onSubmit(e) {
-              _this3.handleSubmit(e);
+              _this4.handleSubmit(e);
             },
             id: 'testForm',
             encType: 'multipart/form-data'
@@ -132,7 +164,7 @@ var AddEvent = function (_Component) {
             value: this.state.title,
             className: 'add-event-input',
             onChange: function onChange(e) {
-              _this3.handleInputChange(e, 'title');
+              _this4.handleInputChange(e, 'title');
             }
           }),
           _react2.default.createElement('input', {
@@ -140,7 +172,7 @@ var AddEvent = function (_Component) {
             value: this.state.location,
             className: 'add-event-input',
             onChange: function onChange(e) {
-              _this3.handleInputChange(e, 'location');
+              _this4.handleInputChange(e, 'location');
             }
           }),
           _react2.default.createElement('input', {
@@ -148,7 +180,7 @@ var AddEvent = function (_Component) {
             value: this.state.date,
             className: 'add-event-input',
             onChange: function onChange(e) {
-              _this3.handleInputChange(e, 'date');
+              _this4.handleInputChange(e, 'date');
             }
           }),
           _react2.default.createElement('input', {
@@ -156,7 +188,7 @@ var AddEvent = function (_Component) {
             value: this.state.summary,
             className: 'add-event-input',
             onChange: function onChange(e) {
-              _this3.handleInputChange(e, 'summary');
+              _this4.handleInputChange(e, 'summary');
             }
           }),
           _react2.default.createElement(
@@ -167,7 +199,7 @@ var AddEvent = function (_Component) {
           _react2.default.createElement(
             _reactDropzone2.default,
             { onDrop: function onDrop(files) {
-                return _this3.handleDrop(files);
+                return _this4.handleDrop(files);
               } },
             _react2.default.createElement(
               'div',

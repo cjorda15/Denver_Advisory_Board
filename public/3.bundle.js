@@ -91,7 +91,7 @@ var Profile = function (_Component) {
       this.setState({ loading: true });
       data.append('file', input);
 
-      fetch('/api/v1/image', {
+      fetch('/api/v1/cloudload', {
         method: 'POST',
         body: data
       }).then(function (res) {

@@ -13,7 +13,7 @@ cloudinary.config({
   api_secret: config.api_secret
 });
 
-r.post('/api/v1/image', upload.single('file'), (req, res) => {
+r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
   cloudinary.uploader.upload(req.file.path, function(result) {
     console.log(result, 'result');
     result.secure_url

@@ -13,6 +13,7 @@ class AddEvent extends Component {
       date: '',
       summary: '',
       filesToBeSent: [],
+      filesUrl: [],
       preview: [],
       loading: false
     };
@@ -25,7 +26,31 @@ class AddEvent extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({ loading: true });
+    this.state.filesToBeSent.map((file, index) => {
+      const data = new FormData();
+      data.append('file', file);
+      fetch('api/v1/cloudload', {
+        method: 'POST',
+        body: data
+      })
+        .then(res => res.json())
+        .then(res => this.handleCloudResponse(res, index))
+        .catch(err => console.log(err));
+    });
   }
+
+  handleCloudResponse(res, index) {
+    let filesUrl = this.state.filesUrl;
+    filesUrl.push(res);
+    this.setState({ filesUrl });
+    if (index == this.state.filesToBeSent.length - 1) {
+      this.handleMongoSubmit();
+      return;
+    }
+  }
+
+  handleMongoSubmit() {}
 
   handleDrop(file) {
     const filesToBeSent = this.state.filesToBeSent;
