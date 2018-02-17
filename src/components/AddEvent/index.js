@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DropzoneComponent from 'react-dropzone-component';
+import Dropzone from 'react-dropzone';
 import '../../../node_modules/react-dropzone-component/styles/filepicker.css';
 import '../../../node_modules/dropzone/dist/min/dropzone.min.css';
 import './add_event.scss';
@@ -12,59 +12,10 @@ class AddEvent extends Component {
       location: '',
       date: '',
       summary: '',
-      fileLoaded: false,
+      filesToBeSent: [],
+      preview: [],
       loading: false
     };
-
-    this.userFiles = [];
-
-    this.componentConfig = {
-      iconFiletypes: ['.jpg', '.png', '.gif', '.webm', '.mp4'],
-      showFiletypeIcon: true,
-      postUrl: 'no-url'
-    };
-
-    this.djsConfig = { autoProcessQueue: false };
-    //
-    // this.eventHandlers = {
-    //   // This one receives the dropzone object as the first parameter
-    //   // and can be used to additional work with the dropzone.js
-    //   // object
-    //   init: null,
-    //   // All of these receive the event as first parameter:
-    //   drop: this.userFiles,
-    //   dragstart: null,
-    //   dragend: null,
-    //   dragenter: null,
-    //   dragover: null,
-    //   dragleave: null,
-    //   // All of these receive the file as first parameter:
-    //   addedfile: this.simpleCallBack,
-    //   removedfile: null,
-    //   thumbnail: null,
-    //   error: null,
-    //   processing: null,
-    //   uploadprogress: null,
-    //   sending: null,
-    //   success: null,
-    //   complete: null,
-    //   canceled: null,
-    //   maxfilesreached: null,
-    //   maxfilesexceeded: null,
-    //   // All of these receive a list of files as first parameter
-    //   // and are only called if the uploadMultiple option
-    //   // in djsConfig is true:
-    //   processingmultiple: null,
-    //   sendingmultiple: null,
-    //   successmultiple: null,
-    //   completemultiple: null,
-    //   canceledmultiple: null,
-    //   // Special Events
-    //   totaluploadprogress: null,
-    //   reset: null,
-    //   queuecomplete: null
-    // };
-    this.handleDrop = this.handleDrop.bind(this);
   }
 
   handleInputChange(e, type) {
@@ -74,13 +25,38 @@ class AddEvent extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log(document.querySelector('#add-event-file').value);
-    // let formData = new FormData();
   }
 
   handleDrop(file) {
-    console.log(file, '!#$!@#$');
+    const filesToBeSent = this.state.filesToBeSent;
+    filesToBeSent.push(file[0]);
+    this.setState({ filesToBeSent });
+  }
+
+  removeFile(e, index) {
+    let filesToBeSent = this.state.filesToBeSent;
+    let updatedFiles = filesToBeSent.filter((file, i) => {
+      return i != index;
+    });
+    this.setState({ filesToBeSent: updatedFiles });
+  }
+
+  showPreview() {
+    return this.state.filesToBeSent.map((file, index) => {
+      return (
+        <div key={index} className="file-preview-item">
+          <p>{file.name}</p>
+          <img width="100px" height="100px" src={file.preview} />
+          <button
+            onClick={e => {
+              this.removeFile(e, index);
+            }}
+          >
+            remove
+          </button>
+        </div>
+      );
+    });
   }
 
   render() {
@@ -125,15 +101,13 @@ class AddEvent extends Component {
               this.handleInputChange(e, 'summary');
             }}
           />
-          <DropzoneComponent
-            config={this.componentConfig}
-            djsConfig={this.djsConfig}
-            onDrop={e => {
-              this.handleDrop(e);
-            }}
-          />
-
           <button>submit</button>
+          <Dropzone onDrop={files => this.handleDrop(files)}>
+            <div>
+              Try dropping some files here, or click to select files to upload.
+            </div>
+          </Dropzone>
+          <div className="file-preview-container">{this.showPreview()}</div>
         </form>
       </div>
     );
