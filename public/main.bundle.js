@@ -36507,21 +36507,21 @@ var Loading = function Loading() {
 
 var LoadLanding = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 154));
+    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 154));
   },
   loading: Loading
 });
 
 var LoadFooter = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 155));
+    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 155));
   },
   loading: Loading
 });
 
 var LoadLogin = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 156));
+    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 156));
   },
   loading: Loading
 });
@@ -36535,14 +36535,14 @@ var LoadEvents = (0, _reactLoadable2.default)({
 
 var LoadAbout = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 158));
+    return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 158));
   },
   loading: Loading
 });
 
 var LoadContact = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 159));
+    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 159));
   },
   loading: Loading
 });
@@ -36556,14 +36556,14 @@ var LoadHome = (0, _reactLoadable2.default)({
 
 var LoadAddEvent = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 161));
+    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 161));
   },
   loading: Loading
 });
 
 var LoadProfile = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 162));
+    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 162));
   },
   loading: Loading
 });

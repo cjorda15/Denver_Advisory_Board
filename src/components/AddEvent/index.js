@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import moment from 'moment';
+import { connect } from 'react-redux';
 import '../../../node_modules/react-dropzone-component/styles/filepicker.css';
 import '../../../node_modules/dropzone/dist/min/dropzone.min.css';
 import './add_event.scss';
@@ -14,7 +16,6 @@ class AddEvent extends Component {
       summary: '',
       filesToBeSent: [],
       filesUrl: [],
-      preview: [],
       loading: false
     };
   }
@@ -50,7 +51,28 @@ class AddEvent extends Component {
     }
   }
 
-  handleMongoSubmit() {}
+  handleMongoSubmit() {
+    const { title, location, date, summary, filesUrl } = this.state;
+    const time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    const id = this.props.user.userID._id;
+    fetch('/api/v1/events', {
+      method: 'post',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: title,
+        location: location,
+        date: date,
+        time: time,
+        summary: summary,
+        images: filesUrl,
+        organizer: id
+      })
+    })
+      .then(res => res.json())
+      .then(res => console.log(res, 'MONGO'))
+      .catch(err => console.log(err, 'ERROR'));
+  }
 
   handleDrop(file) {
     const filesToBeSent = this.state.filesToBeSent;
@@ -139,4 +161,10 @@ class AddEvent extends Component {
   }
 }
 
-export default AddEvent;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(AddEvent);
