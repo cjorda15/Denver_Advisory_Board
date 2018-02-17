@@ -10,8 +10,7 @@ const userSchema = new Schema({
   organization: String,
   summary: String,
   image: String,
-  organizingEvents: [],
-  attendingEvents: []
+  admin: { type: Boolean, default: false }
 });
 
 userSchema.methods.comparePassword = function(password) {

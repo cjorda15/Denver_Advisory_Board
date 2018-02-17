@@ -53,6 +53,7 @@ class Profile extends Component {
         this.props.handleImage(imageUrl);
         fetch('/api/v1/updateImage', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             id: this.props.user.userID._id,
@@ -106,6 +107,7 @@ class Profile extends Component {
     fetch('/api/v1/user/update', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         organization: organization,
