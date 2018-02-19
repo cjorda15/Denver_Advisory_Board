@@ -4,22 +4,29 @@ import StackGrid from 'react-stack-grid';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
 import $ from 'jquery';
+import moment from 'moment';
+import EventCard from './EventCard';
 import './events.scss';
 import './events.js';
 
 class Events extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      events: []
+    };
   }
 
-  scrollTop() {
-    setTimeout(() => {
-      return Scroll.scroller.scrollTo('landing-svg', {
-        duration: 0,
-        delay: 0,
-        smooth: false
-      });
-    }, 0);
+  componentDidMount() {
+    fetch('/api/v1/events', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(data => data.json())
+      .then(events => {
+        this.setState({ events: events });
+      })
+      .catch(err => console.log(err));
   }
 
   scrollAfterSearch(input) {
@@ -35,7 +42,7 @@ class Events extends Component {
   handleOnClick(e) {
     $(e)
       .parents('.event-card-container')
-      .find('img')
+      .find('.event-close')
       .toggle();
     this.grid.updateLayout();
     $(e).toggleClass('open-event-card-container-open');
@@ -57,6 +64,18 @@ class Events extends Component {
     );
   }
 
+  renderEvents() {
+    return this.state.events
+      ? this.state.events.map((event, index) => (
+          <EventCard
+            handleOnClick={this.handleOnClick.bind(this)}
+            key={index}
+            event={event}
+          />
+        ))
+      : null;
+  }
+
   render() {
     const { size: { width } } = this.props;
 
@@ -73,261 +92,7 @@ class Events extends Component {
             columnWidth={300}
             duration={600}
           >
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
-            <div className="event-card-container">
-              <div className="event-card-top">
-                <div
-                  className="open-event-click-open-btn "
-                  onClick={e => {
-                    this.handleOnClick(e.target);
-                  }}
-                >
-                  <span className="open-event-click-line-1" />
-                  <span className="open-event-click-line-2" />
-                  <span className="open-event-click-line-3" />
-                </div>
-              </div>
-              <img className="event-close" src="grr.png" />
-            </div>
+            {this.renderEvents()}
           </StackGrid>
         </div>
       </div>

@@ -14,16 +14,12 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(190);
+__webpack_require__(312);
 
-__webpack_require__(192);
+__webpack_require__(314);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// <video autoPlay playsInline muted loop preload="true">
-// <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
-// </video>
-// >
 var Landing = function Landing() {
   return _react2.default.createElement(
     'div',
@@ -85,13 +81,13 @@ exports.default = Landing;
 
 /***/ }),
 
-/***/ 190:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(191);
+var content = __webpack_require__(313);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -117,7 +113,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 191:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -132,7 +128,7 @@ exports.push([module.i, "@font-face {\n  font-family: Biko;\n  src: url(\"https:
 
 /***/ }),
 
-/***/ 192:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

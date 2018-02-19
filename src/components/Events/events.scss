@@ -45,28 +45,34 @@
 }
 
 .event-card-container {
-  background: red;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 2px solid;
-
-  img {
-    display: none;
-  }
 }
 
+.event-close {
+  display: none;
+}
 .event-card-top {
-  background: purple;
-  height: 70px;
+  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
+  height: 120px;
   width: 100%;
+}
+
+.event-basic-info-container {
+  font-family: $font-fancy;
+  text-align: center;
+  padding-top: 55px;
+  margin: 0px auto;
+  width: 90%;
 }
 
 .open-event-click-open-btn {
   background: #1a1a1a;
   height: 40px;
-  position: relative;
+  position: absolute;
   overflow: none;
   width: 40px;
   span {
@@ -132,4 +138,11 @@
 }
 .close-event-line-3 {
   opacity: 0 !important;
+}
+
+.active-event-file {
+  display: block;
+}
+.not-active-event-file {
+  display: none;
 }
