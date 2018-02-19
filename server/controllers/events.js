@@ -43,7 +43,6 @@ exports.deleteevents = (req, res) => {
 
 exports.post = (req, res) => {
   // may need to get organizers ID from jwt cookie but for now I'm assuming you're including it in the request
-  console.log(req.body, '!!!!!!!!!!');
   let newEvent = new Event(req.body);
   newEvent.save((err, event) => {
     err ? res.send(err) : res.json(event);

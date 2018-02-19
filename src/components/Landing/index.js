@@ -2,10 +2,6 @@ import React from 'react';
 import './landing.scss';
 import './landing.js';
 
-// <video autoPlay playsInline muted loop preload="true">
-// <source src="https://res.cloudinary.com/hdfmst19a/video/upload/v1517535883/people_1_v2epal.mp4" />
-// </video>
-// >
 const Landing = () => {
   return (
     <div className="video-wrapper">

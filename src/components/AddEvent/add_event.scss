@@ -1,6 +1,93 @@
 @import '../../styles/utilities/index.scss';
 
 #add-event-form {
+  align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 0px auto;
+  width: 300px;
+  input,
+  textarea {
+    border: #19f6e8 2px solid;
+    height: 50px;
+    font-family: $font-fancy;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    transition: all 0.5s;
+    outline: none;
+    width: 300px;
+    &:focus {
+      border: #4286f4 2px solid;
+    }
+  }
+  textarea {
+    min-height: 100px;
+    padding-top: 10px;
+    resize: vertical;
+  }
+}
+
+.file-preview-container {
+  height: 150px;
+  display: flex;
+  overflow: scroll;
+  button {
+    border: 2px solid #dd7782;
+    background: #dd7782;
+    color: #fff;
+    height: 30px;
+    font-family: $font-fancy;
+    font-size: 15px;
+    width: 100%;
+  }
+}
+
+.file-preview-item {
+  align-items: center;
+  display: flex;
+  font-family: $font-fancy;
+  flex-direction: column;
+  padding: 5px;
+  width: 100%;
+}
+
+.add-event-file-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#add-event-dropzone {
+  border-width: 2px !important;
+  border-color: #dd7782 !important;
+  border-style: dashed !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-family: $font-fancy !important;
+  height: 150px !important;
+  text-align: center !important;
+  padding: 25px !important;
+
+  width: 150px !important;
+}
+
+#add-event-button {
+  background: #fff;
+  border-radius: 64px;
+  border: #dd7782 3px solid;
+  color: #dd7782;
+  font-family: $font-fancy;
+  font-size: 1.1em;
+  margin: 10px;
+  padding: 14px;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.8s;
+  width: 80%;
+  &:hover {
+    background: #dd7782;
+    color: #fff;
+  }
 }

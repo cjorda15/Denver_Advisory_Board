@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import DatePicker from 'react-datepicker';
 import moment from 'moment-timezone';
 import { connect } from 'react-redux';
+import ReactSVG from 'react-svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../node_modules/react-dropzone-component/styles/filepicker.css';
 import '../../../node_modules/dropzone/dist/min/dropzone.min.css';
@@ -20,23 +21,21 @@ class AddEvent extends Component {
       loading: false,
       startDate: moment().tz('America/Denver'),
       currentDay: moment().tz('America/Denver'),
-      submitDate: ''
+      submitDate: moment().tz('America/Denver'),
+      error: false,
+      errorMessage: '',
+      filesLoaded: 0
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
-  handleInputChange(e, type) {
-    e.preventDefault();
-    this.setState({ [type]: e.target.value });
-  }
+  inspectSubmission() {
+    const { title, location, summary, filesToBeSent } = this.state;
+    if (!title || !location || !summary || !filesToBeSent.length) {
+      this.handleError('Fill out all information please');
+      return;
+    }
 
-  handleDateChange(date) {
-    let newDate = moment.tz(date, 'America/Denver').format('LLLL');
-    this.setState({ startDate: date, submitDate: newDate });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
     this.setState({ loading: true });
     this.state.filesToBeSent.map((file, index) => {
       const data = new FormData();
@@ -46,16 +45,39 @@ class AddEvent extends Component {
         body: data
       })
         .then(res => res.json())
-        .then(res => this.handleCloudResponse(res, index))
+        .then(res => {
+          this.handleCloudResponse(res);
+        })
         .catch(err => console.log(err));
     });
   }
 
-  handleCloudResponse(res, index) {
-    let filesUrl = this.state.filesUrl;
+  handleInputChange(e, type) {
+    e.preventDefault();
+    this.setState({ [type]: e.target.value });
+  }
+
+  handleDateChange(date) {
+    let newDate = moment.tz(date, 'America/Denver').format('LLL');
+    this.setState({ startDate: date, submitDate: newDate });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.inspectSubmission();
+  }
+
+  handleCloudResponse(res) {
+    console.log(res, 'handleCLOUD');
+    console.log(this.state.filesToBeSent, 'TO BE SENT');
+    let filesUrl = [...this.state.filesUrl];
+    let filesLoaded = this.state.filesLoaded + 1;
     filesUrl.push(res);
-    this.setState({ filesUrl });
-    if (index == this.state.filesToBeSent.length - 1) {
+
+    this.setState({ filesUrl, filesLoaded });
+    console.log(filesLoaded, this.state.filesToBeSent.length - 1);
+    if (filesLoaded == this.state.filesToBeSent.length) {
+      console.log(this.state.filesUrl, 'FILESURL CLoud RESPOnsE');
       this.handleMongoSubmit();
       return;
     }
@@ -64,6 +86,7 @@ class AddEvent extends Component {
   handleMongoSubmit() {
     const { title, location, submitDate, summary, filesUrl } = this.state;
     const id = this.props.user.userID._id;
+    console.log(filesUrl, 'TO BE SENT TO MONGO');
     fetch('/api/v1/events', {
       method: 'post',
       credentials: 'include',
@@ -79,7 +102,7 @@ class AddEvent extends Component {
       })
     })
       .then(res => res.json())
-      .then(res => console.log(res, 'MONGO'))
+      .then(res => this.handleSuccessLoad())
       .catch(err => console.log(err, 'ERROR'));
   }
 
@@ -89,6 +112,20 @@ class AddEvent extends Component {
     this.setState({ filesToBeSent });
   }
 
+  handleSuccessLoad() {
+    this.setState({
+      title: '',
+      location: '',
+      summary: '',
+      filesToBeSent: [],
+      filesUrl: [],
+      loading: false,
+      startDate: moment().tz('America/Denver'),
+      currentDay: moment().tz('America/Denver'),
+      submitDate: '',
+      filesLoaded: 0
+    });
+  }
   removeFile(e, index) {
     let filesToBeSent = this.state.filesToBeSent;
     let updatedFiles = filesToBeSent.filter((file, i) => {
@@ -113,6 +150,32 @@ class AddEvent extends Component {
         </div>
       );
     });
+  }
+
+  handleLoading() {
+    return this.state.loading ? (
+      <ReactSVG
+        className="image-loading-svg"
+        path="loading.svg"
+        style={{ width: 200 }}
+      />
+    ) : null;
+  }
+
+  handleError(message) {
+    this.setState({ error: true, errorMessage: message });
+    setTimeout(() => {
+      this.setState({ error: false });
+    }, 3000);
+    return;
+  }
+
+  showError() {
+    return this.state.error ? (
+      <div className="add-event-error">{this.state.errorMessage}</div>
+    ) : (
+      <div className="add-event-error-placeholder" />
+    );
   }
 
   render() {
@@ -153,23 +216,30 @@ class AddEvent extends Component {
             selected={this.state.startDate}
             onChange={this.handleDateChange}
           />
-          <input
+          <textarea
             placeholder="summary"
-            type="input"
             value={this.state.summary}
             className="add-event-input"
             onChange={e => {
               this.handleInputChange(e, 'summary');
             }}
           />
-          <Dropzone onDrop={files => this.handleDrop(files)}>
-            <div>
-              Try dropping some files here, or click to select files to upload.
-            </div>
-          </Dropzone>
-          <div className="file-preview-container">{this.showPreview()}</div>
-          <button>submit</button>
+          <div className="add-event-file-container">
+            <Dropzone
+              id="add-event-dropzone"
+              onDrop={files => this.handleDrop(files)}
+            >
+              <div>
+                Try dropping some files here, or click to select files to
+                upload.
+              </div>
+            </Dropzone>
+            <div className="file-preview-container">{this.showPreview()}</div>
+          </div>
+          <button id="add-event-button">submit</button>
         </form>
+        {this.handleLoading()}
+        {this.showError()}
       </div>
     );
   }
