@@ -22,21 +22,21 @@ var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
 var _reactRedux = __webpack_require__(17);
 
-var _SignupForm = __webpack_require__(195);
+var _SignupForm = __webpack_require__(317);
 
 var _SignupForm2 = _interopRequireDefault(_SignupForm);
 
-var _LoginForm = __webpack_require__(196);
+var _LoginForm = __webpack_require__(318);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-var _RadioButtons = __webpack_require__(197);
+var _RadioButtons = __webpack_require__(319);
 
 var _RadioButtons2 = _interopRequireDefault(_RadioButtons);
 
 var _actions = __webpack_require__(21);
 
-__webpack_require__(198);
+__webpack_require__(320);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -129,9 +129,9 @@ var Login = function (_Component) {
       }
 
       fetch('/api/v1/login', {
-        credentials: 'include',
-        method: 'post',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ email: email, password: password })
       }).then(function (res) {
         return res.json();
@@ -312,7 +312,7 @@ exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
 
 /***/ }),
 
-/***/ 195:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -368,7 +368,7 @@ exports.default = SignupForm;
 
 /***/ }),
 
-/***/ 196:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -415,7 +415,7 @@ exports.default = LoginForm;
 
 /***/ }),
 
-/***/ 197:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -475,13 +475,13 @@ exports.default = RadioButtons;
 
 /***/ }),
 
-/***/ 198:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(199);
+var content = __webpack_require__(321);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -507,7 +507,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 199:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);

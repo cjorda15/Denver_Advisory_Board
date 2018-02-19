@@ -5,6 +5,7 @@
 }
 
 .account-profile-card-container {
+  border: 2px solid #84c1eb;
   margin: 0px auto;
   max-width: 400px;
   min-width: 320px;
@@ -190,6 +191,7 @@
     margin-bottom: 10px;
     outline: none;
     padding-left: 10px;
+    resize: vertical;
     transition: all 0.5s;
     width: 270px;
     &:focus {
