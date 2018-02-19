@@ -23,7 +23,11 @@ r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
       console.log(error, 'CLOUD ERROR');
       console.log(result, 'CLOUD result');
       result.secure_url
-        ? res.json(result.secure_url)
+        ? res.json({
+            url: result.secure_url,
+            format: result.format,
+            type: result.resource_type
+          })
         : res.json('something went wrong');
     }
   );

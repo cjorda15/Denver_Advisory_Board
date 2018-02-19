@@ -69,10 +69,11 @@ class AddEvent extends Component {
   }
 
   handleCloudResponse(res, index) {
-    let filesOrder = [...this.state.filesOrder, { url: res, order: index }];
-
     let filesLoaded = this.state.filesLoaded + 1;
-    // filesUrl.push(res);
+    let filesOrder = [
+      ...this.state.filesOrder,
+      { url: res.url, type: res.type, format: res.format, order: index }
+    ];
 
     this.setState({ filesLoaded, filesOrder });
     if (filesLoaded == this.state.filesToBeSent.length) {
@@ -88,8 +89,11 @@ class AddEvent extends Component {
       return a.order - b.order;
     });
 
-    orderFiles = orderFiles.map(file => file.url);
+    orderFiles = orderFiles.map(file => {
+      return { url: file.url, format: file.format, type: file.type };
+    });
 
+    console.log(orderFiles);
     fetch('/api/v1/events', {
       method: 'post',
       credentials: 'include',

@@ -41,9 +41,9 @@ var _EventCard = __webpack_require__(393);
 
 var _EventCard2 = _interopRequireDefault(_EventCard);
 
-__webpack_require__(396);
+__webpack_require__(395);
 
-__webpack_require__(398);
+__webpack_require__(397);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24502,8 +24502,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _helper = __webpack_require__(395);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24541,19 +24539,18 @@ var EventCarousel = function (_Component) {
 
       if (!this.state.files.length) return null;
       return this.state.files.map(function (file, index) {
-        var info = (0, _helper.determineFormat)(file);
-        return _this2.createPresentation(file, info.type, info.format, index, _this2.state.currentNumber);
+        return _this2.createPresentation(file, index, _this2.state.currentNumber);
       });
     }
   }, {
     key: 'createPresentation',
-    value: function createPresentation(file, fileType, format, indexNumber, currentNumber) {
+    value: function createPresentation(file, indexNumber, currentNumber) {
       var isActive = indexNumber === currentNumber ? 'active-event-file' : 'not-active-event-file';
-      if (fileType == 'image') {
+      if (file.type == 'image') {
         return this.createImage(file, isActive, indexNumber);
       }
-      if (fileType == 'video') {
-        return this.createVideo(file, format, isActive, indexNumber);
+      if (file.type == 'video') {
+        return this.createVideo(file, isActive, indexNumber);
       }
       return _react2.default.createElement(
         'div',
@@ -24569,12 +24566,12 @@ var EventCarousel = function (_Component) {
         className: isActive,
         width: '300',
         height: '240',
-        src: file
+        src: file.url
       });
     }
   }, {
     key: 'createVideo',
-    value: function createVideo(file, format, isActive, indexNumber) {
+    value: function createVideo(file, isActive, indexNumber) {
       return _react2.default.createElement(
         'video',
         {
@@ -24587,7 +24584,7 @@ var EventCarousel = function (_Component) {
           preload: 'true',
           loop: true
         },
-        _react2.default.createElement('source', { src: file, type: 'video/' + format }),
+        _react2.default.createElement('source', { src: file.url, type: 'video/' + file.format }),
         'Your browser does not support the video tag.'
       );
     }
@@ -24645,44 +24642,10 @@ exports.default = EventCarousel;
 /* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var determineFormat = exports.determineFormat = function determineFormat(file) {
-  var images = ['bmp', 'jpg', 'jpeg', 'jp2', 'j2k', 'jpx', 'gif', '.jiff', 'jif', 'j2c', 'png', 'pdf', 'pcd', 'psd', 'tiff', 'tif', 'svg', 'webp'];
-
-  var videos = ['3g2', '3gp', 'asf', 'avi', 'flv', 'mp4', 'mpg', 'rm', 'srt', 'swf', 'vob', 'wmv'];
-  var reverseFile = file.split('').reverse();
-  var format = reverseFile.splice(0, reverseFile.findIndex(function (char) {
-    return char == '.';
-  })).reverse().join('');
-
-  if (images.find(function (e) {
-    return e == format;
-  })) {
-    return { type: 'image' };
-  }
-
-  if (videos.find(function (e) {
-    return e == format;
-  })) {
-    return { type: 'video', format: format };
-  }
-
-  return 'unknown';
-};
-
-/***/ }),
-/* 396 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(397);
+var content = __webpack_require__(396);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -24707,7 +24670,7 @@ if(false) {
 }
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -24721,7 +24684,7 @@ exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#events-container {
 
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

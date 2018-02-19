@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { determineFormat } from './helper';
 
 class EventCarousel extends Component {
   constructor(props) {
@@ -19,27 +18,20 @@ class EventCarousel extends Component {
   handlePresentation() {
     if (!this.state.files.length) return null;
     return this.state.files.map((file, index) => {
-      let info = determineFormat(file);
-      return this.createPresentation(
-        file,
-        info.type,
-        info.format,
-        index,
-        this.state.currentNumber
-      );
+      return this.createPresentation(file, index, this.state.currentNumber);
     });
   }
 
-  createPresentation(file, fileType, format, indexNumber, currentNumber) {
+  createPresentation(file, indexNumber, currentNumber) {
     let isActive =
       indexNumber === currentNumber
         ? 'active-event-file'
         : 'not-active-event-file';
-    if (fileType == 'image') {
+    if (file.type == 'image') {
       return this.createImage(file, isActive, indexNumber);
     }
-    if (fileType == 'video') {
-      return this.createVideo(file, format, isActive, indexNumber);
+    if (file.type == 'video') {
+      return this.createVideo(file, isActive, indexNumber);
     }
     return <div key={indexNumber}>error creating image or video</div>;
   }
@@ -51,12 +43,12 @@ class EventCarousel extends Component {
         className={isActive}
         width="300"
         height="240"
-        src={file}
+        src={file.url}
       />
     );
   }
 
-  createVideo(file, format, isActive, indexNumber) {
+  createVideo(file, isActive, indexNumber) {
     return (
       <video
         key={indexNumber}
@@ -68,7 +60,7 @@ class EventCarousel extends Component {
         preload="true"
         loop
       >
-        <source src={file} type={`video/${format}`} />
+        <source src={file.url} type={`video/${file.format}`} />
         Your browser does not support the video tag.
       </video>
     );
