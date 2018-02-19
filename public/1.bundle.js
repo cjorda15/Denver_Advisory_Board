@@ -73,7 +73,8 @@ var AddEvent = function (_Component) {
       submitDate: (0, _momentTimezone2.default)().tz('America/Denver'),
       error: false,
       errorMessage: '',
-      filesLoaded: 0
+      filesLoaded: 0,
+      filesOrder: []
     };
     _this.handleDateChange = _this.handleDateChange.bind(_this);
     return _this;
@@ -105,7 +106,7 @@ var AddEvent = function (_Component) {
         }).then(function (res) {
           return res.json();
         }).then(function (res) {
-          _this2.handleCloudResponse(res);
+          _this2.handleCloudResponse(res, index);
         }).catch(function (err) {
           return console.log(err);
         });
@@ -131,17 +132,14 @@ var AddEvent = function (_Component) {
     }
   }, {
     key: 'handleCloudResponse',
-    value: function handleCloudResponse(res) {
-      console.log(res, 'handleCLOUD');
-      console.log(this.state.filesToBeSent, 'TO BE SENT');
-      var filesUrl = [].concat(_toConsumableArray(this.state.filesUrl));
-      var filesLoaded = this.state.filesLoaded + 1;
-      filesUrl.push(res);
+    value: function handleCloudResponse(res, index) {
+      var filesOrder = [].concat(_toConsumableArray(this.state.filesOrder), [{ url: res, order: index }]);
 
-      this.setState({ filesUrl: filesUrl, filesLoaded: filesLoaded });
-      console.log(filesLoaded, this.state.filesToBeSent.length - 1);
+      var filesLoaded = this.state.filesLoaded + 1;
+      // filesUrl.push(res);
+
+      this.setState({ filesLoaded: filesLoaded, filesOrder: filesOrder });
       if (filesLoaded == this.state.filesToBeSent.length) {
-        console.log(this.state.filesUrl, 'FILESURL CLoud RESPOnsE');
         this.handleMongoSubmit();
         return;
       }
@@ -156,10 +154,17 @@ var AddEvent = function (_Component) {
           location = _state2.location,
           submitDate = _state2.submitDate,
           summary = _state2.summary,
-          filesUrl = _state2.filesUrl;
+          filesOrder = _state2.filesOrder;
 
       var id = this.props.user.userID._id;
-      console.log(filesUrl, 'TO BE SENT TO MONGO');
+      var orderFiles = filesOrder.sort(function (a, b) {
+        return a.order - b.order;
+      });
+
+      orderFiles = orderFiles.map(function (file) {
+        return file.url;
+      });
+
       fetch('/api/v1/events', {
         method: 'post',
         credentials: 'include',
@@ -169,7 +174,7 @@ var AddEvent = function (_Component) {
           location: location,
           date: submitDate,
           summary: summary,
-          images: filesUrl,
+          images: orderFiles,
           organizer: id,
           today: (0, _momentTimezone2.default)()
         })
@@ -201,7 +206,8 @@ var AddEvent = function (_Component) {
         startDate: (0, _momentTimezone2.default)().tz('America/Denver'),
         currentDay: (0, _momentTimezone2.default)().tz('America/Denver'),
         submitDate: '',
-        filesLoaded: 0
+        filesLoaded: 0,
+        filesOrder: []
       });
     }
   }, {

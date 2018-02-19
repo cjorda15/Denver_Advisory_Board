@@ -24,7 +24,8 @@ class AddEvent extends Component {
       submitDate: moment().tz('America/Denver'),
       error: false,
       errorMessage: '',
-      filesLoaded: 0
+      filesLoaded: 0,
+      filesOrder: []
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
@@ -46,7 +47,7 @@ class AddEvent extends Component {
       })
         .then(res => res.json())
         .then(res => {
-          this.handleCloudResponse(res);
+          this.handleCloudResponse(res, index);
         })
         .catch(err => console.log(err));
     });
@@ -67,26 +68,28 @@ class AddEvent extends Component {
     this.inspectSubmission();
   }
 
-  handleCloudResponse(res) {
-    console.log(res, 'handleCLOUD');
-    console.log(this.state.filesToBeSent, 'TO BE SENT');
-    let filesUrl = [...this.state.filesUrl];
-    let filesLoaded = this.state.filesLoaded + 1;
-    filesUrl.push(res);
+  handleCloudResponse(res, index) {
+    let filesOrder = [...this.state.filesOrder, { url: res, order: index }];
 
-    this.setState({ filesUrl, filesLoaded });
-    console.log(filesLoaded, this.state.filesToBeSent.length - 1);
+    let filesLoaded = this.state.filesLoaded + 1;
+    // filesUrl.push(res);
+
+    this.setState({ filesLoaded, filesOrder });
     if (filesLoaded == this.state.filesToBeSent.length) {
-      console.log(this.state.filesUrl, 'FILESURL CLoud RESPOnsE');
       this.handleMongoSubmit();
       return;
     }
   }
 
   handleMongoSubmit() {
-    const { title, location, submitDate, summary, filesUrl } = this.state;
+    const { title, location, submitDate, summary, filesOrder } = this.state;
     const id = this.props.user.userID._id;
-    console.log(filesUrl, 'TO BE SENT TO MONGO');
+    let orderFiles = filesOrder.sort((a, b) => {
+      return a.order - b.order;
+    });
+
+    orderFiles = orderFiles.map(file => file.url);
+
     fetch('/api/v1/events', {
       method: 'post',
       credentials: 'include',
@@ -96,7 +99,7 @@ class AddEvent extends Component {
         location: location,
         date: submitDate,
         summary: summary,
-        images: filesUrl,
+        images: orderFiles,
         organizer: id,
         today: moment()
       })
@@ -123,7 +126,8 @@ class AddEvent extends Component {
       startDate: moment().tz('America/Denver'),
       currentDay: moment().tz('America/Denver'),
       submitDate: '',
-      filesLoaded: 0
+      filesLoaded: 0,
+      filesOrder: []
     });
   }
   removeFile(e, index) {
