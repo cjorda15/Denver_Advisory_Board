@@ -36507,7 +36507,7 @@ var Loading = function Loading() {
 
 var LoadLanding = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 154));
+    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 154));
   },
   loading: Loading
 });
@@ -36521,7 +36521,7 @@ var LoadFooter = (0, _reactLoadable2.default)({
 
 var LoadLogin = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 156));
+    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 156));
   },
   loading: Loading
 });
@@ -36549,7 +36549,7 @@ var LoadContact = (0, _reactLoadable2.default)({
 
 var LoadHome = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 160));
+    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 160));
   },
   loading: Loading
 });
@@ -36563,7 +36563,7 @@ var LoadAddEvent = (0, _reactLoadable2.default)({
 
 var LoadProfile = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 162));
+    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 162));
   },
   loading: Loading
 });

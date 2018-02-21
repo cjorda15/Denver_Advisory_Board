@@ -1,7 +1,7 @@
 import React from 'react';
 import EventCarousel from './EventCarousel';
 
-const EventCard = ({ event, handleOnClick }) => {
+const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
   return (
     <section className="event-card-container">
       <div className="event-card-top">
@@ -19,6 +19,14 @@ const EventCard = ({ event, handleOnClick }) => {
           <div />
           <h6>{event.title}</h6>
           <p>{event.date}</p>
+          <button
+            className="attend-event-btn"
+            onClick={e => {
+              handleToggleEvent(e, event._id, false);
+            }}
+          >
+            attendEvent
+          </button>
         </div>
       </div>
       <div className="event-close">

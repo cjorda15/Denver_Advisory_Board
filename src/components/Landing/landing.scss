@@ -4,10 +4,11 @@
 }
 
 .video-wrapper {
-  width: 100%;
   margin: 100px auto 0px;
-  position: relative;
   max-width: 1200px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
   svg {
     width: 100%;
     position: absolute;
