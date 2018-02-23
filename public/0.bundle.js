@@ -24513,11 +24513,13 @@ var EventCard = function EventCard(_ref) {
       _react2.default.createElement(
         'p',
         null,
+        'Located: ',
         event.location
       ),
       _react2.default.createElement(
-        'p',
+        'pre',
         null,
+        'Summary: ',
         event.summary
       )
     )
@@ -24599,15 +24601,20 @@ var EventCarousel = function (_Component) {
         'error creating image or video'
       );
     }
+    // <img
+    // className={isActive}
+    // width="300"
+    // height="240"
+    // src={file.url}
+    // />
+
   }, {
     key: 'createImage',
     value: function createImage(file, isActive, indexNumber) {
-      return _react2.default.createElement('img', {
+      return _react2.default.createElement('div', {
+        className: 'event-image-background ' + isActive,
         key: indexNumber,
-        className: isActive,
-        width: '300',
-        height: '240',
-        src: file.url
+        style: { backgroundImage: 'url("' + file.url + '")' }
       });
     }
   }, {
@@ -24618,12 +24625,10 @@ var EventCarousel = function (_Component) {
         {
           key: indexNumber,
           className: isActive,
-          width: '300',
+          width: '100%',
           height: '240',
-          autoPlay: true,
           controls: true,
-          preload: 'true',
-          loop: true
+          preload: 'true'
         },
         _react2.default.createElement('source', { src: file.url, type: 'video/' + file.format }),
         'Your browser does not support the video tag.'
@@ -24643,33 +24648,43 @@ var EventCarousel = function (_Component) {
       }
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'showButtons',
+    value: function showButtons() {
       var _this3 = this;
 
-      return _react2.default.createElement(
+      return this.state.files.length <= 1 ? null : _react2.default.createElement(
         'div',
-        { className: 'event-carousel-container' },
+        { className: 'event-change-presentation-btn-container' },
         _react2.default.createElement(
           'button',
           {
+            className: 'event-change-presentation-left-btn',
             onClick: function onClick() {
               _this3.handleClick('left');
             }
           },
           '\u2190'
         ),
-        this.handlePresentation(),
         _react2.default.createElement(
           'button',
           {
+            className: 'event-change-presentation-right-btn',
             onClick: function onClick() {
               _this3.handleClick('right');
             }
           },
-          ' ',
           '\u2192'
         )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'event-carousel-container' },
+        this.showButtons(),
+        this.handlePresentation()
       );
     }
   }]);
@@ -24719,7 +24734,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#events-container {\n  position: relative;\n  padding-top: 40px; }\n\n#add-event-link,\n.attend-event-btn {\n  background: #fff;\n  border: #dd7782 3px solid;\n  border-radius: 64px;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s; }\n  #add-event-link:hover,\n  .attend-event-btn:hover {\n    background: #dd7782;\n    color: #fff; }\n\n#add-event-link {\n  margin-top: 30px;\n  margin-left: 20px;\n  position: absolute;\n  z-index: 1;\n  width: 270px; }\n\n.attend-event-btn {\n  width: 140px; }\n\n.no-scroll {\n  overflow: hidden; }\n\n.stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n\n.event-close {\n  display: none; }\n\n.event-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 120px;\n  width: 100%; }\n\n.event-basic-info-container {\n  font-family: \"Comfortaa\", serif;\n  text-align: center;\n  padding-top: 55px;\n  margin: 0px auto;\n  width: 90%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  height: 40px;\n  position: absolute;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    position: absolute;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  background: #fff;\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px;\n  transition: all 0.5s; }\n\n.open-event-click-line-2 {\n  background: #fff;\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-click-line-3 {\n  background-color: cyan;\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-line-1-hover {\n  left: 24px;\n  top: 4px; }\n\n.open-event-line-2-hover {\n  left: 14px;\n  top: 14px; }\n\n.open-event-line-3-hover {\n  background: red; }\n\n.close-event-line-1 {\n  height: 25px !important;\n  -webkit-transform: rotate(140deg) !important;\n          transform: rotate(140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-2 {\n  height: 25px !important;\n  -webkit-transform: rotate(-140deg) !important;\n          transform: rotate(-140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-3 {\n  opacity: 0 !important; }\n\n.active-event-file {\n  display: block; }\n\n.not-active-event-file {\n  display: none; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#events-container {\n  position: relative;\n  padding-top: 40px; }\n\n#add-event-link,\n.attend-event-btn {\n  background: #fff;\n  border: #dd7782 3px solid;\n  border-radius: 64px;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s; }\n  #add-event-link:hover,\n  .attend-event-btn:hover {\n    background: #dd7782;\n    color: #fff; }\n\n#add-event-link {\n  margin-top: 30px;\n  margin-left: 20px;\n  position: absolute;\n  z-index: 1;\n  width: 270px; }\n\n.attend-event-btn {\n  width: 140px; }\n\n.no-scroll {\n  overflow: hidden; }\n\n.stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n\n.event-close {\n  border: 2px solid #ace;\n  display: none;\n  width: 100%; }\n  .event-close pre {\n    word-wrap: break-word;\n    white-space: pre-wrap; }\n\n.event-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 120px;\n  width: 100%;\n  z-index: 1; }\n\n.event-basic-info-container {\n  font-family: \"Comfortaa\", serif;\n  text-align: center;\n  padding-top: 55px;\n  margin: 0px auto;\n  width: 90%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  height: 40px;\n  position: absolute;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    position: absolute;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  background: #fff;\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px;\n  transition: all 0.5s; }\n\n.open-event-click-line-2 {\n  background: #fff;\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-click-line-3 {\n  background-color: cyan;\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-line-1-hover {\n  left: 24px;\n  top: 4px; }\n\n.open-event-line-2-hover {\n  left: 14px;\n  top: 14px; }\n\n.open-event-line-3-hover {\n  background: red; }\n\n.close-event-line-1 {\n  height: 25px !important;\n  -webkit-transform: rotate(140deg) !important;\n          transform: rotate(140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-2 {\n  height: 25px !important;\n  -webkit-transform: rotate(-140deg) !important;\n          transform: rotate(-140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-3 {\n  opacity: 0 !important; }\n\n.active-event-file {\n  display: block; }\n\n.not-active-event-file {\n  display: none; }\n\n.event-carousel-container {\n  padding-top: 10px;\n  position: relative; }\n\n.event-change-presentation-btn-container {\n  position: absolute;\n  z-index: 1;\n  top: 4px;\n  width: 100%; }\n\n.event-change-presentation-left-btn,\n.event-change-presentation-right-btn {\n  background: #1a1a1a;\n  border: 2px solid #fff;\n  border-radius: 100%;\n  font-size: 18px;\n  color: #fff;\n  padding: 8px;\n  outline: none; }\n\n.event-change-presentation-left-btn {\n  margin-left: 3px; }\n\n.event-change-presentation-right-btn {\n  margin-right: 3px;\n  float: right; }\n\n.event-image-background {\n  height: 240px;\n  background-size: contain;\n  background-position: center;\n  background-repeat: no-repeat;\n  width: 296px; }\n", ""]);
 
 // exports
 

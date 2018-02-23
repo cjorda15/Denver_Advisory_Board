@@ -61,12 +61,19 @@
 }
 
 .event-close {
+  border: 2px solid #ace;
   display: none;
+  width: 100%;
+  pre {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
 }
 .event-card-top {
   background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
   height: 120px;
   width: 100%;
+  z-index: 1;
 }
 
 .event-basic-info-container {
@@ -153,4 +160,44 @@
 }
 .not-active-event-file {
   display: none;
+}
+
+.event-carousel-container {
+  padding-top: 10px;
+  position: relative;
+}
+
+.event-change-presentation-btn-container {
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  width: 100%;
+}
+
+.event-change-presentation-left-btn,
+.event-change-presentation-right-btn {
+  background: #1a1a1a;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  font-size: 18px;
+  color: #fff;
+  padding: 8px;
+  outline: none;
+}
+
+.event-change-presentation-left-btn {
+  margin-left: 3px;
+}
+
+.event-change-presentation-right-btn {
+  margin-right: 3px;
+  float: right;
+}
+
+.event-image-background {
+  height: 240px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 296px;
 }
