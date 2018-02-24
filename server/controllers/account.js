@@ -61,6 +61,7 @@ exports.get = (req, res) => {
     let { _id, name, email } = decoded;
     User.findOne({ _id: _id }, (err, user) => {
       if (err) return res.status(err);
+      user.password = undefined 
       res.json(user);
     });
   });

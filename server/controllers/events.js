@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 exports.get = (req, res) => {
   Event.find()
-    .populate('organizer', 'name _id')
-    .populate('participants', 'name _id')
+    .populate('organizer', 'name _id image')
+    .populate('participants', 'name _id image')
     .exec((err, results) => {
       if (err) {
         return next(err);
@@ -92,7 +92,7 @@ exports.patch = (req, res) => {
 
 exports.FindUsersEvents = (req, res) => {
   console.log(req.params);
-  Event.find({ participants: { $in: req.params.userID } }, (err, events) => {
+  Event.find({ participants: { $in: [req.params.userID] } }, (err, events) => {
     if (err) return res.json(err);
     res.json(events);
   });
