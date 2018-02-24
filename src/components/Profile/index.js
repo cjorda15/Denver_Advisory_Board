@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
 import $ from 'jquery';
-import { updateUser } from '../../actions';
-
+import { updateUser, gatherEvents, updateParticipant } from '../../actions';
 import './profile.scss';
 
 class Profile extends Component {
@@ -33,6 +32,17 @@ class Profile extends Component {
       title: title,
       summary: summary
     });
+
+    fetch(`/api/v1/events/${this.props.user.userID._id}`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(data => data.json())
+      .then(events => {
+        console.log(events, '!!!!!');
+      })
+      .catch(err => console.log(err));
   }
 
   handleImageLoad(e) {
@@ -286,7 +296,8 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    events: state.events
   };
 };
 
@@ -297,6 +308,12 @@ const mapDispatchToProps = dispatch => {
     },
     handleUser: input => {
       dispatch(updateUser(input));
+    },
+    handleGatherEvents: input => {
+      dispatch(gatherEvents(input));
+    },
+    handleUpdateParticipant: input => {
+      dispatch(updateParticipant(input));
     }
   };
 };

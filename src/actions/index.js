@@ -17,3 +17,17 @@ export const loadImage = input => {
     payload: input
   };
 };
+
+export const gatherEvents = input => {
+  return {
+    type: 'GATHER_EVENTS',
+    payload: input
+  };
+};
+
+export const updateParticipant = input => {
+  return {
+    type: 'UPDATE_PARTICPIANT',
+    payload: input
+  };
+};

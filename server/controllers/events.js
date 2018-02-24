@@ -21,10 +21,10 @@ exports.put = (req, res) => {
     { _id: req.params.id },
     {
       $set: {
-        title   : title,
-        summary : summary,
+        title: title,
+        summary: summary,
         location: location,
-        date    : date
+        date: date
       }
     },
     { new: true },
@@ -43,52 +43,57 @@ exports.deleteevents = (req, res) => {
 
 exports.post = (req, res) => {
   // may need to get organizers ID from jwt cookie but for now I'm assuming you're including it in the request
-  console.log(req.body, '!!!!!');
   let newEvent = new Event(req.body);
   newEvent.save((err, event) => {
     err ? res.send(err) : res.json(event);
   });
 };
 
-
 exports.patch = (req, res) => {
-  const token = req.cookies.jwt
+  const token = req.cookies.jwt;
   jwt.verify(token, 'secret', (error, decoded) => {
     if (error) {
-      return res.status(403).json({ message: 'Not authorized' })
+      return res.status(403).json({ message: 'Not authorized' });
     } else {
-      let id = decoded._id
-      Event.find({ _id: req.body.event, participants: { $in: [id] } }, (err, docs) => {
-        if (err) return res.json(err)
-        if (!docs.length) {
-          Event.findByIdAndUpdate(
-            req.body.event,
-            { $push: { participants: id } },
-            { new  : true },
-            (err, results) => {
-              if (!results) return res.status(404).json({ message: 'No event by that ID found.' })
-              res.json({ message: 'Success' })
-            }
-          )
-        } else {
-          Event.findByIdAndUpdate(
-            req.body.event,
-            { $pull: { participants: id } },
-            { new  : true },
-            (err, results) => {
-              if (err) return res.json({ message: err })
-              res.json(results)
-            }
-          )
+      let id = decoded._id;
+      Event.find(
+        { _id: req.body.event, participants: { $in: [id] } },
+        (err, docs) => {
+          if (err) return res.json(err);
+          if (!docs.length) {
+            Event.findByIdAndUpdate(
+              req.body.event,
+              { $push: { participants: id } },
+              { new: true },
+              (err, results) => {
+                if (!results)
+                  return res
+                    .status(404)
+                    .json({ message: 'No event by that ID found.' });
+                res.json({ message: 'Success' });
+              }
+            );
+          } else {
+            Event.findByIdAndUpdate(
+              req.body.event,
+              { $pull: { participants: id } },
+              { new: true },
+              (err, results) => {
+                if (err) return res.json({ message: err });
+                res.json(results);
+              }
+            );
+          }
         }
-      })
+      );
     }
-  })
-}
+  });
+};
 
 exports.FindUsersEvents = (req, res) => {
+  console.log(req.params);
   Event.find({ participants: { $in: req.params.userID } }, (err, events) => {
-    if (err) return res.json(err)
-    res.json(events)
-  })
-}
+    if (err) return res.json(err);
+    res.json(events);
+  });
+};
