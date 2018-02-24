@@ -93,7 +93,6 @@ class AddEvent extends Component {
       return { url: file.url, format: file.format, type: file.type };
     });
 
-    console.log(orderFiles);
     fetch('/api/v1/events', {
       method: 'post',
       credentials: 'include',
@@ -162,12 +161,16 @@ class AddEvent extends Component {
 
   handleLoading() {
     return this.state.loading ? (
-      <ReactSVG
-        className="image-loading-svg"
-        path="loading.svg"
-        style={{ width: 200 }}
-      />
-    ) : null;
+      <div className="add-event-loading-placeholder">
+        <ReactSVG
+          className="image-loading-svg"
+          path="loading.svg"
+          style={{ width: 200 }}
+        />
+      </div>
+    ) : (
+      <div className="add-event-loading-placeholder" />
+    );
   }
 
   handleError(message) {
@@ -180,7 +183,9 @@ class AddEvent extends Component {
 
   showError() {
     return this.state.error ? (
-      <div className="add-event-error">{this.state.errorMessage}</div>
+      <div className="add-event-error-placeholder">
+        <div className="add-event-error">{this.state.errorMessage}</div>
+      </div>
     ) : (
       <div className="add-event-error-placeholder" />
     );

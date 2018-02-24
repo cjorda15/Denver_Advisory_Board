@@ -48,6 +48,19 @@ class Events extends Component {
     $(e).toggleClass('open-event-card-container-open');
   }
 
+  toggleEvent(e, eventId, attending) {
+    e.preventDefault();
+    attending ? this.unattendEvent(eventId) : this.attendEvent(eventId);
+  }
+
+  attendEvent(eventId) {
+    console.log('ATTENDING', eventId);
+  }
+
+  unattendEvent() {
+    console.log('UNATTENDING', eventId);
+  }
+
   handleAddEventLink() {
     ///eventually only return if user has admin status
     return (
@@ -68,6 +81,7 @@ class Events extends Component {
     return this.state.events
       ? this.state.events.map((event, index) => (
           <EventCard
+            handleToggleEvent={this.toggleEvent.bind(this)}
             handleOnClick={this.handleOnClick.bind(this)}
             key={index}
             event={event}

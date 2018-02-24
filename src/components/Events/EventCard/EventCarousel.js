@@ -35,15 +35,19 @@ class EventCarousel extends Component {
     }
     return <div key={indexNumber}>error creating image or video</div>;
   }
+  // <img
+  // className={isActive}
+  // width="300"
+  // height="240"
+  // src={file.url}
+  // />
 
   createImage(file, isActive, indexNumber) {
     return (
-      <img
+      <div
+        className={`event-image-background ${isActive}`}
         key={indexNumber}
-        className={isActive}
-        width="300"
-        height="240"
-        src={file.url}
+        style={{ backgroundImage: `url("${file.url}")` }}
       />
     );
   }
@@ -53,12 +57,10 @@ class EventCarousel extends Component {
       <video
         key={indexNumber}
         className={isActive}
-        width="300"
+        width="100%"
         height="240"
-        autoPlay
         controls
         preload="true"
-        loop
       >
         <source src={file.url} type={`video/${file.format}`} />
         Your browser does not support the video tag.
@@ -78,25 +80,34 @@ class EventCarousel extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className="event-carousel-container">
+  showButtons() {
+    return this.state.files.length <= 1 ? null : (
+      <div className="event-change-presentation-btn-container">
         <button
+          className="event-change-presentation-left-btn"
           onClick={() => {
             this.handleClick('left');
           }}
         >
           &larr;
         </button>
-        {this.handlePresentation()}
         <button
+          className="event-change-presentation-right-btn"
           onClick={() => {
             this.handleClick('right');
           }}
         >
-          {' '}
           &rarr;
         </button>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="event-carousel-container">
+        {this.showButtons()}
+        {this.handlePresentation()}
       </div>
     );
   }

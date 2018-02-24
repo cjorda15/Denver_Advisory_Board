@@ -5,27 +5,35 @@
   padding-top: 40px;
 }
 
-#add-event-link {
+#add-event-link,
+.attend-event-btn {
   background: #fff;
   border: #dd7782 3px solid;
   border-radius: 64px;
   color: #dd7782;
   font-family: $font-fancy;
-  font-size: 1.1em;
-  margin-top: 30px;
-  margin-left: 20px;
-  position: absolute;
+  font-size: 0.8em;
   padding: 14px;
   outline: none;
   text-decoration: none;
   text-align: center;
   transition: all 0.8s;
-  width: 270px;
-  z-index: 1;
   &:hover {
     background: #dd7782;
     color: #fff;
   }
+}
+
+#add-event-link {
+  margin-top: 30px;
+  margin-left: 20px;
+  position: absolute;
+  z-index: 1;
+  width: 270px;
+}
+
+.attend-event-btn {
+  width: 140px;
 }
 
 .no-scroll {
@@ -54,15 +62,22 @@
 
 .event-close {
   display: none;
+  width: 100%;
+  pre {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
 }
 .event-card-top {
   background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
   height: 120px;
   width: 100%;
+  z-index: 1;
 }
 
 .event-basic-info-container {
-  font-family: $font-fancy;
+  font-family: $font-normal;
+  font-size: 1.2em;
   text-align: center;
   padding-top: 55px;
   margin: 0px auto;
@@ -145,4 +160,56 @@
 }
 .not-active-event-file {
   display: none;
+}
+
+.event-carousel-container {
+  padding-top: 10px;
+  position: relative;
+}
+
+.event-change-presentation-btn-container {
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  width: 100%;
+}
+
+.event-change-presentation-left-btn,
+.event-change-presentation-right-btn {
+  background: #1a1a1a;
+  border-radius: 100%;
+  font-size: 18px;
+  color: #fff;
+  padding: 8px;
+  outline: none;
+}
+
+.event-change-presentation-left-btn {
+  margin-left: 3px;
+}
+
+.event-change-presentation-right-btn {
+  margin-right: 3px;
+  float: right;
+}
+
+.event-image-background {
+  height: 240px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 296px;
+}
+
+.event-inner-info-container {
+  padding: 10px;
+  p,
+  pre {
+    font-family: $font-normal;
+    margin-bottom: 10px;
+    span {
+      border-bottom: 2px solid #33f5e7;
+      display: inline-block;
+    }
+  }
 }
