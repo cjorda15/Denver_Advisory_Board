@@ -46,3 +46,5 @@ r.get('/api/v1/events', events.get);
 r.put('/api/v1/events/:id', checkAdmin, events.put);
 r.delete('/api/v1/events/:id', checkAdmin, events.deleteevents);
 r.post('/api/v1/events', checkAdmin, events.post);
+r.patch('/api/v1/events', events.patch);
+r.get('/api/v1/events/:userID', checkAuth, events.FindUsersEvents);
