@@ -34,7 +34,7 @@ var Landing = function Landing() {
         {
           offsetYMax: 20,
           offsetYMin: -20,
-          slowerScrollRate: true,
+          slowerScrollRate: false,
           tag: 'figure'
         },
         _react2.default.createElement('img', {

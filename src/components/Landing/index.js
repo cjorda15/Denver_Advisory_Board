@@ -10,7 +10,7 @@ const Landing = () => {
         <Parallax
           offsetYMax={20}
           offsetYMin={-20}
-          slowerScrollRate={true}
+          slowerScrollRate={false}
           tag="figure"
         >
           <img
