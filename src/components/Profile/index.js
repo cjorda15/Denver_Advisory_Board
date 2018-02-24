@@ -4,7 +4,6 @@ import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
 import $ from 'jquery';
 import { updateUser } from '../../actions';
-
 import './profile.scss';
 
 class Profile extends Component {

@@ -2,6 +2,18 @@ import React from 'react';
 import EventCarousel from './EventCarousel';
 
 const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
+  const presentParticipants = () => {
+    return event.participants.length ? (
+      <div>
+        Participants:{event.participants.length}
+        {event.participants.map((person, index) => {
+          return <div key={index}>{person.name}</div>;
+        })}
+      </div>
+    ) : (
+      <div>Participants:0</div>
+    );
+  };
   return (
     <section className="event-card-container">
       <div className="event-card-top">
@@ -38,6 +50,7 @@ const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
           <pre>
             <span>Summary</span> {event.summary}
           </pre>
+          {presentParticipants()}
         </div>
       </div>
     </section>

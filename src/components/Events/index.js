@@ -3,18 +3,17 @@ import sizeMe from 'react-sizeme';
 import StackGrid from 'react-stack-grid';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
+import { connect, compose } from 'react-redux';
 import $ from 'jquery';
 import moment from 'moment';
 import EventCard from './EventCard';
+import { gatherEvents, updateParticipant } from '../../actions';
 import './events.scss';
 import './events.js';
 
 class Events extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      events: []
-    };
   }
 
   componentDidMount() {
@@ -24,7 +23,7 @@ class Events extends Component {
     })
       .then(data => data.json())
       .then(events => {
-        this.setState({ events: events });
+        this.props.handleGatherEvents(events);
       })
       .catch(err => console.log(err));
   }
@@ -54,7 +53,20 @@ class Events extends Component {
   }
 
   attendEvent(eventId) {
-    console.log('ATTENDING', eventId);
+    fetch('/api/v1/events', {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event: eventId })
+    })
+      .then(response => response.json())
+      .then(response =>
+        this.props.handleUpdateParticipant({
+          eventId: eventId,
+          user: this.props.user
+        })
+      )
+      .catch(err => console.log(err, ' ERROR'));
   }
 
   unattendEvent() {
@@ -78,8 +90,8 @@ class Events extends Component {
   }
 
   renderEvents() {
-    return this.state.events
-      ? this.state.events.map((event, index) => (
+    return this.props.events
+      ? this.props.events.map((event, index) => (
           <EventCard
             handleToggleEvent={this.toggleEvent.bind(this)}
             handleOnClick={this.handleOnClick.bind(this)}
@@ -114,4 +126,22 @@ class Events extends Component {
   }
 }
 
-export default sizeMe()(Events);
+const mapStateToProps = state => {
+  return {
+    events: state.events,
+    user: state.user.userID
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleGatherEvents: input => {
+      dispatch(gatherEvents(input));
+    },
+    handleUpdateParticipant: input => {
+      dispatch(updateParticipant(input));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(sizeMe()(Events));
