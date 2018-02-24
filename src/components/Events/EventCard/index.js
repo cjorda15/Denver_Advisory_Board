@@ -31,8 +31,14 @@ const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
       </div>
       <div className="event-close">
         <EventCarousel presentation={event.images} />
-        <p>Located: {event.location}</p>
-        <pre>Summary: {event.summary}</pre>
+        <div className="event-inner-info-container">
+          <p>
+            <span>Located</span> {event.location}
+          </p>
+          <pre>
+            <span>Summary</span> {event.summary}
+          </pre>
+        </div>
       </div>
     </section>
   );

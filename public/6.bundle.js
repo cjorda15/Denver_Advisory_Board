@@ -75,7 +75,7 @@ if(false) {
 
 exports = module.exports = __webpack_require__(11)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
 exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.app-footer {\n  background: #1a1a1a;\n  color: #fff;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  padding: 30px; }\n", ""]);

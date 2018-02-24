@@ -163,7 +163,6 @@ var AddEvent = function (_Component) {
         return { url: file.url, format: file.format, type: file.type };
       });
 
-      console.log(orderFiles);
       fetch('/api/v1/events', {
         method: 'post',
         credentials: 'include',
@@ -248,11 +247,15 @@ var AddEvent = function (_Component) {
   }, {
     key: 'handleLoading',
     value: function handleLoading() {
-      return this.state.loading ? _react2.default.createElement(_reactSvg2.default, {
-        className: 'image-loading-svg',
-        path: 'loading.svg',
-        style: { width: 200 }
-      }) : null;
+      return this.state.loading ? _react2.default.createElement(
+        'div',
+        { className: 'add-event-loading-placeholder' },
+        _react2.default.createElement(_reactSvg2.default, {
+          className: 'image-loading-svg',
+          path: 'loading.svg',
+          style: { width: 200 }
+        })
+      ) : _react2.default.createElement('div', { className: 'add-event-loading-placeholder' });
     }
   }, {
     key: 'handleError',
@@ -270,8 +273,12 @@ var AddEvent = function (_Component) {
     value: function showError() {
       return this.state.error ? _react2.default.createElement(
         'div',
-        { className: 'add-event-error' },
-        this.state.errorMessage
+        { className: 'add-event-error-placeholder' },
+        _react2.default.createElement(
+          'div',
+          { className: 'add-event-error' },
+          this.state.errorMessage
+        )
       ) : _react2.default.createElement('div', { className: 'add-event-error-placeholder' });
     }
   }, {
@@ -28099,10 +28106,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(11)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#add-event-form {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 300px; }\n  #add-event-form input,\n  #add-event-form textarea {\n    border: #19f6e8 2px solid;\n    height: 50px;\n    font-family: \"Comfortaa\", serif;\n    font-size: 16px;\n    margin-bottom: 10px;\n    padding-left: 10px;\n    transition: all 0.5s;\n    outline: none;\n    width: 300px; }\n    #add-event-form input:focus,\n    #add-event-form textarea:focus {\n      border: #4286f4 2px solid; }\n  #add-event-form textarea {\n    min-height: 100px;\n    padding-top: 10px;\n    resize: vertical; }\n\n.file-preview-container {\n  height: 150px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  overflow: scroll; }\n  .file-preview-container button {\n    border: 2px solid #dd7782;\n    background: #dd7782;\n    color: #fff;\n    height: 30px;\n    font-family: \"Comfortaa\", serif;\n    font-size: 15px;\n    width: 100%; }\n\n.file-preview-item {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 5px;\n  width: 100%; }\n\n.add-event-file-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  width: 100%; }\n\n#add-event-dropzone {\n  border-width: 2px !important;\n  border-color: #dd7782 !important;\n  border-style: dashed !important;\n  border-radius: 10px !important;\n  font-size: 14px !important;\n  font-family: \"Comfortaa\", serif !important;\n  height: 150px !important;\n  text-align: center !important;\n  padding: 25px !important;\n  width: 150px !important; }\n\n#add-event-button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 80%; }\n  #add-event-button:hover {\n    background: #dd7782;\n    color: #fff; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#add-event-form {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 300px; }\n  #add-event-form input,\n  #add-event-form textarea {\n    border: #19f6e8 2px solid;\n    height: 50px;\n    font-family: \"Comfortaa\", serif;\n    font-size: 16px;\n    margin-bottom: 10px;\n    padding-left: 10px;\n    transition: all 0.5s;\n    outline: none;\n    width: 300px; }\n    #add-event-form input:focus,\n    #add-event-form textarea:focus {\n      border: #4286f4 2px solid; }\n  #add-event-form textarea {\n    min-height: 100px;\n    padding-top: 10px;\n    resize: vertical; }\n\n.file-preview-container {\n  height: 150px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  overflow: scroll; }\n  .file-preview-container button {\n    border: 2px solid #dd7782;\n    background: #dd7782;\n    color: #fff;\n    height: 30px;\n    font-family: \"Comfortaa\", serif;\n    font-size: 15px;\n    width: 100%; }\n\n.file-preview-item {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding: 5px;\n  width: 100%; }\n\n.add-event-file-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  width: 100%; }\n\n#add-event-dropzone {\n  border-width: 2px !important;\n  border-color: #dd7782 !important;\n  border-style: dashed !important;\n  border-radius: 10px !important;\n  font-size: 14px !important;\n  font-family: \"Comfortaa\", serif !important;\n  height: 150px !important;\n  text-align: center !important;\n  padding: 25px !important;\n  width: 150px !important; }\n\n#add-event-button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 80%; }\n  #add-event-button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.add-event-loading-placeholder {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 55px; }\n", ""]);
 
 // exports
 
