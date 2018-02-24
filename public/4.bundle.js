@@ -79,6 +79,18 @@ var Profile = function (_Component) {
         title: title,
         summary: summary
       });
+
+      fetch('/api/v1/events/' + this.props.user.userID._id, {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (data) {
+        return data.json();
+      }).then(function (events) {
+        console.log(events, '!!!!!');
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }, {
     key: 'handleImageLoad',
@@ -413,7 +425,8 @@ var Profile = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    events: state.events
   };
 };
 
@@ -424,6 +437,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     handleUser: function handleUser(input) {
       dispatch((0, _actions.updateUser)(input));
+    },
+    handleGatherEvents: function handleGatherEvents(input) {
+      dispatch((0, _actions.gatherEvents)(input));
+    },
+    handleUpdateParticipant: function handleUpdateParticipant(input) {
+      dispatch((0, _actions.updateParticipant)(input));
     }
   };
 };
