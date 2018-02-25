@@ -8,7 +8,7 @@ exports.logout = (req, res) => {
 
 exports.signup = (req, res) => {
   let { password, email } = req.body;
-  if (!password) return res.json({ message: 'Must include password.' })
+  if (!password) return res.json({ message: 'Must include password.' });
   password = bcrypt.hashSync(password, 10);
   const user = new User({
     password: password,
@@ -21,16 +21,16 @@ exports.signup = (req, res) => {
       return;
     } else {
       user.password = undefined;
-      req.logIn(user, function (loginErr) {
-        if (loginErr) return next(loginErr)
-        return res.json({ message: 'Success', user: user })
+      req.logIn(user, function(loginErr) {
+        if (loginErr) return next(loginErr);
+        return res.json({ message: 'Success', user: user });
       });
     }
   });
 };
 
 exports.login = (req, res, next) => {
-  const { email, password } = req.body 
+  const { email, password } = req.body;
   User.findOne({ email: email }, (error, user) => {
     if (error) {
       return res.status(500).json({ message: 'Something went wrong' });
@@ -42,33 +42,34 @@ exports.login = (req, res, next) => {
         return res.status(401).json({ message: 'Bad Password' });
       } else {
         user.password = undefined;
-        req.logIn(user, function (loginErr) {
-          if (loginErr) return next(loginErr)
-          return res.json({ message: 'Success', user: user })
+        req.logIn(user, function(loginErr) {
+          if (loginErr) return next(loginErr);
+          return res.json({ message: 'Success', user: user });
         });
       }
     }
-  })
-}
-
+  });
+};
 
 exports.get = (req, res) => {
-  if (!req.user) return res.status(403).json({ name: 'JsonWebTokenError'})
-    User.findOne({ _id: req.user.id }, (err, user) => {
-      if (err) return res.status(500).json({message: err});
-      if (!user) return res.status(404).json({message: 'Not found.'})
-      user.password = undefined 
-      res.json(user);
-    });
+  if (!req.user) return res.status(403).json({ name: 'JsonWebTokenError' });
+  User.findOne({ _id: req.user.id }, (err, user) => {
+    if (err) return res.status(500).json({ message: err });
+    if (!user) return res.status(404).json({ message: 'Not found.' });
+    user.password = undefined;
+    res.json(user);
+  });
 };
 
 exports.image = (req, res) => {
+  console.log(req.body);
   let { id, image } = req.body;
   let query = { _id: id };
   let update = { image: image };
   User.findOneAndUpdate(query, update, (err, doc) => {
     if (err) {
-      res.json('error', err);
+      console.log(err, 'RRRRRRRER');
+      res.json(err);
     }
 
     res.json('Success');
@@ -88,7 +89,7 @@ exports.update = (req, res) => {
     if (err) {
       res.json({ message: 'error', error: err });
     }
-    doc.password = undefined 
+    doc.password = undefined;
     res.json({ message: 'Success', user: doc });
   });
 };

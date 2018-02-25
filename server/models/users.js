@@ -9,9 +9,9 @@ const userSchema = new Schema({
   title: String,
   organization: String,
   summary: String,
-  image: String,
+  image: {},
   admin: { type: Boolean, default: false },
-  linkedinID: String 
+  linkedinID: String
 });
 
 userSchema.methods.comparePassword = function(password) {

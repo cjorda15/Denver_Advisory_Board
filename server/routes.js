@@ -25,7 +25,6 @@ r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
     { resource_type: 'auto' },
     function(error, result) {
       console.log(error, 'CLOUD ERROR');
-      console.log(result, 'CLOUD result');
       result.secure_url
         ? res.json({
             url: result.secure_url,

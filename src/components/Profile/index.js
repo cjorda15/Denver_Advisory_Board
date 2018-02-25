@@ -33,7 +33,7 @@ class Profile extends Component {
       .then(data => data.json())
       .then(data => {
         if (data.name === 'JsonWebTokenError') {
-          window.location.href = '/'
+          window.location.href = '/';
           return;
         }
         let { name, title, organization, summary } = data;
@@ -50,7 +50,7 @@ class Profile extends Component {
         this.props.handleUser(data);
       })
       .catch(err => console.log(err));
-    }    
+  }
 
   componentDidMount() {
     fetch(`/api/v1/events/${this.props.user.userID._id}`, {
@@ -106,10 +106,9 @@ class Profile extends Component {
   }
 
   determineImage() {
-    return (
-      this.props.user.userID.image ||
-      'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png'
-    );
+    return this.props.user.userID.image.url
+      ? this.props.user.userID.image.url
+      : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
   }
 
   profileBasicDetails() {
