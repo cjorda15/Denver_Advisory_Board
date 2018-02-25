@@ -27,7 +27,7 @@ export const gatherEvents = input => {
 
 export const updateParticipant = input => {
   return {
-    type: 'UPDATE_PARTICPIANT',
+    type: 'UPDATE_PARTICIPIANT',
     payload: input
   };
 };
