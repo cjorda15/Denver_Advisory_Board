@@ -16,6 +16,12 @@ cloudinary.config({
   api_secret: config.api_secret
 });
 
+
+
+r.get('/', (req, res) => {
+  res.render('home', {})
+})
+
 r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
   cloudinary.v2.uploader.upload(
     req.file.path,
@@ -53,6 +59,8 @@ r.get('/api/v1/events/:userID', checkAuth, events.FindUsersEvents);
 let passport = require('passport')
 require('./passport')
 
+
+
 r.get('/login/linkedin', passport.authenticate('linkedin-login'))
 r.get('/api/v1/linkedin',
   passport.authenticate('linkedin-login', {
@@ -70,10 +78,10 @@ r.get('/api/v1/linkedin/signup',
   })
 )
 
-r.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/events', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/about', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/contact', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/addevent', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/profile', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
-r.get('/add', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/login', (req, res) => res.render('home', {}))
+r.get('/events', (req, res) => res.render('home', {}))
+r.get('/about', (req, res) => res.render('home', {}))
+r.get('/contact', (req, res) => res.render('home', {}))
+r.get('/addevent', (req, res) => res.render('home', {}))
+r.get('/profile', (req, res) => res.render('home', {}))
+r.get('/add', (req, res) => res.render('home', {}))

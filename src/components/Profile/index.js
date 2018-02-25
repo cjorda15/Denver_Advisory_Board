@@ -42,7 +42,6 @@ class Profile extends Component {
           title: title,
           summary: summary
         });
-        console.log('fucking data', data)
         this.props.handleUser(data);
       })
       .catch(err => console.log(err));
