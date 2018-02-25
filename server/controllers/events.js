@@ -91,9 +91,9 @@ exports.patch = (req, res) => {
 };
 
 exports.FindUsersEvents = (req, res) => {
-  console.log(req.params);
   Event.find({ participants: { $in: [req.params.userID] } }, (err, events) => {
-    if (err) return res.json(err);
+    if (err) return res.status(500).json(err);
+    if (!events) return res.status(404).json({message: 'No events found.'})
     res.json(events);
   });
 };

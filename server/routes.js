@@ -7,6 +7,7 @@ const path = require('path');
 const temp_folder_path = path.join(__dirname, '../uploads');
 const checkAuth = require('./controllers/helpers/checkAuth');
 const checkAdmin = require('./controllers/helpers/checkAdmin');
+const jwt = require('jsonwebtoken')
 module.exports = r;
 
 cloudinary.config({
@@ -48,3 +49,31 @@ r.delete('/api/v1/events/:id', checkAdmin, events.deleteevents);
 r.post('/api/v1/events', checkAdmin, events.post);
 r.patch('/api/v1/events', events.patch);
 r.get('/api/v1/events/:userID', checkAuth, events.FindUsersEvents);
+
+let passport = require('passport')
+require('./passport')
+
+r.get('/login/linkedin', passport.authenticate('linkedin-login'))
+r.get('/api/v1/linkedin',
+  passport.authenticate('linkedin-login', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  })
+)
+
+
+r.get('/signup/linkedin', passport.authenticate('linkedin-signup'))
+r.get('/api/v1/linkedin/signup',
+  passport.authenticate('linkedin-signup', {
+    failureRedirect: '/login',
+    successRedirect: '/profile'
+  })
+)
+
+r.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/events', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/about', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/contact', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/addevent', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/profile', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+r.get('/add', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))

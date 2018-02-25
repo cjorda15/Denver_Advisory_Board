@@ -3,12 +3,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.logout = (req, res) => {
-  res.clearCookie('jwt');
+  req.logout();
   res.redirect('/');
 };
 
 exports.signup = (req, res) => {
   let { password, email } = req.body;
+  if (!password) return res.json({ message: 'Must include password.' })
   password = bcrypt.hashSync(password, 10);
   const user = new User({
     password: password,
@@ -55,16 +56,14 @@ exports.login = (req, res) => {
 };
 
 exports.get = (req, res) => {
-  let token = req.cookies.jwt;
-  jwt.verify(token, 'secret', (error, decoded) => {
-    if (error) return res.status(500).send(error);
-    let { _id, name, email } = decoded;
-    User.findOne({ _id: _id }, (err, user) => {
-      if (err) return res.status(err);
+  console.log(req.user)
+  if (!req.user) return res.status(403).json({ name: 'JsonWebTokenError'})
+    User.findOne({ _id: req.user.id }, (err, user) => {
+      if (err) return res.status(500).json({message: err});
+      if (!user) return res.status(404).json({message: 'Not found.'})
       user.password = undefined 
       res.json(user);
     });
-  });
 };
 
 exports.image = (req, res) => {

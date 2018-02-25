@@ -19,6 +19,7 @@ const LoginForm = ({ email, password, handleInput }) => {
         value={password}
         placeholder="Password"
       />
+      <a href="/login/linkedin">Login With LinkedIn</a>
     </div>
   );
 };
