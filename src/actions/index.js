@@ -27,7 +27,21 @@ export const gatherEvents = input => {
 
 export const updateParticipant = input => {
   return {
-    type: 'UPDATE_PARTICPIANT',
+    type: 'UPDATE_PARTICIPIANT',
+    payload: input
+  };
+};
+
+export const generatePersonalEvents = input => {
+  return {
+    type: 'GENERATE_PERSONAL_EVENTS',
+    payload: input
+  };
+};
+
+export const updatePersonalEvents = input => {
+  return {
+    type: 'UPDATE_PERSONAL_EVENTS',
     payload: input
   };
 };

@@ -49,7 +49,7 @@ exports.post = (req, res) => {
 };
 
 exports.patch = (req, res) => {
-  let id = req.user._id 
+  let id = req.user._id;
   Event.find(
     { _id: req.body.event, participants: { $in: [id] } },
     (err, docs) => {
@@ -85,7 +85,7 @@ exports.patch = (req, res) => {
 exports.FindUsersEvents = (req, res) => {
   Event.find({ participants: { $in: [req.params.userID] } }, (err, events) => {
     if (err) return res.status(500).json(err);
-    if (!events) return res.status(404).json({message: 'No events found.'})
+    if (!events) return res.status(404).json({ message: 'No events found.' });
     res.json(events);
   });
 };

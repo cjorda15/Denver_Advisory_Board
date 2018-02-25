@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
 import $ from 'jquery';
-import { updateUser, gatherEvents, updateParticipant } from '../../actions';
+import ProfileEventsList from './ProfileEventsList';
+import {
+  updateUser,
+  updateParticipant,
+  generatePersonalEvents
+} from '../../actions';
 import './profile.scss';
 
 class Profile extends Component {
@@ -55,7 +60,7 @@ class Profile extends Component {
     })
       .then(data => data.json())
       .then(events => {
-        console.log(events, '!!!!!');
+        this.props.handleGeneratePersonalEvents(events);
       })
       .catch(err => console.log(err));
   }
@@ -304,6 +309,7 @@ class Profile extends Component {
           </div>
           {this.showEditProfile()}
         </section>
+        <ProfileEventsList events={this.props.events} />
       </div>
     );
   }
@@ -324,8 +330,8 @@ const mapDispatchToProps = dispatch => {
     handleUser: input => {
       dispatch(updateUser(input));
     },
-    handleGatherEvents: input => {
-      dispatch(gatherEvents(input));
+    handleGeneratePersonalEvents: input => {
+      dispatch(generatePersonalEvents(input));
     },
     handleUpdateParticipant: input => {
       dispatch(updateParticipant(input));

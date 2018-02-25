@@ -15,11 +15,9 @@ cloudinary.config({
   api_secret: config.api_secret
 });
 
-
-
 r.get('/', (req, res) => {
-  res.render('home', {})
-})
+  res.render('home', {});
+});
 
 r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
   cloudinary.v2.uploader.upload(
@@ -52,39 +50,40 @@ r.get('/api/v1/events', events.get);
 r.put('/api/v1/events/:id', checkAdmin, events.put);
 r.delete('/api/v1/events/:id', checkAdmin, events.deleteevents);
 r.post('/api/v1/events', checkAdmin, events.post);
-r.patch('/api/v1/events', checkAdmin, events.patch);
+r.patch('/api/v1/events/:userID', checkAuth, events.patch);
 r.get('/api/v1/events/:userID', checkAuth, events.FindUsersEvents);
 
-let passport = require('passport')
-require('./passport')
+let passport = require('passport');
+require('./passport');
 
-
-
-r.get('/login/linkedin', passport.authenticate('linkedin-login'))
-r.get('/api/v1/linkedin',
+r.get('/login/linkedin', passport.authenticate('linkedin-login'));
+r.get(
+  '/api/v1/linkedin',
   passport.authenticate('linkedin-login', {
     successRedirect: '/profile',
     failureRedirect: '/login'
   })
-)
+);
 
-
-r.get('/signup/linkedin', passport.authenticate('linkedin-signup'))
-r.get('/api/v1/linkedin/signup',
+r.get('/signup/linkedin', passport.authenticate('linkedin-signup'));
+r.get(
+  '/api/v1/linkedin/signup',
   passport.authenticate('linkedin-signup', {
     failureRedirect: '/login',
     successRedirect: '/profile'
   })
-)
+);
 
-r.get('/login', (req, res) => res.render('home', {}))
-r.get('/events', (req, res) => res.render('home', {}))
-r.get('/about', (req, res) => res.render('home', {}))
-r.get('/contact', (req, res) => res.render('home', {}))
-r.get('/addevent', (req, res) => res.render('home', {}))
-r.get('/profile', (req, res) => res.render('home', {}))
-r.get('/add', (req, res) => res.render('home', {}))
+
+r.get('/login', (req, res) => res.render('home', {}));
+r.get('/events', (req, res) => res.render('home', {}));
+r.get('/about', (req, res) => res.render('home', {}));
+r.get('/contact', (req, res) => res.render('home', {}));
+r.get('/addevent', (req, res) => res.render('home', {}));
+r.get('/profile', (req, res) => res.render('home', {}));
+r.get('/add', (req, res) => res.render('home', {}));
 
 let adminDashboard = require('./controllers/admin')
 r.get('/admin', adminDashboard.login)
 r.get('/admin/dashboard', adminDashboard.dashboard)
+
