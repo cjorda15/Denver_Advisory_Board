@@ -1,6 +1,5 @@
 const Event = require('../models/events');
 const User = require('../models/users');
-const jwt = require('jsonwebtoken');
 
 exports.get = (req, res) => {
   Event.find()
@@ -50,44 +49,37 @@ exports.post = (req, res) => {
 };
 
 exports.patch = (req, res) => {
-  const token = req.cookies.jwt;
-  jwt.verify(token, 'secret', (error, decoded) => {
-    if (error) {
-      return res.status(403).json({ message: 'Not authorized' });
-    } else {
-      let id = decoded._id;
-      Event.find(
-        { _id: req.body.event, participants: { $in: [id] } },
-        (err, docs) => {
-          if (err) return res.json(err);
-          if (!docs.length) {
-            Event.findByIdAndUpdate(
-              req.body.event,
-              { $push: { participants: id } },
-              { new: true },
-              (err, results) => {
-                if (!results)
-                  return res
-                    .status(404)
-                    .json({ message: 'No event by that ID found.' });
-                res.json({ message: 'Success' });
-              }
-            );
-          } else {
-            Event.findByIdAndUpdate(
-              req.body.event,
-              { $pull: { participants: id } },
-              { new: true },
-              (err, results) => {
-                if (err) return res.json({ message: err });
-                res.json(results);
-              }
-            );
+  let id = req.user._id 
+  Event.find(
+    { _id: req.body.event, participants: { $in: [id] } },
+    (err, docs) => {
+      if (err) return res.json(err);
+      if (!docs.length) {
+        Event.findByIdAndUpdate(
+          req.body.event,
+          { $push: { participants: id } },
+          { new: true },
+          (err, results) => {
+            if (!results)
+              return res
+                .status(404)
+                .json({ message: 'No event by that ID found.' });
+            res.json({ message: 'Success' });
           }
-        }
-      );
+        );
+      } else {
+        Event.findByIdAndUpdate(
+          req.body.event,
+          { $pull: { participants: id } },
+          { new: true },
+          (err, results) => {
+            if (err) return res.json({ message: err });
+            res.json(results);
+          }
+        );
+      }
     }
-  });
+  );
 };
 
 exports.FindUsersEvents = (req, res) => {
