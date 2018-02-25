@@ -2,7 +2,10 @@ const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: {
+    home:  './src/index.js',
+    adminLogin: './src/admin/login'
+  },
   output: {
     filename: '[name].bundle.js',
     publicPath: '/',
