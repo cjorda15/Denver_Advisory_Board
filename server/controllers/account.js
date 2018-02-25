@@ -1,14 +1,14 @@
 const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 exports.logout = (req, res) => {
-  res.clearCookie('jwt');
+  req.logout();
   res.redirect('/');
 };
 
 exports.signup = (req, res) => {
   let { password, email } = req.body;
+  if (!password) return res.json({ message: 'Must include password.' })
   password = bcrypt.hashSync(password, 10);
   const user = new User({
     password: password,
@@ -21,50 +21,45 @@ exports.signup = (req, res) => {
       return;
     } else {
       user.password = undefined;
-      let token = jwt.sign({ _id: user._id }, 'secret');
-      res
-        .cookie('jwt', token, {
-          expires: new Date(Date.now() + 900000),
-          httpOnly: true
-        })
-        .json({ message: 'Success', user: user });
+      req.logIn(user, function (loginErr) {
+        if (loginErr) return next(loginErr)
+        return res.json({ message: 'Success', user: user })
+      });
     }
   });
 };
 
-exports.login = (req, res) => {
-  const { email, password } = req.body;
-  User.findOne({ email: email }, (err, user) => {
-    if (err) {
+exports.login = (req, res, next) => {
+  const { email, password } = req.body 
+  User.findOne({ email: email }, (error, user) => {
+    if (error) {
       return res.status(500).json({ message: 'Something went wrong' });
     }
     if (!user) {
-      res.status(401).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'User not found' });
     } else {
       if (!user.comparePassword(password)) {
-        res.status(401).json({ message: 'Bad Password' });
+        return res.status(401).json({ message: 'Bad Password' });
       } else {
         user.password = undefined;
-        let token = jwt.sign({ _id: user._id }, 'secret');
-        res
-          .cookie('jwt', token, { maxage: 900000, httpOnly: true })
-          .json({ message: 'Success', user: user });
+        req.logIn(user, function (loginErr) {
+          if (loginErr) return next(loginErr)
+          return res.json({ message: 'Success', user: user })
+        });
       }
     }
-  });
-};
+  })
+}
+
 
 exports.get = (req, res) => {
-  let token = req.cookies.jwt;
-  jwt.verify(token, 'secret', (error, decoded) => {
-    if (error) return res.status(500).send(error);
-    let { _id, name, email } = decoded;
-    User.findOne({ _id: _id }, (err, user) => {
-      if (err) return res.status(err);
+  if (!req.user) return res.status(403).json({ name: 'JsonWebTokenError'})
+    User.findOne({ _id: req.user.id }, (err, user) => {
+      if (err) return res.status(500).json({message: err});
+      if (!user) return res.status(404).json({message: 'Not found.'})
       user.password = undefined 
       res.json(user);
     });
-  });
 };
 
 exports.image = (req, res) => {
