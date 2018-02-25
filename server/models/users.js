@@ -4,13 +4,14 @@ let bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
   name: String,
-  password: { type: String, required: true },
+  password: { type: String, default: '' },
   email: { type: String, unique: true },
   title: String,
   organization: String,
   summary: String,
   image: String,
-  admin: { type: Boolean, default: false }
+  admin: { type: Boolean, default: false },
+  linkedinID: String 
 });
 
 userSchema.methods.comparePassword = function(password) {

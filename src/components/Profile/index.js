@@ -25,19 +25,34 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {
-    let { name, title, organization, summary } = this.props.user.userID;
-    name = name || '';
-    title = title || '';
-    organization = organization || '';
-    summary = summary || '';
-    this.setState({
-      name: name,
-      organization: organization,
-      title: title,
-      summary: summary
-    });
+  componentWillMount() {
+    fetch('/api/v1/user', {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(data => data.json())
+      .then(data => {
+        if (data.name === 'JsonWebTokenError') {
+          window.location.href = '/'
+          return;
+        }
+        let { name, title, organization, summary } = data;
+        name = name || '';
+        title = title || '';
+        organization = organization || '';
+        summary = summary || '';
+        this.setState({
+          name: name,
+          organization: organization,
+          title: title,
+          summary: summary
+        });
+        this.props.handleUser(data);
+      })
+      .catch(err => console.log(err));
+    }    
 
+  componentDidMount() {
     fetch(`/api/v1/events/${this.props.user.userID._id}`, {
       method: 'GET',
       credentials: 'include',

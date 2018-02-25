@@ -27,6 +27,7 @@ const SignupForm = ({ password, retypePassword, email, handleInput }) => {
         value={retypePassword}
         placeholder="retype-password"
       />
+      <a href="/signup/linkedin">Signup With LinkedIn</a>
     </div>
   );
 };

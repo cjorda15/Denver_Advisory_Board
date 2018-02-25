@@ -360,7 +360,12 @@ var SignupForm = function SignupForm(_ref) {
       },
       value: retypePassword,
       placeholder: 'retype-password'
-    })
+    }),
+    _react2.default.createElement(
+      'a',
+      { href: '/signup/linkedin' },
+      'Signup With LinkedIn'
+    )
   );
 };
 
@@ -407,7 +412,12 @@ var LoginForm = function LoginForm(_ref) {
       type: 'password',
       value: password,
       placeholder: 'Password'
-    })
+    }),
+    _react2.default.createElement(
+      'a',
+      { href: '/login/linkedin' },
+      'Login With LinkedIn'
+    )
   );
 };
 
