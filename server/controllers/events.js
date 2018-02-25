@@ -49,8 +49,6 @@ exports.post = (req, res) => {
 };
 
 exports.patch = (req, res) => {
-  console.log(req.user);
-  console.log(req.body);
   let id = req.user._id;
   Event.find(
     { _id: req.body.event, participants: { $in: [id] } },

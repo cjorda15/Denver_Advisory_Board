@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 161:
+/***/ 163:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,23 +16,27 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(16);
+var _reactRedux = __webpack_require__(14);
 
-var _reactScroll = __webpack_require__(36);
+var _actions = __webpack_require__(21);
 
-var _reactScroll2 = _interopRequireDefault(_reactScroll);
-
-var _HomeGrid = __webpack_require__(317);
-
-var _HomeGrid2 = _interopRequireDefault(_HomeGrid);
-
-var _reactSvg = __webpack_require__(166);
+var _reactSvg = __webpack_require__(167);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
-__webpack_require__(320);
+var _jquery = __webpack_require__(37);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _ProfileEventsList = __webpack_require__(445);
+
+var _ProfileEventsList2 = _interopRequireDefault(_ProfileEventsList);
+
+__webpack_require__(448);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -40,135 +44,439 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Home = function (_Component) {
-  _inherits(Home, _Component);
+var Profile = function (_Component) {
+  _inherits(Profile, _Component);
 
-  function Home() {
-    _classCallCheck(this, Home);
+  function Profile(props) {
+    _classCallCheck(this, Profile);
 
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+    _this.state = {
+      loading: false,
+      edit: false,
+      imageLoaded: '',
+      name: '',
+      organization: '',
+      title: '',
+      summary: ''
+    };
+    return _this;
   }
 
-  _createClass(Home, [{
-    key: 'scrollTop',
-    value: function scrollTop() {
-      setTimeout(function () {
-        return _reactScroll2.default.scroller.scrollTo('landing-svg', {
-          duration: 0,
-          delay: 0,
-          smooth: false
+  _createClass(Profile, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      fetch('/api/v1/user', {
+        method: 'GET',
+        credentials: 'include'
+      }).then(function (data) {
+        return data.json();
+      }).then(function (data) {
+        if (data.name === 'JsonWebTokenError') {
+          window.location.href = '/';
+          return;
+        }
+        var name = data.name,
+            title = data.title,
+            organization = data.organization,
+            summary = data.summary;
+
+        name = name || '';
+        title = title || '';
+        organization = organization || '';
+        summary = summary || '';
+        _this2.setState({
+          name: name,
+          organization: organization,
+          title: title,
+          summary: summary
         });
-      }, 0);
+        _this2.props.handleUser(data);
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }, {
-    key: 'scrollAfterSearch',
-    value: function scrollAfterSearch(input) {
-      setTimeout(function () {
-        return _reactScroll2.default.scroller.scrollTo(input, {
-          duration: 1000,
-          delay: 70,
-          smooth: true
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      fetch('/api/v1/events/' + this.props.user.userID._id, {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
+      }).then(function (data) {
+        return data.json();
+      }).then(function (events) {
+        _this3.props.handleGeneratePersonalEvents(events);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'handleImageLoad',
+    value: function handleImageLoad(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      var data = new FormData();
+      var input = document.querySelector('.file-field').files[0];
+      this.setState({ loading: true });
+      data.append('file', input);
+
+      fetch('/api/v1/cloudload', {
+        method: 'POST',
+        body: data
+      }).then(function (res) {
+        return res.json();
+      }).then(function (imageUrl) {
+        _this4.closeEdit();
+        _this4.setState({ loading: false });
+        _this4.props.handleImage(imageUrl);
+        fetch('/api/v1/updateImage', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: _this4.props.user.userID._id,
+            image: imageUrl
+          })
+        }).then(function (data) {
+          return data.json();
+        }).then(function (mongoResponse) {
+          if (mongoResponse == 'Success') {
+            console.log(mongoResponse);
+            return;
+          }
+          console.log('ERRORWITHMONGO');
+        }).catch(function (err) {
+          console.log(err, 'ERRROR');
         });
-      }, 100);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'determineImage',
+    value: function determineImage() {
+      return this.props.user.userID.image || 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
+    }
+  }, {
+    key: 'profileBasicDetails',
+    value: function profileBasicDetails() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'account-profile-basic-details' },
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.name || 'add your name'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.organization || 'add your organization'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.user.userID.title || 'add your title'
+        )
+      );
+    }
+  }, {
+    key: 'profileSummaryDetails',
+    value: function profileSummaryDetails() {
+      return _react2.default.createElement(
+        'pre',
+        { className: 'account-profile-summary' },
+        this.props.user.userID.summary || 'add a summary'
+      );
+    }
+  }, {
+    key: 'handleEditBasicInfo',
+    value: function handleEditBasicInfo(e) {
+      var _this5 = this;
+
+      e.preventDefault();
+      var _state = this.state,
+          name = _state.name,
+          organization = _state.organization,
+          title = _state.title,
+          summary = _state.summary;
+
+      var id = this.props.user.userID._id;
+      fetch('/api/v1/user/update', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          name: name,
+          organization: organization,
+          title: title,
+          summary: summary,
+          id: id
+        })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        return _this5.handleUserUpdate(data);
+      }).catch(function (err) {
+        return console.log(err, 'ERROR');
+      });
+    }
+  }, {
+    key: 'handleUserUpdate',
+    value: function handleUserUpdate(data) {
+      if (data.message === 'Success') {
+        this.props.handleUser(data.user);
+        this.closeEdit();
+        return;
+      }
+    }
+  }, {
+    key: 'handleImagePath',
+    value: function handleImagePath(e) {
+      var imagePath = e.target.value.split('');
+      var cleanImageName = imagePath.splice(imagePath.indexOf('h') + 2, imagePath.length).join('');
+
+      this.setState({ imageLoaded: cleanImageName });
+    }
+  }, {
+    key: 'determineImageFile',
+    value: function determineImageFile() {
+      return this.state.imageLoaded ? _react2.default.createElement(
+        'span',
+        null,
+        this.state.imageLoaded
+      ) : null;
+    }
+  }, {
+    key: 'showEditProfile',
+    value: function showEditProfile() {
+      var _this6 = this;
+
+      return this.state.edit ? _react2.default.createElement(
+        'div',
+        { className: 'edit-profile-container' },
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'edit-profile-details-btn',
+            onClick: function onClick() {
+              _this6.closeEdit();
+            }
+          },
+          'cancel'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'edit-image-form-container' },
+          _react2.default.createElement(
+            'form',
+            {
+              className: 'edit-image-form',
+              onSubmit: function onSubmit(e) {
+                _this6.handleImageLoad(e);
+              },
+              action: '/api/v1/image',
+              method: 'post',
+              encType: 'multipart/form-data'
+            },
+            _react2.default.createElement(
+              'div',
+              null,
+              'Load Image'
+            ),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'upload-photo' },
+              'Choose Image'
+            ),
+            _react2.default.createElement('input', {
+              onChange: function onChange(e) {
+                _this6.handleImagePath(e);
+              },
+              className: 'file-field',
+              name: 'recfile',
+              type: 'file',
+              id: 'upload-photo'
+            }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit' },
+              'Submit'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'edit-image-bottom-container' },
+              _react2.default.createElement(
+                'div',
+                { className: 'image-file-name-container' },
+                this.determineImageFile()
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'image-loading-svg-container' },
+                this.state.loading ? _react2.default.createElement(_reactSvg2.default, {
+                  className: 'image-loading-svg',
+                  path: 'loading.svg',
+                  style: { width: 200 }
+                }) : null
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'edit-basic-form-container' },
+          _react2.default.createElement(
+            'div',
+            null,
+            'Basic Info'
+          ),
+          _react2.default.createElement('input', {
+            placeholder: 'name',
+            value: this.state.name,
+            onChange: function onChange(e) {
+              _this6.editBasicInfo(e, 'name');
+            }
+          }),
+          _react2.default.createElement('input', {
+            placeholder: 'organization',
+            value: this.state.organization,
+            onChange: function onChange(e) {
+              _this6.editBasicInfo(e, 'organization');
+            }
+          }),
+          _react2.default.createElement('input', {
+            placeholder: 'title',
+            value: this.state.title,
+            onChange: function onChange(e) {
+              _this6.editBasicInfo(e, 'title');
+            }
+          }),
+          _react2.default.createElement('textarea', {
+            placeholder: 'summary',
+            value: this.state.summary,
+            onChange: function onChange(e) {
+              _this6.editBasicInfo(e, 'summary');
+            }
+          }),
+          _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick(e) {
+                _this6.handleEditBasicInfo(e);
+              }
+            },
+            'Submit'
+          )
+        )
+      ) : null;
+    }
+  }, {
+    key: 'editProfile',
+    value: function editProfile(e) {
+      e.preventDefault();
+      (0, _jquery2.default)('body').addClass('no-scroll');
+      this.setState({ edit: true });
+    }
+  }, {
+    key: 'closeEdit',
+    value: function closeEdit() {
+      this.setState({ imageLoaded: '' });
+      (0, _jquery2.default)('body').removeClass('no-scroll');
+      this.setState({ edit: false });
+    }
+  }, {
+    key: 'editBasicInfo',
+    value: function editBasicInfo(e, type) {
+      this.setState(_defineProperty({}, type, e.target.value));
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this7 = this;
 
       return _react2.default.createElement(
         'div',
-        { id: 'home-container' },
-        _react2.default.createElement(
-          'div',
-          { className: 'home-intro-container' },
-          _react2.default.createElement('span', null),
-          _react2.default.createElement(
-            'h3',
-            { 'data-aos': 'fade-up' },
-            'We believe in creating and growing professional friendships resulting in personal & business success.'
-          ),
-          _react2.default.createElement('span', null)
-        ),
+        { id: 'profile-container' },
         _react2.default.createElement(
           'section',
-          { className: 'home-page-section-1', 'data-aos': 'fade-down' },
+          { className: 'account-profile-card-container' },
           _react2.default.createElement(
             'div',
-            {
-              src: '/',
-              'data-aos': 'fade-down',
-              className: 'call-to-action-container'
-            },
-            _react2.default.createElement(_reactSvg2.default, { path: 'computer.svg', style: { width: 200 } }),
-            ' ',
+            { className: 'account-profile-card-top' },
             _react2.default.createElement(
-              _reactRouterDom.NavLink,
+              'button',
               {
-                className: 'call-to-action-links',
-                onClick: function onClick() {
-                  _this2.scrollTop();
-                  _this2.scrollAfterSearch('home-container');
+                onClick: function onClick(e) {
+                  _this7.editProfile(e);
                 },
-                to: '/'
+                className: 'edit-profile-details-btn'
               },
-              'Get Connected'
+              'edit profile'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'profile-image-wrapper' },
+              _react2.default.createElement('div', {
+                className: 'profile-image',
+                style: {
+                  backgroundImage: 'url(' + this.determineImage() + ')'
+                }
+              })
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'call-to-action-container', 'data-aos': 'fade-down' },
-            _react2.default.createElement(_reactSvg2.default, { path: 'chatting.svg', style: { width: 200 } }),
-            ' ',
-            _react2.default.createElement(
-              _reactRouterDom.NavLink,
-              {
-                className: 'call-to-action-links',
-                onClick: function onClick() {
-                  _this2.scrollTop();
-
-                  _this2.scrollAfterSearch('events-container');
-                },
-                to: '/events'
-              },
-              'COME TO AN EVENT'
-            ),
-            ' '
+            { className: 'account-profile-bottom-card' },
+            this.profileBasicDetails(),
+            this.profileSummaryDetails()
           ),
-          _react2.default.createElement(
-            'div',
-            { 'data-aos': 'fade-down', className: 'call-to-action-container' },
-            _react2.default.createElement(_reactSvg2.default, { path: 'rocket.svg', style: { width: 200 } }),
-            ' ',
-            _react2.default.createElement(
-              _reactRouterDom.NavLink,
-              {
-                className: 'call-to-action-links',
-                onClick: function onClick() {
-                  _this2.scrollTop();
-
-                  _this2.scrollAfterSearch('home-container');
-                },
-                to: '/'
-              },
-              'SOAR NETWORK'
-            ),
-            ' '
-          )
+          this.showEditProfile()
         ),
-        _react2.default.createElement(_HomeGrid2.default, null)
+        _react2.default.createElement(_ProfileEventsList2.default, { events: this.props.events })
       );
     }
   }]);
 
-  return Home;
+  return Profile;
 }(_react.Component);
 
-exports.default = Home;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.user,
+    events: state.events
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    handleImage: function handleImage(input) {
+      dispatch((0, _actions.loadImage)(input));
+    },
+    handleUser: function handleUser(input) {
+      dispatch((0, _actions.updateUser)(input));
+    },
+    handleGeneratePersonalEvents: function handleGeneratePersonalEvents(input) {
+      dispatch((0, _actions.generatePersonalEvents)(input));
+    },
+    handleUpdateParticipant: function handleUpdateParticipant(input) {
+      dispatch((0, _actions.updateParticipant)(input));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Profile);
 
 /***/ }),
 
-/***/ 165:
+/***/ 166:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -202,7 +510,7 @@ module.exports = memoizeStringOnly;
 
 /***/ }),
 
-/***/ 166:
+/***/ 167:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -222,7 +530,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(167);
+var _server = __webpack_require__(288);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -236,7 +544,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // See: https://github.com/webpack/react-starter/issues/37
 var isBrowser = typeof window !== 'undefined';
-var SVGInjector = isBrowser ? __webpack_require__(170) : undefined;
+var SVGInjector = isBrowser ? __webpack_require__(291) : undefined;
 
 var ReactSVG = function (_React$Component) {
   _inherits(ReactSVG, _React$Component);
@@ -336,23 +644,23 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 167:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(168);
+  module.exports = __webpack_require__(289);
 } else {
-  module.exports = __webpack_require__(169);
+  module.exports = __webpack_require__(290);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 168:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -365,7 +673,7 @@ if (process.env.NODE_ENV === 'production') {
  * LICENSE file in the root directory of this source tree.
  */
 
-var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(165);
+var h=__webpack_require__(6),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(166);
 function w(a){for(var b=arguments.length-1,g="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)g+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(g+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var x={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function z(a,b){return(a&b)===b}
 var B={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=B,g=a.Properties||{},c=a.DOMAttributeNamespaces||{},k=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in g){C.hasOwnProperty(f)?w("48",f):void 0;var e=f.toLowerCase(),d=g[f];e={attributeName:e,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:z(d,b.MUST_USE_PROPERTY),
@@ -402,7 +710,7 @@ d){if(null!=d.__html){d=d.__html;break a}}else if(d=f.children,"string"===typeof
 
 /***/ }),
 
-/***/ 169:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -429,7 +737,7 @@ var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(5);
 var emptyObject = __webpack_require__(13);
 var hyphenateStyleName = __webpack_require__(66);
-var memoizeStringOnly = __webpack_require__(165);
+var memoizeStringOnly = __webpack_require__(166);
 var warning = __webpack_require__(15);
 var checkPropTypes = __webpack_require__(20);
 var camelizeStyleName = __webpack_require__(67);
@@ -2955,7 +3263,7 @@ module.exports = server_browser;
 
 /***/ }),
 
-/***/ 170:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3427,7 +3735,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ 317:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3443,17 +3751,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(16);
+var _reactRedux = __webpack_require__(14);
 
-var _reactScroll = __webpack_require__(36);
-
-var _reactScroll2 = _interopRequireDefault(_reactScroll);
-
-__webpack_require__(318);
-
-var _reactSvg = __webpack_require__(166);
-
-var _reactSvg2 = _interopRequireDefault(_reactSvg);
+__webpack_require__(446);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3463,232 +3763,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var HomeGrid = function (_Component) {
-  _inherits(HomeGrid, _Component);
+var ProfileEventsList = function (_Component) {
+  _inherits(ProfileEventsList, _Component);
 
-  function HomeGrid() {
-    _classCallCheck(this, HomeGrid);
+  function ProfileEventsList(props) {
+    _classCallCheck(this, ProfileEventsList);
 
-    return _possibleConstructorReturn(this, (HomeGrid.__proto__ || Object.getPrototypeOf(HomeGrid)).call(this));
+    return _possibleConstructorReturn(this, (ProfileEventsList.__proto__ || Object.getPrototypeOf(ProfileEventsList)).call(this, props));
   }
 
-  _createClass(HomeGrid, [{
-    key: 'scrollTop',
-    value: function scrollTop() {
-      setTimeout(function () {
-        return _reactScroll2.default.scroller.scrollTo('landing-svg', {
-          duration: 0,
-          delay: 0,
-          smooth: false
-        });
-      }, 0);
-    }
-  }, {
-    key: 'scrollAfterSearch',
-    value: function scrollAfterSearch(input) {
-      setTimeout(function () {
-        return _reactScroll2.default.scroller.scrollTo(input, {
-          duration: 1000,
-          delay: 70,
-          smooth: true
-        });
-      }, 100);
+  _createClass(ProfileEventsList, [{
+    key: 'renderEvents',
+    value: function renderEvents() {
+      return this.props.events && this.props.events.length ? _react2.default.createElement(
+        'section',
+        { className: 'profile-events-list-container' },
+        this.props.events.map(function (event, index) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'events-card-holder', key: index },
+            _react2.default.createElement(
+              'div',
+              null,
+              'hello'
+            )
+          );
+        })
+      ) : null;
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'section',
-        { id: 'home-grid' },
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-1' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'One of the most valuable benefits of the Denver Advisory Board is the opportunity to join a Peer Advisory Group.'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'waving.svg', style: { width: 200 } }),
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Peer Advisory Group'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-2' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'One of our primary purposes was to bring value to the community in which its members live and work. Today, that is still an important hallmark of the organization.'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'community.svg', style: { width: 200 } }),
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Community Service'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-3' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'We meet at the Downtown Aquarium on the 2nd Tuesday of every month and we welcome guests!'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'monthly.svg', style: { width: 200 } }),
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Monthly Meetings'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-4' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'Come see our list of members'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'search.svg', style: { width: 200 } }),
-              ' ',
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Membership Directory'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-5' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'Check out our Commitee Chairs'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'hi-five.svg', style: { width: 200 } }),
-              ' ',
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Committees'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'landing-photo-wrapper' },
-          _react2.default.createElement(
-            'div',
-            { className: 'landing-photo-container photo-container-bg-6' },
-            _react2.default.createElement(
-              'div',
-              { className: 'landing-photo-hidden-text-wrapper' },
-              _react2.default.createElement(
-                'p',
-                { className: 'landing-photo-hidden-text' },
-                'The DAB is always looking to bring in speakers that add value to our members. Interested in being a speaker?'
-              ),
-              _react2.default.createElement(_reactSvg2.default, { path: 'group.svg', style: { width: 200 } }),
-              ' ',
-              _react2.default.createElement(
-                'a',
-                { className: 'grid-link', href: '/' },
-                'Learn More'
-              )
-            ),
-            _react2.default.createElement(
-              'h6',
-              { className: 'inital-block' },
-              'Programs'
-            )
-          )
-        )
+        'div',
+        { className: 'profile-events-list' },
+        this.renderEvents()
       );
     }
   }]);
 
-  return HomeGrid;
+  return ProfileEventsList;
 }(_react.Component);
 
-exports.default = HomeGrid;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    events: state.events
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(ProfileEventsList);
 
 /***/ }),
 
-/***/ 318:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(319);
+var content = __webpack_require__(447);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3702,8 +3835,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./home_grid.scss", function() {
-			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./home_grid.scss");
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./profile_events_list.scss", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/autoprefixer-loader/index.js!../../../../node_modules/sass-loader/lib/loader.js!./profile_events_list.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -3714,28 +3847,28 @@ if(false) {
 
 /***/ }),
 
-/***/ 319:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
+
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapper h1 {\n  font-family: 'Pacifico', cursive;\n  font-weight: normal;\n  margin-left: 10%;\n  font-size: 3em; }\n\n#home-grid {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  max-width: 1000px;\n  margin: 0 auto;\n  width: 100%; }\n\n.landing-photo-wrapper {\n  height: 360px;\n  margin-bottom: 10px; }\n\n.landing-photo-container {\n  background: #000;\n  display: block;\n  height: 230px;\n  overflow: hidden;\n  position: relative;\n  margin-top: 20px;\n  width: 300px;\n  transition: all 400ms ease-in-out; }\n  .landing-photo-container:hover {\n    height: 360px; }\n\n.landing-photo-container:hover .inital-block {\n  margin-left: -500px; }\n\n.landing-photo-container:hover div {\n  margin-right: 0px;\n  left: 0px; }\n\n.landing-photo-container:hover {\n  box-shadow: none; }\n\n.inital-block {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  height: 230px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.landing-photo-hidden-text {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 1em;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  font-family: \"Comfortaa\", serif;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding: 10px;\n  transition: all 400ms ease-in-out; }\n\n.landing-photo-hidden-text-wrapper {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  color: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  height: 100%;\n  left: 300px;\n  padding: 10px;\n  position: absolute;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  transition: all 400ms ease-in-out;\n  width: 100%; }\n\n.grid-link {\n  border-bottom: #19f6e8 2px solid;\n  color: #fff;\n  font-family: \"Fredoka One\", cursive;\n  text-decoration: none;\n  transition: all 0.5s; }\n  .grid-link:hover {\n    border-bottom: red 2px solid;\n    color: #fff; }\n\n.photo-container-bg-1 {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-1:hover {\n  background: linear-gradient(to bottom right, #ffafbd, #ffc3a0); }\n\n.photo-container-bg-2 {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-2:hover {\n  background: linear-gradient(to bottom right, #d66d75, #ff4f6f); }\n\n.photo-container-bg-3 {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-3:hover {\n  background: linear-gradient(to bottom right, #bc4e9c, #f80759); }\n\n.photo-container-bg-4 {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-4:hover {\n  background: linear-gradient(to bottom right, #a8c0ff, #3f2b96); }\n\n.photo-container-bg-5 {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-5:hover {\n  background: linear-gradient(to bottom right, #ffc44f, #b20a2c); }\n\n.photo-container-bg-6 {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n\n.photo-container-bg-6:hover {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff); }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 320:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(321);
+var content = __webpack_require__(449);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3749,8 +3882,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./home.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./home.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./profile.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./profile.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -3761,7 +3894,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 321:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(false);
@@ -3769,7 +3902,7 @@ exports = module.exports = __webpack_require__(11)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#home-container {\n  margin: 60px 0px;\n  padding: 80px 0px; }\n  #home-container h3 {\n    font-family: \"Nunito\", serif;\n    font-size: 2em;\n    max-width: 600px;\n    padding: 20px;\n    text-align: center;\n    width: 90%; }\n  #home-container .home-page-section-1 {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    margin: 100px auto;\n    max-width: 860px; }\n\n.call-to-action-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n  .call-to-action-container img {\n    width: 90px; }\n\n.call-to-action-links {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  text-decoration: none;\n  padding: 18px;\n  margin-top: 15px;\n  text-align: center;\n  transition: all 0.8s;\n  width: 239px; }\n  .call-to-action-links:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.home-intro-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n  .home-intro-container span {\n    display: -webkit-inline-box;\n    display: -ms-inline-flexbox;\n    display: inline-flex;\n    border-bottom: 3px solid #000;\n    max-width: 300px;\n    width: 80%; }\n\n@media (max-width: 700px) {\n  .home-page-section-1 {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column; }\n    .home-page-section-1 div {\n      margin: 20px; } }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#profile-container {\n  padding-top: 100px; }\n\n.account-profile-card-container {\n  border: 2px solid #84c1eb;\n  margin: 0px auto;\n  max-width: 400px;\n  min-width: 320px;\n  width: 100%; }\n\n.account-profile-card-top {\n  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);\n  height: 160px;\n  position: relative; }\n\n.profile-image-wrapper {\n  bottom: -85px;\n  position: absolute;\n  width: 100%; }\n\n.profile-image {\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center;\n  border-radius: 100%;\n  height: 175px;\n  margin: 0px auto;\n  width: 175px; }\n\n.edit-profile-details-btn,\n.edit-image-form button {\n  background: #fff;\n  border-radius: 64px;\n  border: #dd7782 3px solid;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.1em;\n  margin: 10px;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s;\n  width: 140px; }\n  .edit-profile-details-btn:hover,\n  .edit-image-form button:hover {\n    background: #dd7782;\n    color: #fff; }\n\n.edit-profile-details-btn {\n  float: right; }\n\n.account-profile-bottom-card {\n  padding-top: 110px; }\n\n.account-profile-basic-details {\n  border-bottom: 3px solid cyan;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  margin: 0px auto;\n  width: 90%; }\n  .account-profile-basic-details p {\n    background: #fff;\n    border: #dd7782 3px solid;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s; }\n\n.account-profile-summary {\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  margin: 0px auto;\n  padding: 20px 0px;\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  width: 90%; }\n\n.edit-profile-container {\n  background: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  z-index: 50;\n  height: 100%;\n  width: 100%;\n  overflow-y: scroll; }\n\n.edit-image-form-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0px auto;\n  text-align: center;\n  width: 100%; }\n\n.edit-image-form {\n  background: #fff;\n  margin: 75px auto 10px;\n  width: 100%; }\n  .edit-image-form div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-image-form input {\n    height: 0px;\n    opacity: 0;\n    width: 0px; }\n  .edit-image-form label {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-image-form label:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.edit-image-bottom-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 165px; }\n\n.image-loading-svg-container {\n  height: 100px;\n  padding-top: 0px;\n  padding-bottom: 15px;\n  margin: 0px auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 50px; }\n\n.edit-basic-form-container {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background: #fff;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  width: 100%; }\n  .edit-basic-form-container div {\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 10px;\n    padding-top: 20px;\n    text-align: center; }\n  .edit-basic-form-container input,\n  .edit-basic-form-container textarea {\n    border: 2px solid #dd7782;\n    color: #dd7782;\n    font-size: 1em;\n    height: 50px;\n    margin-bottom: 10px;\n    outline: none;\n    padding-left: 10px;\n    resize: vertical;\n    transition: all 0.5s;\n    width: 270px; }\n    .edit-basic-form-container input:focus,\n    .edit-basic-form-container textarea:focus {\n      border: 2px solid #19f6e8; }\n  .edit-basic-form-container textarea {\n    padding-top: 14px; }\n  .edit-basic-form-container button {\n    background: #fff;\n    border: #dd7782 3px solid;\n    border-radius: 64px;\n    color: #dd7782;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1.1em;\n    margin: 10px;\n    padding: 14px;\n    outline: none;\n    text-decoration: none;\n    text-align: center;\n    transition: all 0.8s;\n    width: 270px; }\n    .edit-basic-form-container button:hover {\n      background: #dd7782;\n      color: #fff; }\n\n.no-scroll {\n  overflow: hidden; }\n", ""]);
 
 // exports
 
