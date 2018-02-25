@@ -84,3 +84,7 @@ r.get('/contact', (req, res) => res.render('home', {}))
 r.get('/addevent', (req, res) => res.render('home', {}))
 r.get('/profile', (req, res) => res.render('home', {}))
 r.get('/add', (req, res) => res.render('home', {}))
+
+let adminDashboard = require('./controllers/admin')
+r.get('/admin', adminDashboard.login)
+r.get('/admin/dashboard', adminDashboard.dashboard)
