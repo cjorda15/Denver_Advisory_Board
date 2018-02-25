@@ -3,7 +3,7 @@ const events = (state = null, action) => {
     case 'GATHER_EVENTS':
       return action.payload;
 
-    case 'UPDATE_PARTICPIANT':
+    case 'UPDATE_PARTICIPIANT':
       let newState = [...state];
       newState = newState.map(event => {
         if (event._id == action.payload.eventId) {

@@ -3,11 +3,12 @@ import sizeMe from 'react-sizeme';
 import StackGrid from 'react-stack-grid';
 import { NavLink } from 'react-router-dom';
 import Scroll from 'react-scroll';
-import { connect, compose } from 'react-redux';
 import $ from 'jquery';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import EventCard from './EventCard';
 import { gatherEvents, updateParticipant } from '../../actions';
+
 import './events.scss';
 import './events.js';
 
@@ -53,19 +54,19 @@ class Events extends Component {
   }
 
   attendEvent(eventId) {
-    fetch('/api/v1/events', {
+    fetch(`/api/v1/events/${this.props.user.userID._id}`, {
       method: 'PATCH',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ event: eventId })
     })
       .then(response => response.json())
-      .then(response =>
+      .then(response => {
         this.props.handleUpdateParticipant({
           eventId: eventId,
-          user: this.props.user
-        })
-      )
+          user: this.props.user.userID
+        });
+      })
       .catch(err => console.log(err, ' ERROR'));
   }
 
@@ -129,7 +130,7 @@ class Events extends Component {
 const mapStateToProps = state => {
   return {
     events: state.events,
-    user: state.user.userID
+    user: state.user
   };
 };
 
