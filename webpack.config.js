@@ -4,7 +4,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   entry: {
     home:  './src/index.js',
-    adminLogin: './src/admin/login'
+    adminLogin: './src/admin/login',
+    adminDash: './src/admin/dash'
   },
   output: {
     filename: '[name].bundle.js',
