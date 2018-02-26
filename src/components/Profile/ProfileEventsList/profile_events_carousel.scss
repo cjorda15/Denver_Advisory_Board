@@ -1,0 +1,57 @@
+@import '../../../styles/utilities/index.scss';
+
+.profile-event-carousel-container {
+  position: relative;
+  width: 250px;
+}
+
+.profile-event-change-presentation-btn-container {
+  position: absolute;
+  z-index: 1;
+  bottom: 31px;
+  width: 100%;
+}
+
+.profile-event-change-presentation-left-btn,
+.profile-event-change-presentation-right-btn {
+  background: #1a1a1a;
+  border-radius: 100%;
+  font-size: 18px;
+  color: #fff;
+  padding: 8px;
+  outline: none;
+}
+
+.profile-event-change-presentation-left-btn {
+}
+
+.profile-event-change-presentation-right-btn {
+  float: right;
+}
+
+.profile-event-image-background {
+  height: 240px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.profile-event-inner-info-container {
+  padding: 10px;
+  p,
+  pre {
+    font-family: $font-normal;
+    margin-bottom: 10px;
+    span {
+      border-bottom: 2px solid #33f5e7;
+      display: inline-block;
+    }
+  }
+}
+
+.active-profile-event-file {
+  display: block;
+}
+.not-active-profile-event-file {
+  display: none;
+}

@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import EventCard from './EventCard';
 import { gatherEvents, updateParticipant } from '../../actions';
-
 import './events.scss';
 import './events.js';
 

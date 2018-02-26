@@ -6,7 +6,7 @@ import $ from 'jquery';
 import ProfileEventsList from './ProfileEventsList';
 import {
   updateUser,
-  updateParticipant,
+  updatePersonalEvents,
   generatePersonalEvents
 } from '../../actions';
 import './profile.scss';
@@ -50,9 +50,7 @@ class Profile extends Component {
         this.props.handleUser(data);
       })
       .catch(err => console.log(err));
-  }
 
-  componentDidMount() {
     fetch(`/api/v1/events/${this.props.user.userID._id}`, {
       method: 'GET',
       credentials: 'include',
@@ -106,9 +104,10 @@ class Profile extends Component {
   }
 
   determineImage() {
-    return this.props.user.userID.image.url
-      ? this.props.user.userID.image.url
-      : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
+    return (
+      this.props.user.userID.image.url ||
+      'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png'
+    );
   }
 
   profileBasicDetails() {
@@ -308,7 +307,11 @@ class Profile extends Component {
           </div>
           {this.showEditProfile()}
         </section>
-        <ProfileEventsList events={this.props.events} />
+        <ProfileEventsList
+          handleUpdateParticipant={this.props.handleUpdateParticipant}
+          user={this.props.user}
+          events={this.props.events}
+        />
       </div>
     );
   }
@@ -317,7 +320,7 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    events: state.events
+    events: state.personalEvents
   };
 };
 
@@ -333,7 +336,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(generatePersonalEvents(input));
     },
     handleUpdateParticipant: input => {
-      dispatch(updateParticipant(input));
+      dispatch(updatePersonalEvents(input));
     }
   };
 };

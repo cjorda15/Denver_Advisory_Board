@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import ProfileEventsCarousel from './ProfileEventsCarousel';
 import './profile_events_list.scss';
 
 class ProfileEventsList extends Component {
@@ -7,13 +7,41 @@ class ProfileEventsList extends Component {
     super(props);
   }
 
+  removeEvent(eventID) {
+    console.log(eventID);
+    fetch(`/api/v1/events/${this.props.user.userID._id}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event: eventID })
+    })
+      .then(response => response.json())
+      .then(response => {
+        this.props.handleUpdateParticipant({
+          eventId: eventID,
+          user: this.props.user.userID
+        });
+      })
+      .catch(err => console.log(err, ' ERROR'));
+  }
+
   renderEvents() {
     return this.props.events && this.props.events.length ? (
       <section className="profile-events-list-container">
         {this.props.events.map((event, index) => {
           return (
-            <div className="events-card-holder" key={index}>
-              <div>hello</div>
+            <div className="profile-events-card-holder" key={index}>
+              <div>{event.title}</div>
+              <div>{event.date}</div>
+              <ProfileEventsCarousel presentation={event.images} />
+              <div>{event.summary}</div>
+              <button
+                onClick={e => {
+                  this.removeEvent(event._id);
+                }}
+              >
+                unattend
+              </button>
             </div>
           );
         })}
@@ -26,10 +54,4 @@ class ProfileEventsList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    events: state.events
-  };
-};
-
-export default connect(mapStateToProps)(ProfileEventsList);
+export default ProfileEventsList;
