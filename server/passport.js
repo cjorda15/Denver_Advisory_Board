@@ -53,25 +53,3 @@ passport.use(
     }
   )
 );
-
-// exports.login = (req, res) => {
-//   const { email, password } = req.body;
-//   User.findOne({ email: email }, (err, user) => {
-//     if (err) {
-//       return res.status(500).json({ message: 'Something went wrong' });
-//     }
-//     if (!user) {
-//       res.status(401).json({ message: 'User not found' });
-//     } else {
-//       if (!user.comparePassword(password)) {
-//         res.status(401).json({ message: 'Bad Password' });
-//       } else {
-//         user.password = undefined;
-//         let token = jwt.sign({ _id: user._id }, 'secret');
-//         res
-//           .cookie('jwt', token, { maxage: 900000, httpOnly: true })
-//           .json({ message: 'Success', user: user });
-//       }
-//     }
-//   });
-// };

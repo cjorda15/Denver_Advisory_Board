@@ -1,6 +1,35 @@
 extends ./layout 
 append head
   title Admin | DAB 
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
   link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/css/materialize.min.css")
 block content
-  h1 Dashboard 
+    //- <nav> <!-- navbar content here  --> </nav>
+    ul(id="slide-out" class="sidenav sidenav-fixed")
+      li  
+        a(class="white-text" href="#!") 
+          i(class="material-icons white-text") dashboard 
+          | Dashboard 
+      li
+        a(class="white-text") 
+          i(class="material-icons white-text") group
+          | Members
+      li
+        a(class="waves-effect white-text" href="#!") 
+          i(class="material-icons white-text") event 
+          | Events 
+      li
+        a(href="#!" class="white-text")
+          i(class="material-icons white-text") gavel
+          | Manage Admins
+      li 
+        a(href="#!" class="white-text")
+          i(class="material-icons white-text") email
+          | Newsletter 
+
+    a(href="#" data-target="slide-out" class="sidenav-trigger")
+      i(class="material-icons") menu
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js")
+    script(src="/adminDash.bundle.js")
+    
