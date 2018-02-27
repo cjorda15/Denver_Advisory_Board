@@ -3,6 +3,7 @@ import React from 'react';
 const SignupForm = ({ password, retypePassword, email, handleInput }) => {
   return (
     <div className="signup-container">
+      <a href="/signup/linkedin">Signup With LinkedIn</a>
       <input
         onChange={e => {
           handleInput(e, 'email');
@@ -27,7 +28,6 @@ const SignupForm = ({ password, retypePassword, email, handleInput }) => {
         value={retypePassword}
         placeholder="retype-password"
       />
-      <a href="/signup/linkedin">Signup With LinkedIn</a>
     </div>
   );
 };

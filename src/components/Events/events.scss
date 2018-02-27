@@ -5,6 +5,12 @@
   padding-top: 40px;
 }
 
+#event-svg-intro-wrapper {
+  margin: 10px auto;
+  padding-top: 25px;
+  width: 250px;
+}
+
 #add-event-link,
 .attend-event-btn {
   background: #fff;
@@ -33,6 +39,7 @@
 }
 
 .attend-event-btn {
+  margin-top: 9px;
   width: 140px;
 }
 
@@ -61,6 +68,10 @@
 }
 
 .event-close {
+  background: #fff;
+  border-radius: 0px 0px 10px 10px;
+  border: #dd7782 3px solid;
+  color: #1a1a1a;
   display: none;
   width: 100%;
   pre {
@@ -69,23 +80,26 @@
   }
 }
 .event-card-top {
-  background: linear-gradient(to bottom right, #22c1c3, #a8c0ff);
+  background: #1a1a1a;
+  border-radius: 10px 10px 0px 0px;
   height: 120px;
   width: 100%;
   z-index: 1;
 }
 
 .event-basic-info-container {
-  font-family: $font-normal;
+  color: #fff;
+  font-family: $font-fancy;
   font-size: 1.2em;
   text-align: center;
-  padding-top: 55px;
+  padding-top: 43px;
   margin: 0px auto;
   width: 90%;
 }
 
 .open-event-click-open-btn {
   background: #1a1a1a;
+  border-radius: 10px;
   height: 40px;
   position: absolute;
   overflow: none;

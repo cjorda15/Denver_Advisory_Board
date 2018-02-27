@@ -71,10 +71,5 @@
     "husky": "^0.15.0-rc.8",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack-merge": "^4.1.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prod"
-    }
   }
 }

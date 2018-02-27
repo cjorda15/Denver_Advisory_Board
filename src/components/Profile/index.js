@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadImage } from '../../actions';
 import ReactSVG from 'react-svg';
+import Scroll from 'react-scroll';
 import $ from 'jquery';
+import { loadImage } from '../../actions';
 import ProfileEventsList from './ProfileEventsList';
 import {
   updateUser,
@@ -61,6 +62,20 @@ class Profile extends Component {
         this.props.handleGeneratePersonalEvents(events);
       })
       .catch(err => console.log(err));
+  }
+
+  componentWillMount() {
+    this.scrollAfterLoad();
+  }
+
+  scrollAfterLoad() {
+    setTimeout(() => {
+      return Scroll.scroller.scrollTo('profile-container', {
+        duration: 1000,
+        delay: 0,
+        smooth: true
+      });
+    }, 1000);
   }
 
   handleImageLoad(e) {

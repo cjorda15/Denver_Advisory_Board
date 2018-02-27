@@ -22,14 +22,26 @@ class Login extends Component {
     };
   }
 
-  scrollTop() {
+  componentWillMount() {
+    let options = {
+      delay: '0',
+      duration: '0'
+    };
+    Scroll.animateScroll.scrollToTop(options);
+  }
+
+  componentDidMount() {
+    this.scrollAfterLoad();
+  }
+
+  scrollAfterLoad() {
     setTimeout(() => {
-      return Scroll.scroller.scrollTo('landing-svg', {
-        duration: 0,
+      return Scroll.scroller.scrollTo('login-signup-container', {
+        duration: 1000,
         delay: 0,
-        smooth: false
+        smooth: true
       });
-    }, 0);
+    }, 1000);
   }
 
   scrollAfterSearch(input) {
@@ -118,7 +130,6 @@ class Login extends Component {
   handleSignup(response) {
     if (response.message == 'Success') {
       this.props.handleLogin(response.user);
-      this.scrollTop();
       this.scrollAfterSearch('profile-container');
       this.props.history.replace('/profile');
       return;
@@ -139,7 +150,6 @@ class Login extends Component {
   handleLogin(response) {
     if (response.message == 'Success') {
       this.props.handleLogin(response.user);
-      this.scrollTop();
       this.scrollAfterSearch('profile-container');
       this.props.history.replace('/profile');
       return;

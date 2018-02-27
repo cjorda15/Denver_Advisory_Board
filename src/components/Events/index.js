@@ -7,6 +7,7 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import EventCard from './EventCard';
+import ReactSVG from 'react-svg';
 import { gatherEvents, updateParticipant } from '../../actions';
 import './events.scss';
 import './events.js';
@@ -14,6 +15,14 @@ import './events.js';
 class Events extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    let options = {
+      delay: '0',
+      duration: '0'
+    };
+    Scroll.animateScroll.scrollToTop(options);
   }
 
   componentDidMount() {
@@ -26,16 +35,18 @@ class Events extends Component {
         this.props.handleGatherEvents(events);
       })
       .catch(err => console.log(err));
+
+    this.scrollAfterLoad();
   }
 
-  scrollAfterSearch(input) {
+  scrollAfterLoad() {
     setTimeout(() => {
-      return Scroll.scroller.scrollTo(input, {
+      return Scroll.scroller.scrollTo('events-container', {
         duration: 1000,
-        delay: 70,
+        delay: 0,
         smooth: true
       });
-    }, 100);
+    }, 1000);
   }
 
   handleOnClick(e) {
@@ -107,6 +118,10 @@ class Events extends Component {
 
     return (
       <div id="events-container">
+        <div id="event-svg-intro-wrapper">
+          <ReactSVG path="calendar.svg" style={{ width: 250 }} />
+        </div>
+
         {this.handleAddEventLink()}
         <div className="stack-grid-wrapper">
           <StackGrid
