@@ -67,7 +67,13 @@ var Events = function (_Component) {
   function Events(props) {
     _classCallCheck(this, Events);
 
-    return _possibleConstructorReturn(this, (Events.__proto__ || Object.getPrototypeOf(Events)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Events.__proto__ || Object.getPrototypeOf(Events)).call(this, props));
+
+    _this.state = {
+      showError: false,
+      errorMessage: ''
+    };
+    return _this;
   }
 
   _createClass(Events, [{
@@ -122,11 +128,31 @@ var Events = function (_Component) {
       attending ? this.unattendEvent(eventId) : this.attendEvent(eventId);
     }
   }, {
-    key: 'attendEvent',
-    value: function attendEvent(eventId) {
+    key: 'handleError',
+    value: function handleError(message) {
       var _this3 = this;
 
-      fetch('/api/v1/events/' + this.props.user.userID._id, {
+      this.setState({ showError: true, errorMessage: message });
+
+      setTimeout(function () {
+        _this3.setState({ showError: false, errorMessage: '' });
+      }, 3000);
+    }
+  }, {
+    key: 'errorMessage',
+    value: function errorMessage() {
+      return this.state.showError ? _react2.default.createElement(
+        'div',
+        { id: 'events-error-message' },
+        this.state.errorMessage
+      ) : null;
+    }
+  }, {
+    key: 'attendEvent',
+    value: function attendEvent(eventId) {
+      var _this4 = this;
+
+      this.props.user ? fetch('/api/v1/events/' + this.props.user.userID._id, {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -134,13 +160,13 @@ var Events = function (_Component) {
       }).then(function (response) {
         return response.json();
       }).then(function (response) {
-        _this3.props.handleUpdateParticipant({
+        _this4.props.handleUpdateParticipant({
           eventId: eventId,
-          user: _this3.props.user.userID
+          user: _this4.props.user.userID
         });
       }).catch(function (err) {
         return console.log(err, ' ERROR');
-      });
+      }) : this.handleError('Must be logged in to attend events');
     }
   }, {
     key: 'unattendEvent',
@@ -150,15 +176,15 @@ var Events = function (_Component) {
   }, {
     key: 'handleAddEventLink',
     value: function handleAddEventLink() {
-      var _this4 = this;
+      var _this5 = this;
 
       ///eventually only return if user has admin status
       return _react2.default.createElement(
         _reactRouterDom.NavLink,
         {
           onClick: function onClick() {
-            _this4.scrollTop();
-            _this4.scrollAfterSearch('add-event-container');
+            _this5.scrollTop();
+            _this5.scrollAfterSearch('add-event-container');
           },
           to: '/addevent',
           id: 'add-event-link'
@@ -169,12 +195,13 @@ var Events = function (_Component) {
   }, {
     key: 'renderEvents',
     value: function renderEvents() {
-      var _this5 = this;
+      var _this6 = this;
 
       return this.props.events ? this.props.events.map(function (event, index) {
         return _react2.default.createElement(_EventCard2.default, {
-          handleToggleEvent: _this5.toggleEvent.bind(_this5),
-          handleOnClick: _this5.handleOnClick.bind(_this5),
+          user: _this6.props.user,
+          handleToggleEvent: _this6.toggleEvent.bind(_this6),
+          handleOnClick: _this6.handleOnClick.bind(_this6),
           key: index,
           event: event
         });
@@ -183,7 +210,7 @@ var Events = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       var width = this.props.size.width;
 
@@ -204,7 +231,7 @@ var Events = function (_Component) {
             _reactStackGrid2.default,
             {
               gridRef: function gridRef(grid) {
-                return _this6.grid = grid;
+                return _this7.grid = grid;
               },
               monitorImagesLoaded: true,
               className: 'stack-grid',
@@ -215,7 +242,8 @@ var Events = function (_Component) {
             },
             this.renderEvents()
           )
-        )
+        ),
+        this.errorMessage()
       );
     }
   }]);
@@ -27759,7 +27787,8 @@ var _EventCarousel2 = _interopRequireDefault(_EventCarousel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EventCard = function EventCard(_ref) {
-  var event = _ref.event,
+  var user = _ref.user,
+      event = _ref.event,
       handleOnClick = _ref.handleOnClick,
       handleToggleEvent = _ref.handleToggleEvent;
 
@@ -27782,6 +27811,18 @@ var EventCard = function EventCard(_ref) {
       'Participants:0'
     );
   };
+
+  var determineAttendence = function determineAttendence() {
+    if (!user) {
+      return 'Attend Event';
+    }
+    var participantsList = event.participants.map(function (participant) {
+      return participant._id;
+    });
+
+    return participantsList.includes(user.userID._id) ? 'Unattend Event' : 'Attend Event';
+  };
+
   return _react2.default.createElement(
     'section',
     { className: 'event-card-container' },
@@ -27822,7 +27863,7 @@ var EventCard = function EventCard(_ref) {
               handleToggleEvent(e, event._id, false);
             }
           },
-          'attendEvent'
+          determineAttendence()
         )
       )
     ),
@@ -28069,7 +28110,7 @@ exports = module.exports = __webpack_require__(6)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#events-container {\n  position: relative;\n  padding-top: 40px; }\n\n#event-svg-intro-wrapper {\n  margin: 10px auto;\n  padding-top: 25px;\n  width: 250px; }\n\n#add-event-link,\n.attend-event-btn {\n  background: #fff;\n  border: #dd7782 3px solid;\n  border-radius: 64px;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 0.8em;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s; }\n  #add-event-link:hover,\n  .attend-event-btn:hover {\n    background: #dd7782;\n    color: #fff; }\n\n#add-event-link {\n  margin-top: 30px;\n  margin-left: 20px;\n  position: absolute;\n  z-index: 1;\n  width: 270px; }\n\n.attend-event-btn {\n  margin-top: 9px;\n  width: 140px; }\n\n.no-scroll {\n  overflow: hidden; }\n\n.stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n\n.event-close {\n  background: #fff;\n  border-radius: 0px 0px 10px 10px;\n  border: #dd7782 3px solid;\n  color: #1a1a1a;\n  display: none;\n  width: 100%; }\n  .event-close pre {\n    word-wrap: break-word;\n    white-space: pre-wrap; }\n\n.event-card-top {\n  background: #1a1a1a;\n  border-radius: 10px 10px 0px 0px;\n  height: 120px;\n  width: 100%;\n  z-index: 1; }\n\n.event-basic-info-container {\n  color: #fff;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.2em;\n  text-align: center;\n  padding-top: 43px;\n  margin: 0px auto;\n  width: 90%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  border-radius: 10px;\n  height: 40px;\n  position: absolute;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    position: absolute;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  background: #fff;\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px;\n  transition: all 0.5s; }\n\n.open-event-click-line-2 {\n  background: #fff;\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-click-line-3 {\n  background-color: cyan;\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-line-1-hover {\n  left: 24px;\n  top: 4px; }\n\n.open-event-line-2-hover {\n  left: 14px;\n  top: 14px; }\n\n.open-event-line-3-hover {\n  background: red; }\n\n.close-event-line-1 {\n  height: 25px !important;\n  -webkit-transform: rotate(140deg) !important;\n          transform: rotate(140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-2 {\n  height: 25px !important;\n  -webkit-transform: rotate(-140deg) !important;\n          transform: rotate(-140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-3 {\n  opacity: 0 !important; }\n\n.active-event-file {\n  display: block; }\n\n.not-active-event-file {\n  display: none; }\n\n.event-carousel-container {\n  padding-top: 10px;\n  position: relative; }\n\n.event-change-presentation-btn-container {\n  position: absolute;\n  z-index: 1;\n  top: 4px;\n  width: 100%; }\n\n.event-change-presentation-left-btn,\n.event-change-presentation-right-btn {\n  background: #1a1a1a;\n  border-radius: 100%;\n  font-size: 18px;\n  color: #fff;\n  padding: 8px;\n  outline: none; }\n\n.event-change-presentation-left-btn {\n  margin-left: 3px; }\n\n.event-change-presentation-right-btn {\n  margin-right: 3px;\n  float: right; }\n\n.event-image-background {\n  height: 240px;\n  background-size: contain;\n  background-position: center;\n  background-repeat: no-repeat;\n  width: 296px; }\n\n.event-inner-info-container {\n  padding: 10px; }\n  .event-inner-info-container p,\n  .event-inner-info-container pre {\n    font-family: \"Maven Pro\", sans-serif;\n    margin-bottom: 10px; }\n    .event-inner-info-container p span,\n    .event-inner-info-container pre span {\n      border-bottom: 2px solid #33f5e7;\n      display: inline-block; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#events-container {\n  position: relative;\n  padding-top: 40px; }\n\n#event-svg-intro-wrapper {\n  margin: 10px auto;\n  padding-top: 25px;\n  width: 250px; }\n\n#add-event-link,\n.attend-event-btn {\n  background: #fff;\n  border: #dd7782 3px solid;\n  border-radius: 64px;\n  color: #dd7782;\n  font-family: \"Comfortaa\", serif;\n  font-size: 0.8em;\n  padding: 14px;\n  outline: none;\n  text-decoration: none;\n  text-align: center;\n  transition: all 0.8s; }\n  #add-event-link:hover,\n  .attend-event-btn:hover {\n    background: #dd7782;\n    color: #fff; }\n\n#add-event-link {\n  margin-top: 30px;\n  margin-left: 20px;\n  position: absolute;\n  z-index: 1;\n  width: 270px; }\n\n.attend-event-btn {\n  margin-top: 9px;\n  width: 180px; }\n\n.no-scroll {\n  overflow: hidden; }\n\n.stack-grid-wrapper {\n  max-width: 1200px;\n  margin: 0px auto;\n  padding: 120px 0px;\n  position: relative;\n  width: 80%; }\n\n.stack-grid {\n  width: 100%; }\n\n.event-card-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  margin: 2px solid; }\n\n.event-close {\n  background: #fff;\n  border-radius: 0px 0px 10px 10px;\n  border: #dd7782 3px solid;\n  color: #1a1a1a;\n  display: none;\n  width: 100%; }\n  .event-close pre {\n    word-wrap: break-word;\n    white-space: pre-wrap; }\n\n.event-card-top {\n  background: #1a1a1a;\n  border-radius: 10px 10px 0px 0px;\n  height: 120px;\n  width: 100%;\n  z-index: 1; }\n\n.event-basic-info-container {\n  color: #fff;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1.2em;\n  text-align: center;\n  padding-top: 43px;\n  margin: 0px auto;\n  width: 90%; }\n\n.open-event-click-open-btn {\n  background: #1a1a1a;\n  border-radius: 10px;\n  height: 40px;\n  position: absolute;\n  overflow: none;\n  width: 40px; }\n  .open-event-click-open-btn span {\n    position: absolute;\n    width: 3px; }\n\n.open-event-click-line-1 {\n  background: #fff;\n  height: 21px;\n  top: 3px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  left: 25px;\n  transition: all 0.5s; }\n\n.open-event-click-line-2 {\n  background: #fff;\n  height: 21px;\n  left: 13px;\n  top: 15px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-click-line-3 {\n  background-color: cyan;\n  left: 19px;\n  height: 30px;\n  top: 5px;\n  -webkit-transform: rotate(-50deg);\n          transform: rotate(-50deg);\n  transition: all 0.5s; }\n\n.open-event-line-1-hover {\n  left: 24px;\n  top: 4px; }\n\n.open-event-line-2-hover {\n  left: 14px;\n  top: 14px; }\n\n.open-event-line-3-hover {\n  background: red; }\n\n.close-event-line-1 {\n  height: 25px !important;\n  -webkit-transform: rotate(140deg) !important;\n          transform: rotate(140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-2 {\n  height: 25px !important;\n  -webkit-transform: rotate(-140deg) !important;\n          transform: rotate(-140deg) !important;\n  background: blue !important;\n  left: 19px !important;\n  top: 8px !important; }\n\n.close-event-line-3 {\n  opacity: 0 !important; }\n\n.active-event-file {\n  display: block; }\n\n.not-active-event-file {\n  display: none; }\n\n.event-carousel-container {\n  padding-top: 10px;\n  position: relative; }\n\n.event-change-presentation-btn-container {\n  position: absolute;\n  z-index: 1;\n  top: 4px;\n  width: 100%; }\n\n.event-change-presentation-left-btn,\n.event-change-presentation-right-btn {\n  background: #1a1a1a;\n  border-radius: 100%;\n  font-size: 18px;\n  color: #fff;\n  padding: 8px;\n  outline: none; }\n\n.event-change-presentation-left-btn {\n  margin-left: 3px; }\n\n.event-change-presentation-right-btn {\n  margin-right: 3px;\n  float: right; }\n\n.event-image-background {\n  height: 240px;\n  background-size: contain;\n  background-position: center;\n  background-repeat: no-repeat;\n  width: 296px; }\n\n.event-inner-info-container {\n  padding: 10px; }\n  .event-inner-info-container p,\n  .event-inner-info-container pre {\n    font-family: \"Maven Pro\", sans-serif;\n    margin-bottom: 10px; }\n    .event-inner-info-container p span,\n    .event-inner-info-container pre span {\n      border-bottom: 2px solid #33f5e7;\n      display: inline-block; }\n\n#events-error-message {\n  background: #1a1a1a;\n  font-size: 1.5em;\n  font-family: \"Comfortaa\", serif;\n  color: #fff;\n  height: 200px;\n  padding-top: 86px;\n  position: fixed;\n  text-align: center;\n  top: 50%;\n  width: 100%;\n  z-index: 5; }\n", ""]);
 
 // exports
 

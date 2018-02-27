@@ -1,7 +1,7 @@
 import React from 'react';
 import EventCarousel from './EventCarousel';
 
-const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
+const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
   const presentParticipants = () => {
     return event.participants.length ? (
       <div>
@@ -14,6 +14,20 @@ const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
       <div>Participants:0</div>
     );
   };
+
+  const determineAttendence = () => {
+    if (!user) {
+      return 'Attend Event';
+    }
+    let participantsList = event.participants.map(
+      participant => participant._id
+    );
+
+    return participantsList.includes(user.userID._id)
+      ? 'Unattend Event'
+      : 'Attend Event';
+  };
+
   return (
     <section className="event-card-container">
       <div className="event-card-top">
@@ -37,7 +51,7 @@ const EventCard = ({ event, handleOnClick, handleToggleEvent }) => {
               handleToggleEvent(e, event._id, false);
             }}
           >
-            attendEvent
+            {determineAttendence()}
           </button>
         </div>
       </div>

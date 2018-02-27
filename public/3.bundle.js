@@ -3855,7 +3855,7 @@ var ProfileEventsList = function (_Component) {
                   _this3.removeEvent(event._id);
                 }
               },
-              'unattend'
+              'Unattend Event'
             )
           );
         })

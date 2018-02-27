@@ -15,6 +15,10 @@ import './events.js';
 class Events extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showError: false,
+      errorMessage: ''
+    };
   }
 
   componentWillMount() {
@@ -63,21 +67,37 @@ class Events extends Component {
     attending ? this.unattendEvent(eventId) : this.attendEvent(eventId);
   }
 
+  handleError(message) {
+    this.setState({ showError: true, errorMessage: message });
+
+    setTimeout(() => {
+      this.setState({ showError: false, errorMessage: '' });
+    }, 3000);
+  }
+
+  errorMessage() {
+    return this.state.showError ? (
+      <div id="events-error-message">{this.state.errorMessage}</div>
+    ) : null;
+  }
+
   attendEvent(eventId) {
-    fetch(`/api/v1/events/${this.props.user.userID._id}`, {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event: eventId })
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.props.handleUpdateParticipant({
-          eventId: eventId,
-          user: this.props.user.userID
-        });
-      })
-      .catch(err => console.log(err, ' ERROR'));
+    this.props.user
+      ? fetch(`/api/v1/events/${this.props.user.userID._id}`, {
+          method: 'PATCH',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event: eventId })
+        })
+          .then(response => response.json())
+          .then(response => {
+            this.props.handleUpdateParticipant({
+              eventId: eventId,
+              user: this.props.user.userID
+            });
+          })
+          .catch(err => console.log(err, ' ERROR'))
+      : this.handleError('Must be logged in to attend events');
   }
 
   unattendEvent() {
@@ -104,6 +124,7 @@ class Events extends Component {
     return this.props.events
       ? this.props.events.map((event, index) => (
           <EventCard
+            user={this.props.user}
             handleToggleEvent={this.toggleEvent.bind(this)}
             handleOnClick={this.handleOnClick.bind(this)}
             key={index}
@@ -136,6 +157,7 @@ class Events extends Component {
             {this.renderEvents()}
           </StackGrid>
         </div>
+        {this.errorMessage()}
       </div>
     );
   }
