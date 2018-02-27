@@ -9,12 +9,12 @@ passport.use(
     {
       clientID: process.env.LINKEDIN_KEY,
       clientSecret: process.env.LINKEDIN_SECRET,
-      callbackURL: 'http://localhost:3000/api/v1/linkedin',
+      callbackURL: process.env.LINKEDIN_LOGIN_CALLBACK,
       scope: ['r_emailaddress', 'r_basicprofile']
     },
     function(accessToken, refreshToken, profile, done) {
       User.find({ linkedinID: profile.id }, (err, user) => {
-        if (err) return done(null, false);
+        if (err) return done(err, false);
         if (!user) return done(null, false);
         return done(null, user[0]);
       });
@@ -28,11 +28,10 @@ passport.use(
     {
       clientID: process.env.LINKEDIN_KEY,
       clientSecret: process.env.LINKEDIN_SECRET,
-      callbackURL: 'http://localhost:3000/api/v1/linkedin/signup',
+      callbackURL: process.env.LINKEDIN_SIGNUP_CALLBACK,
       scope: ['r_emailaddress', 'r_basicprofile']
     },
     function(accessToken, refreshToken, profile, done) {
-      // console.log(profile)
 
       const user = new User({
         linkedinID: profile.id,
@@ -45,7 +44,7 @@ passport.use(
 
       user.save((error, account) => {
         if (error) {
-          return error;
+          return done(error, false);
         } else {
           return done(null, account);
         }
