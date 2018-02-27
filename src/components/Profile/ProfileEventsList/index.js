@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ProfileEventsCarousel from './ProfileEventsCarousel';
 import './profile_events_list.scss';
-
 class ProfileEventsList extends Component {
   constructor(props) {
     super(props);

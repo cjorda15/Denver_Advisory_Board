@@ -10,24 +10,26 @@ class Home extends Component {
     super();
   }
 
-  scrollTop() {
-    setTimeout(() => {
-      return Scroll.scroller.scrollTo('landing-svg', {
-        duration: 0,
-        delay: 0,
-        smooth: false
-      });
-    }, 0);
+  componentWillMount() {
+    let options = {
+      delay: '0',
+      duration: '0'
+    };
+    Scroll.animateScroll.scrollToTop(options);
   }
 
-  scrollAfterSearch(input) {
+  componentDidMount() {
+    this.scrollAfterLoad();
+  }
+
+  scrollAfterLoad() {
     setTimeout(() => {
-      return Scroll.scroller.scrollTo(input, {
+      return Scroll.scroller.scrollTo('home-container', {
         duration: 1000,
-        delay: 70,
+        delay: 0,
         smooth: true
       });
-    }, 100);
+    }, 1000);
   }
   render() {
     return (
@@ -47,45 +49,34 @@ class Home extends Component {
             data-aos="fade-down"
             className="call-to-action-container"
           >
-            <ReactSVG path="computer.svg" style={{ width: 200 }} />{' '}
+            <ReactSVG path="computer.svg" style={{ width: 200 }} />
             <NavLink
               className="call-to-action-links"
-              onClick={() => {
-                this.scrollTop();
-                this.scrollAfterSearch('home-container');
-              }}
+              onClick={() => {}}
               to={'/'}
             >
               Get Connected
             </NavLink>
           </div>
           <div className="call-to-action-container" data-aos="fade-down">
-            <ReactSVG path="chatting.svg" style={{ width: 200 }} />{' '}
+            <ReactSVG path="chatting.svg" style={{ width: 200 }} />
             <NavLink
               className="call-to-action-links"
-              onClick={() => {
-                this.scrollTop();
-
-                this.scrollAfterSearch('events-container');
-              }}
+              onClick={() => {}}
               to={'/events'}
             >
               COME TO AN EVENT
             </NavLink>{' '}
           </div>
           <div data-aos="fade-down" className="call-to-action-container">
-            <ReactSVG path="rocket.svg" style={{ width: 200 }} />{' '}
+            <ReactSVG path="rocket.svg" style={{ width: 200 }} />
             <NavLink
               className="call-to-action-links"
-              onClick={() => {
-                this.scrollTop();
-
-                this.scrollAfterSearch('home-container');
-              }}
+              onClick={() => {}}
               to={'/'}
             >
               SOAR NETWORK
-            </NavLink>{' '}
+            </NavLink>
           </div>
         </section>
         <HomeGrid />

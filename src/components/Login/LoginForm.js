@@ -3,6 +3,7 @@ import React from 'react';
 const LoginForm = ({ email, password, handleInput }) => {
   return (
     <div className="login-container">
+      <a href="/login/linkedin">Login With LinkedIn</a>
       <input
         onChange={e => {
           handleInput(e, 'email');
@@ -19,7 +20,6 @@ const LoginForm = ({ email, password, handleInput }) => {
         value={password}
         placeholder="Password"
       />
-      <a href="/login/linkedin">Login With LinkedIn</a>
     </div>
   );
 };
