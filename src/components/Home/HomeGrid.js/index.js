@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Scroll from 'react-scroll';
 import './home_grid.scss';
 import ReactSVG from 'react-svg';
@@ -86,9 +86,9 @@ class HomeGrid extends Component {
                 Come see our list of members
               </p>
               <ReactSVG path="search.svg" style={{ width: 200 }} />{' '}
-              <a className="grid-link" href="/">
+              <Link className="grid-link" to="/members">
                 Learn More
-              </a>
+              </Link>
             </div>
             <h6 className="inital-block">Membership Directory</h6>
           </div>

@@ -1,0 +1,24 @@
+#members {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20%;
+  margin-bottom: 100px;
+}
+
+
+.member {
+  padding: 12px;
+  border: 2px solid #dd7782;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+  height: 200px;
+}
+
+.member-img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  // width: 150px;
+}
+

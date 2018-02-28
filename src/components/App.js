@@ -55,6 +55,11 @@ const LoadProfile = Loadable({
   loading: Loading
 });
 
+const LoadMembers = Loadable({
+  loader: () => import('./Members'),
+  loading: Loading  
+})
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -112,6 +117,10 @@ class App extends Component {
                 <Redirect to="/" />
               );
             }}
+          />
+          <Route  
+            path="/members"
+            render={({ history }) => <LoadMembers history={history}/> }
           />
           <Route
             path="/"
