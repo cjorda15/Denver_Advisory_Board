@@ -124,7 +124,10 @@ class Profile extends Component {
   }
 
   determineImage() {
-    return this.props.user.userID.image ? this.props.user.userID.image.url : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1519598001/rp2tjf5ftdpmfhetgoyf.png';
+
+    return this.props.user.userID.image
+      ? this.props.user.userID.image.url
+      : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1519598001/rp2tjf5ftdpmfhetgoyf.png';
   }
 
   profileBasicDetails() {
