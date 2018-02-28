@@ -182,7 +182,7 @@ var Profile = function (_Component) {
   }, {
     key: 'determineImage',
     value: function determineImage() {
-      return this.props.user.userID.image.url || 'https://res.cloudinary.com/hdfmst19a/image/upload/v1518358978/placeholder_image_logo_jjtrzu.png';
+      return this.props.user.userID.image ? this.props.user.userID.image.url : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1519598001/rp2tjf5ftdpmfhetgoyf.png';
     }
   }, {
     key: 'profileBasicDetails',
