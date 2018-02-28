@@ -43,6 +43,7 @@ r.get('/api/v1/user', account.get);
 r.get('/api/v1/logout', account.logout);
 r.post('/api/v1/updateImage', checkAuth, account.image);
 r.put('/api/v1/user/update', checkAuth, account.update);
+r.get('/api/v1/members', account.members)
 
 const events = require('./controllers/events');
 r.get('/api/v1/events', events.get);
@@ -81,6 +82,7 @@ r.get('/contact', (req, res) => res.render('home', {}));
 r.get('/addevent', (req, res) => res.render('home', {}));
 r.get('/profile', (req, res) => res.render('home', {}));
 r.get('/add', (req, res) => res.render('home', {}));
+r.get('/members', (req, res) => res.render('home', {}))
 
 let adminDashboard = require('./controllers/admin')
 r.get('/admin', adminDashboard.login)

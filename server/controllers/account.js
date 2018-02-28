@@ -93,3 +93,12 @@ exports.update = (req, res) => {
     res.json({ message: 'Success', user: doc });
   });
 };
+
+exports.members = (req, res) => {
+  User.find({}, 
+    '_id name title image',
+    (err, users) => {
+      if (err) return res.status(500).json({ message: err })
+      res.status(200).json(users)
+  })
+}
