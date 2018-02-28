@@ -39,7 +39,7 @@ class ProfileEventsList extends Component {
                   this.removeEvent(event._id);
                 }}
               >
-                unattend
+                Unattend Event
               </button>
             </div>
           );

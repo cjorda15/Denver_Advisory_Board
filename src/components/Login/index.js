@@ -37,11 +37,11 @@ class Login extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('login-signup-container', {
-        duration: 1000,
+        duration: 750,
         delay: 0,
         smooth: true
       });
-    }, 1000);
+    }, 750);
   }
 
   scrollAfterSearch(input) {

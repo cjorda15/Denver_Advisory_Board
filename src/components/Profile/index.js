@@ -27,6 +27,11 @@ class Profile extends Component {
   }
 
   componentWillMount() {
+    let options = {
+      delay: '0',
+      duration: '0'
+    };
+    Scroll.animateScroll.scrollToTop(options);
     fetch('/api/v1/user', {
       method: 'GET',
       credentials: 'include'
@@ -64,18 +69,18 @@ class Profile extends Component {
       .catch(err => console.log(err));
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.scrollAfterLoad();
   }
 
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('profile-container', {
-        duration: 1000,
+        duration: 750,
         delay: 0,
         smooth: true
       });
-    }, 1000);
+    }, 750);
   }
 
   handleImageLoad(e) {
