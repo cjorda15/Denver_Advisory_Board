@@ -76,11 +76,11 @@ class Profile extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('profile-container', {
-        duration: 1000,
+        duration: 750,
         delay: 0,
         smooth: true
       });
-    }, 1000);
+    }, 750);
   }
 
   handleImageLoad(e) {

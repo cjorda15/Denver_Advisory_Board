@@ -68,11 +68,11 @@ var Home = function (_Component) {
     value: function scrollAfterLoad() {
       setTimeout(function () {
         return _reactScroll2.default.scroller.scrollTo('home-container', {
-          duration: 1000,
+          duration: 750,
           delay: 0,
           smooth: true
         });
-      }, 1000);
+      }, 750);
     }
   }, {
     key: 'render',

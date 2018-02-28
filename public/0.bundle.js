@@ -108,11 +108,11 @@ var Events = function (_Component) {
     value: function scrollAfterLoad() {
       setTimeout(function () {
         return _reactScroll2.default.scroller.scrollTo('events-container', {
-          duration: 1000,
+          duration: 750,
           delay: 0,
           smooth: true
         });
-      }, 1000);
+      }, 750);
     }
   }, {
     key: 'handleOnClick',
@@ -123,9 +123,9 @@ var Events = function (_Component) {
     }
   }, {
     key: 'toggleEvent',
-    value: function toggleEvent(e, eventId, attending) {
+    value: function toggleEvent(e, eventId) {
       e.preventDefault();
-      attending ? this.unattendEvent(eventId) : this.attendEvent(eventId);
+      this.toggleAttendEvent(eventId);
     }
   }, {
     key: 'handleError',
@@ -148,8 +148,8 @@ var Events = function (_Component) {
       ) : null;
     }
   }, {
-    key: 'attendEvent',
-    value: function attendEvent(eventId) {
+    key: 'toggleAttendEvent',
+    value: function toggleAttendEvent(eventId) {
       var _this4 = this;
 
       this.props.user ? fetch('/api/v1/events/' + this.props.user.userID._id, {
@@ -167,11 +167,6 @@ var Events = function (_Component) {
       }).catch(function (err) {
         return console.log(err, ' ERROR');
       }) : this.handleError('Must be logged in to attend events');
-    }
-  }, {
-    key: 'unattendEvent',
-    value: function unattendEvent() {
-      console.log('UNATTENDING', eventId);
     }
   }, {
     key: 'handleAddEventLink',
@@ -27860,7 +27855,7 @@ var EventCard = function EventCard(_ref) {
           {
             className: 'attend-event-btn',
             onClick: function onClick(e) {
-              handleToggleEvent(e, event._id, false);
+              handleToggleEvent(e, event._id);
             }
           },
           determineAttendence()

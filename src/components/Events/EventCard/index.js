@@ -48,7 +48,7 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
           <button
             className="attend-event-btn"
             onClick={e => {
-              handleToggleEvent(e, event._id, false);
+              handleToggleEvent(e, event._id);
             }}
           >
             {determineAttendence()}

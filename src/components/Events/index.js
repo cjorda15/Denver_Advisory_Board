@@ -46,11 +46,11 @@ class Events extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('events-container', {
-        duration: 1000,
+        duration: 750,
         delay: 0,
         smooth: true
       });
-    }, 1000);
+    }, 750);
   }
 
   handleOnClick(e) {
@@ -62,9 +62,9 @@ class Events extends Component {
     $(e).toggleClass('open-event-card-container-open');
   }
 
-  toggleEvent(e, eventId, attending) {
+  toggleEvent(e, eventId) {
     e.preventDefault();
-    attending ? this.unattendEvent(eventId) : this.attendEvent(eventId);
+    this.toggleAttendEvent(eventId);
   }
 
   handleError(message) {
@@ -81,7 +81,7 @@ class Events extends Component {
     ) : null;
   }
 
-  attendEvent(eventId) {
+  toggleAttendEvent(eventId) {
     this.props.user
       ? fetch(`/api/v1/events/${this.props.user.userID._id}`, {
           method: 'PATCH',
@@ -98,10 +98,6 @@ class Events extends Component {
           })
           .catch(err => console.log(err, ' ERROR'))
       : this.handleError('Must be logged in to attend events');
-  }
-
-  unattendEvent() {
-    console.log('UNATTENDING', eventId);
   }
 
   handleAddEventLink() {
