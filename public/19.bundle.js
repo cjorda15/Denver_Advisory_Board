@@ -1,6 +1,6 @@
-webpackJsonp([8],{
+webpackJsonp([19],{
 
-/***/ 163:
+/***/ 159:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,29 +14,37 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(418);
+__webpack_require__(332);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Contact = function Contact() {
+var Footer = function Footer() {
+  var date = new Date();
+  var year = date.getFullYear();
   return _react2.default.createElement(
-    'div',
-    { id: 'contact-container' },
-    'Contact'
+    'footer',
+    { className: 'app-footer' },
+    _react2.default.createElement(
+      'div',
+      { className: 'copyright-container' },
+      '\xA9 ',
+      year,
+      ' Denver Advisory Board \u2014 All rights reserved.'
+    )
   );
 };
 
-exports.default = Contact;
+exports.default = Footer;
 
 /***/ }),
 
-/***/ 418:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(419);
+var content = __webpack_require__(333);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -50,8 +58,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contact.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contact.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./footer.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./footer.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -62,15 +70,15 @@ if(false) {
 
 /***/ }),
 
-/***/ 419:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.app-footer {\n  background: #1a1a1a;\n  color: #fff;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  padding: 30px; }\n", ""]);
 
 // exports
 

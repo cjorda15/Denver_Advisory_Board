@@ -25,11 +25,11 @@ class Home extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('home-container', {
-        duration: 750,
+        duration: 600,
         delay: 0,
         smooth: true
       });
-    }, 750);
+    }, 700);
   }
   render() {
     return (

@@ -76,11 +76,11 @@ class Profile extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('profile-container', {
-        duration: 750,
+        duration: 600,
         delay: 0,
         smooth: true
       });
-    }, 750);
+    }, 500);
   }
 
   handleImageLoad(e) {
@@ -124,7 +124,6 @@ class Profile extends Component {
   }
 
   determineImage() {
-
     return this.props.user.userID.image
       ? this.props.user.userID.image.url
       : 'https://res.cloudinary.com/hdfmst19a/image/upload/v1519598001/rp2tjf5ftdpmfhetgoyf.png';
