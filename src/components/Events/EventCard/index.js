@@ -2,19 +2,6 @@ import React from 'react';
 import EventCarousel from './EventCarousel';
 
 const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
-  const presentParticipants = () => {
-    return event.participants.length ? (
-      <div>
-        Participants:{event.participants.length}
-        {event.participants.map((person, index) => {
-          return <div key={index}>{person.name}</div>;
-        })}
-      </div>
-    ) : (
-      <div>Participants:0</div>
-    );
-  };
-
   const determineAttendence = () => {
     if (!user) {
       return 'Attend Event';
@@ -28,6 +15,27 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
       : 'Attend Event';
   };
 
+  const presentParticipants = () => {
+    return event.participants.length ? (
+      <div className="attendeance-cards-container">
+        <div className="attendance-parcipants-count">
+          Participants:{event.participants.length}
+        </div>
+        {event.participants.map((person, index) => {
+          return (
+            <div className="attendee-basic-summary" key={index}>
+              <div className="attendee-basic-summary-content">
+                <img className="attendee-image" src={person.image.url} />
+                <p> {person.name}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ) : (
+      <div>Participants:0</div>
+    );
+  };
   return (
     <section className="event-card-container">
       <div className="event-card-top">
@@ -64,7 +72,7 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
           <pre>
             <span>Summary</span> {event.summary}
           </pre>
-          {presentParticipants()}
+          <div>{presentParticipants()}</div>
         </div>
       </div>
     </section>

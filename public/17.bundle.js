@@ -1,4 +1,4 @@
-webpackJsonp([5],{
+webpackJsonp([17],{
 
 /***/ 160:
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,23 +20,23 @@ var _reactScroll = __webpack_require__(67);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
-var _reactRedux = __webpack_require__(14);
+var _reactRedux = __webpack_require__(15);
 
-var _SignupForm = __webpack_require__(335);
+var _SignupForm = __webpack_require__(334);
 
 var _SignupForm2 = _interopRequireDefault(_SignupForm);
 
-var _LoginForm = __webpack_require__(336);
+var _LoginForm = __webpack_require__(335);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-var _RadioButtons = __webpack_require__(337);
+var _RadioButtons = __webpack_require__(336);
 
 var _RadioButtons2 = _interopRequireDefault(_RadioButtons);
 
 var _actions = __webpack_require__(21);
 
-__webpack_require__(338);
+__webpack_require__(337);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -88,11 +88,11 @@ var Login = function (_Component) {
     value: function scrollAfterLoad() {
       setTimeout(function () {
         return _reactScroll2.default.scroller.scrollTo('login-signup-container', {
-          duration: 600,
+          duration: 750,
           delay: 0,
           smooth: true
         });
-      }, 500);
+      }, 750);
     }
   }, {
     key: 'scrollAfterSearch',
@@ -297,7 +297,7 @@ var Login = function (_Component) {
                 _this5.handleSubmit(e);
               }
             },
-            'SUBMIT'
+            'Submit'
           ),
           this.state.showError ? _react2.default.createElement(
             'div',
@@ -324,7 +324,7 @@ exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
 
 /***/ }),
 
-/***/ 335:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -352,7 +352,7 @@ var SignupForm = function SignupForm(_ref) {
     _react2.default.createElement(
       "a",
       { href: "/signup/linkedin" },
-      "SIGN UP WITH LinkedIn"
+      "Signup With LinkedIn"
     ),
     _react2.default.createElement("input", {
       onChange: function onChange(e) {
@@ -385,7 +385,7 @@ exports.default = SignupForm;
 
 /***/ }),
 
-/***/ 336:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -437,7 +437,7 @@ exports.default = LoginForm;
 
 /***/ }),
 
-/***/ 337:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -497,13 +497,13 @@ exports.default = RadioButtons;
 
 /***/ }),
 
-/***/ 338:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(339);
+var content = __webpack_require__(338);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -529,7 +529,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 339:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -537,7 +537,7 @@ exports = module.exports = __webpack_require__(6)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  padding-top: 35px;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button,\n  #login-signup-container a {\n    border: 2px solid #33f5e7;\n    background: #33f5e7;\n    color: #fff;\n    font-size: 1em;\n    font-family: \"Comfortaa\", serif;\n    line-height: 1.3;\n    margin-bottom: 10px;\n    padding: 14px;\n    outline: none;\n    text-align: center;\n    text-decoration: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus,\n    #login-signup-container a:hover,\n    #login-signup-container a:focus {\n      background-color: #fff;\n      color: #33f5e7; }\n    #login-signup-container button:active,\n    #login-signup-container a:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid #4286f4;\n      color: #4286f4; }\n\n#error-message-login {\n  background: red;\n  font-family: \"Comfortaa\", serif;\n  max-width: 200px;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  padding: 20px;\n  margin-top: 15px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#login-signup-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  height: 70vh;\n  max-width: 300px;\n  margin: 50px auto;\n  padding-top: 35px;\n  width: 90%; }\n  #login-signup-container form {\n    margin: 0px auto; }\n  #login-signup-container label {\n    font-family: \"Comfortaa\", serif;\n    margin-bottom: 25px;\n    display: inline-block; }\n  #login-signup-container input[type='radio'] {\n    margin-left: 15px; }\n  #login-signup-container button,\n  #login-signup-container a {\n    border: 2px solid #33f5e7;\n    color: #33f5e7;\n    font-size: 1em;\n    font-family: \"Comfortaa\", serif;\n    line-height: 1.3;\n    margin-bottom: 10px;\n    padding: 14px;\n    outline: none;\n    text-align: center;\n    text-decoration: none;\n    transition: all 0.8s;\n    width: 100%; }\n    #login-signup-container button:hover, #login-signup-container button:focus,\n    #login-signup-container a:hover,\n    #login-signup-container a:focus {\n      background: #33f5e7;\n      color: #fff; }\n    #login-signup-container button:active,\n    #login-signup-container a:active {\n      background: red;\n      color: #fff; }\n\n.signup-container,\n.login-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 200px;\n  width: 100%; }\n  .signup-container input,\n  .login-container input {\n    border: 2px solid #33f5e7;\n    font-family: \"Comfortaa\", serif;\n    font-size: 1em;\n    height: 48px;\n    margin-bottom: 9px;\n    padding-left: 10px;\n    outline: none;\n    transition: all 0.8s; }\n    .signup-container input:focus,\n    .login-container input:focus {\n      border: 2px solid #4286f4;\n      color: #4286f4; }\n\n#error-message-login {\n  background: red;\n  font-family: \"Comfortaa\", serif;\n  max-width: 200px;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  padding: 20px;\n  margin-top: 15px; }\n", ""]);
 
 // exports
 

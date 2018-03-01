@@ -37,11 +37,11 @@ class Login extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('login-signup-container', {
-        duration: 750,
+        duration: 600,
         delay: 0,
         smooth: true
       });
-    }, 750);
+    }, 500);
   }
 
   scrollAfterSearch(input) {
@@ -212,7 +212,7 @@ class Login extends Component {
               this.handleSubmit(e);
             }}
           >
-            Submit
+            SUBMIT
           </button>
           {this.state.showError ? (
             <div id="error-message-login">{this.state.errorMessage}</div>

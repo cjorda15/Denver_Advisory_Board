@@ -1,6 +1,6 @@
-webpackJsonp([6],{
+webpackJsonp([18],{
 
-/***/ 167:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,7 +16,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(14);
+var _reactRedux = __webpack_require__(15);
 
 __webpack_require__(457);
 
@@ -53,6 +53,7 @@ var Members = function (_Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (json) {
+        console.log(json);
         _this2.setState({ members: json });
       }).catch(function (err) {
         return console.log('Error loading members: ', err);
@@ -66,21 +67,17 @@ var Members = function (_Component) {
         if (!member.name || !member.image) return;
         return _react2.default.createElement(
           'div',
-          { key: i, className: 'member-container' },
+          { key: i, className: 'member' },
           _react2.default.createElement('img', { src: member.image.url, className: 'member-img' }),
           _react2.default.createElement(
-            'div',
-            { className: 'member-info' },
-            _react2.default.createElement(
-              'p',
-              null,
-              member.name
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              member.title
-            )
+            'p',
+            null,
+            member.name
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            member.title
           )
         );
       });
@@ -90,7 +87,7 @@ var Members = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { id: 'members-container' },
+        { id: 'members' },
         this.renderMembers()
       );
     }
@@ -105,6 +102,24 @@ var mapStateToProps = function mapStateToProps(state) {
     events: state.personalEvents
   };
 };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     handleImage: input => {
+//       dispatch(loadImage(input));
+//     },
+//     handleUser: input => {
+//       dispatch(updateUser(input));
+//     },
+//     handleGeneratePersonalEvents: input => {
+//       dispatch(generatePersonalEvents(input));
+//     },
+//     handleUpdateParticipant: input => {
+//       dispatch(updatePersonalEvents(input));
+//     }
+//   };
+// };
+
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(Members);
 
@@ -150,7 +165,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "#members-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 500px;\n  margin: 0px auto; }\n\n.member-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-bottom: 10px;\n  padding: 12px; }\n\n.member-info {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n\n.member-img {\n  height: 150px;\n  width: 150px;\n  border-radius: 50%; }\n", ""]);
+exports.push([module.i, "#members {\n  display: -ms-grid;\n  display: grid;\n  -ms-grid-columns: 25% 25% 25% 25%;\n      grid-template-columns: 25% 25% 25% 25%;\n  -ms-grid-rows: 20% 20% 20% 20%;\n      grid-template-rows: 20% 20% 20% 20%;\n  margin-bottom: 100px; }\n\n.member {\n  padding: 12px;\n  border: 2px solid #dd7782;\n  text-align: center;\n  -ms-flex-item-align: center;\n      -ms-grid-row-align: center;\n      align-self: center;\n  justify-self: center;\n  height: 200px; }\n\n.member-img {\n  height: 150px;\n  width: 150px;\n  border-radius: 50%; }\n", ""]);
 
 // exports
 

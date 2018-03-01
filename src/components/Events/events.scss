@@ -241,3 +241,23 @@
   width: 100%;
   z-index: 5;
 }
+
+.attendee-image {
+  height: 120px;
+  width: 120px;
+}
+
+.attendeance-cards-container {
+  display: flex;
+  overflow: scroll;
+  position: relative;
+}
+
+.attendance-parcipants-count {
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 60px;
+  color: #fff;
+  font-family: $font-fancy;
+  position: fixed;
+  padding: 3px;
+}

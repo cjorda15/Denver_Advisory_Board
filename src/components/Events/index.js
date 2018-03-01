@@ -46,11 +46,11 @@ class Events extends Component {
   scrollAfterLoad() {
     setTimeout(() => {
       return Scroll.scroller.scrollTo('events-container', {
-        duration: 750,
+        duration: 600,
         delay: 0,
         smooth: true
       });
-    }, 750);
+    }, 500);
   }
 
   handleOnClick(e) {
