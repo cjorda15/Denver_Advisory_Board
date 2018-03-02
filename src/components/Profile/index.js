@@ -385,20 +385,23 @@ class Profile extends Component {
           </div>
           {this.showEditProfile()}
         </section>
-        <ProfileEventsList
-          handleUpdateParticipant={this.props.handleUpdateParticipant}
-          user={this.props.user}
-          events={this.state.activeEvents}
-        />
-        <Calendar
-          onChange={function(date) {
-            that.handleCalendarClick(date);
-          }}
-          tileClassName={function({ date, view }) {
-            return that.checkCalendarDay(date, view);
-          }}
-          value={this.state.date}
-        />
+        <section className="profile-events-list-wrapper">
+          <Calendar
+            onChange={function(date) {
+              that.handleCalendarClick(date);
+            }}
+            tileClassName={function({ date, view }) {
+              return that.checkCalendarDay(date, view);
+            }}
+            value={this.state.date}
+          />
+          <ProfileEventsList
+            setParentState={this.setState.bind(this)}
+            handleUpdateParticipant={this.props.handleUpdateParticipant}
+            user={this.props.user}
+            events={this.state.activeEvents}
+          />
+        </section>
       </div>
     );
   }

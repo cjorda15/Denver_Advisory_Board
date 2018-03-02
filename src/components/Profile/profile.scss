@@ -3,15 +3,20 @@
 #profile-container {
   flex-wrap: wrap;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 0px auto;
   padding-top: 100px;
-  width: 90%;
+  padding-bottom: 65px;
 }
 
 .account-profile-card-container {
   border: 2px solid #84c1eb;
-  margin: 0px auto;
+  max-width: 400px;
+  min-width: 320px;
+  width: 100%;
+}
+
+.profile-events-list-wrapper {
   max-width: 400px;
   min-width: 320px;
   width: 100%;
@@ -229,14 +234,30 @@
   }
 }
 
+.react-calendar {
+  margin-top: 0px;
+
+  width: 100%;
+}
+
 .active-calendar-day {
-  background: red;
+  background: #7fc1e9;
+  color: #fff;
 }
 
 .not-active-calendar-day {
-  // background: yellow;
+}
+
+.react-calendar {
+  width: 100%;
 }
 
 .no-scroll {
   overflow: hidden;
+}
+
+@media (max-width: 888px) {
+  profile-container {
+    justify-content: center;
+  }
 }
