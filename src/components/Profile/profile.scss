@@ -1,7 +1,12 @@
 @import '../../styles/utilities/index.scss';
 
 #profile-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
   padding-top: 100px;
+  width: 90%;
 }
 
 .account-profile-card-container {
@@ -222,6 +227,14 @@
       color: #fff;
     }
   }
+}
+
+.active-calendar-day {
+  background: red;
+}
+
+.not-active-calendar-day {
+  // background: yellow;
 }
 
 .no-scroll {

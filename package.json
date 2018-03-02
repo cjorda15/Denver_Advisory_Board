@@ -50,6 +50,7 @@
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
+    "react-calendar": "^2.13.1",
     "react-datepicker": "^1.2.1",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.8",

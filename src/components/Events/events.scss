@@ -80,7 +80,7 @@
   }
 }
 .event-card-top {
-  background: #1a1a1a;
+  background: #79bef7;
   border-radius: 10px 10px 0px 0px;
   height: 120px;
   width: 100%;
@@ -253,9 +253,14 @@
   position: relative;
 }
 
+.attendance-parcipants-container {
+  position: relative;
+  display: flex;
+}
+
 .attendance-parcipants-count {
   background: rgba(0, 0, 0, 0.5);
-  bottom: 60px;
+  top: 509px;
   color: #fff;
   font-family: $font-fancy;
   position: fixed;

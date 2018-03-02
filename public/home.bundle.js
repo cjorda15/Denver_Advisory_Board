@@ -3024,6 +3024,33 @@ function isPlainObject(value) {
 
 /***/ }),
 /* 37 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13391,33 +13418,6 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
 
 
 /***/ }),
@@ -36535,14 +36535,14 @@ var LoadLanding = (0, _reactLoadable2.default)({
 
 var LoadFooter = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 159));
+    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 159));
   },
   loading: Loading
 });
 
 var LoadLogin = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 160));
+    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 160));
   },
   loading: Loading
 });
@@ -36556,21 +36556,21 @@ var LoadEvents = (0, _reactLoadable2.default)({
 
 var LoadAbout = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 162));
+    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 162));
   },
   loading: Loading
 });
 
 var LoadContact = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 163));
+    return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 163));
   },
   loading: Loading
 });
 
 var LoadHome = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 164));
+    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 164));
   },
   loading: Loading
 });
@@ -36584,14 +36584,14 @@ var LoadAddEvent = (0, _reactLoadable2.default)({
 
 var LoadProfile = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 166));
+    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 166));
   },
   loading: Loading
 });
 
 var LoadMembers = (0, _reactLoadable2.default)({
   loader: function loader() {
-    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 167));
+    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 167));
   },
   loading: Loading
 });
@@ -36859,7 +36859,7 @@ exports.push([module.i, ".wrapper {\n  position: relative; }\n\n.burger {\n  z-i
 "use strict";
 
 
-var _jquery = __webpack_require__(37);
+var _jquery = __webpack_require__(38);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -37279,7 +37279,7 @@ exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#menu {\n  backgrou
 "use strict";
 
 
-var _jquery = __webpack_require__(37);
+var _jquery = __webpack_require__(38);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -38356,7 +38356,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 /* harmony default export */ __webpack_exports__["a"] = (freeGlobal);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(38)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(37)))
 
 /***/ }),
 /* 128 */
@@ -38539,7 +38539,7 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(38), __webpack_require__(134)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(37), __webpack_require__(134)(module)))
 
 /***/ }),
 /* 134 */
