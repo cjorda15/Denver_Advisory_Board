@@ -1,28 +1,47 @@
 import React from 'react';
 import EventCarousel from './EventCarousel';
 
-const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
+const EventCard = ({
+  user,
+  eventData,
+  handleOnClick,
+  handleToggleEvent,
+  participantsList
+}) => {
   const determineAttendence = () => {
     if (!user) {
       return 'Attend Event';
     }
-    let participantsList = event.participants.map(
+    let participantsList = eventData.participants.map(
       participant => participant._id
     );
-
     return participantsList.includes(user.userID._id)
       ? 'Unattend Event'
       : 'Attend Event';
   };
 
+  const classNameCardTop = () => {
+    if (!user) {
+      return 'not-active-event-card';
+    }
+
+    let participantsList = eventData.participants.map(
+      participant => participant._id
+    );
+
+    return participantsList.includes(user.userID._id)
+      ? 'active-event-card'
+      : 'not-active-event-card';
+  };
+
   const presentParticipants = () => {
-    return event.participants.length ? (
+    return eventData.participants.length ? (
       <div className="attendeance-cards-container">
         <div className="attendance-parcipants-container">
           <div className="attendance-parcipants-count">
-            Participants:{event.participants.length}
+            Participants:{eventData.participants.length}
           </div>
-          {event.participants.map((person, index) => {
+          {eventData.participants.map((person, index) => {
             return (
               <div className="attendee-basic-summary" key={index}>
                 <div className="attendee-basic-summary-content">
@@ -38,9 +57,10 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
       <div>Participants:0</div>
     );
   };
+
   return (
     <section className="event-card-container">
-      <div className="event-card-top">
+      <div className={`event-card-top ${classNameCardTop()}`}>
         <div
           className="open-event-click-open-btn "
           onClick={e => {
@@ -53,12 +73,12 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
         </div>
         <div className="event-basic-info-container">
           <div />
-          <h6>{event.title}</h6>
-          <p>{event.date}</p>
+          <h6>{eventData.title}</h6>
+          <p>{eventData.date}</p>
           <button
             className="attend-event-btn"
             onClick={e => {
-              handleToggleEvent(e, event._id);
+              handleToggleEvent(e, eventData._id);
             }}
           >
             {determineAttendence()}
@@ -66,14 +86,14 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
         </div>
       </div>
       <div className="event-close">
-        <EventCarousel presentation={event.images} />
+        <EventCarousel presentation={eventData.images} />
         <div className="event-inner-info-container">
           <p>
-            <span>Located</span> {event.location}
+            <span>Located</span> {eventData.location}
           </p>
           <div>{presentParticipants()}</div>
           <pre>
-            <span>Summary</span> {event.summary}
+            <span>Summary</span> {eventData.summary}
           </pre>
         </div>
       </div>

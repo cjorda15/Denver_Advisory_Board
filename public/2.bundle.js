@@ -14,11 +14,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(321);
+__webpack_require__(310);
 
-__webpack_require__(322);
+__webpack_require__(311);
 
-var _reactScrollParallax = __webpack_require__(324);
+var _reactScrollParallax = __webpack_require__(313);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -102,7 +102,7 @@ exports.default = Landing;
 
 /***/ }),
 
-/***/ 296:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -114,7 +114,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _index = __webpack_require__(303);
+var _index = __webpack_require__(184);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -534,7 +534,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 301:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -554,9 +554,9 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _propValidation = __webpack_require__(302);
+var _propValidation = __webpack_require__(183);
 
-var _ParallaxController = __webpack_require__(296);
+var _ParallaxController = __webpack_require__(179);
 
 var _ParallaxController2 = _interopRequireDefault(_ParallaxController);
 
@@ -721,7 +721,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 302:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -772,7 +772,7 @@ function offsetMax(props, propName) {
 
 /***/ }),
 
-/***/ 303:
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -783,27 +783,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.testForPassiveScroll = exports.scaleBetween = exports.parseValueAndUnit = exports.isElementInView = exports.getParallaxOffsets = exports.clamp = undefined;
 
-var _clamp2 = __webpack_require__(325);
+var _clamp2 = __webpack_require__(314);
 
 var _clamp3 = _interopRequireDefault(_clamp2);
 
-var _getParallaxOffsets2 = __webpack_require__(326);
+var _getParallaxOffsets2 = __webpack_require__(315);
 
 var _getParallaxOffsets3 = _interopRequireDefault(_getParallaxOffsets2);
 
-var _isElementInView2 = __webpack_require__(327);
+var _isElementInView2 = __webpack_require__(316);
 
 var _isElementInView3 = _interopRequireDefault(_isElementInView2);
 
-var _parseValueAndUnit2 = __webpack_require__(328);
+var _parseValueAndUnit2 = __webpack_require__(317);
 
 var _parseValueAndUnit3 = _interopRequireDefault(_parseValueAndUnit2);
 
-var _scaleBetween2 = __webpack_require__(329);
+var _scaleBetween2 = __webpack_require__(318);
 
 var _scaleBetween3 = _interopRequireDefault(_scaleBetween2);
 
-var _testForPassiveScroll2 = __webpack_require__(330);
+var _testForPassiveScroll2 = __webpack_require__(319);
 
 var _testForPassiveScroll3 = _interopRequireDefault(_testForPassiveScroll2);
 
@@ -818,7 +818,7 @@ exports.testForPassiveScroll = _testForPassiveScroll3.default;
 
 /***/ }),
 
-/***/ 321:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -832,13 +832,13 @@ if (window.matchMedia('(prefers-reduced-motion)').matches) {
 
 /***/ }),
 
-/***/ 322:
+/***/ 311:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(323);
+var content = __webpack_require__(312);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -864,7 +864,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 323:
+/***/ 312:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -879,7 +879,7 @@ exports.push([module.i, "@font-face {\n  font-family: Biko;\n  src: url(\"https:
 
 /***/ }),
 
-/***/ 324:
+/***/ 313:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -890,19 +890,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ParallaxController = exports.ParallaxBanner = exports.ParallaxProvider = exports.Parallax = undefined;
 
-var _Parallax2 = __webpack_require__(301);
+var _Parallax2 = __webpack_require__(182);
 
 var _Parallax3 = _interopRequireDefault(_Parallax2);
 
-var _ParallaxProvider2 = __webpack_require__(331);
+var _ParallaxProvider2 = __webpack_require__(320);
 
 var _ParallaxProvider3 = _interopRequireDefault(_ParallaxProvider2);
 
-var _ParallaxBanner2 = __webpack_require__(332);
+var _ParallaxBanner2 = __webpack_require__(321);
 
 var _ParallaxBanner3 = _interopRequireDefault(_ParallaxBanner2);
 
-var _ParallaxController2 = __webpack_require__(296);
+var _ParallaxController2 = __webpack_require__(179);
 
 var _ParallaxController3 = _interopRequireDefault(_ParallaxController2);
 
@@ -915,7 +915,7 @@ exports.ParallaxController = _ParallaxController3.default;
 
 /***/ }),
 
-/***/ 325:
+/***/ 314:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -934,7 +934,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 326:
+/***/ 315:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -945,7 +945,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getParallaxOffsets;
 
-var _index = __webpack_require__(303);
+var _index = __webpack_require__(184);
 
 /**
  * Gets the parallax X and Y offsets to be applied to an element
@@ -992,7 +992,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 327:
+/***/ 316:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1025,7 +1025,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 328:
+/***/ 317:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1070,7 +1070,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 329:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1088,7 +1088,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 330:
+/***/ 319:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1115,7 +1115,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 331:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1135,7 +1135,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _ParallaxController = __webpack_require__(296);
+var _ParallaxController = __webpack_require__(179);
 
 var _ParallaxController2 = _interopRequireDefault(_ParallaxController);
 
@@ -1204,7 +1204,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 332:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1224,11 +1224,11 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Parallax = __webpack_require__(301);
+var _Parallax = __webpack_require__(182);
 
 var _Parallax2 = _interopRequireDefault(_Parallax);
 
-var _propValidation = __webpack_require__(302);
+var _propValidation = __webpack_require__(183);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

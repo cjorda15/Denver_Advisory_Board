@@ -117,17 +117,23 @@ class Events extends Component {
   }
 
   renderEvents() {
-    return this.props.events
-      ? this.props.events.map((event, index) => (
-          <EventCard
-            user={this.props.user}
-            handleToggleEvent={this.toggleEvent.bind(this)}
-            handleOnClick={this.handleOnClick.bind(this)}
-            key={index}
-            event={event}
-          />
-        ))
-      : null;
+    if (this.props.events) {
+      let sortedEvents = this.props.events.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+
+      return sortedEvents.map((eventData, index) => (
+        <EventCard
+          user={this.props.user}
+          handleToggleEvent={this.toggleEvent.bind(this)}
+          handleOnClick={this.handleOnClick.bind(this)}
+          key={index}
+          eventData={eventData}
+        />
+      ));
+    } else {
+      return null;
+    }
   }
 
   render() {

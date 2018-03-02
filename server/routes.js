@@ -20,11 +20,14 @@ r.get('/', (req, res) => {
 });
 
 r.post('/api/v1/cloudload', upload.single('file'), (req, res) => {
+  console.log(req.file.path);
+
   cloudinary.v2.uploader.upload(
     req.file.path,
     { resource_type: 'auto' },
     function(error, result) {
       console.log(error, 'CLOUD ERROR');
+      console.log(result);
       result.secure_url
         ? res.json({
             url: result.secure_url,
@@ -43,7 +46,7 @@ r.get('/api/v1/user', account.get);
 r.get('/api/v1/logout', account.logout);
 r.post('/api/v1/updateImage', checkAuth, account.image);
 r.put('/api/v1/user/update', checkAuth, account.update);
-r.get('/api/v1/members', account.members)
+r.get('/api/v1/members', account.members);
 
 const events = require('./controllers/events');
 r.get('/api/v1/events', events.get);
@@ -74,7 +77,6 @@ r.get(
   })
 );
 
-
 r.get('/login', (req, res) => res.render('home', {}));
 r.get('/events', (req, res) => res.render('home', {}));
 r.get('/about', (req, res) => res.render('home', {}));
@@ -82,9 +84,8 @@ r.get('/contact', (req, res) => res.render('home', {}));
 r.get('/addevent', (req, res) => res.render('home', {}));
 r.get('/profile', (req, res) => res.render('home', {}));
 r.get('/add', (req, res) => res.render('home', {}));
-r.get('/members', (req, res) => res.render('home', {}))
+r.get('/members', (req, res) => res.render('home', {}));
 
-let adminDashboard = require('./controllers/admin')
-r.get('/admin', adminDashboard.login)
-r.get('/admin/dashboard', adminDashboard.dashboard)
-
+let adminDashboard = require('./controllers/admin');
+r.get('/admin', adminDashboard.login);
+r.get('/admin/dashboard', adminDashboard.dashboard);
