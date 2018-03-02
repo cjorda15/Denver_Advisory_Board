@@ -16,21 +16,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(17);
+var _reactRouterDom = __webpack_require__(16);
 
 var _reactScroll = __webpack_require__(67);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
-var _HomeGrid = __webpack_require__(420);
+var _HomeGrid = __webpack_require__(333);
 
 var _HomeGrid2 = _interopRequireDefault(_HomeGrid);
 
-var _reactSvg = __webpack_require__(171);
+var _reactSvg = __webpack_require__(172);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
-__webpack_require__(423);
+__webpack_require__(336);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -154,7 +154,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 170:
+/***/ 171:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -188,7 +188,7 @@ module.exports = memoizeStringOnly;
 
 /***/ }),
 
-/***/ 171:
+/***/ 172:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -208,7 +208,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(292);
+var _server = __webpack_require__(173);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -222,7 +222,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // See: https://github.com/webpack/react-starter/issues/37
 var isBrowser = typeof window !== 'undefined';
-var SVGInjector = isBrowser ? __webpack_require__(295) : undefined;
+var SVGInjector = isBrowser ? __webpack_require__(176) : undefined;
 
 var ReactSVG = function (_React$Component) {
   _inherits(ReactSVG, _React$Component);
@@ -322,23 +322,23 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 292:
+/***/ 173:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(293);
+  module.exports = __webpack_require__(174);
 } else {
-  module.exports = __webpack_require__(294);
+  module.exports = __webpack_require__(175);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 293:
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -351,7 +351,7 @@ if (process.env.NODE_ENV === 'production') {
  * LICENSE file in the root directory of this source tree.
  */
 
-var h=__webpack_require__(8),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(170);
+var h=__webpack_require__(8),n=__webpack_require__(0),aa=__webpack_require__(5),t=__webpack_require__(13),ba=__webpack_require__(66),ca=__webpack_require__(171);
 function w(a){for(var b=arguments.length-1,g="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)g+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(g+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var x={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function z(a,b){return(a&b)===b}
 var B={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=B,g=a.Properties||{},c=a.DOMAttributeNamespaces||{},k=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in g){C.hasOwnProperty(f)?w("48",f):void 0;var e=f.toLowerCase(),d=g[f];e={attributeName:e,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:z(d,b.MUST_USE_PROPERTY),
@@ -388,7 +388,7 @@ d){if(null!=d.__html){d=d.__html;break a}}else if(d=f.children,"string"===typeof
 
 /***/ }),
 
-/***/ 294:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -415,7 +415,7 @@ var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(5);
 var emptyObject = __webpack_require__(13);
 var hyphenateStyleName = __webpack_require__(66);
-var memoizeStringOnly = __webpack_require__(170);
+var memoizeStringOnly = __webpack_require__(171);
 var warning = __webpack_require__(15);
 var checkPropTypes = __webpack_require__(20);
 var camelizeStyleName = __webpack_require__(68);
@@ -2941,7 +2941,7 @@ module.exports = server_browser;
 
 /***/ }),
 
-/***/ 295:
+/***/ 176:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -3413,7 +3413,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ 420:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3429,15 +3429,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(17);
+var _reactRouterDom = __webpack_require__(16);
 
 var _reactScroll = __webpack_require__(67);
 
 var _reactScroll2 = _interopRequireDefault(_reactScroll);
 
-__webpack_require__(421);
+__webpack_require__(334);
 
-var _reactSvg = __webpack_require__(171);
+var _reactSvg = __webpack_require__(172);
 
 var _reactSvg2 = _interopRequireDefault(_reactSvg);
 
@@ -3668,13 +3668,13 @@ exports.default = HomeGrid;
 
 /***/ }),
 
-/***/ 421:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(422);
+var content = __webpack_require__(335);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3700,7 +3700,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 422:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -3715,13 +3715,13 @@ exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n#landing-page-wrapp
 
 /***/ }),
 
-/***/ 423:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(424);
+var content = __webpack_require__(337);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3747,7 +3747,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 424:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
