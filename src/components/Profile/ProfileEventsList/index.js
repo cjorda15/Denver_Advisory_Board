@@ -7,7 +7,7 @@ class ProfileEventsList extends Component {
   }
 
   removeEvent(eventID) {
-    console.log(eventID);
+    this.props.setParentState({ activeEvents: [] });
     fetch(`/api/v1/events/${this.props.user.userID._id}`, {
       method: 'PATCH',
       credentials: 'include',

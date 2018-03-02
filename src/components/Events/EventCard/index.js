@@ -18,19 +18,21 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
   const presentParticipants = () => {
     return event.participants.length ? (
       <div className="attendeance-cards-container">
-        <div className="attendance-parcipants-count">
-          Participants:{event.participants.length}
-        </div>
-        {event.participants.map((person, index) => {
-          return (
-            <div className="attendee-basic-summary" key={index}>
-              <div className="attendee-basic-summary-content">
-                <img className="attendee-image" src={person.image.url} />
-                <p> {person.name}</p>
+        <div className="attendance-parcipants-container">
+          <div className="attendance-parcipants-count">
+            Participants:{event.participants.length}
+          </div>
+          {event.participants.map((person, index) => {
+            return (
+              <div className="attendee-basic-summary" key={index}>
+                <div className="attendee-basic-summary-content">
+                  <img className="attendee-image" src={person.image.url} />
+                  <p> {person.name}</p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     ) : (
       <div>Participants:0</div>
@@ -69,10 +71,10 @@ const EventCard = ({ user, event, handleOnClick, handleToggleEvent }) => {
           <p>
             <span>Located</span> {event.location}
           </p>
+          <div>{presentParticipants()}</div>
           <pre>
             <span>Summary</span> {event.summary}
           </pre>
-          <div>{presentParticipants()}</div>
         </div>
       </div>
     </section>

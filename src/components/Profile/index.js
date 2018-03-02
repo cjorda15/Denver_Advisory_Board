@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import Scroll from 'react-scroll';
 import $ from 'jquery';
+import Calendar from 'react-calendar';
 import { loadImage } from '../../actions';
 import ProfileEventsList from './ProfileEventsList';
 import {
@@ -16,6 +17,9 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: new Date(),
+      activeEvents: [],
+      eventDates: [],
       loading: false,
       edit: false,
       imageLoaded: '',
@@ -24,6 +28,14 @@ class Profile extends Component {
       title: '',
       summary: ''
     };
+  }
+  componentWillReceiveProps(props) {
+    if (props.events) {
+      let dates = props.events.map(event => {
+        return { date: new Date(event.date), id: event._id };
+      });
+      this.setState({ eventDates: dates, id: event._id });
+    }
   }
 
   componentWillMount() {
@@ -298,7 +310,54 @@ class Profile extends Component {
     this.setState({ [type]: e.target.value });
   }
 
+  checkCalendarDay(date, view) {
+    let isActive = false;
+    if (this.state.eventDates.length) {
+      let calendarDay = new Date(date);
+      let sameDayCheck = calendarDay.getDate();
+      let sameMonthCheck = calendarDay.getMonth();
+      let sameYearCheck = calendarDay.getYear();
+      this.state.eventDates.forEach(event => {
+        let eventDate = new Date(event.date);
+        let sameDay = eventDate.getDate();
+        let sameMonth = eventDate.getMonth();
+        let sameYear = eventDate.getYear();
+        sameDay == sameDayCheck &&
+        sameMonth == sameMonthCheck &&
+        sameYear == sameYearCheck
+          ? (isActive = true)
+          : null;
+      });
+    }
+    return isActive ? 'active-calendar-day' : 'not-active-calendar-day';
+  }
+
+  handleEventUpdate() {
+    this.setState({ eventsDate: this.props.events });
+  }
+
+  handleCalendarClick(date) {
+    const calendarDay = new Date(date);
+    const sameDayCheck = calendarDay.getDate();
+    const sameMonthCheck = calendarDay.getMonth();
+    const sameYearCheck = calendarDay.getYear();
+    const activeEvents = this.props.events.filter(eventDate => {
+      eventDate = new Date(eventDate.date);
+      const sameDay = eventDate.getDate();
+      const sameMonth = eventDate.getMonth();
+      const sameYear = eventDate.getYear();
+      return sameDay == sameDayCheck &&
+      sameMonth == sameMonthCheck &&
+      sameYear == sameYearCheck
+        ? true
+        : false;
+    });
+
+    this.setState({ activeEvents: activeEvents });
+  }
+
   render() {
+    let that = this;
     return (
       <div id="profile-container">
         <section className="account-profile-card-container">
@@ -326,11 +385,23 @@ class Profile extends Component {
           </div>
           {this.showEditProfile()}
         </section>
-        <ProfileEventsList
-          handleUpdateParticipant={this.props.handleUpdateParticipant}
-          user={this.props.user}
-          events={this.props.events}
-        />
+        <section className="profile-events-list-wrapper">
+          <Calendar
+            onChange={function(date) {
+              that.handleCalendarClick(date);
+            }}
+            tileClassName={function({ date, view }) {
+              return that.checkCalendarDay(date, view);
+            }}
+            value={this.state.date}
+          />
+          <ProfileEventsList
+            setParentState={this.setState.bind(this)}
+            handleUpdateParticipant={this.props.handleUpdateParticipant}
+            user={this.props.user}
+            events={this.state.activeEvents}
+          />
+        </section>
       </div>
     );
   }
