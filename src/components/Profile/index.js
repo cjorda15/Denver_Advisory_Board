@@ -34,7 +34,7 @@ class Profile extends Component {
       let dates = props.events.map(event => {
         return { date: new Date(event.date), id: event._id };
       });
-      this.setState({ eventDates: dates, id: event._id });
+      this.setState({ eventDates: dates });
     }
   }
 

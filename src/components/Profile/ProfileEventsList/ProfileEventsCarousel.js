@@ -4,20 +4,13 @@ class ProfileEventCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: [],
       currentNumber: 0
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      files: this.props.presentation
-    });
-  }
-
   handlePresentation() {
-    if (!this.state.files.length) return null;
-    return this.state.files.map((file, index) => {
+    if (!this.props.presentation.length) return null;
+    return this.props.presentation.map((file, index) => {
       return this.createPresentation(file, index, this.state.currentNumber);
     });
   }
@@ -67,14 +60,14 @@ class ProfileEventCarousel extends Component {
       counter = counter - 1;
       this.setState({ currentNumber: counter });
     }
-    if (direction == 'right' && counter < this.state.files.length - 1) {
+    if (direction == 'right' && counter < this.props.presentation.length - 1) {
       counter = counter + 1;
       this.setState({ currentNumber: counter });
     }
   }
 
   showButtons() {
-    return this.state.files.length <= 1 ? null : (
+    return this.props.presentation.length <= 1 ? null : (
       <div className="profile-event-change-presentation-btn-container">
         <button
           className="profile-event-change-presentation-left-btn"
