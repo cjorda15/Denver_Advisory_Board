@@ -1,1 +1,88 @@
-webpackJsonp([6],{158:function(e,n,t){"use strict";function r(e,n){if(!(e instanceof n))throw new TypeError("Cannot call a class as a function")}function o(e,n){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!n||"object"!=typeof n&&"function"!=typeof n?e:n}function i(e,n){if("function"!=typeof n&&null!==n)throw new TypeError("Super expression must either be null or a function, not "+typeof n);e.prototype=Object.create(n&&n.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),n&&(Object.setPrototypeOf?Object.setPrototypeOf(e,n):e.__proto__=n)}Object.defineProperty(n,"__esModule",{value:!0});var a=function(){function e(e,n){for(var t=0;t<n.length;t++){var r=n[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(n,t,r){return t&&e(n.prototype,t),r&&e(n,r),n}}(),l=t(0),c=function(e){return e&&e.__esModule?e:{default:e}}(l),u=t(9);t(479);var s=function(e){function n(e){r(this,n);var t=o(this,(n.__proto__||Object.getPrototypeOf(n)).call(this,e));return t.state={loading:!1,members:[]},t}return i(n,e),a(n,[{key:"componentWillMount",value:function(){var e=this;fetch("/api/v1/members",{method:"GET"}).then(function(e){return e.json()}).then(function(n){e.setState({members:n})}).catch(function(e){return console.log("Error loading members: ",e)})}},{key:"renderMembers",value:function(){if(this.state.members.length)return this.state.members.map(function(e,n){if(e.name&&e.image)return c.default.createElement("div",{key:n,className:"member-container"},c.default.createElement("img",{src:e.image.url,className:"member-img"}),c.default.createElement("div",{className:"member-info"},c.default.createElement("p",null,e.name),c.default.createElement("p",null,e.title)))})}},{key:"render",value:function(){return c.default.createElement("div",{id:"members-container"},this.renderMembers())}}]),n}(l.Component),m=function(e){return{user:e.user,events:e.personalEvents}};n.default=(0,u.connect)(m,null)(s)},479:function(e,n,t){var r=t(480);"string"==typeof r&&(r=[[e.i,r,""]]);var o={hmr:!0};o.transform=void 0;t(5)(r,o);r.locals&&(e.exports=r.locals)},480:function(e,n,t){n=e.exports=t(4)(!1),n.push([e.i,"#members-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  max-width: 500px;\n  margin: 0px auto; }\n\n.member-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-bottom: 10px;\n  padding: 12px; }\n\n.member-info {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n\n.member-img {\n  height: 150px;\n  width: 150px;\n  border-radius: 50%; }\n",""])}});
+webpackJsonp([6],{
+
+/***/ 159:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(322);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  var date = new Date();
+  var year = date.getFullYear();
+  return _react2.default.createElement(
+    'footer',
+    { className: 'app-footer' },
+    _react2.default.createElement(
+      'div',
+      { className: 'copyright-container' },
+      '\xA9 ',
+      year,
+      ' Denver Advisory Board \u2014 All rights reserved.'
+    )
+  );
+};
+
+exports.default = Footer;
+
+/***/ }),
+
+/***/ 322:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(323);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(7)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./footer.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/autoprefixer-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./footer.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 323:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(false);
+// imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Fredoka+One|Nunito|Comfortaa|Maven+Pro);", ""]);
+
+// module
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.app-footer {\n  background: #1a1a1a;\n  color: #fff;\n  font-family: \"Comfortaa\", serif;\n  font-size: 1em;\n  padding: 30px; }\n", ""]);
+
+// exports
+
+
+/***/ })
+
+});

@@ -67,6 +67,14 @@
   margin: 2px solid;
 }
 
+.not-active-event-card {
+  background: #79bef7;
+}
+
+.active-event-card {
+  background: #acd8aa;
+}
+
 .event-close {
   background: #fff;
   border-radius: 0px 0px 10px 10px;
@@ -80,7 +88,6 @@
   }
 }
 .event-card-top {
-  background: #79bef7;
   border-radius: 10px 10px 0px 0px;
   height: 120px;
   width: 100%;
@@ -90,11 +97,14 @@
 .event-basic-info-container {
   color: #fff;
   font-family: $font-fancy;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: center;
-  padding-top: 43px;
+  padding-top: 44px;
   margin: 0px auto;
-  width: 90%;
+  width: 99%;
+  h6 {
+    margin-bottom: 10px;
+  }
 }
 
 .open-event-click-open-btn {
